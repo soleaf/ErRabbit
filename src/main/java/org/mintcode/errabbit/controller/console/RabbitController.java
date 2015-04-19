@@ -42,7 +42,7 @@ public class RabbitController {
 
         try{
             List<Rabbit> rabbitList = rabbitManagingService.getRabbits();
-            Map<Rabbit,LogLevelDailyStatistics> lastStatics = new HashMap<>();
+            Map<Rabbit,LogLevelDailyStatistics> lastStatics = new HashMap<Rabbit,LogLevelDailyStatistics>();
             for (Rabbit rabbit : rabbitList){
                 LogLevelDailyStatistics statistics = logLevelDailyStatisticsRepository.findByRabbitIdOnLast(rabbit.getId());
                 if (statistics != null){
