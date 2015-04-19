@@ -22,6 +22,7 @@ $(document).ready(function(){
 });
 
 function retrieveCalendar(rabbitId, year, month) {
+    showLoading();
     $.ajax({
         url: '/report/list_days.err?id=' + rabbitId + '&y=' + year + '&m=' + month,
         success: function (data) {
@@ -35,10 +36,13 @@ function retrieveCalendar(rabbitId, year, month) {
                 $("#report-calendar .active").removeClass("active");
                 $(this).addClass("active");
             });
+
+            hideLoading();
         }
         ,fail: function(){
             // todo : fail
             alert("fail");
+            hideLoading();
         }
     });
 }
@@ -93,6 +97,8 @@ function initReportFeedButton(){
  * @param size
  */
 function retrieveReports(rabbitId, page, size, y, m, d) {
+
+    showLoading();
     $.ajax({
         url : '/report/list_data.err?id=' + rabbitId + '&page=' + page + '&size=' + size
         + '&y=' + y + '&m=' + m + '&d=' + d,
@@ -162,6 +168,7 @@ function retrieveReports(rabbitId, page, size, y, m, d) {
 
             });
 
+            hideLoading();
         }
     });
 }

@@ -16,4 +16,6 @@ public interface LogLevelDailyStatisticsRepository
                                                                        Integer year,
                                                                        Integer month);
 
+    public List<LogLevelDailyStatistics> deleteByRabbitId(String rabbitId);
+
 }

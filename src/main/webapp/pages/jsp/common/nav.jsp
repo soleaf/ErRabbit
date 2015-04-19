@@ -7,7 +7,7 @@
         <ul>
             <li class="selected"><a href="/rabbit/list.err">Rabbits</a></li>
             <li>Alarms</li>
-            <li>Settings</li>
+            <%--<li>Settings</li>--%>
         </ul>
     </nav>
     </c:if>

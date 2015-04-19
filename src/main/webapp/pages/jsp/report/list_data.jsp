@@ -15,7 +15,7 @@
         <li class="report" data-id="${item.id}">
             <span class="time">${format.format(item.loggingEvent.timeStampDate)}</span>
             <span class="level ${item.loggingEvent.level}">${item.loggingEvent.level}</span>
-            <span class="categoryName">${item.loggingEvent.categoryName} ${item.loggingEvent.message}</span>
+            <span class="categoryName">${item.loggingEvent.categoryName} ${item.loggingEvent.renderedMessage}</span>
         </li>
 
         <div class="report-detail-popup" data-id="${item.id}">
@@ -26,6 +26,7 @@
                 </ul>
                 <div class="close"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
                 <div class="graph">
+                    <div class="threadName label">threadName: ${item.loggingEvent.threadName}</div>
                     <ul>
                         <li>
                             <div class="exception">

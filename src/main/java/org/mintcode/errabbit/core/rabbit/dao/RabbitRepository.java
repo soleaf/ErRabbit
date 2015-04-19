@@ -15,4 +15,6 @@ public interface RabbitRepository extends MongoRepository<Rabbit,String>{
 
     public Rabbit findById(String id);
 
+    public List<Rabbit> deleteById(String id);
+
 }

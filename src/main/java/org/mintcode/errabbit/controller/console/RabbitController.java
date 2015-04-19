@@ -38,7 +38,9 @@ public class RabbitController {
 
     // List of all Rabbits
     @RequestMapping(value = "list")
-    public ModelAndView list(Model model){
+    public ModelAndView list(Model model,
+                             @RequestParam(value = "info", required = false) String info,
+                             @RequestParam(value = "error", required = false) String error){
 
         try{
             List<Rabbit> rabbitList = rabbitManagingService.getRabbits();
@@ -51,10 +53,12 @@ public class RabbitController {
             }
             model.addAttribute("list", rabbitList);
             model.addAttribute("lastStatics", lastStatics);
+            model.addAttribute("info",info);
+            model.addAttribute("error",error);
         }
         catch (Exception e){
-            e.printStackTrace();
             logger.error(e.getMessage(),e);
+            model.addAttribute("error", e.getMessage());
         }
 
         return new ModelAndView("/rabbit/list");
@@ -77,16 +81,52 @@ public class RabbitController {
             // update rabbit name cache
             coreService.syncRabbitNameCache();
 
-            // todo: show rabbit detail.
+            model.addAttribute("info", String.format("Success to make Rabbit '%s'", id));
             return "redirect:list.err";
         }
         catch (Exception e){
-            e.printStackTrace();
             logger.error(e.getMessage(),e);
-            // todo: make ErrorPage
             model.addAttribute("e",e);
             return "/rabbit/form";
         }
     }
+
+    // Delete a rabbit
+    @RequestMapping(value = "delete")
+    public String delete(@RequestParam(value = "id", required = true) String id,
+                               Model model){
+        try{
+
+            Rabbit rabbit = rabbitManagingService.getRabbitById(id);
+            if (rabbit == null){
+                throw new RabbitNotExistException(id);
+            }
+
+            logger.info("Delete Rabbit > " + id);
+
+            // Delete
+            rabbitManagingService.deleteRabbit(id);
+
+            // update rabbit name cache
+            coreService.syncRabbitNameCache();
+
+            model.addAttribute("info", String.format("Success to delete Rabbit '%s'", id));
+            return "redirect:list.err?";
+        }
+        catch (Exception e){
+            logger.error(e.getMessage(),e);
+            model.addAttribute("error",e.getMessage());
+            return "redirect:list.err";
+        }
+    }
+
+    public class RabbitNotExistException extends Exception{
+        public RabbitNotExistException(String id) {
+            super(String.format("Rabbit '%s' is not exist", id));
+        }
+    }
+
+
+
 
 }

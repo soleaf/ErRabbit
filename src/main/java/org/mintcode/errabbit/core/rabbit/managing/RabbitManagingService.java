@@ -23,4 +23,18 @@ public interface RabbitManagingService {
      */
     public List<Rabbit> getRabbits();
 
+    /**
+     * Delete a Rabbit and related Objects
+     * @param id
+     * @return
+     */
+    public boolean deleteRabbit(String id);
+
+    /**
+     * Get a Rabbit by ID
+     * @param id
+     * @return
+     */
+    public Rabbit getRabbitById(String id);
+
 }

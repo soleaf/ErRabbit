@@ -2,6 +2,8 @@ package org.mintcode.errabbit.core.rabbit.managing;
 
 import org.apache.log4j.Logger;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
+import org.mintcode.errabbit.core.report.dao.LogLevelDailyStatisticsRepository;
+import org.mintcode.errabbit.core.report.dao.ReportRepository;
 import org.mintcode.errabbit.model.Rabbit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,13 @@ import java.util.List;
 public class RabbitManagingServiceImpl implements RabbitManagingService {
 
     @Autowired
-    private RabbitRepository repository;
+    private RabbitRepository rabbitRepository;
+
+    @Autowired
+    private LogLevelDailyStatisticsRepository logLevelDailyStatisticsRepository;
+
+    @Autowired
+    private ReportRepository reportRepository;
 
     private Logger logger = Logger.getLogger(getClass());
 
@@ -24,7 +32,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
     public Rabbit makeNewRabbit(String id) throws AlreadyExistRabbitIDException {
 
         // Check already exist id
-        if (repository.findById(id) != null) {
+        if (rabbitRepository.findById(id) != null) {
             throw new AlreadyExistRabbitIDException(id);
         }
 
@@ -37,12 +45,31 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
     @Override
     public List<Rabbit> getRabbits() {
         try {
-            return repository.findAll();
+            return rabbitRepository.findAll();
         } catch (Exception e) {
-            e.printStackTrace();
             logger.error(e.getMessage(), e);
             return null;
         }
 
+    }
+
+    @Override
+    public boolean deleteRabbit(String id) {
+
+        // Remove reports
+        reportRepository.deleteByRabbitId(id);
+
+        // Remove counters
+        logLevelDailyStatisticsRepository.deleteByRabbitId(id);
+
+        // Remove rabbit;
+        rabbitRepository.deleteById(id);
+
+        return true;
+    }
+
+    @Override
+    public Rabbit getRabbitById(String id) {
+        return rabbitRepository.findById(id);
     }
 }

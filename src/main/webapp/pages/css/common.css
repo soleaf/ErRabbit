@@ -6,7 +6,7 @@ header{
     width: 100%;
     top:0px;
     left:0px;
-    z-index:9999;
+    z-index:1;
 }
 
 header .logo{
@@ -28,6 +28,31 @@ UL{
 
 UL LI{
     list-style: none;
+}
+
+.loading_box{
+    width:100%;
+    height:100%;
+    position: fixed;
+    z-index: 999999;
+    background-color: rgba(255, 255, 255, 0.80);
+    top:0px;
+    left:0px;
+}
+
+.loading_box>DIV{
+    display: inline-block;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+    width:100px;
+    height:30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #4d4d4d;
+    border-radius: 2px;
+    color: #FFF;
 }
 
 header h1{
@@ -200,9 +225,12 @@ header nav UL .selected A{
 }
 
 .page .list_rabbit li>SPAN{
-    display: block;
-    margin-left: 60px;
     color: #515151;
+}
+
+.page .list_rabbit li>.conts{
+    margin-top: 4px;
+    margin-left: 60px;
 }
 
 .page .list_rabbit li>.name{
@@ -393,6 +421,14 @@ header nav UL .selected A{
 }
 .report-detail-popup .ThrowableInfo .graph{
 
+}
+
+.report-detail-popup .ThrowableInfo .graph .threadName{
+    color: #aeaeae;
+}
+
+.report-detail-popup .ThrowableInfo .graph .threadName .value{
+    color: #828282;
 }
 
 .report-detail-popup .ThrowableInfo .graph .arrow{
