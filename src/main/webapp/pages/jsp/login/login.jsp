@@ -41,11 +41,11 @@
                 <label for="password">Password</label>
                 <input name="password" type="password" class="form-control" id="password" placeholder="Password">
             </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox"> Check me out
-                </label>
-            </div>
+            <%--<div class="checkbox">--%>
+                <%--<label>--%>
+                    <%--<input type="checkbox"> Remember Me!--%>
+                <%--</label>--%>
+            <%--</div>--%>
             <button type="submit" class="btn btn-default btn-block">SIGN IN</button>
             <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
         </form>

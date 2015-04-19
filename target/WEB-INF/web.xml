@@ -61,4 +61,8 @@
         <url-pattern>*.err</url-pattern>
     </filter-mapping>
 
+    <welcome-file-list>
+        <welcome-file>/login.err</welcome-file>
+    </welcome-file-list>
+
 </web-app>
