@@ -18,11 +18,9 @@
 <section class="page">
     <div class="jumbotron">
         <div class="container">
-            <h1>Hello!</h1>
-
-            <p>...</p>
-
-            <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more</a></p>
+            <h1>Check unaware errors</h1>
+            <p>Visual Tracking Remote server log4j error logs</p>
+            <p><a class="btn btn-default btn-lg" href="https://github.com/soleaf/ErRabbit" target="_blank" role="button">Learn more</a></p>
         </div>
     </div>
     <div class="login">
