@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://activemq.apache.org/schema/core
+        http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+    <!--  lets create an embedded ActiveMQ Broker -->
+    <amq:broker useJmx="false" persistent="false">
+        <amq:transportConnectors>
+            <amq:transportConnector uri="tcp://localhost:61616"/>
+        </amq:transportConnectors>
+        <amq:plugins>
+            <amq:jaasAuthenticationPlugin configuration="activemq-domain" />
+            <amq:authorizationPlugin>
+                <amq:map>
+                    <amq:authorizationMap>
+                        <amq:authorizationEntries>
+                            <amq:authorizationEntry topic="ActiveMQ.Advisory.>" write="users" read="users" admin="users"/>
+                            <amq:authorizationEntry queue="errabbit.report.>" write="users" read="users" admin="users"/>
+                        </amq:authorizationEntries>
+                    </amq:authorizationMap>
+                </amq:map>
+            </amq:authorizationPlugin>
+        </amq:plugins>
+    </amq:broker>
+</beans>

@@ -1,0 +1,45 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/data/mongo
+       http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
+
+    <util:properties id="db" location="classpath:db.properties"/>
+    <context:property-placeholder properties-ref="db"/>
+
+    <mongo:repositories base-package="org.mintcode.errabbit.core" mongo-template-ref="mongoTemplate"/>
+
+    <mongo:mongo id="mongo" host="#{db['mongodb.host']}" port="#{db['mongodb.port']}">
+        <mongo:options connections-per-host="100"
+                       threads-allowed-to-block-for-connection-multiplier="5"
+                       connect-timeout="10000" max-wait-time="120000" auto-connect-retry="true"
+                       socket-keep-alive="true" socket-timeout="15000" slave-ok="true"
+                       write-number="1" write-timeout="0" write-fsync="true" />
+    </mongo:mongo>
+    <mongo:db-factory dbname="#{db['mongodb.databaseName']}"/>
+
+    <!-- MongoTemplate for connecting and quering the documents in the database -->
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongo" ref="mongo"/>
+        <constructor-arg name="databaseName" value="#{db['mongodb.databaseName']}"/>
+        <constructor-arg name="userCredentials" ref="mongoCredentials"/>
+    </bean>
+
+    <!-- Use this post processor to translate any MongoExceptions thrown in @Repository annotated classes -->
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+    <bean id="mongoCredentials"
+          class="org.springframework.data.authentication.UserCredentials">
+        <constructor-arg name="username" value="#{db['mongodb.username']}"/>
+        <constructor-arg name="password" value="#{db['mongodb.password']}"/>
+    </bean>
+
+</beans>
