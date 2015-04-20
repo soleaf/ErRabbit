@@ -15,7 +15,7 @@ public interface RabbitManagingService {
      * @param id id
      * @return
      */
-    public Rabbit makeNewRabbit(String id) throws AlreadyExistRabbitIDException;
+    public Rabbit makeNewRabbit(String id) throws AlreadyExistRabbitIDException, InvalidRabbitNameException;
 
     /**
      * Getting Rabbit List

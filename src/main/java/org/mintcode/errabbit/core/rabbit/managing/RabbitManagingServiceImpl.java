@@ -29,7 +29,16 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
     private Logger logger = Logger.getLogger(getClass());
 
     @Override
-    public Rabbit makeNewRabbit(String id) throws AlreadyExistRabbitIDException {
+    public Rabbit makeNewRabbit(String id) throws AlreadyExistRabbitIDException, InvalidRabbitNameException {
+
+        // Rabbit Name Validation
+        if (id == null){
+            throw new InvalidRabbitNameException(String.format("'Null' is invalid"));
+        }
+
+        if (id.length() < 2){
+            throw new InvalidRabbitNameException(String.format("Rabbit id's length must be greater than 2 characters."));
+        }
 
         // Check already exist id
         if (rabbitRepository.findById(id) != null) {
@@ -39,6 +48,9 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         Rabbit rabbit = new Rabbit();
         rabbit.setId(id);
         rabbit.setRegDate(new Date());
+
+        rabbitRepository.save(rabbit);
+
         return rabbit;
     }
 
