@@ -29,9 +29,9 @@
     <!--<mvc:resources mapping="/assets/**" location="classpath:/META-INF/resources/webjars/"/>-->
     <mvc:resources mapping="/pages/**" location="classpath:/pages/"/>
 
-    <import resource="security.xml"/>
+    <import resource="../../resources/security.xml"/>
     <import resource="mongodb.xml"/>
-    <import resource="mq-listener.xml"/>
+    <import resource="../../resources/mq-listener.xml"/>
 
     <!--Emeved ActiveMQ Server -->
     <import resource="mq-server.xml"/>

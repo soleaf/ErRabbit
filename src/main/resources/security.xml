@@ -12,16 +12,16 @@
     <context:property-placeholder properties-ref="rabbituser"/>
 
     <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/login.err" access="permitAll" />
-        <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/login" access="permitAll" />
+        <intercept-url pattern="/pages" access="hasRole('ROLE_USER')" />
         <form-login
-                login-page="/login.err"
-                default-target-url="/rabbit/list.err"
-                authentication-failure-url="/login.err?error"
-                login-processing-url="/login_process.err"
+                login-page="/login"
+                default-target-url="/rabbit/list"
+                authentication-failure-url="/login?error"
+                login-processing-url="/login_process"
                 username-parameter="username"
                 password-parameter="password" />
-        <logout logout-success-url="/login.err?logout"  />
+        <logout logout-success-url="/login?logout"  />
         <csrf/>
     </http>
 

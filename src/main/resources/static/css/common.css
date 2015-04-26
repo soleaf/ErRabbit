@@ -31,6 +31,7 @@ UL LI{
 }
 
 .loading_box{
+    display:none;
     width:100%;
     height:100%;
     position: fixed;
@@ -204,7 +205,6 @@ header nav UL .selected A{
     margin-top:10px;
     padding:0px;
     display: block;
-    height:60px;
 }
 
 .page .list_rabbit li .icon{

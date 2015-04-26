@@ -4,7 +4,7 @@
 <html>
 <head>
     <jsp:include page="../common/header_include.jsp"/>
-    <script src="/pages/js/rabbit.js"></script>
+    <script src="/js/rabbit.js"></script>
 </head>
 <body>
 <jsp:include page="../common/nav.jsp"/>
