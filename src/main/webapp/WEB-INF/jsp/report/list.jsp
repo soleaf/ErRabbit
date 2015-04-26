@@ -4,7 +4,7 @@
 <html>
 <head>
     <jsp:include page="../common/header_include.jsp"/>
-    <script src="/pages/js/report.js"></script>
+    <script src="/js/report.js"></script>
 </head>
 <body>
 <jsp:include page="../common/nav.jsp">

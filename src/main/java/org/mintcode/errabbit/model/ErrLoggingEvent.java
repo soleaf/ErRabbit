@@ -15,23 +15,23 @@ public class ErrLoggingEvent implements Serializable{
 
     }
 
-    public static ErrLoggingEvent fromLogingEvent(LoggingEvent loggingEvent){
-
-        ErrLoggingEvent erLoggingEvent = new ErrLoggingEvent();
-
-        erLoggingEvent.setCategoryName(loggingEvent.getLogger().getName());
-        erLoggingEvent.setLevel(loggingEvent.getLevel().toString());
-        erLoggingEvent.setMessage(loggingEvent.getMessage());
-        erLoggingEvent.setRenderedMessage(loggingEvent.getRenderedMessage());
-        erLoggingEvent.setThreadName(loggingEvent.getThreadName());
-        erLoggingEvent.setLocationInfo(ErLocationInfo.fromLocationInfo(loggingEvent.getLocationInformation()));
-        erLoggingEvent.setTimeStamp(loggingEvent.getTimeStamp());
-        erLoggingEvent.setTimeStampDate(new Date(loggingEvent.getTimeStamp()));
-        erLoggingEvent.setThrowableInfo(ErThrowableInformation.fromThrowableInformation(loggingEvent.getThrowableInformation()));
-
-        return erLoggingEvent;
-
-    }
+//    public static ErrLoggingEvent fromLoggingEvent(LoggingEvent loggingEvent){
+//
+//        ErrLoggingEvent erLoggingEvent = new ErrLoggingEvent();
+//
+//        erLoggingEvent.setCategoryName(loggingEvent.getLogger().getName());
+//        erLoggingEvent.setLevel(loggingEvent.getLevel().toString());
+//        erLoggingEvent.setMessage(loggingEvent.getMessage());
+//        erLoggingEvent.setRenderedMessage(loggingEvent.getRenderedMessage());
+//        erLoggingEvent.setThreadName(loggingEvent.getThreadName());
+//        erLoggingEvent.setLocationInfo(ErLocationInfo.fromLocationInfo(loggingEvent.getLocationInformation()));
+//        erLoggingEvent.setTimeStamp(loggingEvent.getTimeStamp());
+//        erLoggingEvent.setTimeStampDate(new Date(loggingEvent.getTimeStamp()));
+//        erLoggingEvent.setThrowableInfo(ErThrowableInformation.fromThrowableInformation(loggingEvent.getThrowableInformation()));
+//
+//        return erLoggingEvent;
+//
+//    }
 
     public static ErrLoggingEvent fromLog4jLogEvent(Log4jLogEvent log4jLogEvent){
         ErrLoggingEvent erLoggingEvent = new ErrLoggingEvent();

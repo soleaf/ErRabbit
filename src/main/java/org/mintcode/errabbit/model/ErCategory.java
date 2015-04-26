@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class ErCategory implements Serializable{
 
     private String name;
-    private ErCategory parent;
+//    private ErCategory parent;
     private ErLevel level;
 
     public ErCategory(){
@@ -25,7 +25,7 @@ public class ErCategory implements Serializable{
 
         ErCategory erCategory = new ErCategory();
         erCategory.setName(category.getName());
-        erCategory.setParent(ErCategory.fromCategory(category.getParent()));
+//        erCategory.setParent(ErCategory.fromCategory(category.getParent()));
         erCategory.setLevel(ErLevel.fromLevel(category.getLevel()));
 
         return erCategory;
@@ -39,13 +39,13 @@ public class ErCategory implements Serializable{
         this.name = name;
     }
 
-    public ErCategory getParent() {
-        return parent;
-    }
-
-    public void setParent(ErCategory parent) {
-        this.parent = parent;
-    }
+//    public ErCategory getParent() {
+//        return parent;
+//    }
+//
+//    public void setParent(ErCategory parent) {
+//        this.parent = parent;
+//    }
 
     public ErLevel getLevel() {
         return level;
@@ -59,7 +59,7 @@ public class ErCategory implements Serializable{
     public String toString() {
         return "ErCategory{" +
                 "name='" + name + '\'' +
-                ", parent=" + parent +
+//                ", parent=" + parent +
                 ", level=" + level +
                 '}';
     }
