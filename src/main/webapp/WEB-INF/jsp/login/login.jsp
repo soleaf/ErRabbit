@@ -30,7 +30,7 @@
         <c:if test="${not empty msg}">
             <div class="alert alert-success" role="alert">${msg}</div>
         </c:if>
-        <form action="<c:url value='/login_process.err' />" method='POST'>
+        <form action="<c:url value='/login_process' />" method='POST'>
             <div class="form-group">
                 <label for="id">ID</label>
                 <input name="username" type="text" class="form-control" id="id" placeholder="Enter id">
