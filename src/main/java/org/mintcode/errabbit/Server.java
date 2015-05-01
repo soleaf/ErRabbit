@@ -22,8 +22,6 @@ import javax.servlet.Filter;
  * Created by soleaf on 2015. 4. 20..
  */
 @SpringBootApplication
-//@ComponentScan
-//@EnableWebMvc
 @ImportResource( {"classpath:mq-listener.xml" } )
 public class Server {
 
@@ -43,12 +41,4 @@ public class Server {
         characterEncodingFilter.setForceEncoding(true);
         return characterEncodingFilter;
     }
-
-//    @Bean
-//    public InternalResourceViewResolver getViewResolver(){
-//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-//        viewResolver.setPrefix("/WEB-INF/jsp/");
-//        viewResolver.setSuffix(".jsp");
-//        return viewResolver;
-//    }
 }
