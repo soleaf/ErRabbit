@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.mintcode.errabbit</groupId>
-    <artifactId>server</artifactId>
+    <artifactId>ErRabbitServer</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-
+    <packaging>war</packaging>
     <name>ErRabbit Server</name>
     <url>http://www.mintcode.org</url>
 
@@ -18,6 +18,8 @@
     <properties>
         <start-class>org.mintcode.errabbit.Server</start-class>
         <java.version>1.7</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
