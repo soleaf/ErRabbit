@@ -12,6 +12,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -20,23 +21,14 @@ import javax.servlet.Filter;
 /**
  * Created by soleaf on 2015. 4. 20..
  */
-@EnableAutoConfiguration
-@ComponentScan
+@SpringBootApplication
+//@ComponentScan
+//@EnableWebMvc
 @ImportResource( {"classpath:mq-listener.xml" } )
 public class Server {
 
     public static void main(String[] args) {
-
         ApplicationContext ctx = SpringApplication.run(Server.class, args);
-
-        System.out.println("Let's inspect the beans provided by Spring Boot:");
-
-        String[] beanNames = ctx.getBeanDefinitionNames();
-        Arrays.sort(beanNames);
-        for (String beanName : beanNames) {
-            System.out.println(beanName);
-        }
-
     }
 
     @Bean
@@ -51,4 +43,12 @@ public class Server {
         characterEncodingFilter.setForceEncoding(true);
         return characterEncodingFilter;
     }
+
+//    @Bean
+//    public InternalResourceViewResolver getViewResolver(){
+//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+//        viewResolver.setPrefix("/WEB-INF/jsp/");
+//        viewResolver.setSuffix(".jsp");
+//        return viewResolver;
+//    }
 }

@@ -21,8 +21,6 @@ public class LoginController {
                              @RequestParam(value = "error", required = false) String error,
                              @RequestParam(value = "logout", required = false) String logout){
 
-        logger.info("login page");
-
         if (error != null) {
             model.addAttribute("error", "Invalid username and password!");
         }
