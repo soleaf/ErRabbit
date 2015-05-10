@@ -1,7 +1,7 @@
 header{
     background-color: #FFF;
     height:40px;
-    border-bottom:1px solid #86a99f;
+    border-bottom:1px solid #47a698;
     position: fixed;
     width: 100%;
     top:0px;
@@ -121,6 +121,9 @@ header .logout{
     font-size:12px;
 }
 
+.login-banner{
+    background: url("/img/logo_white_login.png") no-repeat bottom right;
+}
 .page_header{
     height:150px;
     background-color: #47a698;

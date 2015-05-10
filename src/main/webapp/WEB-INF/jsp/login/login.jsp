@@ -17,9 +17,10 @@
 </jsp:include>
 <section class="page">
     <div class="jumbotron">
-        <div class="container">
-            <h1>Check unaware errors</h1>
-            <p>Visual Tracking Remote server log4j error logs</p>
+        <div class="container login-banner">
+            <h1>ErRabbit</h1>
+            <p>Check Unaware Errors<br/>
+            Visual Tracking Remote Server Log4j Error Logs</p>
             <p><a class="btn btn-default btn-lg" href="https://github.com/soleaf/ErRabbit" target="_blank" role="button">Learn more</a></p>
         </div>
     </div>
