@@ -6,6 +6,6 @@ package org.mintcode.errabbit.core.rabbit.managing;
 public class AlreadyExistRabbitIDException extends Exception {
 
     public AlreadyExistRabbitIDException(String rabbitID){
-        super(String.format("A Rabbit Id '%s' is already exist.", rabbitID));
+        super(String.format("Rabbit Id '%s' is already exist.", rabbitID));
     }
 }
