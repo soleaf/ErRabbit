@@ -5,7 +5,9 @@
 ErRabbit(Error Rabbit) is useful Error remote tracking service with Visual View.
 Collecting by Using Log4j and ActiveMQ Easy Make it easy ,compatible other programs.
  
-![ScreenShot](graphics/screenshot.png)
+![ScreenShot](graphics/screenshot1.png)
+
+![ScreenShot](graphics/screenshot2.png)
 
 # Requirements 
 
@@ -147,4 +149,5 @@ You can make it better.
 
 * Alarm warning
 * Statistics
-* Integration with VCS.
+* Integration with VCS
+* Mobile Support
