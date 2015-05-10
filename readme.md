@@ -2,8 +2,8 @@
 
 # Introduction
 
-ErRabbit(Error Rabbit) is useful Error remote tracking service with Visual View.
-Collecting by Log4j and ActiveMQ is make it easy compatible other programs.
+ErRabbit(Error Rabbit) is useful error remote tracking service with Visual View.
+Collecting by Log4j and ActiveMQ will make it easy compatible with other programs.
  
 ![ScreenShot](graphics/screenshot1.png)
 
@@ -14,14 +14,14 @@ Collecting by Log4j and ActiveMQ is make it easy compatible other programs.
 * Java 1.7 upper
 * MongoDB 2
 * ActiveMQ
-* Log4j 2 in Your Application(Log Tracking Target).
+* Log4j 2 in your application(log tracking target).
 
 # Install and Using
 
 1. Run MongoDB, ActiveMQ
 1. Run ErRabbit
 1. Make a Rabbit
-1. Add JMS Appender to your Application log4j2.xml
+1. Add JMS Appender to your application log4j2.xml
 
 ## Download release
 
@@ -29,9 +29,9 @@ https://github.com/soleaf/ErRabbit/releases
 
 ## Run Dependencies
 
-ErRabbit is using MongoDB and ActiveMQ.
+ErRabbit uses MongoDB and ActiveMQ.
 
-1. Run Mongodb
+1. Run MongoDB
 1. ActiveMQ server
 
 ## Run ErRabbit
@@ -51,7 +51,7 @@ Or directly command `java -jar [war filename] --spring.config.location=file:sett
 1. Connect Console with WebBrowser
     `http://localhost:[port]`
 1. Your server port is 'server.port' on 'settings.properties' and login account is also on properties ('errabbit.security.admin.username, errabbit.security.admin.password').
-1. Click 'add' on left side menu.
+1. Click 'add' menu on left side.
 1. Make your new rabbit. (Rabbit is a namespace for tracking log like application artifact id).
 
 ## Make your application connect JMS
@@ -76,11 +76,11 @@ Or directly command `java -jar [war filename] --spring.config.location=file:sett
 </dependency>
 ```
 
-### Setup log4j2
+### Setup Log4j2
 
-1. Declare 'JSM Appender' to `log4j2.xml` with your ActiveMQ URL, userName,Password And
-'queueBindingName' should be 'errabbit.report.[RabbitID]'.
-1. And Add JMS Appender to Loggers.
+1. Declare 'JMS Appender' to `log4j2.xml` with your ActiveMQ URL, userName, password.
+1. 'queueBindingName' should be 'errabbit.report.[RabbitID]'.
+1. And add JMS Appender to Loggers.
 
 
 ```xml
@@ -105,29 +105,27 @@ Or directly command `java -jar [war filename] --spring.config.location=file:sett
 
 ### Setup jndi.properties
 
-1. Make java/main/resource/jndi.properties, and put it with above ActiveMQ settings.
+1. Make `java/main/resource/jndi.properties`, and put same ActiveMQ settings(username, password, rabbitID).
 
 ```
 java.naming.factory.initial = org.apache.activemq.jndi.ActiveMQInitialContextFactory
 java.naming.provider.url = tcp://localhost:61616
-queue.errabbit.report.example=errabbit.report.example
+queue.errabbit.report.example = errabbit.report.example
 ```
 
 ### Use In Application Code
 
-ErRabbit is using Log4j2 JMS Appender.
-And collect exception information with error logs.
-You can log all (info, debug, trace .. etc). But, for your Application performance,
+ErRabbit uses Log4j2 JMS Appender, and collects exceptions with other information logs.
+You can all kind of log(info, debug, trace .. etc). But, for your application performance,
 use only as exception error logging.
 
- 
 1. Get Log4j Logger
  
 ```java
 Logger logger = LogManager.getLogger(getClass());
 ```
 
-1. Log error with exception, Just `logger.error([message],e)`
+1. Log error with exception, Just type `logger.error([message],e)`
 
 ```java
 try{
