@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * Created by soleaf on 2015. 4. 20..
@@ -26,14 +27,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login_process")
-                .defaultSuccessUrl("/rabbit/list")
-                .permitAll()
+                    .formLogin()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/login_process")
+                    .defaultSuccessUrl("/rabbit/list")
+                    .permitAll()
                 .and()
-                .logout()
-                .permitAll();
+                    .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/login?logout")
+                ;
     }
 
     @Autowired

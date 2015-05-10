@@ -113,6 +113,14 @@ header nav A{
     color:#47a698;
 }
 
+header .logout{
+    float:right;
+    height:39px;
+    line-height:39px;
+    margin-right:10px;
+    font-size:12px;
+}
+
 .page_header{
     height:150px;
     background-color: #47a698;
