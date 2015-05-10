@@ -30,6 +30,18 @@ UL LI{
     list-style: none;
 }
 
+.btn-primary{
+    border: 1px solid #00AB99;
+    color :#00AB99;
+    background-color: #fff;
+}
+
+.btn-primary:HOVER {
+    color:#fff;
+    background-color: #00AB99;
+    border: 1px solid #00AB99;
+}
+
 .loading_box{
     display:none;
     width:100%;
@@ -63,6 +75,7 @@ header h1{
     margin: 0px;
     font-size:12px;
     float: left;
+    color:#00AB99;
 }
 
 header nav{
@@ -131,15 +144,6 @@ header nav UL .selected A{
     margin-top: 2px;
     border-left: 1px solid #FFF;
 }
-
-.side LI:HOVER{
-    border-left: 1px solid #D5D5D5;
-}
-
-.side .active{
-    border-left: 1px solid #47a698;
-}
-
 .side .active{
     color:#000;
 }
@@ -200,6 +204,7 @@ header nav UL .selected A{
     margin:0px;
     padding:0px;
     list-style: none;
+    margin-bottom:50px;
 }
 .page .list_rabbit li{
     margin-top:10px;
@@ -220,10 +225,6 @@ header nav UL .selected A{
     border:1px solid #fff;
 }
 
-.page .list_rabbit li:HOVER .icon{
-    border:1px solid #47a698;
-}
-
 .page .list_rabbit li>SPAN{
     color: #515151;
 }
@@ -231,6 +232,10 @@ header nav UL .selected A{
 .page .list_rabbit li>.conts{
     margin-top: 4px;
     margin-left: 60px;
+}
+
+.page .list_rabbit li>.recent{
+    color:#CCCCCC;
 }
 
 .page .list_rabbit li>.name{

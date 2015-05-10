@@ -26,7 +26,7 @@
                         </div>
                     </c:if>
                 <div class="form_submit">
-                    <button type="submit" class="btn btn-default">CONFIRM</button>
+                    <button type="submit" class="btn btn-primary">CONFIRM</button>
                     <button class="btn btn-default">CANCEL</button>
                 </div>
             </form>
