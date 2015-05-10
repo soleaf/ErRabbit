@@ -141,7 +141,7 @@ Example Project : https://github.com/soleaf/ErRabbit-Example-log4j2
 
 # Contribution
 
-Welcome. You can make it better. :D
+Welcome. We can make it better. :D
 
 # Next : ToDo
 
