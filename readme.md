@@ -3,7 +3,6 @@
 # Introduction
 
 ErRabbit(Error Rabbit) is useful Error remote tracking service with Visual View.
-
 Collecting by Using Log4j and ActiveMQ Easy Make it easy ,compatible other programs.
  
 ![ScreenShot](graphics/screenshot.png)
@@ -140,8 +139,12 @@ catch (Exception e){
 
 Example Project : https://github.com/soleaf/ErRabbit-Example-log4j2
 
+# Development
+
+You can make it better.
+
 # Next : ToDo
 
 * Alarm warning
 * Statistics
-* Connect with VCS.
+* Integration with VCS.
