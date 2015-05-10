@@ -116,7 +116,7 @@ queue.errabbit.report.example = errabbit.report.example
 ### Use In Application Code
 
 ErRabbit uses Log4j2 JMS Appender, and collects exceptions with other information logs.
-You can all kind of log(info, debug, trace .. etc). But, for your application performance,
+You can collect all kind of log(info, debug, trace .. etc). But, for your application performance,
 use only as exception error logging.
 
 1. Get Log4j Logger
