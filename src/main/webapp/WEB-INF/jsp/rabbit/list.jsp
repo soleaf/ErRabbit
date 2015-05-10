@@ -45,13 +45,20 @@
                                 </c:choose>
                             </div>
                             <div class="conts action">
-                                <a class="btn btn-xs btn-default" role="button" href="/report/list.err?id=${item.id}" >REPORTS</a>
-                                <button class="btn btn-xs btn-default" role="button" data-id="${item.id}" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> DEL</button>
+                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                    <a class="btn btn-xs btn-default" role="button" href="/report/list.err?id=${item.id}" ><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> REPORTS</a>
+                                    <button class="btn btn-xs btn-default" role="button" data-id="${item.id}" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> DEL</button>
+                                </div>
                             </div>
                         </li>
                 </c:forEach>
             </ul>
         </c:if>
+
+        <div>
+            <p>How to integrate with your Application</p>
+            <a href="/rabbit/howto" role="button" class="btn btn-primary">SEE HOWTO</a>
+        </div>
     </div>
 </section>
 

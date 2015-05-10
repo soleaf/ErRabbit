@@ -120,13 +120,16 @@ public class RabbitController {
         }
     }
 
+    // How to Integrate with Application
+    @RequestMapping(value = "howto")
+    public String howTo(){
+        return "/rabbit/setup";
+    }
+
     public class RabbitNotExistException extends Exception{
         public RabbitNotExistException(String id) {
             super(String.format("Rabbit '%s' is not exist", id));
         }
     }
-
-
-
 
 }
