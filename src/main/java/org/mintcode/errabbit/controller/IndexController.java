@@ -8,25 +8,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@SuppressWarnings("UnusedDeclaration")
 public class IndexController {
 
     @Autowired
     ReportRepository reportRepository;
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    @ResponseBody
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showIndex() {
-
-//        List<ExceptionLog> logs = reportRepository.findReports();
-
-//        return logs.toString();
-        return "";
-    }
-
-    @RequestMapping(value = "/hello")
-    public String hello(){
-        return "test";
+        return "redirect:/rabbit/list";
     }
 
 }
