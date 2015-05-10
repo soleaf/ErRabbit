@@ -50,7 +50,7 @@
                                 <a role="button" href="/report/list.err?id=${item.id}" ><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> REPORTS</a>
                             </div>
                             <div class="conts action">
-                                <a role="button" data-id="${item.id}" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> DEL</a>
+                                <a role="button" data-id="${item.id}" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> REMOVE</a>
                             </div>
                         </li>
                 </c:forEach>
