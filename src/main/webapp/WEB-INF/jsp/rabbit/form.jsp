@@ -13,6 +13,9 @@
         <jsp:param name="add" value="active"/>
     </jsp:include>
     <div class="page-side-margin">
+        <h3>Add New Rabbit</h3>
+        <p>Rabbit is Target Application to track log.</p>
+
         <div class="form-horizontal rabbit-form">
             <form class="form" action="/rabbit/insert_action.err">
                     <label for="id" class="control-label">ID</label>

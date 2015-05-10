@@ -7,7 +7,9 @@
     <script src="/js/rabbit.js"></script>
 </head>
 <body>
-<jsp:include page="../common/nav.jsp"/>
+<jsp:include page="../common/nav.jsp">
+    <jsp:param name="rabbit" value="active"/>
+</jsp:include>
 <section class="page">
     <jsp:include page="side.jsp">
         <jsp:param name="list" value="active"/>
@@ -28,7 +30,7 @@
                 <c:forEach var="item" items="${list}" varStatus="status">
                         <li class="col-md-4">
                             <div class="icon">
-                                ${fn:substring(item.id, 0, 1)}
+                                ${fn:toUpperCase(fn:substring(item.id, 0, 1))}
                             </div>
                             <div class="conts title">
                                 <h4 class="name">${item.id}</h4>
@@ -45,10 +47,10 @@
                                 </c:choose>
                             </div>
                             <div class="conts action">
-                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
-                                    <a class="btn btn-xs btn-default" role="button" href="/report/list.err?id=${item.id}" ><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> REPORTS</a>
-                                    <button class="btn btn-xs btn-default" role="button" data-id="${item.id}" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> DEL</button>
-                                </div>
+                                <a role="button" href="/report/list.err?id=${item.id}" ><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> REPORTS</a>
+                            </div>
+                            <div class="conts action">
+                                <a role="button" data-id="${item.id}" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> DEL</a>
                             </div>
                         </li>
                 </c:forEach>

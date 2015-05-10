@@ -76,6 +76,8 @@ header h1{
     font-size:12px;
     float: left;
     color:#00AB99;
+    background: url("/img/logo_top.png") no-repeat center center;
+    text-indent:-999999px;
 }
 
 header nav{
@@ -95,14 +97,20 @@ header nav UL LI{
     padding-left: 10px;
     padding-right: 10px;
     border-right:1px solid #f4f4f4;
+    float:left;
 }
 
-header nav UL .selected{
+header nav UL .active{
     background-color:#47a698;
+    color:#fff;
 }
 
-header nav UL .selected A{
+header nav UL .active A{
     color:#fff;
+}
+
+header nav A{
+    color:#47a698;
 }
 
 .page_header{
@@ -138,9 +146,8 @@ header nav UL .selected A{
 .side LI{
     font-size:14px;
     list-style: none;
-    width:55px;
+    width:100%;
     height:55px;
-    margin-left:5px;
     margin-top: 2px;
     border-left: 1px solid #FFF;
 }
@@ -213,16 +220,20 @@ header nav UL .selected A{
 }
 
 .page .list_rabbit li .icon{
-    background: #ededed;
+    background: #f3f3f3;
     width:46px;
     height:46px;
-    border-radius: 23px;
+    /*border-radius: 23px;*/
     text-align: center;
     line-height: 46px;
     color: #FFF;
     font-size:20px;
     float:left;
-    border:1px solid #fff;
+    /*border:1px solid #00AB99;*/
+}
+
+.page .list_rabbit li:HOVER .icon{
+    background: #00AB99;
 }
 
 .page .list_rabbit li>SPAN{
@@ -236,6 +247,22 @@ header nav UL .selected A{
 
 .page .list_rabbit li>.recent{
     color:#CCCCCC;
+}
+
+.page .list_rabbit li>.action{
+    border-bottom: 1px solid #f6f6f6;
+    height:30px;
+    line-height: 30px;
+}
+
+.page .list_rabbit li>.action A{
+    color:#595959;
+    cursor: pointer;
+}
+
+.page .list_rabbit li>.action A:HOVER{
+    text-decoration: none;
+    color:#00AB99;
 }
 
 .page .list_rabbit li>.name{
