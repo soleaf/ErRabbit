@@ -57,9 +57,9 @@ public class ReportMessageListener implements MessageListener {
             if (obj instanceof Log4jLogEvent){
                 errLoggingEvent = ErrLoggingEvent.fromLog4jLogEvent((Log4jLogEvent) obj);
             }
-//            else if (obj instanceof LoggingEvent){
-//                errLoggingEvent = ErrLoggingEvent.fromLoggingEvent((LoggingEvent) obj);
-//            }
+            else if (obj instanceof LoggingEvent){
+                errLoggingEvent = ErrLoggingEvent.fromLoggingEvent((LoggingEvent) obj);
+            }
             else{
                 throw new NotLoggingEventException(obj);
             }

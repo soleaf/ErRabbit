@@ -1,5 +1,6 @@
 package org.mintcode.errabbit.model;
 
+import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggingEvent;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 
@@ -15,23 +16,22 @@ public class ErrLoggingEvent implements Serializable{
 
     }
 
-//    public static ErrLoggingEvent fromLoggingEvent(LoggingEvent loggingEvent){
-//
-//        ErrLoggingEvent erLoggingEvent = new ErrLoggingEvent();
-//
-//        erLoggingEvent.setCategoryName(loggingEvent.getLogger().getName());
-//        erLoggingEvent.setLevel(loggingEvent.getLevel().toString());
-//        erLoggingEvent.setMessage(loggingEvent.getMessage());
-//        erLoggingEvent.setRenderedMessage(loggingEvent.getRenderedMessage());
-//        erLoggingEvent.setThreadName(loggingEvent.getThreadName());
-//        erLoggingEvent.setLocationInfo(ErLocationInfo.fromLocationInfo(loggingEvent.getLocationInformation()));
-//        erLoggingEvent.setTimeStamp(loggingEvent.getTimeStamp());
-//        erLoggingEvent.setTimeStampDate(new Date(loggingEvent.getTimeStamp()));
-//        erLoggingEvent.setThrowableInfo(ErThrowableInformation.fromThrowableInformation(loggingEvent.getThrowableInformation()));
-//
-//        return erLoggingEvent;
-//
-//    }
+    public static ErrLoggingEvent fromLoggingEvent(LoggingEvent loggingEvent){
+
+        ErrLoggingEvent erLoggingEvent = new ErrLoggingEvent();
+
+        erLoggingEvent.setCategoryName(loggingEvent.getLoggerName());
+        erLoggingEvent.setLevel(loggingEvent.getLevel().toString());
+        erLoggingEvent.setMessage(loggingEvent.getMessage());
+        erLoggingEvent.setRenderedMessage(loggingEvent.getRenderedMessage());
+        erLoggingEvent.setThreadName(loggingEvent.getThreadName());
+        erLoggingEvent.setLocationInfo(ErLocationInfo.fromLocationInfo(loggingEvent.getLocationInformation()));
+        erLoggingEvent.setTimeStamp(loggingEvent.getTimeStamp());
+        erLoggingEvent.setTimeStampDate(new Date(loggingEvent.getTimeStamp()));
+        erLoggingEvent.setThrowableInfo(ErThrowableInformation.fromThrowableInformation(loggingEvent.getThrowableInformation()));
+        return erLoggingEvent;
+
+    }
 
     public static ErrLoggingEvent fromLog4jLogEvent(Log4jLogEvent log4jLogEvent){
         ErrLoggingEvent erLoggingEvent = new ErrLoggingEvent();
@@ -41,7 +41,7 @@ public class ErrLoggingEvent implements Serializable{
         erLoggingEvent.setMessage(log4jLogEvent.getMessage());
         erLoggingEvent.setRenderedMessage(log4jLogEvent.getMessage().getFormattedMessage());
         erLoggingEvent.setThreadName(log4jLogEvent.getThreadName());
-//        erLoggingEvent.setLocationInfo(ErLocationInfo.fromLocationInfo(log4jLogEvent.get));
+//        erLoggingEvent.setLocationInfo(ErLocationInfo.fromLocationInfo(log4jLogEvent.));
         erLoggingEvent.setTimeStamp(log4jLogEvent.getTimeMillis());
         erLoggingEvent.setTimeStampDate(new Date(log4jLogEvent.getTimeMillis()));
         erLoggingEvent.setThrowableInfo(ErThrowableInformation.fromThrowableProxy(log4jLogEvent.getThrownProxy()));
