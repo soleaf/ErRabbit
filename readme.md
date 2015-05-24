@@ -4,6 +4,12 @@
 
 ErRabbit(Error Rabbit) is useful error remote tracking service with Visual View.
 Collecting by Log4j and ActiveMQ will make it easy compatible with other programs.
+
+## Structure
+
+![Structure](graphics/structure.png)
+
+## Web console screenshot
  
 ![ScreenShot](graphics/screenshot1.png)
 
@@ -14,7 +20,7 @@ Collecting by Log4j and ActiveMQ will make it easy compatible with other program
 * Java 1.7 upper
 * MongoDB 2
 * ActiveMQ
-* Log4j 2 in your application(log tracking target).
+* Log4j1.2 or log4j 2 in your application(log tracking target).
 
 # Install and Using
 
@@ -56,14 +62,106 @@ Or directly command `java -jar [war filename] --spring.config.location=file:sett
 
 ## Make your application connect JMS
 
-### Add Dependencies to maven `pom.xml`
+Choose method by your application log4j version.
+
+# Log4j 1.2
+# Log4j 2.x
+
+### Setup for Log4j 1.2
+
+Because Default JMS Appender on Log4j1 did not support queue, ErRabbit made a custom appender.
+There is dependency for our custom appender.
+
+#### Add Dependencies to maven `pom.xml`
 
 ```xml
 <dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-core</artifactId>
-    <version>2.1</version>
+    <groupId>org.mintcode.errabbit</groupId>
+    <artifactId>log4j-apeender</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
 </dependency>
+```
+
+And this dependency is on our server. So you make sure add errabit repository.
+```xml
+   <repositories>
+        <repository>
+            <id>mintcode</id>
+            <name>mintcode-errabbit</name>
+            <url>http://dev.mintcode.org/nexus/content/repositories/errabbit-snapshot/</url>
+        </repository>
+    </repositories>
+```
+
+#### Setup log4j.xml
+
+1. Declare 'errabbit' appender to `log4j.xml` with your ActiveMQ URL, userName, password, rabbitID
+ 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- Console view -->
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%t] %p - %C{1}.%M(%L) | %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="errabbit" class="org.mintcode.errabbit.log4j.Log4jAppender">
+        <param name="host" value="tcp://localhost:61616"/>
+        <param name="rabbitID" value="example"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%5p [%d{HH:mm:ss}] %m%n"/>
+        </layout>
+    </appender>
+
+    <logger name="org.mintcode.errabbit.example">
+        <level value="ERROR"/>
+        <appender-ref ref="errabbit"/>
+    </logger>
+
+    <!-- Root Logger -->
+    <root>
+        <priority value="INFO" />
+        <appender-ref ref="console" />
+    </root>
+    
+</log4j:configuration>
+```
+
+#### Use In Application Code
+
+You can collect all kind of log(info, debug, trace .. etc). But, for your application performance,
+use only as exception error logging.
+
+1. Get Log4j Logger
+ 
+```java
+Logger logger = Logger.getLogger(getClass());
+```
+
+1. Log error with exception, Just type `logger.error([message],e)`
+
+```java
+try{
+    int a[] = new int[2];
+    System.out.println("Access element three :" + a[3]);
+}
+catch (Exception e){
+    logger.error(e.getMessage(),e);
+}
+```
+
+Example Project : https://github.com/soleaf/ErRabbit-Example-log4j2
+
+
+### Setup for Log4j 2.x
+
+#### Add Dependencies to maven `pom.xml`
+
+```xml
 <dependency>
     <groupId>javax.jms</groupId>
     <artifactId>jms</artifactId>
@@ -76,7 +174,7 @@ Or directly command `java -jar [war filename] --spring.config.location=file:sett
 </dependency>
 ```
 
-### Setup Log4j2
+#### Setup Log4j2
 
 1. Declare 'JMS Appender' to `log4j2.xml` with your ActiveMQ URL, userName, password.
 1. 'queueBindingName' should be 'errabbit.report.[RabbitID]'.
@@ -94,16 +192,23 @@ Or directly command `java -jar [war filename] --spring.config.location=file:sett
          userName = "sender"
          password = "senderpassword!"
             />
+    <Console name="STDOUT" target="SYSTEM_OUT">
+        <PatternLayout pattern="%m%n"/>
+    </Console>
 </Appenders>
 <Loggers>
-    <Root level="error">
+    <Logger name="org.mintcode.errabbit.example" level="error">
         <AppenderRef ref="errabbit"/>
+    </Logger>
+    <Root level="error">
+        <AppenderRef ref="STDOUT"/>
     </Root>
 </Loggers>
 </Configuration>
+
 ```
 
-### Setup jndi.properties
+#### Setup jndi.properties
 
 1. Make `java/main/resource/jndi.properties`, and put same ActiveMQ settings(username, password, rabbitID).
 
@@ -113,7 +218,7 @@ java.naming.provider.url = tcp://localhost:61616
 queue.errabbit.report.example = errabbit.report.example
 ```
 
-### Use In Application Code
+#### Use In Application Code
 
 ErRabbit uses Log4j2 JMS Appender, and collects exceptions with other information logs.
 You can collect all kind of log(info, debug, trace .. etc). But, for your application performance,
