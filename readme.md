@@ -64,8 +64,8 @@ Or directly command `java -jar [war filename] --spring.config.location=file:sett
 
 Choose method by your application log4j version.
 
-# Log4j 1.2
-# Log4j 2.x
+* Log4j 1.2
+* Log4j 2.x
 
 ### Setup for Log4j 1.2
 
@@ -130,6 +130,8 @@ And this dependency is on our server. So you make sure add errabit repository.
     
 </log4j:configuration>
 ```
+
+CustomAppender's source : https://github.com/soleaf/ErRabbit-log4j-apeender
 
 #### Use In Application Code
 
