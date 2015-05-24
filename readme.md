@@ -154,7 +154,7 @@ catch (Exception e){
 }
 ```
 
-Example Project : https://github.com/soleaf/ErRabbit-Example-log4j2
+Example Project : https://github.com/soleaf/ErRabbit-Example-log4j1
 
 
 ### Setup for Log4j 2.x
