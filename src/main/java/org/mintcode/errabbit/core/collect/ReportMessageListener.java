@@ -1,6 +1,7 @@
 package org.mintcode.errabbit.core.collect;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.log4j.spi.LoggingEvent;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 import org.mintcode.errabbit.core.rabbit.name.RabbitNameCache;
@@ -10,7 +11,7 @@ import org.mintcode.errabbit.model.ErrLoggingEvent;
 import org.mintcode.errabbit.model.Report;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import javax.annotation.PostConstruct;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -25,7 +26,7 @@ import java.util.Date;
 @Component(value = "reportMessageListener")
 public class ReportMessageListener implements MessageListener {
 
-    private Logger logger = Logger.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private ReportRepository reportRepository;
@@ -36,13 +37,14 @@ public class ReportMessageListener implements MessageListener {
     @Autowired
     private LogLevelDailyStatisticsRepository logLevelDailyStatisticsRepository;
 
+    @PostConstruct
+    public void onStartup(){
+        logger.info("ActiveMQ Listener ready");
+    }
+
     public void onMessage(Message message) {
 
         try {
-
-            logger.info(message.getJMSDestination());
-            logger.info(message.getJMSMessageID());
-
             // Extract message
             String rabbitID = extractRabbitIDFromMessage(message);
             // Verifying Message
@@ -54,11 +56,13 @@ public class ReportMessageListener implements MessageListener {
             ObjectMessage msg = (ObjectMessage) message;
             Object obj = msg.getObject();
             ErrLoggingEvent errLoggingEvent;
+            // From log4j2 JMS appender
             if (obj instanceof Log4jLogEvent){
                 errLoggingEvent = ErrLoggingEvent.fromLog4jLogEvent((Log4jLogEvent) obj);
             }
-            else if (obj instanceof LoggingEvent){
-                errLoggingEvent = ErrLoggingEvent.fromLoggingEvent((LoggingEvent) obj);
+            // From log4j1 custom ErRabbit JMS appender
+            else if (obj instanceof ErrLoggingEvent){
+                errLoggingEvent = (ErrLoggingEvent) obj;
             }
             else{
                 throw new NotLoggingEventException(obj);

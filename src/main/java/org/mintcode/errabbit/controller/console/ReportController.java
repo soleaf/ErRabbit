@@ -1,6 +1,7 @@
 package org.mintcode.errabbit.controller.console;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
 import org.mintcode.errabbit.core.report.dao.LogLevelDailyStatisticsRepository;
 import org.mintcode.errabbit.core.report.dao.ReportRepository;
@@ -29,7 +30,7 @@ import java.util.*;
 @RequestMapping(value = "/report")
 public class ReportController {
 
-    private Logger logger = Logger.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private ReportRepository reportRepository;
@@ -218,31 +219,39 @@ public class ReportController {
      * @return
      */
     public List<StackTraceGraph> makeTraceGraph(Report report){
-        List<StackTraceGraph> graphs = new ArrayList<StackTraceGraph>();
 
-        StackTraceGraph lastGraph = new StackTraceGraph();
-        graphs.add(lastGraph);
+        try{
+            List<StackTraceGraph> graphs = new ArrayList<StackTraceGraph>();
 
-        boolean thoughBasPackages = false;
+            StackTraceGraph lastGraph = new StackTraceGraph();
+            graphs.add(lastGraph);
 
-        for (ErStackTraceElement element :
-                report.getLoggingEvent().getThrowableInfo().getThrowable().getStackTraceElements()){
-            if (lastGraph.getClassName() != null &&
-                    !lastGraph.getClassName().equals(element.getDeclaringClass())){
-                lastGraph = new StackTraceGraph();
-                graphs.add(lastGraph);
+            boolean thoughBasPackages = false;
+
+            for (ErStackTraceElement element :
+                    report.getLoggingEvent().getThrowableInfo().getThrowable().getStackTraceElements()){
+                if (lastGraph.getClassName() != null &&
+                        !lastGraph.getClassName().equals(element.getDeclaringClass())){
+                    lastGraph = new StackTraceGraph();
+                    graphs.add(lastGraph);
+                }
+
+                if (thoughBasPackages){
+                    lastGraph.setDefaultHidden(true);
+                } else if (lastGraph.isDefaultHidden){
+                    thoughBasPackages = true;
+                }
+
+                lastGraph.addElement(element);
+
             }
-
-            if (thoughBasPackages){
-                lastGraph.setDefaultHidden(true);
-            } else if (lastGraph.isDefaultHidden){
-                thoughBasPackages = true;
-            }
-
-            lastGraph.addElement(element);
-
+            return graphs;
         }
-        return graphs;
+        catch (Exception e){
+            logger.error(e.getMessage(),e);
+            return null;
+        }
+
     }
 
 }

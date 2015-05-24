@@ -1,6 +1,6 @@
 package org.mintcode.errabbit.core.rabbit.name;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class InMemoryRabbitNameCache implements RabbitNameCache {
 
-    private Logger logger = Logger.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private List<String> rabbitIDList;
 
     public void updateRabbitIdList(List<String> rabbitIDs) {

@@ -1,6 +1,6 @@
 package org.mintcode.errabbit.core;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.rabbit.name.RabbitNameCache;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
 import org.mintcode.errabbit.model.Rabbit;
@@ -19,7 +19,7 @@ import java.util.List;
 @Component
 public class CoreService {
 
-    private Logger logger = Logger.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private RabbitNameCache nameRepository;

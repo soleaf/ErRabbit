@@ -1,6 +1,6 @@
 package org.mintcode.errabbit.model;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.apache.log4j.spi.LoggingEvent;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 
@@ -11,6 +11,8 @@ import java.util.Date;
  * Created by soleaf on 2/21/15.
  */
 public class ErrLoggingEvent implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     public ErrLoggingEvent(){
 

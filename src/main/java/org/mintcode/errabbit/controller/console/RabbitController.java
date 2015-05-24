@@ -1,6 +1,6 @@
 package org.mintcode.errabbit.controller.console;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.CoreService;
 import org.mintcode.errabbit.core.report.dao.LogLevelDailyStatisticsRepository;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
@@ -25,7 +25,7 @@ import java.util.Map;
 @RequestMapping(value = "/rabbit")
 public class RabbitController {
 
-    private Logger logger = Logger.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     RabbitManagingService rabbitManagingService;

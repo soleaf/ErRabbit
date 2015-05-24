@@ -1,6 +1,6 @@
 package org.mintcode.errabbit.core.rabbit.managing;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
 import org.mintcode.errabbit.core.report.dao.LogLevelDailyStatisticsRepository;
 import org.mintcode.errabbit.core.report.dao.ReportRepository;
@@ -26,7 +26,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
     @Autowired
     private ReportRepository reportRepository;
 
-    private Logger logger = Logger.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public Rabbit makeNewRabbit(String id) throws AlreadyExistRabbitIDException, InvalidRabbitNameException {

@@ -1,6 +1,6 @@
 package org.mintcode.errabbit.core.report.dao;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 import org.mintcode.errabbit.model.Report;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStatisticsRepositoryCustom {
 
-    private Logger logger = Logger.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private MongoOperations mongoOperations;

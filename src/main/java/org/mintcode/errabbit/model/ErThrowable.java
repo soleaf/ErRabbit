@@ -12,6 +12,8 @@ import java.util.Arrays;
  */
 public class ErThrowable implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+
     private ErStackTraceElement[] stackTraceElements;
     private String detailMessage;
 
@@ -33,7 +35,6 @@ public class ErThrowable implements Serializable{
             erStackTraceElements[i] = ErStackTraceElement.fromStackTraceElement(stackTraceElements[i]);
         }
         ert.setStackTraceElements(erStackTraceElements);
-
         return ert;
     }
 

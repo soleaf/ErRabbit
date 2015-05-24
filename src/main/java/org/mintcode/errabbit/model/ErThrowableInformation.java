@@ -13,6 +13,8 @@ import java.util.Arrays;
  */
 public class ErThrowableInformation implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+
     private ErThrowable throwable;
     private ErCategory category;
     private String[] rep;

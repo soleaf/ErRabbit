@@ -9,6 +9,8 @@ import java.io.Serializable;
  */
 public class ErStackTraceElement implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+
     private String declaringClass;
     private String methodName;
     private String fileName;
