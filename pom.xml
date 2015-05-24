@@ -4,7 +4,7 @@
 
     <groupId>org.mintcode.errabbit</groupId>
     <artifactId>ErRabbitServer</artifactId>
-    <version>0.1.0-SNAPSHOT3</version>
+    <version>0.1.0-SNAPSHOT4</version>
     <packaging>war</packaging>
     <name>ErRabbit Server</name>
     <url>http://www.mintcode.org</url>
