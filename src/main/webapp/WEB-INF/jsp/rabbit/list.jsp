@@ -59,7 +59,7 @@
 
         <div>
             <p>How to integrate with your Application</p>
-            <a href="/rabbit/howto" role="button" class="btn btn-primary">SEE HOW TO</a>
+            <a href="https://github.com/soleaf/ErRabbit#make-your-application-connect-jms" role="button" class="btn btn-primary" target="_blank">SEE HOW TO</a>
         </div>
     </div>
 </section>
