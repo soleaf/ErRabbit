@@ -18,7 +18,7 @@
             <span class="categoryName">${item.loggingEvent.categoryName} ${item.loggingEvent.renderedMessage}</span>
         </li>
 
-        <c:if test="${item.loggingEvent.throwableInfo}">
+        <c:if test="${not empty item.loggingEvent.throwableInfo}">
         <div class="report-detail-popup" data-id="${item.id}">
             <div class="ThrowableInfo">
                 <ul class="report-tab">
