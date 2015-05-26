@@ -9,13 +9,14 @@ $(document).ready(function(){
     // Get information
     rabbitId = $("#report-area").attr("data-rabbitId");
 
-    // Retrieve Calendar
-    retrieveCalendar(rabbitId, 2015, 4);
     initReportFeedButton();
 
     // Init CalendarEvent
     initCalendarYear();
     initCalendarMonth();
+
+    // Retrieve Calendar
+    retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val());
 
     //initCalendarValueChanged();
 
@@ -108,9 +109,9 @@ function retrieveReports(rabbitId, page, size, y, m, d) {
 
             // PagingInfo
             totalPages = $("#report-list #page_total").val();
-            if (totalPages > page+1){
+            if (totalPages > parseInt(page)+1){
                 $("#report-feed").show();
-                $("#report-feed").attr("data-page", page+1);
+                $("#report-feed").attr("data-page", parseInt(page)+1);
             }
             else{
                 $("#report-feed").hide();

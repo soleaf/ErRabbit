@@ -52,7 +52,6 @@ public class ReportMessageListener implements MessageListener {
                 logger.error(String.format("Rabbit ID %s is invalid", rabbitID));
                 return;
             }
-
             ObjectMessage msg = (ObjectMessage) message;
             Object obj = msg.getObject();
             ErrLoggingEvent errLoggingEvent;

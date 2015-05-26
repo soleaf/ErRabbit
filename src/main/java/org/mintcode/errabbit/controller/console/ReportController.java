@@ -67,7 +67,7 @@ public class ReportController {
                 }
                 model.addAttribute("yearList",yearList);
                 model.addAttribute("today_y", cal.get(Calendar.YEAR));
-                model.addAttribute("today_m", cal.get(Calendar.MONTH)); // warn : jan.=0
+                model.addAttribute("today_m", cal.get(Calendar.MONTH) +1); // warn : jan.=1
                 model.addAttribute("today_d", cal.get(Calendar.DAY_OF_MONTH));
             }
 
@@ -89,7 +89,7 @@ public class ReportController {
     public ModelAndView dayStaticListData(Model model,
             @RequestParam(value = "id", required = true) String id,
             @RequestParam(value = "y", required = true) Integer year,
-            @RequestParam(value = "m", required = true) Integer month  // warn : jan.=0
+            @RequestParam(value = "m", required = true) Integer month  // warn : jan.=1
     ){
         try{
 
