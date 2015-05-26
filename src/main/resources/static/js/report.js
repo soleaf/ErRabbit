@@ -120,9 +120,11 @@ function retrieveReports(rabbitId, page, size, y, m, d) {
                 // Report Detail Information Layer Toggle
                 var id = $(this).attr("data-id");
                 $("#report-list .report-detail-popup").hide();
-                $(this).parent().find(".report-detail-popup[data-id='" + id + "']").toggle();
-                $("#report-list .report_active").removeClass("report_active");
-                $(this).addClass("report_active");
+                if ($(this).parent().find(".report-detail-popup[data-id='" + id + "']")){
+                    $(this).parent().find(".report-detail-popup[data-id='" + id + "']").toggle();
+                    $("#report-list .report_active").removeClass("report_active");
+                    $(this).addClass("report_active");
+                }
             });
 
             $("#report-list .close").click(function() {

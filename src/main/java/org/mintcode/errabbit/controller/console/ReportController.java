@@ -93,8 +93,6 @@ public class ReportController {
     ){
         try{
 
-            logger.info(String.format("%d-%d", year, month));
-
             // Make Calendar with blank cell
             int lastDayOfMonth = DateUtil.getLastDayOfMonth(year, month);
             List<DayCell> cellList = new ArrayList<DayCell>();
@@ -221,6 +219,10 @@ public class ReportController {
     public List<StackTraceGraph> makeTraceGraph(Report report){
 
         try{
+            if (report.getLoggingEvent().getThrowableInfo() == null){
+                return null;
+            }
+
             List<StackTraceGraph> graphs = new ArrayList<StackTraceGraph>();
 
             StackTraceGraph lastGraph = new StackTraceGraph();

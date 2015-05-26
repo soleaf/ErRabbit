@@ -30,7 +30,9 @@ public class ErrLoggingEvent implements Serializable{
         erLoggingEvent.setLocationInfo(ErLocationInfo.fromLocationInfo(loggingEvent.getLocationInformation()));
         erLoggingEvent.setTimeStamp(loggingEvent.getTimeStamp());
         erLoggingEvent.setTimeStampDate(new Date(loggingEvent.getTimeStamp()));
-        erLoggingEvent.setThrowableInfo(ErThrowableInformation.fromThrowableInformation(loggingEvent.getThrowableInformation()));
+        if (loggingEvent.getThrowableInformation() != null){
+            erLoggingEvent.setThrowableInfo(ErThrowableInformation.fromThrowableInformation(loggingEvent.getThrowableInformation()));
+        }
         return erLoggingEvent;
 
     }
@@ -46,7 +48,9 @@ public class ErrLoggingEvent implements Serializable{
 //        erLoggingEvent.setLocationInfo(ErLocationInfo.fromLocationInfo(log4jLogEvent.));
         erLoggingEvent.setTimeStamp(log4jLogEvent.getTimeMillis());
         erLoggingEvent.setTimeStampDate(new Date(log4jLogEvent.getTimeMillis()));
-        erLoggingEvent.setThrowableInfo(ErThrowableInformation.fromThrowableProxy(log4jLogEvent.getThrownProxy()));
+        if (log4jLogEvent.getThrownProxy() != null){
+            erLoggingEvent.setThrowableInfo(ErThrowableInformation.fromThrowableProxy(log4jLogEvent.getThrownProxy()));
+        }
 
         return erLoggingEvent;
     }
