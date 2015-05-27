@@ -46,7 +46,6 @@
                 <%--</label>--%>
             <%--</div>--%>
             <button type="submit" class="btn btn-default btn-block">SIGN IN</button>
-            <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
         </form>
     </div>
 </section>
