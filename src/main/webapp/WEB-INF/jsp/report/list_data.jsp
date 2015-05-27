@@ -15,7 +15,10 @@
         <li class="report" data-id="${item.id}">
             <span class="time">${format.format(item.loggingEvent.timeStampDate)}</span>
             <span class="level ${item.loggingEvent.level}">${item.loggingEvent.level}</span>
-            <span class="categoryName">${item.loggingEvent.categoryName} ${item.loggingEvent.renderedMessage}</span>
+            <div class="contgroup">
+                <span class="categoryName">${item.loggingEvent.categoryName}</span>
+                <span class="message">${item.loggingEvent.renderedMessage}</span>
+            </div>
         </li>
 
         <c:if test="${not empty item.loggingEvent.throwableInfo}">
@@ -41,7 +44,7 @@
                                     <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></div>
                                 <div class='class <c:if test="${stack.isDefaultHidden()}">base-package</c:if>'>
                                     <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                                    <span> ${stack.className}</span>
+                                    <span class="class_name"> ${stack.className}</span>
                                     <c:forEach var="element" items="${stack.stackTraceElements}" varStatus="status">
                                         <ul>
                                             <li class="method">

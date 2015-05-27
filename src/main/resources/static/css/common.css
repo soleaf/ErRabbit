@@ -357,11 +357,13 @@ header .logout{
     font-size: 13px;
     padding-top:4px;
     padding-bottom:4px;
+    padding-left:10px;
     cursor: pointer;
+    border-top: 1px solid #f4f4f4;
 }
 
 .report-list .report:HOVER{
-    background-color: #f6f6f6;
+    background-color: #f9f9f9;
 }
 
 .report-list .report .level{
@@ -370,8 +372,10 @@ header .logout{
     border-style: solid;
     font-size:10px;
     line-height: 12px;
-    padding-left:2px;
-    padding-right:2px;
+    width:50px;
+    text-align: center;
+    display:inline-block;
+    float:left;
 }
 
 .report-list .report .DEBUG{
@@ -379,18 +383,50 @@ header .logout{
     color: #868686;
 }
 
+.report-list .report .WARN{
+    border-color: #dd560a;
+    color: #dd560a;
+}
+
+.report-list .report .ERROR{
+    border-color: #a51c1e;
+    color: #a51c1e;
+}
+
+.report-list .report .FATAL{
+    border-color: #a5006d;
+    color: #a5006d;
+}
+
 .report-list .report .time{
     font-style: italic;
     color: #868686;
-    padding-left:8px;
+    float:left;
+    width:90px;
 }
+
+.report-list .report .contgroup{
+    margin-left:150px;
+}
+
 
 .report-list .report .categoryName{
+    margin-left: 4px;
+    color: #384e63;
+    text-decoration: underline;
 }
 
+.report-list .report .message{
+    margin-left: 4px;
+    color: #4b4b4b;
+}
 
 .report-list .report_active{
-    font-weight: bold;
+    background-color: #e4f1ef;
+}
+
+.report-list .report_active .message{
+    color: #010101;
 }
 
 .report-list .empty{
@@ -488,8 +524,8 @@ header .logout{
     margin-left:0px;
     display: inline-block;
     clear:both;
+    max-width:400px;
 }
-
 
 .report-detail-popup .ThrowableInfo .graph .class{
     background-color: #47A698;
@@ -498,6 +534,17 @@ header .logout{
     margin-bottom:2px;
     padding:8px;
     display: inline-block;
+    max-width:400px;
+}
+
+.report-detail-popup .ThrowableInfo .glyphicon-file{
+    float:left;
+}
+
+.report-detail-popup .ThrowableInfo .graph .class_name{
+    display:block;
+    word-wrap: break-word;
+    margin-left:18px;
 }
 
 .report-detail-popup .ThrowableInfo .graph .method{
@@ -506,7 +553,7 @@ header .logout{
     color: #17993A;
     margin-top:4px;
     margin-bottom:2px;
-    margin-left:10px;
+    margin-left:18px;
     padding-left:4px;
     padding-right:4px;
     display: inline-block;
