@@ -52,6 +52,12 @@ public class ReportController {
                 return new ModelAndView("/report/list");
             }
 
+            // Mark read
+            if (!rabbit.getRead()){
+                rabbit.setRead(true);
+                rabbitRepository.save(rabbit);
+            }
+
             // Get first day of report
             LogLevelDailyStatistics firstDayStatistic = logLevelDailyStatisticsRepository.findByRabbitIdOnFirst(id);
             List<Integer> yearList = new ArrayList<Integer>();

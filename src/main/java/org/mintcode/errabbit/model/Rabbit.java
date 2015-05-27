@@ -23,6 +23,9 @@ public class Rabbit implements Serializable {
     // Registered Date
     private Date regDate = new Date();
 
+    // Read all reports
+    private Boolean read = false;
+
     /**
      * Getter and Setter
      */
@@ -51,4 +54,11 @@ public class Rabbit implements Serializable {
         this.regDate = regDate;
     }
 
+    public Boolean getRead() {
+        return read;
+    }
+
+    public void setRead(Boolean read) {
+        this.read = read;
+    }
 }

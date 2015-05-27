@@ -260,6 +260,11 @@ header .logout{
     color:#CCCCCC;
 }
 
+.page .list_rabbit li>.recent>.new{
+    color:#00AB99;
+    font-weight: bold;
+}
+
 .page .list_rabbit li>.action{
     border-bottom: 1px solid #f6f6f6;
     height:30px;

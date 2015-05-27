@@ -1,5 +1,7 @@
 package org.mintcode.errabbit.core.collect;
 
+import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
+import org.mintcode.errabbit.model.Rabbit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.log4j.spi.LoggingEvent;
@@ -32,6 +34,9 @@ public class ReportMessageListener implements MessageListener {
     private ReportRepository reportRepository;
 
     @Autowired
+    private RabbitRepository rabbitRepository;
+
+    @Autowired
     private RabbitNameCache nameRepository;
 
     @Autowired
@@ -47,8 +52,9 @@ public class ReportMessageListener implements MessageListener {
         try {
             // Extract message
             String rabbitID = extractRabbitIDFromMessage(message);
-            // Verifying Message
-            if (!verify(rabbitID)) {
+
+            Rabbit rabbit = rabbitRepository.findById(rabbitID);
+            if (rabbit == null) {
                 logger.error(String.format("Rabbit ID %s is invalid", rabbitID));
                 return;
             }
@@ -78,6 +84,12 @@ public class ReportMessageListener implements MessageListener {
 
             // Add to statistic dao
             logLevelDailyStatisticsRepository.insertDailyStatistic(report);
+
+            // Mark unread
+            if (rabbit.getRead()){
+                rabbit.setRead(false);
+                rabbitRepository.save(rabbit);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
