@@ -89,7 +89,8 @@ public class ReportController {
     public ModelAndView dayStaticListData(Model model,
             @RequestParam(value = "id", required = true) String id,
             @RequestParam(value = "y", required = true) Integer year,
-            @RequestParam(value = "m", required = true) Integer month  // warn : jan.=1
+            @RequestParam(value = "m", required = true) Integer month, // warn : jan.=1
+            @RequestParam(value = "s", required = false) Long selectedDay
     ){
         try{
 
@@ -109,6 +110,10 @@ public class ReportController {
                 cell.setStatistics(statistics);
             }
             model.addAttribute(cellList);
+
+            if (selectedDay != null){
+                model.addAttribute("selectedDay", selectedDay);
+            }
 
             return new ModelAndView("/report/day_data");
         }

@@ -16,19 +16,28 @@ $(document).ready(function(){
     initCalendarMonth();
 
     // Retrieve Calendar
-    retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val());
+    if ($("#cal_y").val() != null && $("#cal_m").val() != null){
+        var today = new Date();
+        var dd = today.getDate();
+        retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val(), dd);
+        retrieveReports(rabbitId, 0, 100, $("#cal_y").val(), $("#cal_m").val(), dd);
+    }
 
     //initCalendarValueChanged();
 
 });
 
-function retrieveCalendar(rabbitId, year, month) {
+function retrieveCalendar(rabbitId, year, month, selectedDay) {
     showLoading();
     $.ajax({
-        url: '/report/list_days.err?id=' + rabbitId + '&y=' + year + '&m=' + month,
+        url: '/report/list_days.err?id=' + rabbitId + '&y=' + year + '&m=' + month +'&s=' + selectedDay,
         success: function (data) {
             $("#report-calendar").html("");
             $("#report-calendar").append(data);
+
+            if (selectedDay > 0){
+                $("#cal_d").val(selectedDay);
+            }
 
             $("#report-calendar .day").click(function(){
                 $("#cal_d").val($(this).attr("data-value"));
@@ -37,7 +46,6 @@ function retrieveCalendar(rabbitId, year, month) {
                 $("#report-calendar .active").removeClass("active");
                 $(this).addClass("active");
             });
-
             hideLoading();
         }
         ,fail: function(){
@@ -73,7 +81,7 @@ function initCalendarMonth(){
 }
 
 function reloadCalendarFromSelected(){
-    retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val());
+    retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val(), -1);
     $("#report-list").html("");
 }
 
