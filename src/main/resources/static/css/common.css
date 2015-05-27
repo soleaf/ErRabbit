@@ -349,8 +349,17 @@ header .logout{
     overflow: scroll;
 }
 
+.report-area .report-head{
+    height:32px;
+    line-height: 32px;
+    padding-left:10px;
+    padding-top:1px;
+    font-size:14px;
+    color:#333;
+}
+
 .report-list-box{
-    margin-top:10px;
+
 }
 
 .report-list .report{
@@ -359,7 +368,7 @@ header .logout{
     padding-bottom:4px;
     padding-left:10px;
     cursor: pointer;
-    border-top: 1px solid #f4f4f4;
+    border-bottom: 1px solid #f4f4f4;
 }
 
 .report-list .report:HOVER{

@@ -62,6 +62,9 @@
             </div>
         </div>
         <div class="report-area" id="report-area" data-rabbitId="${rabbit.id}">
+            <div class="report-head" id="report-head">
+
+            </div>
             <div class="report-timeLine">
                 <!-- Report Time Line Area-->
             </div>

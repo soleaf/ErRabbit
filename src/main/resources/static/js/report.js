@@ -113,6 +113,7 @@ function retrieveReports(rabbitId, page, size, y, m, d) {
         + '&y=' + y + '&m=' + m + '&d=' + d,
         success : function(data) {
 
+            $("#report-head").html("" + d);
             $("#report-list").append(data);
 
             // PagingInfo
