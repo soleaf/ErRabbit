@@ -398,13 +398,18 @@ header .logout{
 }
 
 .report-list .report .WARN{
-    border-color: #dd560a;
-    color: #dd560a;
+    border-color: #ed681b;
+    color: #ed681b;
 }
 
 .report-list .report .ERROR{
-    border-color: #a51c1e;
-    color: #a51c1e;
+    border-color: #C33F4A;
+    color: #C33F4A;
+}
+
+.report-list .report .has_exception{
+    background-color:#C33F4A;
+    color:#FFF;
 }
 
 .report-list .report .FATAL{
@@ -618,6 +623,7 @@ header .logout{
 
 .report-detail-popup .ThrowableInfo .text{
     display: none;
+    max-width:100%;
 }
 
 .report-detail-popup .ThrowableInfo .text li{
