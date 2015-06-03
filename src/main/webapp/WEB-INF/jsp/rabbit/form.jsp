@@ -18,16 +18,30 @@
 
         <div class="form-horizontal rabbit-form">
             <form class="form" action="/rabbit/insert_action.err">
+                <div>
                     <label for="id" class="control-label">ID</label>
                     <input type="text" class="form-control" id="id" name="id" placeholder="Rabbit ID">
-                    <span id="helpBlock" class="help-block">It's used to identify a rabbitId. and set to log4jappender property</span>
-                    <c:if test="${not empty e}">
-                        <div class="alert alert-warning alert-dismissible" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                            <strong>ERROR</strong> ${e.message}
-                        </div>
-                    </c:if>
+                    <span   class="help-block">It's used to identify a rabbitId on Log4j appender property.</span>
+                </div>
+                <div>
+                    <label for="basePackage" class="control-label">Base Package</label>
+                    <input type="text" class="form-control" id="basePackage" name="basePackage" placeholder="org.mintcode.errabbit">
+                    <span class="help-block">It will be help you to recognize your package in throwable stack.</span>
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" name="onlyException" value="true"/>
+                        Collection only Exception
+                    </label>
+                    <span class="help-block">Discard any other logs has no Throwable exception</span>
+                </div>
+                <c:if test="${not empty e}">
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <strong>ERROR</strong> ${e.message}
+                    </div>
+                </c:if>
                 <div class="form_submit">
                     <button type="submit" class="btn btn-primary">CONFIRM</button>
                     <button class="btn btn-default">CANCEL</button>

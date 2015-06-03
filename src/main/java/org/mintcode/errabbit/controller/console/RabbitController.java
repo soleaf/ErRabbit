@@ -1,6 +1,7 @@
 package org.mintcode.errabbit.controller.console;
 
-import org.slf4j.Logger; import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.CoreService;
 import org.mintcode.errabbit.core.report.dao.LogLevelDailyStatisticsRepository;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
@@ -40,24 +41,23 @@ public class RabbitController {
     @RequestMapping(value = "list")
     public ModelAndView list(Model model,
                              @RequestParam(value = "info", required = false) String info,
-                             @RequestParam(value = "error", required = false) String error){
+                             @RequestParam(value = "error", required = false) String error) {
 
-        try{
+        try {
             List<Rabbit> rabbitList = rabbitManagingService.getRabbits();
-            Map<Rabbit,LogLevelDailyStatistics> lastStatics = new HashMap<Rabbit,LogLevelDailyStatistics>();
-            for (Rabbit rabbit : rabbitList){
+            Map<Rabbit, LogLevelDailyStatistics> lastStatics = new HashMap<Rabbit, LogLevelDailyStatistics>();
+            for (Rabbit rabbit : rabbitList) {
                 LogLevelDailyStatistics statistics = logLevelDailyStatisticsRepository.findByRabbitIdOnLast(rabbit.getId());
-                if (statistics != null){
-                    lastStatics.put(rabbit,statistics);
+                if (statistics != null) {
+                    lastStatics.put(rabbit, statistics);
                 }
             }
             model.addAttribute("list", rabbitList);
             model.addAttribute("lastStatics", lastStatics);
-            model.addAttribute("info",info);
-            model.addAttribute("error",error);
-        }
-        catch (Exception e){
-            logger.error(e.getMessage(),e);
+            model.addAttribute("info", info);
+            model.addAttribute("error", error);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
             model.addAttribute("error", e.getMessage());
         }
 
@@ -66,16 +66,18 @@ public class RabbitController {
 
     // New Rabbit form
     @RequestMapping(value = "insert")
-    public ModelAndView insertForm(){
+    public ModelAndView insertForm() {
         return new ModelAndView("/rabbit/form");
     }
 
     // Action for Insert a rabbit
     @RequestMapping(value = "insert_action")
     public String insertAction(@RequestParam(value = "id", required = true) String id,
-                               Model model){
-        try{
-            Rabbit newRabbit = rabbitManagingService.makeNewRabbit(id);
+                               @RequestParam(value = "basePackage", required = true) String basePackage,
+                               @RequestParam(value = "onlyException", required = false, defaultValue = "false") Boolean onlyException,
+                               Model model) {
+        try {
+            Rabbit newRabbit = rabbitManagingService.makeNewRabbit(id, basePackage, onlyException);
             logger.info("Made new Rabbit > " + newRabbit);
 
             // update rabbit name cache
@@ -83,10 +85,56 @@ public class RabbitController {
 
             model.addAttribute("info", String.format("Success to make Rabbit '%s'", id));
             return "redirect:list.err";
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            model.addAttribute("e", e);
+            return "/rabbit/form";
         }
-        catch (Exception e){
-            logger.error(e.getMessage(),e);
-            model.addAttribute("e",e);
+    }
+
+    // Modify Rabbit form
+    public String modifyForm(@RequestParam(value = "id", required = true) String id,
+                             Model model){
+
+        model.addAttribute("modifying", true);
+
+        try {
+            Rabbit rabbit = rabbitManagingService.getRabbitById(id);
+            if (rabbit == null) {
+                throw new RabbitNotExistException(id);
+            }
+            model.addAttribute(rabbit);
+            return "/rabbit/form";
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            model.addAttribute("e", e);
+            return "/rabbit/form";
+        }
+    }
+
+    // Action for Modify a rabbit
+    @RequestMapping(value = "modify_action")
+    public String modifyAction(@RequestParam(value = "id", required = true) String id,
+                               @RequestParam(value = "basePackage", required = true) String basePackage,
+                               @RequestParam(value = "onlyException", required = false, defaultValue = "false") Boolean onlyException,
+                               Model model) {
+        try {
+
+            Rabbit rabbit = rabbitManagingService.getRabbitById(id);
+            if (rabbit == null) {
+                throw new RabbitNotExistException(id);
+            }
+
+            rabbit.setBasePackage(basePackage);
+            rabbit.setCollectionOnlyException(onlyException);
+            rabbitManagingService.saveRabbit(rabbit);
+
+            model.addAttribute("info", String.format("Success to modify Rabbit '%s'", id));
+            return "redirect:list.err";
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            model.addAttribute("e", e);
+            model.addAttribute("modifying", true);
             return "/rabbit/form";
         }
     }
@@ -94,11 +142,11 @@ public class RabbitController {
     // Delete a rabbit
     @RequestMapping(value = "delete")
     public String delete(@RequestParam(value = "id", required = true) String id,
-                               Model model){
-        try{
+                         Model model) {
+        try {
 
             Rabbit rabbit = rabbitManagingService.getRabbitById(id);
-            if (rabbit == null){
+            if (rabbit == null) {
                 throw new RabbitNotExistException(id);
             }
 
@@ -112,21 +160,20 @@ public class RabbitController {
 
             model.addAttribute("info", String.format("Success to delete Rabbit '%s'", id));
             return "redirect:list.err?";
-        }
-        catch (Exception e){
-            logger.error(e.getMessage(),e);
-            model.addAttribute("error",e.getMessage());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            model.addAttribute("error", e.getMessage());
             return "redirect:list.err";
         }
     }
 
     // How to Integrate with Application
     @RequestMapping(value = "howto")
-    public String howTo(){
+    public String howTo() {
         return "/rabbit/setup";
     }
 
-    public class RabbitNotExistException extends Exception{
+    public class RabbitNotExistException extends Exception {
         public RabbitNotExistException(String id) {
             super(String.format("Rabbit '%s' is not exist", id));
         }

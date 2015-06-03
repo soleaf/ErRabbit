@@ -26,6 +26,12 @@ public class Rabbit implements Serializable {
     // Read all reports
     private Boolean read = false;
 
+    // BasePackage
+    private String basePackage;
+
+    // Collect only log has Throwable exception;
+    private Boolean collectionOnlyException;
+
     /**
      * Getter and Setter
      */
@@ -60,5 +66,21 @@ public class Rabbit implements Serializable {
 
     public void setRead(Boolean read) {
         this.read = read;
+    }
+
+    public String getBasePackage() {
+        return basePackage;
+    }
+
+    public void setBasePackage(String basePackage) {
+        this.basePackage = basePackage;
+    }
+
+    public Boolean getCollectionOnlyException() {
+        return collectionOnlyException;
+    }
+
+    public void setCollectionOnlyException(Boolean collectionOnlyException) {
+        this.collectionOnlyException = collectionOnlyException;
     }
 }

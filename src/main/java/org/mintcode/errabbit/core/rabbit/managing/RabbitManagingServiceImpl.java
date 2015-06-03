@@ -28,14 +28,17 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
     @Override
-    public Rabbit makeNewRabbit(String id) throws AlreadyExistRabbitIDException, InvalidRabbitNameException {
+    public Rabbit makeNewRabbit(String id,
+                                String basePackage,
+                                Boolean collectOnlyException) throws AlreadyExistRabbitIDException,
+            InvalidRabbitNameException, InvalidBasePackageException {
 
         // Rabbit Name Validation
         if (id == null){
             throw new InvalidRabbitNameException(String.format("'Null' is invalid"));
         }
-
         if (id.length() < 2){
             throw new InvalidRabbitNameException(String.format("Rabbit id's length must be greater than 2 characters."));
         }
@@ -45,13 +48,25 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
             throw new AlreadyExistRabbitIDException(id);
         }
 
+        // BasePackage Validation
+        if (basePackage == null || basePackage.length() < 2){
+            throw new InvalidBasePackageException(String.format("Please insert base package"));
+        }
+
         Rabbit rabbit = new Rabbit();
         rabbit.setId(id);
+        rabbit.setBasePackage(basePackage);
         rabbit.setRegDate(new Date());
+        rabbit.setCollectionOnlyException(collectOnlyException);
 
         rabbitRepository.save(rabbit);
 
         return rabbit;
+    }
+
+    @Override
+    public void saveRabbit(Rabbit rabbit) {
+        rabbitRepository.save(rabbit);
     }
 
     @Override

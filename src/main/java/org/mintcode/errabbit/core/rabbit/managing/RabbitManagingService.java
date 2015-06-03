@@ -15,7 +15,16 @@ public interface RabbitManagingService {
      * @param id id
      * @return
      */
-    public Rabbit makeNewRabbit(String id) throws AlreadyExistRabbitIDException, InvalidRabbitNameException;
+    public Rabbit makeNewRabbit(String id,
+                                String basePackage,
+                                Boolean collectOnlyException) throws AlreadyExistRabbitIDException,
+            InvalidRabbitNameException, InvalidBasePackageException;
+
+    /**
+     * Save modified rabbit
+     * @param rabbit
+     */
+    public void saveRabbit(Rabbit rabbit);
 
     /**
      * Getting Rabbit List
