@@ -246,13 +246,14 @@ catch (Exception e){
 
 Example Project : https://github.com/soleaf/ErRabbit-Example-log4j2
 
-# Contribution
-
-Welcome. We can make it better. :D
-
 # Next : ToDo
 
 * Alarm warning
 * Statistics
 * Integration with VCS
 * Mobile support
+
+# Special Thanks
+
+## Mentor
+신현묵 (supims@gmail.com)
