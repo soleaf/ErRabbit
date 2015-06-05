@@ -24,7 +24,7 @@ public interface RabbitManagingService {
      * Save modified rabbit
      * @param rabbit
      */
-    public void saveRabbit(Rabbit rabbit);
+    public Rabbit saveRabbit(Rabbit rabbit);
 
     /**
      * Getting Rabbit List

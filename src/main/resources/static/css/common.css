@@ -290,9 +290,13 @@ header .logout{
 
 }
 
-.page .form_submit{
+.page .form_submit {
     border-top: 1px solid #f5f5f5;
-    padding-top:15px;
+    padding-top: 15px;
+}
+
+.page .how_to_integration_banner{
+    margin-bottom: 50px;
 }
 
 .page-navi{

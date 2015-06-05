@@ -93,6 +93,7 @@ public class RabbitController {
     }
 
     // Modify Rabbit form
+    @RequestMapping(value = "modify")
     public String modifyForm(@RequestParam(value = "id", required = true) String id,
                              Model model){
 
@@ -124,11 +125,10 @@ public class RabbitController {
             if (rabbit == null) {
                 throw new RabbitNotExistException(id);
             }
-
             rabbit.setBasePackage(basePackage);
             rabbit.setCollectionOnlyException(onlyException);
-            rabbitManagingService.saveRabbit(rabbit);
-
+            Rabbit savedRabbit = rabbitManagingService.saveRabbit(rabbit);
+            logger.info("Modify Rabbit > " + savedRabbit);
             model.addAttribute("info", String.format("Success to modify Rabbit '%s'", id));
             return "redirect:list.err";
         } catch (Exception e) {

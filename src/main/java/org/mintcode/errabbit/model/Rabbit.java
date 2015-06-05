@@ -83,4 +83,16 @@ public class Rabbit implements Serializable {
     public void setCollectionOnlyException(Boolean collectionOnlyException) {
         this.collectionOnlyException = collectionOnlyException;
     }
+
+    @Override
+    public String toString() {
+        return "Rabbit{" +
+                "id='" + id + '\'' +
+                ", label='" + label + '\'' +
+                ", regDate=" + regDate +
+                ", read=" + read +
+                ", basePackage='" + basePackage + '\'' +
+                ", collectionOnlyException=" + collectionOnlyException +
+                '}';
+    }
 }

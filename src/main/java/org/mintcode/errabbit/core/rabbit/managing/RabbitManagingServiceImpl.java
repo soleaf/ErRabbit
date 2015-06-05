@@ -65,8 +65,8 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
     }
 
     @Override
-    public void saveRabbit(Rabbit rabbit) {
-        rabbitRepository.save(rabbit);
+    public Rabbit saveRabbit(Rabbit rabbit) {
+        return rabbitRepository.save(rabbit);
     }
 
     @Override
