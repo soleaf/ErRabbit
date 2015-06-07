@@ -45,12 +45,12 @@
                                         </c:if>
                                     </c:when>
                                     <c:otherwise>
-                                        <span>No Recent Report</span>
+                                        <span>No recent logs</span>
                                     </c:otherwise>
                                 </c:choose>
                             </div>
                             <div class="conts action">
-                                <a role="button" href="/report/list.err?id=${item.id}" ><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> REPORTS</a>
+                                <a role="button" href="/log/list.err?id=${item.id}" ><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span> LOGS</a>
                             </div>
                             <div class="conts action">
                                 <a role="button" href="/rabbit/modify.err?id=${item.id}" ><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> SETTINGS</a>

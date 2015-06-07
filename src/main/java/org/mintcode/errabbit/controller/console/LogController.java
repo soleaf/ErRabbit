@@ -28,8 +28,8 @@ import java.util.*;
  * Created by soleaf on 2/16/15.
  */
 @Controller
-@RequestMapping(value = "/report")
-public class ReportController {
+@RequestMapping(value = "/log")
+public class LogController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -53,7 +53,7 @@ public class ReportController {
             Rabbit rabbit = rabbitRepository.findById(id);
             if (rabbit == null){
                 model.addAttribute("e",new Exception("Can't find rabbit"));
-                return new ModelAndView("/report/list");
+                return new ModelAndView("/log/list");
             }
 
             // Mark read
@@ -82,14 +82,14 @@ public class ReportController {
             }
 
             model.addAttribute(rabbit);
-            return new ModelAndView("/report/list");
+            return new ModelAndView("/log/list");
         }
         catch (Exception e){
             e.printStackTrace();
             logger.error(e.getMessage(),e);
             // todo: make ErrorPage
             model.addAttribute("e",e);
-            return new ModelAndView("/report/list");
+            return new ModelAndView("/log/list");
         }
     }
 
@@ -125,14 +125,14 @@ public class ReportController {
                 model.addAttribute("selectedDay", selectedDay);
             }
 
-            return new ModelAndView("/report/day_data");
+            return new ModelAndView("/log/day_data");
         }
         catch (Exception e){
             e.printStackTrace();
             logger.error(e.getMessage(),e);
             // todo: make ErrorPage
             model.addAttribute("e",e);
-            return new ModelAndView("/report/day_data");
+            return new ModelAndView("/log/day_data");
         }
 
     }
@@ -176,7 +176,7 @@ public class ReportController {
             Rabbit rabbit = rabbitRepository.findById(id);
             if (rabbit == null){
                 model.addAttribute("e",new Exception("Can't find rabbit"));
-                return new ModelAndView("/report/list");
+                return new ModelAndView("/log/list");
             }
 
             if (page == null){
@@ -206,7 +206,7 @@ public class ReportController {
             model.addAttribute("reports", reportPage);
             model.addAttribute("graphs", reportPresentation.makeTraceGraph(rabbit.getBasePackage(), reportPage));
             model.addAttribute("format", new SimpleDateFormat("HH:mm:ss:SSS"));
-            return new ModelAndView("/report/list_data");
+            return new ModelAndView("/log/list_data");
 
         }
         catch (Exception e){
@@ -214,7 +214,7 @@ public class ReportController {
             logger.error(e.getMessage(),e);
             // todo: make ErrorPage
             model.addAttribute("e",e);
-            return new ModelAndView("/report/list_data");
+            return new ModelAndView("/log/list_data");
         }
 
     }

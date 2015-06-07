@@ -30,7 +30,7 @@ $(document).ready(function(){
 function retrieveCalendar(rabbitId, year, month, selectedDay) {
     showLoading();
     $.ajax({
-        url: '/report/list_days.err?id=' + rabbitId + '&y=' + year + '&m=' + month +'&s=' + selectedDay,
+        url: '/log/list_days.err?id=' + rabbitId + '&y=' + year + '&m=' + month +'&s=' + selectedDay,
         success: function (data) {
             $("#report-calendar").html("");
             $("#report-calendar").append(data);
@@ -109,7 +109,7 @@ function retrieveReports(rabbitId, page, size, y, m, d) {
 
     showLoading();
     $.ajax({
-        url : '/report/list_data.err?id=' + rabbitId + '&page=' + page + '&size=' + size
+        url : '/log/list_data.err?id=' + rabbitId + '&page=' + page + '&size=' + size
         + '&y=' + y + '&m=' + m + '&d=' + d,
         success : function(data) {
 
