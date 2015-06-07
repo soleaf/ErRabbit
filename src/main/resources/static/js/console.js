@@ -41,6 +41,6 @@ function disconnect() {
 
 function showGreeting(message) {
     $("#waiting").fadeOut();
-    $("#report-list").append(message);
+    $("#report-list").prepend(message);
 }
 
