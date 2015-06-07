@@ -1,10 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--
-  User: soleaf
-  Date: 2/21/15
-  Time: 4:27 PM
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <input type="hidden" id="page_total" value="${reports.getTotalPages()}"/>
 <input type="hidden" id="page_call" value="${param.page}"/>
@@ -58,10 +53,10 @@
                                 <span class="fileName <c:if test="${stack.isDefaultHidden()}">base-package-fileName</c:if>">${stack.fileName}</span>
                             </li>
                         </c:forEach>
-                        <button type="button" class="btn btn-default btn-xs base-package-toggle" data-id="${item.id}"
-                                data-toggle="0">
-                            TOGGLE HIDDEN TRACES
-                        </button>
+                        <%--<button type="button" class="btn btn-default btn-xs base-package-toggle" data-id="${item.id}"--%>
+                                <%--data-toggle="0">--%>
+                            <%--TOGGLE HIDDEN TRACES--%>
+                        <%--</button>--%>
                     </ul>
                 </div>
                 <div class="text">

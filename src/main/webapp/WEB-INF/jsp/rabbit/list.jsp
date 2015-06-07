@@ -6,7 +6,7 @@
     <jsp:include page="../common/header_include.jsp"/>
     <script src="/js/rabbit.js"></script>
 </head>
-<body>
+<body class="rabbit">
 <jsp:include page="../common/nav.jsp">
     <jsp:param name="rabbit" value="active"/>
 </jsp:include>

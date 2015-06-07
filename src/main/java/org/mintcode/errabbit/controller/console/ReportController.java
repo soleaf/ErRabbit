@@ -1,5 +1,6 @@
 package org.mintcode.errabbit.controller.console;
 
+import org.mintcode.errabbit.core.console.ReportPresentation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
@@ -40,6 +41,9 @@ public class ReportController {
 
     @Autowired
     private LogLevelDailyStatisticsRepository logLevelDailyStatisticsRepository;
+
+    @Autowired
+    private ReportPresentation reportPresentation;
 
     // List for report
     @RequestMapping(value = "list")
@@ -169,6 +173,12 @@ public class ReportController {
     ) {
         try{
 
+            Rabbit rabbit = rabbitRepository.findById(id);
+            if (rabbit == null){
+                model.addAttribute("e",new Exception("Can't find rabbit"));
+                return new ModelAndView("/report/list");
+            }
+
             if (page == null){
                 page = 0;
             }
@@ -194,7 +204,7 @@ public class ReportController {
 
             logger.trace("Result of retrieve reportPage > " + reportPage.getContent().size());
             model.addAttribute("reports", reportPage);
-            model.addAttribute("graphs", makeTraceGraph(reportPage));
+            model.addAttribute("graphs", reportPresentation.makeTraceGraph(rabbit.getBasePackage(), reportPage));
             model.addAttribute("format", new SimpleDateFormat("HH:mm:ss:SSS"));
             return new ModelAndView("/report/list_data");
 
@@ -209,62 +219,6 @@ public class ReportController {
 
     }
 
-    /**
-     * Generate TraceGraph Many
-     * @param reportPage
-     * @return
-     */
-    public Map<Report,List<StackTraceGraph>> makeTraceGraph(Page<Report> reportPage){
-        Map<Report,List<StackTraceGraph>> graphs = new HashMap<Report, List<StackTraceGraph>>();
-        for (Report report : reportPage.getContent()){
-            graphs.put(report, makeTraceGraph(report));
-        }
-        return graphs;
-    }
 
-    /**
-     * Generate TraceGraph One
-     * @param report
-     * @return
-     */
-    public List<StackTraceGraph> makeTraceGraph(Report report){
-
-        try{
-            if (report.getLoggingEvent().getThrowableInfo() == null){
-                return null;
-            }
-
-            List<StackTraceGraph> graphs = new ArrayList<StackTraceGraph>();
-
-            StackTraceGraph lastGraph = new StackTraceGraph();
-            graphs.add(lastGraph);
-
-            boolean thoughBasPackages = false;
-
-            for (ErStackTraceElement element :
-                    report.getLoggingEvent().getThrowableInfo().getThrowable().getStackTraceElements()){
-                if (lastGraph.getClassName() != null &&
-                        !lastGraph.getClassName().equals(element.getDeclaringClass())){
-                    lastGraph = new StackTraceGraph();
-                    graphs.add(lastGraph);
-                }
-
-                if (thoughBasPackages){
-                    lastGraph.setDefaultHidden(true);
-                } else if (lastGraph.isDefaultHidden){
-                    thoughBasPackages = true;
-                }
-
-                lastGraph.addElement(element);
-
-            }
-            return graphs;
-        }
-        catch (Exception e){
-            logger.error(e.getMessage(),e);
-            return null;
-        }
-
-    }
 
 }

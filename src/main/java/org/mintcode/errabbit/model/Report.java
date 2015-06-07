@@ -102,4 +102,23 @@ public class Report implements Serializable {
                 ", collectedDate=" + collectedDate +
                 '}';
     }
+
+    public String toHTML(Boolean showRabbitID){
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss:SSS");
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("<li class='report' data-id='%s'>", id.toString()));
+            sb.append(String.format("<span class='time'>%s</span>", format.format(loggingEvent.timeStampDate)));
+            sb.append(String.format("<span class='level %s %s'>%s</span>", loggingEvent.level,
+                                                                (loggingEvent.getThrowableInfo() != null ? "has_exception" : ""),
+                                                                loggingEvent.level));
+            sb.append("<div class='contgroup'>");
+                if (showRabbitID){
+                    sb.append(String.format("<span class='rabbit_id'>%s</span>", rabbitId));
+                }
+                sb.append(String.format("<span class='categoryName'>%s</span>", loggingEvent.categoryName));
+                sb.append(String.format("<span class='message'>%s</span>", loggingEvent.getRenderedMessage()));
+            sb.append("</div>");
+        sb.append("</li>");
+        return sb.toString();
+    }
 }

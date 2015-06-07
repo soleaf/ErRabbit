@@ -1,5 +1,6 @@
 package org.mintcode.errabbit.core.collect;
 
+import org.mintcode.errabbit.core.console.WebSocketMessagingService;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
 import org.mintcode.errabbit.model.Rabbit;
 import org.slf4j.Logger;
@@ -42,6 +43,9 @@ public class ReportMessageListener implements MessageListener {
     @Autowired
     private LogLevelDailyStatisticsRepository logLevelDailyStatisticsRepository;
 
+    @Autowired
+    private WebSocketMessagingService webSocketMessagingService;
+
     @PostConstruct
     public void onStartup(){
         logger.info("ActiveMQ Listener ready");
@@ -58,9 +62,11 @@ public class ReportMessageListener implements MessageListener {
                 logger.error(String.format("Rabbit ID %s is invalid", rabbitID));
                 return;
             }
+
             ObjectMessage msg = (ObjectMessage) message;
             Object obj = msg.getObject();
             ErrLoggingEvent errLoggingEvent;
+
             // From log4j2 JMS appender
             if (obj instanceof Log4jLogEvent){
                 errLoggingEvent = ErrLoggingEvent.fromLog4jLogEvent((Log4jLogEvent) obj);
@@ -71,6 +77,12 @@ public class ReportMessageListener implements MessageListener {
             }
             else{
                 throw new NotLoggingEventException(obj);
+            }
+
+            // Check option : accept only
+            if (rabbit.getCollectionOnlyException() && errLoggingEvent.getThrowableInfo() == null){
+                // Ignore
+                return;
             }
 
             Report report = new Report();
@@ -90,6 +102,9 @@ public class ReportMessageListener implements MessageListener {
                 rabbit.setRead(false);
                 rabbitRepository.save(rabbit);
             }
+
+            // Forward to console
+            webSocketMessagingService.sendReportToConsole(report);
 
         } catch (Exception e) {
             e.printStackTrace();

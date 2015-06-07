@@ -357,6 +357,9 @@ header .logout{
     height:100%;
     overflow: scroll;
 }
+.report-area_nosidebar{
+    margin-left:0px;
+}
 
 .report-area .report-head{
     height:32px;
@@ -432,6 +435,14 @@ header .logout{
     margin-left:150px;
 }
 
+.report-list .report .rabbit_id{
+    margin-left: 4px;
+    width: 100px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 .report-list .report .categoryName{
     margin-left: 4px;
@@ -551,8 +562,9 @@ header .logout{
 }
 
 .report-detail-popup .ThrowableInfo .graph .class{
-    background-color: #47A698;
-    color:#fff;
+    border:1px solid #bfbfbf;
+    background-color: #FFF;
+    color:#979797;
     margin-top:2px;
     margin-bottom:2px;
     padding:8px;
@@ -571,9 +583,9 @@ header .logout{
 }
 
 .report-detail-popup .ThrowableInfo .graph .method{
-    background-color: #C8FFF8;
+    background-color: #e0e0e0;
+    color: #616161;
     padding:2px;
-    color: #17993A;
     margin-top:4px;
     margin-bottom:2px;
     margin-left:18px;
@@ -584,10 +596,9 @@ header .logout{
 }
 
 .report-detail-popup .ThrowableInfo .graph .base-package{
+    background-color: #47A698;
+    color:#fff;
     display: inline-block;
-    border:1px solid #bfbfbf;
-    background-color: #FFF;
-    color:#979797;
 }
 
 .report-detail-popup .ThrowableInfo .graph .base-package-arrow{
@@ -597,8 +608,8 @@ header .logout{
 }
 
 .report-detail-popup .ThrowableInfo .graph .base-package .method{
-    background-color: #e0e0e0;
-    color: #616161;
+    background-color: #C8FFF8;
+    color: #17993A;
 }
 
 .report-detail-popup .ThrowableInfo .graph .method .lineNumber{
@@ -707,4 +718,27 @@ header .logout{
     width:300px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.console #con_success,
+.console #con_fail{
+    display: none;
+}
+
+.console #waiting{
+    display: none;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    width:400px;
+    height:100px;
+}
+
+.console #retry{
+    display: none;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    width:400px;
+    height:100px;
 }

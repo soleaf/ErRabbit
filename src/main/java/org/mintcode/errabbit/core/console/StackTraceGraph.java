@@ -1,4 +1,4 @@
-package org.mintcode.errabbit.controller.console;
+package org.mintcode.errabbit.core.console;
 
 import org.mintcode.errabbit.model.ErStackTraceElement;
 
@@ -10,10 +10,15 @@ import java.util.List;
  */
 public class StackTraceGraph {
 
-    List<ErStackTraceElement> stackTraceElements = new ArrayList<ErStackTraceElement>();
-    String className;
-    String fileName;
-    boolean isDefaultHidden = false;
+    private List<ErStackTraceElement> stackTraceElements = new ArrayList<ErStackTraceElement>();
+    private String basePackage;
+    private String className;
+    private String fileName;
+    private boolean isDefaultHidden = false;
+
+    public StackTraceGraph(String basePackage) {
+        this.basePackage = basePackage;
+    }
 
     public void addElement(ErStackTraceElement element){
 
@@ -30,16 +35,23 @@ public class StackTraceGraph {
     }
 
     private boolean checkBasePackages(String className){
-        if(className.startsWith("sun")){
-            return true;
-        }
-        else if (className.startsWith("java"))
-        {
-            return true;
-        }
-        else{
+
+        if (basePackage == null){
             return false;
         }
+        else{
+            return className.startsWith(basePackage);
+        }
+//        if(className.startsWith("sun")){
+//            return true;
+//        }
+//        else if (className.startsWith("java"))
+//        {
+//            return true;
+//        }
+//        else{
+//            return false;
+//        }
     }
 
     public List<ErStackTraceElement> getStackTraceElements() {
