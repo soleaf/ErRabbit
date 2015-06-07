@@ -80,7 +80,9 @@ public class ReportMessageListener implements MessageListener {
             }
 
             // Check option : accept only
-            if (rabbit.getCollectionOnlyException() && errLoggingEvent.getThrowableInfo() == null){
+            if (rabbit.getCollectionOnlyException() != null &&
+                    rabbit.getCollectionOnlyException() &&
+                    errLoggingEvent.getThrowableInfo() == null){
                 // Ignore
                 return;
             }

@@ -1,6 +1,8 @@
 package org.mintcode.errabbit.controller.console;
 
 import org.mintcode.errabbit.core.console.ReportPresentation;
+import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;
+import org.mintcode.errabbit.core.rabbit.name.RabbitNameCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
@@ -37,7 +39,10 @@ public class LogController {
     private ReportRepository reportRepository;
 
     @Autowired
-    private RabbitRepository rabbitRepository;
+    private RabbitNameCache rabbitNameCache;
+
+    @Autowired
+    private RabbitManagingService rabbitManagingService;
 
     @Autowired
     private LogLevelDailyStatisticsRepository logLevelDailyStatisticsRepository;
@@ -50,7 +55,7 @@ public class LogController {
     public ModelAndView list(Model model,
                              @RequestParam(value = "id", required = true) String id) {
         try{
-            Rabbit rabbit = rabbitRepository.findById(id);
+            Rabbit rabbit = rabbitNameCache.getRabbit(id);
             if (rabbit == null){
                 model.addAttribute("e",new Exception("Can't find rabbit"));
                 return new ModelAndView("/log/list");
@@ -59,7 +64,7 @@ public class LogController {
             // Mark read
             if (!rabbit.getRead()){
                 rabbit.setRead(true);
-                rabbitRepository.save(rabbit);
+                rabbitManagingService.saveRabbit(rabbit);
             }
 
             // Get first day of report
@@ -173,7 +178,7 @@ public class LogController {
     ) {
         try{
 
-            Rabbit rabbit = rabbitRepository.findById(id);
+            Rabbit rabbit = rabbitNameCache.getRabbit(id);
             if (rabbit == null){
                 model.addAttribute("e",new Exception("Can't find rabbit"));
                 return new ModelAndView("/log/list");

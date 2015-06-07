@@ -34,9 +34,6 @@ public class RabbitController {
     @Autowired
     LogLevelDailyStatisticsRepository logLevelDailyStatisticsRepository;
 
-    @Autowired
-    CoreService coreService;
-
     // List of all Rabbits
     @RequestMapping(value = "list")
     public ModelAndView list(Model model,
@@ -79,9 +76,6 @@ public class RabbitController {
         try {
             Rabbit newRabbit = rabbitManagingService.makeNewRabbit(id, basePackage, onlyException);
             logger.info("Made new Rabbit > " + newRabbit);
-
-            // update rabbit name cache
-            coreService.syncRabbitNameCache();
 
             model.addAttribute("info", String.format("Success to make Rabbit '%s'", id));
             return "redirect:list.err";
@@ -129,9 +123,6 @@ public class RabbitController {
             rabbit.setCollectionOnlyException(onlyException);
             Rabbit savedRabbit = rabbitManagingService.saveRabbit(rabbit);
 
-            // update rabbit name cache
-            coreService.syncRabbitNameCache();
-
             logger.info("Modify Rabbit > " + savedRabbit);
             model.addAttribute("info", String.format("Success to modify Rabbit '%s'", id));
             return "redirect:list.err";
@@ -158,9 +149,6 @@ public class RabbitController {
 
             // Delete
             rabbitManagingService.deleteRabbit(id);
-
-            // update rabbit name cache
-            coreService.syncRabbitNameCache();
 
             model.addAttribute("info", String.format("Success to delete Rabbit '%s'", id));
             return "redirect:list.err?";

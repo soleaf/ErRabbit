@@ -1,5 +1,6 @@
 package org.mintcode.errabbit.core.rabbit.managing;
 
+import org.mintcode.errabbit.core.CoreService;
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
 import org.mintcode.errabbit.core.report.dao.LogLevelDailyStatisticsRepository;
@@ -25,6 +26,9 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
 
     @Autowired
     private ReportRepository reportRepository;
+
+    @Autowired
+    private CoreService coreService;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -61,12 +65,16 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
 
         rabbitRepository.save(rabbit);
 
+        coreService.syncRabbitNameCache();
+
         return rabbit;
     }
 
     @Override
     public Rabbit saveRabbit(Rabbit rabbit) {
-        return rabbitRepository.save(rabbit);
+        Rabbit savedRabbit = rabbitRepository.save(rabbit);
+        coreService.syncRabbitNameCache();
+        return savedRabbit;
     }
 
     @Override
@@ -92,7 +100,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         // Remove rabbit;
         rabbitRepository.deleteById(id);
 
-
+        coreService.syncRabbitNameCache();
 
         return true;
     }
