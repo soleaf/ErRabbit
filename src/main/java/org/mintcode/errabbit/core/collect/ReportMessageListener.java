@@ -57,7 +57,7 @@ public class ReportMessageListener implements MessageListener {
             // Extract message
             String rabbitID = extractRabbitIDFromMessage(message);
 
-            Rabbit rabbit = rabbitRepository.findById(rabbitID);
+            Rabbit rabbit = nameRepository.getRabbit(rabbitID);
             if (rabbit == null) {
                 logger.error(String.format("Rabbit ID %s is invalid", rabbitID));
                 return;
@@ -121,17 +121,6 @@ public class ReportMessageListener implements MessageListener {
     protected String extractRabbitIDFromMessage(Message message) throws JMSException {
         String queueName = message.getJMSDestination().toString();
         return queueName.replace("queue://errabbit.report.", ""); // todo: Out with setting var
-    }
-
-    /**
-     * Verify Report
-     * 1. Valid Rabbit ID
-     *
-     * @param rabbitID
-     * @return
-     */
-    public boolean verify(String rabbitID) {
-        return nameRepository.isRabbitId(rabbitID);
     }
 
     /**

@@ -1,6 +1,9 @@
 package org.mintcode.errabbit.core.rabbit.name;
 
+import org.mintcode.errabbit.model.Rabbit;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * Rabbit Name Repository
@@ -11,9 +14,9 @@ public interface RabbitNameCache {
 
     /**
      * Init or update rabbitID List
-     * @param rabbitIDs
+     * @param rabbits
      */
-    public void updateRabbitIdList(List<String> rabbitIDs);
+    public void updateRabbitIdList(Map<String,Rabbit> rabbits);
 
     /**
      * Check a rabbit id exists
@@ -21,5 +24,12 @@ public interface RabbitNameCache {
      * @return
      */
     public boolean isRabbitId(String id);
+
+    /**
+     * Get Rabbit by id
+     * @param id
+     * @return
+     */
+    public Rabbit getRabbit(String id);
 
 }

@@ -92,6 +92,8 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         // Remove rabbit;
         rabbitRepository.deleteById(id);
 
+
+
         return true;
     }
 

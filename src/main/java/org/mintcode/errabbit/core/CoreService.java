@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Make Environment for rabbit core.
@@ -39,12 +41,12 @@ public class CoreService {
      * This Sync need to Report listener check a report's rabbit name is valid.
      */
     public void syncRabbitNameCache(){
+        Map<String,Rabbit> rabbits = new HashMap<>();
         List<Rabbit> rabbitList = rabbitRepository.findAll();
-        List<String> nameList = new ArrayList<String>();
         for (Rabbit rabbit : rabbitList){
-            nameList.add(rabbit.getId());
+            rabbits.put(rabbit.getId(),rabbit);
         }
-        nameRepository.updateRabbitIdList(nameList);
+        nameRepository.updateRabbitIdList(rabbits);
     }
 
 

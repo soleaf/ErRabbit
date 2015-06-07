@@ -128,6 +128,10 @@ public class RabbitController {
             rabbit.setBasePackage(basePackage);
             rabbit.setCollectionOnlyException(onlyException);
             Rabbit savedRabbit = rabbitManagingService.saveRabbit(rabbit);
+
+            // update rabbit name cache
+            coreService.syncRabbitNameCache();
+
             logger.info("Modify Rabbit > " + savedRabbit);
             model.addAttribute("info", String.format("Success to modify Rabbit '%s'", id));
             return "redirect:list.err";
