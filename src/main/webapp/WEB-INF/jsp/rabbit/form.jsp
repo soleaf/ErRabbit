@@ -53,7 +53,7 @@
                 <div>
                     <label>
                         <input type="checkbox" name="onlyException" value="true" ${collectionOnlyException}/>
-                        Collection only Exception
+                        Collect only Exception
                     </label>
                     <span class="help-block">Discard any other logs has no Throwable exception</span>
                 </div>
@@ -65,7 +65,7 @@
                     </div>
                 </c:if>
                 <div class="form_submit">
-                    <button type="submit" class="btn btn-primary">CONFIRM</button>
+                    <button type="submit"s class="btn btn-primary">CONFIRM</button>
                     <button class="btn btn-default">CANCEL</button>
                 </div>
             </form>
