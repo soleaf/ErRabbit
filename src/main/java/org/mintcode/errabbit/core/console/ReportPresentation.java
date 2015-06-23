@@ -51,7 +51,6 @@ public class ReportPresentation {
             StackTraceGraph lastGraph = new StackTraceGraph(basePackage);
             graphs.add(lastGraph);
 
-            boolean thoughBasPackages = false;
 
             for (ErStackTraceElement element :
                     report.getLoggingEvent().getThrowableInfo().getThrowable().getStackTraceElements()){
@@ -60,13 +59,6 @@ public class ReportPresentation {
                     lastGraph = new StackTraceGraph(basePackage);
                     graphs.add(lastGraph);
                 }
-
-                if (thoughBasPackages){
-                    lastGraph.setDefaultHidden(true);
-                } else if (lastGraph.isDefaultHidden()){
-                    thoughBasPackages = true;
-                }
-
                 lastGraph.addElement(element);
 
             }
