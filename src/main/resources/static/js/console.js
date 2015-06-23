@@ -25,9 +25,17 @@ function connect() {
     stompClient.connect({}, function(frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/console', function(greeting){
-            showGreeting(greeting.body);
-        });
+        stompClient.subscribe('/topic/console', function(message){
+            showGreeting(message.body);
+        }
+        );
+    }, function(){
+        console.log('STOMP: ' + error);
+        disconnect();
+        setTimeout(function(){
+            connect();
+            console.log('STOMP: Reconecting in 10 seconds');
+        }, 10000);
     });
 }
 
