@@ -7,6 +7,7 @@
         <ul>
             <li class="${param.rabbit}"><a href="/rabbit/list.err">Rabbits</a></li>
             <li class="${param.console}"><a href="/console/main.err">Console</a></li>
+            <li class="${param.anal}"><a href="/anal/main.err">Analysis</a></li>
         </ul>
         <a class="logout" href="/logout">LOG OUT</a>
     </nav>

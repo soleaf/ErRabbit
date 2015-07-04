@@ -34,8 +34,8 @@
             </ul>
         </div>
         <div id="waiting">
-            <div class="panel panel-success">
-                <div class="panel-heading">Waiting for new log</div>
+            <div class="panel panel-default">
+                <div class="panel-heading"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Waiting for new log</div>
                 <div class="panel-body">
                     <p>WebSocket Connection is succeed.</p>
                     <p>Log will be appear as arriving. Do not refresh this page.</p>

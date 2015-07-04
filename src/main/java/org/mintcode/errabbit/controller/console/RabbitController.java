@@ -35,7 +35,7 @@ public class RabbitController {
     LogLevelDailyStatisticsRepository logLevelDailyStatisticsRepository;
 
     // List of all Rabbits
-    @RequestMapping(value = "list")
+    @RequestMapping(value = {"list"})
     public ModelAndView list(Model model,
                              @RequestParam(value = "info", required = false) String info,
                              @RequestParam(value = "error", required = false) String error) {

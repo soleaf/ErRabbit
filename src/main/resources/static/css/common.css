@@ -30,16 +30,57 @@ UL LI{
     list-style: none;
 }
 
+/* bootstrap override */
+.modal-dialog{
+    z-index:999999;
+}
+.btn-default{
+    border-color: #f3f3f3;
+    background-color: #fbfbfb;
+}
 .btn-primary{
     border: 1px solid #00AB99;
     color :#00AB99;
     background-color: #fff;
 }
-
 .btn-primary:HOVER {
     color:#fff;
     background-color: #00AB99;
     border: 1px solid #00AB99;
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+.btn:hover,
+.btn:focus,
+.btn.focus {
+    color: #666666;
+    text-decoration: none;
+}
+.btn:active,
+.btn.active {
+    outline: 0;
+    background-image: none;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+
+.no-padding{
+    padding:0px;
+
+}
+
+.no-margin{
+    margin:0px;
+
 }
 
 .loading_box{
@@ -94,10 +135,11 @@ header nav UL LI{
     line-height:39px;
     color: #47a698;
     font-size:13px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-right:1px solid #f4f4f4;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*border-right:1px solid #f4f4f4;*/
     float:left;
+    font-weight: bold;
 }
 
 header nav UL .active{
@@ -110,6 +152,10 @@ header nav UL .active A{
 }
 
 header nav A{
+    color:#47a698;
+}
+
+header nav A:HOVER{
     color:#47a698;
 }
 
@@ -330,12 +376,55 @@ header .logout{
 .page-navi>UL>LI>A{
     color: #1b1b1b;
 }
+
 .page-side {
     width:140px;
     float:left;
     height:100%;
     border-right:1px solid #d5d5d5;
     overflow: scroll;
+}
+
+.page-side-wide {
+    width:200px;
+}
+
+.page-side-element{
+    margin-left:5px;
+    margin-bottom:10px;
+    font-size:13px;
+}
+
+.page-side-element-head{
+    /*background-color: #ECECEC;*/
+    /*color: #FFF;*/
+    font-size: 12px;
+    height:30px;
+    line-height: 30px;
+    text-align: left;
+    padding-left:5px;
+    font-weight: bold;
+}
+
+.page-side-element-head-border{
+    border-top: 1px solid #eaeaea;
+}
+
+.page-side-sub-element-head{
+    display: block;
+    margin-left:6px;
+    border-top:1px solid #eaeaea;
+    height:24px;
+    padding-top:4px;
+    padding-bottom: 4px;
+    line-height: 20px;
+    font-weight: normal;
+    color: #a6a6a6;
+}
+
+.page-side-sub-element{
+    margin-left:6px;
+    margin-right:5px;
 }
 
 /** Reports **/
@@ -741,4 +830,12 @@ header .logout{
     margin-right: auto;
     width:400px;
     height:100px;
+}
+
+.analysis #groupby_selected LI{
+    padding-right:5px;
+}
+
+.analysis #groupby_selected LI SPAN{
+    float:right;
 }
