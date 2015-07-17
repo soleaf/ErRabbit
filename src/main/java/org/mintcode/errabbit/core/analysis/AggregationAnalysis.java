@@ -1,17 +1,17 @@
 package org.mintcode.errabbit.core.analysis;
 
-import org.mintcode.errabbit.model.Report;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
-
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Aggregation works for log
@@ -26,17 +26,16 @@ public class AggregationAnalysis {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final HashMap<String,Object> mapType = new HashMap<String,Object>();
 
-    public LogAggregationResult aggregation(LogAggregationRequest request){
+    public LogAggregationResultSet aggregation(LogAggregationRequest request){
 
         List op = makeAggregationOpFromReq(request);
         logger.trace("op : " + op);
 
         AggregationResults result = mongoTemplate.aggregate(Aggregation.newAggregation(op),
-                "report", mapType.getClass());
+                "reports", mapType.getClass());
 
-        List resultList  = result.getMappedResults();
-        logger.warn("result : " + resultList);
-        return null;
+        List resultList = result.getMappedResults();
+        return makeResult(request, resultList);
     }
 
     /**
@@ -44,7 +43,7 @@ public class AggregationAnalysis {
      * @param req
      * @return
      */
-    public List makeAggregationOpFromReq(LogAggregationRequest req){
+    private List makeAggregationOpFromReq(LogAggregationRequest req){
 
         List op = new ArrayList();
 
@@ -73,10 +72,21 @@ public class AggregationAnalysis {
 
         // Group by
         if (req.group != null){
+            logger.trace("(String[]) req.group.toArray()) : " + req.group.toArray());
             op.add(new GroupOperation(Fields.fields((String[]) req.group.toArray())).count().as("count"));
         }
 
         return  op;
+    }
+
+    /**
+     * Make Result Obj
+     * @param req
+     * @param result
+     * @return
+     */
+    private LogAggregationResultSet makeResult(LogAggregationRequest req, List<Map<String,Object>> result){
+        return new LogAggregationResultTable(result);
     }
 
 }

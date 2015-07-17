@@ -13,7 +13,7 @@
 <section class="page">
     <div class="page-side page-side-wide">
         <!-- option -->
-        <form action="/anl/aggregation" method="post">
+        <form action="/anal/aggregation" method="post">
             <input type="hidden" name="rabbit" value=""/>
             <input type="hidden" name="groupBy" value="" id="groupBy"/>
             <div class="page-side-element-head"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
@@ -122,21 +122,23 @@
                 <label class="page-side-sub-element-head">Available</label>
                 <div class="page-side-sub-element">
                     <ul id="groupby_available">
-                        <li><input type="checkbox" value="rabbit" data-label="rabbit"> rabbit</li>
-                        <li><input type="checkbox" value="date" data-label="date"> date</li>
-                        <li><input type="checkbox" value="level" data-label="level"> level</li>
-                        <li><input type="checkbox" value="className" data-label="className"> className</li>
+                        <li><input type="checkbox" value="rabbitId" data-label="rabbit"> rabbit</li>
+                        <li><input type="checkbox" value="loggingEventDateInt" data-label="date"> date</li>
+                        <li><input type="checkbox" value="loggingEvent.level" data-label="level"> level</li>
+                        <li><input type="checkbox" value="loggingEvent.categoryName" data-label="className"> className</li>
                     </ul>
                 </div>
             </div>
             <div class="page-side-element page-side-sub-element">
-                <button type="submit" class="btn btn-default btn-block btn-sm"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> RUN</button>
+                <button type="submit" class="btn btn-primary btn-block btn-sm"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> RUN</button>
             </div>
         </form>
         <div style="clear:both;"></div>
     </div>
     <div>
         <!-- result -->
+        asdfasdf
+        <c:out value="${result}" />
     </div>
 
 </section>

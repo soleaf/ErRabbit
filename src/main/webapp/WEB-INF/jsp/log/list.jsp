@@ -29,7 +29,7 @@
                         <input type="hidden" name="cal_m" id="cal_m" value="${today_m}"/>
                         <input type="hidden" name="cal_d" id="cal_d" value="${today_d}"/>
                         <div class="dropdown" id="dropdownMenu_year_dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu_year" data-toggle="dropdown" aria-expanded="true">
+                            <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenu_year" data-toggle="dropdown" aria-expanded="true">
                                 <span class="value">${today_y}</span>
                                 <span class="caret"></span>
                             </button>
@@ -40,7 +40,7 @@
                             </ul>
                         </div>
                         <div class="dropdown" id="dropdownMenu_month_dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu_month" data-toggle="dropdown" aria-expanded="true">
+                            <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenu_month" data-toggle="dropdown" aria-expanded="true">
                                 <span class="value">${today_m}</span>
                                 <span class="caret"></span>
                             </button>

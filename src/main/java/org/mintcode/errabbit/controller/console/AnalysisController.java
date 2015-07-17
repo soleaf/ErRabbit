@@ -3,7 +3,7 @@ package org.mintcode.errabbit.controller.console;
 import org.apache.logging.log4j.Level;
 import org.mintcode.errabbit.core.analysis.AggregationAnalysis;
 import org.mintcode.errabbit.core.analysis.LogAggregationRequest;
-import org.mintcode.errabbit.core.analysis.LogAggregationResult;
+import org.mintcode.errabbit.core.analysis.LogAggregationResultSet;
 import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;
 import org.mintcode.errabbit.model.Rabbit;
 import org.slf4j.Logger;
@@ -62,9 +62,9 @@ public class AnalysisController {
                                     @RequestParam(value = "level_warn", defaultValue = "false") Boolean warn,
                                     @RequestParam(value = "level_error", defaultValue = "false") Boolean error,
                                     @RequestParam(value = "level_fatal", defaultValue = "false") Boolean fatal,
-                                    @RequestParam(value = "date_begin") Integer date_begin,
-                                    @RequestParam(value = "date_end") Integer date_end,
-                                    @RequestParam(value = "groupBy") String groupBy
+                                    @RequestParam(value = "date_begin", required = false) Integer date_begin,
+                                    @RequestParam(value = "date_end", required = false) Integer date_end,
+                                    @RequestParam(value = "groupBy", required = false) String groupBy
                                     )
     {
         try {
@@ -97,16 +97,17 @@ public class AnalysisController {
             if (StringUtils.hasLength(groupBy)){
                 String[] groupByItems = groupBy.split(",");
                 if (groupByItems != null && groupByItems.length > 0){
-                    req.group.addAll(Arrays.asList(groupByItems));
+                    req.group = Arrays.asList(groupByItems);
                 }
             }
+            logger.trace("req : " + req);
 
-            LogAggregationResult result = analysis.aggregation(req);
+            LogAggregationResultSet result = analysis.aggregation(req);
             if (result != null){
                 model.addAttribute(result);
+                logger.trace("result : " + result);
             }
-
-            logger.trace("req : " + req);
+            model.addAttribute(req);
 
             // Aggregation query
             return new ModelAndView("/anal/main");

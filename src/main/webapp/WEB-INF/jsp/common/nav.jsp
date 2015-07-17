@@ -9,7 +9,7 @@
             <li class="${param.console}"><a href="/console/main.err">Console</a></li>
             <li class="${param.anal}"><a href="/anal/main.err">Analysis</a></li>
         </ul>
-        <a class="logout" href="/logout">LOG OUT</a>
+        <a class="logout" href="/logout">LogOut</a>
     </nav>
     </c:if>
 </header>
