@@ -428,6 +428,10 @@ header .logout{
 }
 
 /** Reports **/
+
+.page-side .calendar{
+    background: #FBFBFB;
+}
 .page-side .calendar .dropdown BUTTON{
     border-radius: 0px;
     border:none;
@@ -440,6 +444,17 @@ header .logout{
 
 .page-side .calendar .dropdown .dropdown-menu{
     min-width: 10px;
+}
+
+.page-side .calendar .dropdown .dropdown-menu A{
+    padding:10px 10px;
+}
+
+.page-side .calendar .badge{
+    background-color: transparent;
+    border:1px solid #AAAAAA;
+    color:#AAAAAA;
+    font-size: 10px;
 }
 
 .report-area{
