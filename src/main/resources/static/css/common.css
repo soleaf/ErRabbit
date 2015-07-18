@@ -841,3 +841,22 @@ header .logout{
 .analysis #groupby_selected LI SPAN{
     float:right;
 }
+
+.analysis .result{
+    margin-left:200px;
+}
+
+.analysis .result > *{
+    margin-left:20px;
+}
+
+.analysis .result TABLE{
+    width:auto;
+}
+
+.analysis .result .alert{
+    display: inline-block;
+    margin-top:20px;
+    margin-left:20px;
+    margin-right:20px;
+}

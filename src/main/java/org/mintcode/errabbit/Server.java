@@ -26,7 +26,7 @@ import javax.servlet.Filter;
 public class Server {
 
     public static void main(String[] args) {
-        ApplicationContext ctx = SpringApplication.run(Server.class, args);
+        SpringApplication.run(Server.class, args);
     }
 
     @Bean

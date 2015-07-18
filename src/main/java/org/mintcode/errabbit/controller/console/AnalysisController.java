@@ -62,36 +62,40 @@ public class AnalysisController {
                                     @RequestParam(value = "level_warn", defaultValue = "false") Boolean warn,
                                     @RequestParam(value = "level_error", defaultValue = "false") Boolean error,
                                     @RequestParam(value = "level_fatal", defaultValue = "false") Boolean fatal,
-                                    @RequestParam(value = "date_begin", required = false) Integer date_begin,
-                                    @RequestParam(value = "date_end", required = false) Integer date_end,
+                                    @RequestParam(value = "date_begin", required = false) String date_begin,
+                                    @RequestParam(value = "date_end", required = false) String date_end,
                                     @RequestParam(value = "groupBy", required = false) String groupBy
                                     )
     {
         try {
 
             LogAggregationRequest req = new LogAggregationRequest();
+            model.addAttribute("req", req);
 
             if (StringUtils.hasLength(rabbit)){
-                req.filterRabbit = rabbit;
+                req.setFilterRabbit(rabbit);
             }
 
             if (trace)
-                req.filterLevels.add(Level.TRACE.name());
+                req.getFilterLevels().add(Level.TRACE.name());
             if (debug)
-                req.filterLevels.add(Level.DEBUG.name());
+                req.getFilterLevels().add(Level.DEBUG.name());
             if (info)
-                req.filterLevels.add(Level.INFO.name());
+                req.getFilterLevels().add(Level.INFO.name());
             if (warn)
-                req.filterLevels.add(Level.WARN.name());
+                req.getFilterLevels().add(Level.WARN.name());
             if (error)
-                req.filterLevels.add(Level.ERROR.name());
+                req.getFilterLevels().add(Level.ERROR.name());
             if (fatal)
-                req.filterLevels.add(Level.FATAL.name());
-            if (date_begin != null){
-                req.filterBeginDate = date_begin;
+                req.getFilterLevels().add(Level.FATAL.name());
+
+            if (StringUtils.hasLength(date_begin)){
+                logger.trace("date_begin " + date_begin);
+                req.setFilterBeginDate(Integer.parseInt(date_begin.replaceAll("-","")));
             }
-            if (date_end != null){
-                req.filterEndDate = date_end;
+            if (StringUtils.hasLength(date_end)){
+                logger.trace("date_end " + date_end);
+                req.setFilterEndDate(Integer.parseInt(date_end.replaceAll("-","")));
             }
 
             if (StringUtils.hasLength(groupBy)){
@@ -100,23 +104,25 @@ public class AnalysisController {
                     req.group = Arrays.asList(groupByItems);
                 }
             }
+
             logger.trace("req : " + req);
 
+            // Aggregation Query
             LogAggregationResultSet result = analysis.aggregation(req);
             if (result != null){
-                model.addAttribute(result);
+                model.addAttribute("result", result);
                 logger.trace("result : " + result);
             }
-            model.addAttribute(req);
 
-            // Aggregation query
-            return new ModelAndView("/anal/main");
+            // Get Rabbit List
+            List<Rabbit> rabbitList = rabbitManagingService.getRabbits();
+            model.addAttribute(rabbitList);
+            return new ModelAndView("/anal/result");
         } catch (Exception e) {
-            e.printStackTrace();
             logger.error(e.getMessage(), e);
             // todo: make ErrorPage
             model.addAttribute("e", e);
-            return new ModelAndView("/anal/main");
+            return new ModelAndView("/anal/result");
         }
     }
 

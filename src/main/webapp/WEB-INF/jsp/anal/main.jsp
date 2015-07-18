@@ -13,9 +13,10 @@
 <section class="page">
     <div class="page-side page-side-wide">
         <!-- option -->
-        <form action="/anal/aggregation" method="post">
+        <form action="/anal/aggregation" method="post" id="frm_anal">
             <input type="hidden" name="rabbit" value=""/>
             <input type="hidden" name="groupBy" value="" id="groupBy"/>
+
             <div class="page-side-element-head"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
                 FILTER
             </div>
@@ -38,6 +39,7 @@
                 </div>
                 <div class="form-group">
                     <label class="page-side-sub-element-head">Level</label>
+
                     <div class="page-side-sub-element">
                         <div class="row no-margin">
                             <div class="col-md-5">
@@ -92,53 +94,59 @@
                         <div style="text-align: center;color:#CCCCCC;">~</div>
                         <div>
                             <div class="input-group input-sm no-padding">
-                                <span name="date_end" class="input-group-addon"><span class="glyphicon glyphicon-calendar"
-                                                                      aria-hidden="true"></span></span>
-                                <input type="text" class="form-control input-sm"
+                                <span class="input-group-addon"><span
+                                        class="glyphicon glyphicon-calendar"
+                                        aria-hidden="true"></span></span>
+                                <input name="date_end" type="text" class="form-control input-sm"
                                        aria-describedby="inputGroupSuccess1Status" placeholder="2015-01-01">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="page-side-sub-element-head">Exception</label>
+                <%--<div class="form-group">--%>
+                    <%--<label class="page-side-sub-element-head">Exception</label>--%>
 
-                    <div class="page-side-sub-element">
-                        <input name="exception" type="checkbox" value="true"> Has ThrowableInfo
-                    </div>
-                </div>
+                    <%--<div class="page-side-sub-element">--%>
+                        <%--<input name="exception" type="checkbox" value="true"> Has ThrowableInfo--%>
+                    <%--</div>--%>
+                <%--</div>--%>
             </div>
 
-            <div class="page-side-element-head page-side-element-head-border"><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+            <div class="page-side-element-head page-side-element-head-border"><span class="glyphicon glyphicon-transfer"
+                                                                                    aria-hidden="true"></span>
                 GROUP BY
             </div>
             <div class="page-side-element">
                 <label class="page-side-sub-element-head">Selected</label>
+
                 <div class="page-side-sub-element">
                     <ul id="groupby_selected">
 
                     </ul>
                 </div>
                 <label class="page-side-sub-element-head">Available</label>
+
                 <div class="page-side-sub-element">
                     <ul id="groupby_available">
                         <li><input type="checkbox" value="rabbitId" data-label="rabbit"> rabbit</li>
                         <li><input type="checkbox" value="loggingEventDateInt" data-label="date"> date</li>
                         <li><input type="checkbox" value="loggingEvent.level" data-label="level"> level</li>
-                        <li><input type="checkbox" value="loggingEvent.categoryName" data-label="className"> className</li>
+                        <li><input type="checkbox" value="loggingEvent.categoryName" data-label="className"> className
+                        </li>
                     </ul>
                 </div>
             </div>
             <div class="page-side-element page-side-sub-element">
-                <button type="submit" class="btn btn-primary btn-block btn-sm"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> RUN</button>
+                <button id="run" type="button" class="btn btn-primary btn-block btn-sm"><span class="glyphicon glyphicon-play"
+                                                                                     aria-hidden="true"></span> RUN
+                </button>
             </div>
         </form>
         <div style="clear:both;"></div>
     </div>
-    <div>
-        <!-- result -->
-        asdfasdf
-        <c:out value="${result}" />
+
+    <div class="result" id="result">
+
     </div>
 
 </section>

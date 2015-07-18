@@ -6,10 +6,50 @@ $(document).ready(function(){
     $("#frm_rabbit_list li").click(function(){
         selectRabbit($(this).attr("data-value"), $(this).attr("data-label"));
     });
+
     //Group by
     $("#groupby_available li").click(function(){
         $checkBox  = $(this).find("INPUT");
         selectGroupByAvailable($checkBox.val(), $checkBox.attr("data-label"));
+    });
+
+    $("#run").click(function(){
+
+        // Validations
+        if ($("#groupBy").val().length < 1){
+            alert("Choose least one 'GROUP BY' element");
+            return;
+        }
+        if ($("INPUT[name=level_trace]").is(':checked') == false &&
+            $("INPUT[name=level_debug]").is(':checked') == false &&
+            $("INPUT[name=level_info]").is(':checked') == false &&
+            $("INPUT[name=level_warn]").is(':checked') == false &&
+            $("INPUT[name=level_error]").is(':checked') == false &&
+            $("INPUT[name=level_fatal]").is(':checked') == false
+        ){
+            alert("Choose least one 'LEVEL' element");
+            return;
+        }
+
+        // Req
+        showLoading();
+        var formData = $("#frm_anal").serialize();
+        var action = $("#frm_anal").attr("action")
+        $.ajax({
+            type : "POST",
+            data : formData,
+            url: action,
+            success: function (data) {
+                $("#result").html("");
+                $("#result").append(data);
+                hideLoading();
+            }
+            ,fail: function(){
+                // todo : fail
+                alert("fail");
+                hideLoading();
+            }
+        });
     });
 });
 

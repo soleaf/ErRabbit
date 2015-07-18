@@ -43,40 +43,65 @@ public class AggregationAnalysis {
      * @param req
      * @return
      */
-    private List makeAggregationOpFromReq(LogAggregationRequest req){
+    private List<AggregationOperation> makeAggregationOpFromReq(LogAggregationRequest req){
 
-        List op = new ArrayList();
+        List<AggregationOperation> op = new ArrayList<>();
 
         // Filter : RabbitId
-        if (req.filterRabbit != null){
-            op.add(new MatchOperation(Criteria.where("rabbit").is(req.filterRabbit)));
+        if (req.getFilterRabbit() != null){
+            op.add(new MatchOperation(Criteria.where("rabbit").is(req.getFilterRabbit())));
         }
+
         // Filter : Levels
-        if (req.filterLevels.size() > 0){
-            Criteria orCriteria = null;
-            for (String level : req.filterLevels){
-                if (orCriteria == null)
-                    orCriteria = Criteria.where("loggingEvent.level").is(level);
-                else
-                    orCriteria.orOperator(Criteria.where("loggingEvent.level").is(level));
+        if (req.getFilterLevels().size() > 0){
+            logger.trace("levels " + req.getFilterLevels());
+//            Criteria levelCriteria = null;
+//            Criteria[] orCriteria = null;
+//            if (req.getFilterLevels().size() > 1){
+//                orCriteria = new Criteria[req.getFilterLevels().size()-1];
+//            }
+//
+//            int i = 0;
+//            for (String level : req.getFilterLevels()){
+//                if (levelCriteria == null)
+//                    levelCriteria = Criteria.where("loggingEvent.level").is(level);
+//                else{
+//                    orCriteria[i] = Criteria.where("loggingEvent.level").is(level);
+//                    i++;
+//                }
+//            }
+//
+//            if (orCriteria != null){
+//                levelCriteria = levelCriteria.orOperator(orCriteria);
+//                logger.trace("append orOperator");
+//            }
+
+            op.add(new MatchOperation(Criteria.where("loggingEvent.level").in(req.getFilterLevels())));
+        }
+
+        // Filter : Date
+        Criteria dateCriteria = null;
+        if (req.getFilterBeginDate() != null){
+            dateCriteria = Criteria.where("loggingEventDateInt").gte(req.getFilterBeginDate());
+        }
+        if (req.getFilterEndDate() != null){
+            if (dateCriteria == null){
+                dateCriteria = Criteria.where("loggingEventDateInt").lte(req.getFilterEndDate());
             }
-            op.add(new MatchOperation(orCriteria));
+            else{
+                dateCriteria = dateCriteria.andOperator(Criteria.where("loggingEventDateInt").lte(req.getFilterEndDate()));
+            }
         }
-        // Filter Date
-        if (req.filterBeginDate != null){
-            op.add(new MatchOperation(Criteria.where("loggingEventDateInt").gte(req.filterBeginDate)));
-        }
-        if (req.filterEndDate != null){
-            op.add(new MatchOperation(Criteria.where("loggingEventDateInt").lte(req.filterEndDate)));
+        if (dateCriteria != null){
+            op.add(new MatchOperation(dateCriteria));
         }
 
         // Group by
         if (req.group != null){
-            logger.trace("(String[]) req.group.toArray()) : " + req.group.toArray());
             op.add(new GroupOperation(Fields.fields((String[]) req.group.toArray())).count().as("count"));
         }
 
-        return  op;
+        return op;
     }
 
     /**
