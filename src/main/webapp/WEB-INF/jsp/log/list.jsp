@@ -62,12 +62,12 @@
             </div>
         </div>
         <div class="report-area" id="report-area" data-rabbitId="${rabbit.id}">
-            <%--<div class="report-head" id="report-head">--%>
-            <%--</div>--%>
+
             <div class="report-timeLine">
                 <!-- Report Time Line Area-->
             </div>
             <div class="report-list-box">
+                <%--<div class="report-head" id="report-head"></div>--%>
                 <ul class="report-list" id="report-list">
                 <!--  Report List Area -->
                 </ul>
@@ -76,7 +76,8 @@
         </div>
     </c:if>
 
-</section>
+</section>-
 <jsp:include page="../common/footer.jsp"/>
+<jsp:include page="popover_view.jsp"/>
 </body>
 </html>

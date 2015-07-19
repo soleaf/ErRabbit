@@ -11,11 +11,14 @@ $(document).ready(function(){
 
     initReportFeedButton();
 
-    // Init CalendarEvent
+    // init reportModal button event
+    initReportModalButton();
+
+    // Init calendarEvent
     initCalendarYear();
     initCalendarMonth();
 
-    // Retrieve Calendar
+    // Retrieve calendar
     if ($("#cal_y").val() != null && $("#cal_m").val() != null){
         var today = new Date();
         var dd = today.getDate();
@@ -26,6 +29,17 @@ $(document).ready(function(){
     //initCalendarValueChanged();
 
 });
+
+function initReportModalButton(){
+    $("#popover_log_btn_graph").click(function(){
+        $("#popover_log_body .graph").show();
+        $("#popover_log_body .text").hide();
+    });
+    $("#popover_log_btn_text").click(function(){
+        $("#popover_log_body .graph").hide();
+        $("#popover_log_body .text").show();
+    });
+}
 
 function retrieveCalendar(rabbitId, year, month, selectedDay) {
     showLoading();
@@ -127,57 +141,16 @@ function retrieveReports(rabbitId, page, size, y, m, d) {
             }
 
             $("#report-list .report").click(function(){
+
                 // Report Detail Information Layer Toggle
-                var id = $(this).attr("data-id");
-                $("#report-list .report-detail-popup").hide();
-                if ($(this).parent().find(".report-detail-popup[data-id='" + id + "']")){
-                    $(this).parent().find(".report-detail-popup[data-id='" + id + "']").toggle();
-                    $("#report-list .report_active").removeClass("report_active");
-                    $(this).addClass("report_active");
-                }
-            });
+                var row = $(this);
+                $.get(row.data('poload'),function(d) {
 
-            $("#report-list .close").click(function() {
-                // Close button
-                $(this).parent().parent().hide();
-            });
+                    $("#popover_log_title").html(row.find(".time").text() + " " + row.find(".level").text());
+                    $("#popover_log_body").html(d);
+                    $("#popover_log").modal();
 
-            $("#report-list .report-detail-popup .base-package-toggle").click(function(){
-                // Report Detai Information Graph BasePackage Toggle
-                var id = $(this).attr("data-id");
-                var toggle = $(this).attr("data-toggle");
-
-                if (toggle == "1"){
-                    $(this).parent().find(".base-package").css({display:"inline-block"});
-                    $(this).parent().find(".base-package-arrow").css({display:"block"});
-                    $(this).parent().find(".base-package-fileName").css({display:"block"});
-                    $(this).attr("data-toggle","0");
-                }else{
-                    $(this).parent().find(".base-package").css({display:"none"});
-                    $(this).parent().find(".base-package-arrow").css({display:"none"});
-                    $(this).parent().find(".base-package-fileName").css({display:"none"});
-                    $(this).attr("data-toggle","1");
-                }
-
-            });
-
-            $("#report-list .report-tab li").click(function(){
-                // Tab Click to change StackTrace view mode
-
-                var toActiveTab = $(this).attr("data-tab")
-                if (toActiveTab == "graph"){
-                    $(this).parent().parent().find(".graph").show();
-                    $(this).parent().parent().find(".text").hide();
-                    $(this).parent().find("li[data-tab='graph']").addClass("active");
-                    $(this).parent().find("li[data-tab='text']").removeClass("active");
-                }
-                else{
-                    $(this).parent().parent().find(".graph").hide();
-                    $(this).parent().parent().find(".text").show();
-                    $(this).parent().find("li[data-tab='text']").addClass("active");
-                    $(this).parent().find("li[data-tab='graph']").removeClass("active");
-                }
-
+                });
             });
 
             hideLoading();

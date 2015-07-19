@@ -1,5 +1,6 @@
 package org.mintcode.errabbit.controller.console;
 
+import org.bson.types.ObjectId;
 import org.mintcode.errabbit.core.console.ReportPresentation;
 import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;
 import org.mintcode.errabbit.core.rabbit.name.RabbitNameCache;
@@ -209,7 +210,7 @@ public class LogController {
 
             logger.trace("Result of retrieve reportPage > " + reportPage.getContent().size());
             model.addAttribute("reports", reportPage);
-            model.addAttribute("graphs", reportPresentation.makeTraceGraph(rabbit.getBasePackage(), reportPage));
+//            model.addAttribute("graphs", reportPresentation.makeTraceGraph(rabbit.getBasePackage(), reportPage));
             model.addAttribute("format", new SimpleDateFormat("HH:mm:ss:SSS"));
             return new ModelAndView("/log/list_data");
 
@@ -224,6 +225,27 @@ public class LogController {
 
     }
 
+    // AJAX Report PopOver DATA API for report
+    @RequestMapping(value = "popover_data")
+    public ModelAndView reportListData(Model model,
+                                       @RequestParam(value = "id", required = true) String id
+
+    ) {
+        try{
+            Report report = reportRepository.findOne(new ObjectId(id));
+            Rabbit rabbit = rabbitNameCache.getRabbit(report.getRabbitId());
+            model.addAttribute("graphs", reportPresentation.makeTraceGraph(rabbit.getBasePackage(), report));
+            model.addAttribute("report", report);
+            return new ModelAndView("/log/popover_data");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            logger.error(e.getMessage(),e);
+            // todo: make ErrorPage
+            model.addAttribute("e",e);
+            return new ModelAndView("/log/popover_data");
+        }
+    }
 
 
 }

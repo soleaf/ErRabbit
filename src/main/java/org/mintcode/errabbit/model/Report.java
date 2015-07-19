@@ -106,7 +106,7 @@ public class Report implements Serializable {
     public String toHTML(Boolean showRabbitID){
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss:SSS");
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("<li class='report' data-id='%s'>", id.toString()));
+        sb.append(String.format("<li class='report' data-poload='/log/popover_data?id=%s'>", id.toString()));
             sb.append(String.format("<span class='time'>%s</span>", format.format(loggingEvent.timeStampDate)));
             sb.append(String.format("<span class='level %s %s'>%s</span>", loggingEvent.level,
                                                                 (loggingEvent.getThrowableInfo() != null ? "has_exception" : ""),

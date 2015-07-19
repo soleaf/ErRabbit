@@ -12,19 +12,17 @@
 <jsp:include page="../common/nav.jsp">
     <jsp:param name="console" value="active"/>
 </jsp:include>
-<div class="page-navi">
-    <ul>
-        <li><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> WebSocket Connection Status</li>
-        <li id="con_connecting"><span class="label label-warning">CONNECTING</span></li>
-        <li id="con_success"><span class="label label-success">CONNECTED</span></li>
-        <li id="con_fail"><span class="label label-danger">DISCONNECTED</span></li>
-    </ul>
-</div>
+<%--<div class="page-navi">--%>
+    <%--<ul>--%>
+        <%--<li><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> STATUS </li>--%>
+        <%--<li id="con_connecting"><span class="label label-warning">CONNECTING</span></li>--%>
+        <%--<li id="con_success"><span class="label label-success">CONNECTED</span></li>--%>
+        <%--<li id="con_fail"><span class="label label-danger">DISCONNECTED</span></li>--%>
+    <%--</ul>--%>
+<%--</div>--%>
 <section class="page">
     <div class="report-area report-area_nosidebar" id="report-area">
-        <div class="report-head" id="report-head">
 
-        </div>
         <div class="report-timeLine">
             <!-- Report Time Line Area-->
         </div>
@@ -37,16 +35,15 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Waiting for new log</div>
                 <div class="panel-body">
-                    <p>WebSocket Connection is succeed.</p>
-                    <p>Log will be appear as arriving. Do not refresh this page.</p>
+                    <p>WebSocket connection is succeed. Log will be appear as arriving. Do not refresh this page.</p>
                 </div>
             </div>
         </div>
         <div id="retry">
             <div class="panel panel-warning">
-                <div class="panel-heading">WebSocket Connection Failed</div>
+                <div class="panel-heading">WebSocket connection failed</div>
                 <div class="panel-body">
-                    <p>Please Retry with Refresh this page</p>
+                    <p>Please retry with refresh this page</p>
                 </div>
                 <div class="panel-footer">
                 </div>
@@ -55,5 +52,6 @@
     </div>
 </section>
 <jsp:include page="../common/footer.jsp"/>
+<jsp:include page="../log/popover_view.jsp"/>
 </body>
 </html>

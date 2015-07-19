@@ -8,7 +8,7 @@
 </c:if>
 <c:if test="${not empty reports.content}">
     <c:forEach var="item" items="${reports.content}" varStatus="status">
-        <li class="report" data-id="${item.id}">
+        <li class="report" data-id="${item.id}" data-poload="/log/popover_data?id=${item.id}">
             <span class="time">${format.format(item.loggingEvent.timeStampDate)}</span>
             <span class="level ${item.loggingEvent.level} <c:if test="${not empty item.loggingEvent.throwableInfo}"> has_exception</c:if>">${item.loggingEvent.level}</span>
             <div class="contgroup">
@@ -16,58 +16,5 @@
                 <span class="message">${item.loggingEvent.renderedMessage}</span>
             </div>
         </li>
-
-        <c:if test="${not empty item.loggingEvent.throwableInfo}">
-        <div class="report-detail-popup" data-id="${item.id}">
-            <div class="ThrowableInfo">
-                <ul class="report-tab">
-                    <li class="active" data-tab="graph"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span> Graph</li>
-                    <li data-tab="text"><span class="glyphicon glyphicon-console" aria-hidden="true"></span> Text</li>
-                </ul>
-                <div class="close"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
-                <div class="graph">
-                    <div class="threadName label">threadName: ${item.loggingEvent.threadName}</div>
-                    <ul>
-                        <li>
-                            <div class="exception">
-                                <span class="glyphicon glyphicon-warning-sign"
-                                      aria-hidden="true"></span> ${item.loggingEvent.throwableInfo.rep[0]}
-                            </div>
-                        </li>
-                        <c:forEach var="stack" items="${graphs.get(item)}" varStatus="status">
-                            <li>
-                                <div class='arrow <c:if test="${stack.isDefaultHidden()}">base-package-arrow</c:if>'>
-                                    <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></div>
-                                <div class='class <c:if test="${stack.isDefaultHidden()}">base-package</c:if>'>
-                                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                                    <span class="class_name"> ${stack.className}</span>
-                                    <c:forEach var="element" items="${stack.stackTraceElements}" varStatus="status">
-                                        <ul>
-                                            <li class="method">
-                                                <span class="methodName">${element.methodName}</span>
-                                                <span class="lineNumber">line.${element.lineNumber}</span>
-                                            </li>
-                                        </ul>
-                                    </c:forEach>
-                                </div>
-                                <span class="fileName <c:if test="${stack.isDefaultHidden()}">base-package-fileName</c:if>">${stack.fileName}</span>
-                            </li>
-                        </c:forEach>
-                        <%--<button type="button" class="btn btn-default btn-xs base-package-toggle" data-id="${item.id}"--%>
-                                <%--data-toggle="0">--%>
-                            <%--TOGGLE HIDDEN TRACES--%>
-                        <%--</button>--%>
-                    </ul>
-                </div>
-                <div class="text">
-                    <ul>
-                        <c:forEach var="rep" items="${item.loggingEvent.throwableInfo.rep}" varStatus="status">
-                            <li>${rep}</li>
-                        </c:forEach>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        </c:if>
     </c:forEach>
 </c:if>
