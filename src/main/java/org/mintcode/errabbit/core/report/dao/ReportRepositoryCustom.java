@@ -1,5 +1,6 @@
 package org.mintcode.errabbit.core.report.dao;
 
+import com.mongodb.WriteResult;
 import org.mintcode.errabbit.model.Report;
 
 import java.util.List;
@@ -15,4 +16,11 @@ public interface ReportRepositoryCustom {
      */
     public void insertHourStatistic(Report report);
 
+    /**
+     * Remove logs on range of days
+     * @param rabbitId
+     * @param begin
+     * @param end
+     */
+    public WriteResult deleteReportRangeOfLoggingEventDateInt(String rabbitId, Integer begin, Integer end);
 }

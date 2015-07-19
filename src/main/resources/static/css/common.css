@@ -312,7 +312,8 @@ header .logout{
 }
 
 .page .list_rabbit li>.recent{
-    color:#CCCCCC;
+    color: #737373;
+    font-weight: normal;
 }
 
 .page .list_rabbit li>.recent>.new{
@@ -326,11 +327,15 @@ header .logout{
     line-height: 30px;
 }
 
+
 .page .list_rabbit li>.action A{
-    color:#595959;
+    color: #CCCCCC;
     cursor: pointer;
 }
 
+.page .list_rabbit li:HOVER .action A {
+    color:#595959;
+}
 .page .list_rabbit li>.action A:HOVER{
     text-decoration: none;
     color:#7BCCD4;

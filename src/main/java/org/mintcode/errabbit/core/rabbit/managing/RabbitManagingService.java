@@ -46,4 +46,12 @@ public interface RabbitManagingService {
      */
     public Rabbit getRabbitById(String id);
 
+    /**
+     * Clean log
+     * @param id
+     * @param begin
+     * @param end
+     */
+    public void cleanLog(String id, Integer begin, Integer end);
+
 }

@@ -13,4 +13,13 @@ $().ready(function(){
         modal.find('#deleting_id').val(rabbitId);
     })
 
+    $('#cleanModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var rabbitId = button.data('id');
+        var modal = $(this);
+        modal.find('.modal-title').text('Clean "' + rabbitId +'"');
+        modal.find('.well').text('target id : "' + rabbitId +'"');
+        modal.find('#clean_id').val(rabbitId);
+    })
+
 });

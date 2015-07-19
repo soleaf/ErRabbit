@@ -1,6 +1,8 @@
 package org.mintcode.errabbit.core.report.dao;
 
-import org.slf4j.Logger; import org.slf4j.LoggerFactory;
+import com.mongodb.WriteResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 import org.mintcode.errabbit.model.Report;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -47,13 +51,17 @@ public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStati
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
             Integer year = cal.get(Calendar.YEAR);
-            Integer month = cal.get(Calendar.MONTH)+ 1; // normal day
+            Integer month = cal.get(Calendar.MONTH) + 1; // normal day
             Integer day = cal.get(Calendar.DAY_OF_MONTH);
+
+            DateFormat format = new SimpleDateFormat("yyyyMMdd");
+            Integer dateInt = Integer.parseInt(format.format(date));
 
             // Upsert + $inc
             Query query = new Query();
             query.addCriteria(Criteria.where("rabbitId").is(report.getRabbitId())
                             .andOperator(
+                                    Criteria.where("dateInt").is(dateInt),
                                     Criteria.where("year").is(year),
                                     Criteria.where("month").is(month),
                                     Criteria.where("day").is(day)
@@ -78,10 +86,9 @@ public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStati
 
         List<LogLevelDailyStatistics> list = mongoOperations.find(query, LogLevelDailyStatistics.class);
 
-        if (list != null && list.size() > 0 ){
+        if (list != null && list.size() > 0) {
             return mongoOperations.find(query, LogLevelDailyStatistics.class).get(0);
-        }
-        else{
+        } else {
             return null;
         }
     }
@@ -95,12 +102,24 @@ public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStati
 
         List<LogLevelDailyStatistics> list = mongoOperations.find(query, LogLevelDailyStatistics.class);
 
-        if (list != null && list.size() > 0 ){
+        if (list != null && list.size() > 0) {
             return mongoOperations.find(query, LogLevelDailyStatistics.class).get(0);
-        }
-        else{
+        } else {
             return null;
         }
+    }
+
+    @Override
+    public WriteResult deleteDailyStatisticRangeOfLoggingEventDateInt(String rabbitId, Integer begin, Integer end) {
+
+        Query query = new Query();
+        query.addCriteria(Criteria.where("rabbitId").is(rabbitId)
+                        .andOperator(
+                                Criteria.where("dateInt").gte(begin),
+                                Criteria.where("dateInt").lte(end)
+                        )
+        );
+        return mongoOperations.remove(query, LogLevelDailyStatistics.class);
     }
 
 }

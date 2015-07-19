@@ -1,5 +1,6 @@
 package org.mintcode.errabbit.core.report.dao;
 
+import com.mongodb.WriteResult;
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 import org.mintcode.errabbit.model.LogLevelHourStatistics;
@@ -22,6 +23,17 @@ public class ReportRepositoryImpl implements ReportRepositoryCustom {
 
     @Autowired
     private MongoOperations mongoOperations;
+
+
+    public WriteResult deleteReportRangeOfLoggingEventDateInt(String rabbitId, Integer begin, Integer end){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("rabbitId").is(rabbitId)
+                        .andOperator(Criteria.where("loggingEventDateInt").gte(begin),
+                                Criteria.where("loggingEventDateInt").lte(end)
+                        )
+        );
+        return mongoOperations.remove(query, Report.class);
+    }
 
     @Override
     public void insertHourStatistic(Report report) {

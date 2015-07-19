@@ -159,6 +159,40 @@ public class RabbitController {
         }
     }
 
+    // Delete logs on range
+    @RequestMapping(value = "clean")
+    public String delete(@RequestParam(value = "id", required = true) String id,
+                         @RequestParam(value = "begin", required = true) String begin,
+                         @RequestParam(value = "end", required = true) String end,
+                         Model model) {
+        try {
+
+            Rabbit rabbit = rabbitManagingService.getRabbitById(id);
+            if (rabbit == null) {
+                throw new RabbitNotExistException(id);
+            }
+
+            Integer beginDateInteger = Integer.parseInt(begin.replace("-",""));
+            Integer endDateInteger = Integer.parseInt(end.replace("-",""));
+
+            logger.info("Clean log for rabbit > " + id);
+
+            // Clean logs
+            rabbitManagingService.cleanLog(id, beginDateInteger, endDateInteger);
+
+            // Clean logLevelDailyStatistics
+            logLevelDailyStatisticsRepository.deleteDailyStatisticRangeOfLoggingEventDateInt(id,
+                    beginDateInteger, endDateInteger);
+
+            model.addAttribute("info", String.format("Success to clean Rabbit '%s'", id));
+            return "redirect:list.err?";
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            model.addAttribute("error", e.getMessage());
+            return "redirect:list.err";
+        }
+    }
+
     // How to Integrate with Application
     @RequestMapping(value = "howto")
     public String howTo() {

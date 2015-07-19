@@ -109,4 +109,9 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
     public Rabbit getRabbitById(String id) {
         return rabbitRepository.findById(id);
     }
+
+    @Override
+    public void cleanLog(String id, Integer begin, Integer end) {
+        reportRepository.deleteReportRangeOfLoggingEventDateInt(id, begin, end);
+    }
 }

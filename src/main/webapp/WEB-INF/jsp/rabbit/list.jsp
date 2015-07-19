@@ -56,6 +56,9 @@
                                 <a role="button" href="/rabbit/modify.err?id=${item.id}" ><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> SETTINGS</a>
                             </div>
                             <div class="conts action">
+                                <a role="button" data-id="${item.id}" data-toggle="modal" data-target="#cleanModal"><span class="glyphicon glyphicon-erase" aria-hidden="true"></span> CLEAN</a>
+                            </div>
+                            <div class="conts action">
                                 <a role="button" data-id="${item.id}" data-toggle="modal" data-target="#deleteModal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> REMOVE</a>
                             </div>
                         </li>
@@ -90,6 +93,40 @@
                 </form>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Clean Modal -->
+<div class="modal fade" id="cleanModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="/rabbit/clean.err">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Clean Modal</h4>
+            </div>
+            <div class="modal-body">
+                Clean logs for selected range of days
+                <p>
+                    <div class="input-group input-sm no-padding">
+                                <span class="input-group-addon" style="width:100px;text-align:left;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> BEGIN</span>
+                        <input name="begin" type="text" class="form-control input-sm" aria-describedby="inputGroupSuccess1Status" placeholder="2015-01-01">
+                    </div>
+                </p>
+                <p>
+                    <div class="input-group input-sm no-padding">
+                                <span class="input-group-addon" style="width:100px;text-align:left;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> END </span>
+                        <input name="end" type="text" class="form-control input-sm" aria-describedby="inputGroupSuccess1Status" placeholder="2015-01-01">
+                    </div>
+                </p>
+            </div>
+            <div class="modal-footer">
+                    <input type="hidden" name="id" id="clean_id" value=""/>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+                    <button type="submit" class="btn btn-danger">CLEAN</button>
+            </div>
+        </div>
+        </form>
     </div>
 </div>
 

@@ -1,5 +1,6 @@
 package org.mintcode.errabbit.core.report.dao;
 
+import com.mongodb.WriteResult;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 import org.mintcode.errabbit.model.Report;
 
@@ -25,4 +26,13 @@ public interface LogLevelDailyStatisticsRepositoryCustom {
      * @return
      */
     public LogLevelDailyStatistics findByRabbitIdOnLast(String rabbitId);
+
+    /**
+     * Delete objects on range of days
+     * @param rabbitId
+     * @param begin
+     * @param end
+     */
+    public WriteResult deleteDailyStatisticRangeOfLoggingEventDateInt(String rabbitId, Integer begin, Integer end);
+
 }

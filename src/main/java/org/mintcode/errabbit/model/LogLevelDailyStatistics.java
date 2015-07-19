@@ -39,6 +39,9 @@ public class LogLevelDailyStatistics implements Serializable {
 
     private Integer month;
 
+    @Indexed
+    private Integer dateInt;
+
     private Integer level_DEBUG = 0;
 
     private Integer level_INFO = 0;
@@ -139,6 +142,14 @@ public class LogLevelDailyStatistics implements Serializable {
         this.level_ERROR = level_ERROR;
     }
 
+    public Integer getDateInt() {
+        return dateInt;
+    }
+
+    public void setDateInt(Integer dateInt) {
+        this.dateInt = dateInt;
+    }
+
     /**
      * Calculating Sum All logs
      * @return
@@ -154,11 +165,13 @@ public class LogLevelDailyStatistics implements Serializable {
 
     @Override
     public String toString() {
-        return "LogLevelStatistics{" +
+        return "LogLevelDailyStatistics{" +
                 "id=" + id +
                 ", rabbitId='" + rabbitId + '\'' +
                 ", year=" + year +
                 ", day=" + day +
+                ", month=" + month +
+                ", dateInt=" + dateInt +
                 ", level_DEBUG=" + level_DEBUG +
                 ", level_INFO=" + level_INFO +
                 ", level_TRACE=" + level_TRACE +
