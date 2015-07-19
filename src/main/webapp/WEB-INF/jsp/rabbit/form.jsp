@@ -28,7 +28,7 @@
     </jsp:include>
     <div class="page-side-margin">
         <h3>${title}</h3>
-        <p>Rabbit is Target Application to track log.</p>
+        <p>Rabbit is a target application to track log.</p>
 
         <div class="form-horizontal rabbit-form">
             <form class="form" action="${action}">
@@ -45,7 +45,7 @@
                     <span class="help-block">It's used to identify a rabbitId on Log4j appender property.</span>
                 </div>
                 <div>
-                    <label for="basePackage" class="control-label">Base Package</label>
+                    <label for="basePackage" class="control-label">Base package</label>
                     <input type="text" class="form-control" id="basePackage" name="basePackage"
                            placeholder="org.mintcode.errabbit" value="${basePackage}">
                     <span class="help-block">It will be help you to recognize your package in throwable stack.</span>
@@ -53,9 +53,9 @@
                 <div>
                     <label>
                         <input type="checkbox" name="onlyException" value="true" ${collectionOnlyException}/>
-                        Collect only Exception
+                        Collect only exception
                     </label>
-                    <span class="help-block">Discard any other logs has no Throwable exception</span>
+                    <span class="help-block">Discard any other logs has no throwable exception</span>
                 </div>
                 <c:if test="${not empty e}">
                     <div class="alert alert-warning alert-dismissible" role="alert">
