@@ -72,6 +72,15 @@ UL LI{
     border: 1px solid #7BCCD4;
 }
 
+.btn-page-navi {
+    height: 25px;
+    padding:0px;
+    border-top:none;
+    border-bottom:none;
+    padding-left:10px;
+    padding-right:10px;
+    background-color: transparent;
+}
 
 .no-padding{
     padding:0px;
@@ -498,8 +507,13 @@ header .logout{
     background-color: #f9f9f9;
 }
 
+.report-list .report:HOVER .message{
+    color:#000;
+}
+
 .report-list .report .level{
     margin-left: 4px;
+    margin-top:1px;
     border-width: 1px;
     border-style: solid;
     font-size:10px;
@@ -557,13 +571,15 @@ header .logout{
 
 .report-list .report .categoryName{
     margin-left: 4px;
-    color: #384e63;
+    color: #5d5d5d;
     text-decoration: underline;
 }
 
 .report-list .report .message{
+    margin-top:1px;
     margin-left: 4px;
-    color: #4b4b4b;
+    color: #737373;
+    display:block;
 }
 
 .report-list .report_active{

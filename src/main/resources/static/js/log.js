@@ -140,7 +140,7 @@ function retrieveReports(rabbitId, page, size, y, m, d) {
                 $("#report-feed").hide();
             }
 
-            $("#report-list .report").click(function(){
+            $("#report-list .report[data-e=true]").click(function(){
 
                 // Report Detail Information Layer Toggle
                 var row = $(this);

@@ -18,7 +18,6 @@
     </ul>
 </div>
 <section class="page page-navi-padding">
-
     <c:if test="${not empty rabbit}">
         <div class="page-side">
             <!-- Options and Calendar -->
@@ -75,8 +74,7 @@
             </div>
         </div>
     </c:if>
-
-</section>-
+</section>
 <jsp:include page="../common/footer.jsp"/>
 <jsp:include page="popover_view.jsp"/>
 </body>
