@@ -691,7 +691,6 @@ header .logout{
     margin-left:0px;
     display: inline-block;
     clear:both;
-    max-width:400px;
     border-radius: 5px;
 }
 
@@ -703,7 +702,6 @@ header .logout{
     margin-bottom:2px;
     padding:8px;
     display: inline-block;
-    max-width:400px;
     border-radius: 5px;
 }
 
@@ -711,10 +709,18 @@ header .logout{
     float:left;
 }
 
-.report-detail-popup .ThrowableInfo .graph .class_name{
+.report-detail-popup .ThrowableInfo .graph .class_name_set{
     display:block;
     word-wrap: break-word;
     margin-left:18px;
+}
+
+.report-detail-popup .ThrowableInfo .graph .package_name{
+    color: #bababa;
+}
+
+.report-detail-popup .ThrowableInfo .graph .class_name{
+
 }
 
 .report-detail-popup .ThrowableInfo .graph .method{
@@ -737,6 +743,11 @@ header .logout{
     color:#fff;
     display: inline-block;
 }
+
+.report-detail-popup .ThrowableInfo .graph .base-package .package_name{
+    color: #dafaff;
+}
+
 
 .report-detail-popup .ThrowableInfo .graph .base-package-arrow{
     padding:2px;

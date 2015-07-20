@@ -24,7 +24,9 @@
                                 <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></div>
                             <div class='class <c:if test="${stack.isDefaultHidden()}">base-package</c:if>'>
                                 <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                                <span class="class_name"> ${stack.className}</span>
+                                <div class="class_name_set">
+                                    <span class="package_name"> ${stack.packageName}.</span><span class="class_name">${stack.className}</span>
+                                </div>
                                 <c:forEach var="element" items="${stack.stackTraceElements}" varStatus="status">
                                     <ul>
                                         <li class="method">

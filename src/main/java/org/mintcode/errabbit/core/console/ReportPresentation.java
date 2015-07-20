@@ -51,14 +51,17 @@ public class ReportPresentation {
             StackTraceGraph lastGraph = new StackTraceGraph(basePackage);
             graphs.add(lastGraph);
 
-
             for (ErStackTraceElement element :
                     report.getLoggingEvent().getThrowableInfo().getThrowable().getStackTraceElements()){
-                if (lastGraph.getClassName() != null &&
-                        !lastGraph.getClassName().equals(element.getDeclaringClass())){
+
+                // Make Class
+                if (lastGraph.getClassName() != null
+                        && !lastGraph.getClassName().equals(element.getDeclaringClass())){
                     lastGraph = new StackTraceGraph(basePackage);
                     graphs.add(lastGraph);
                 }
+
+                // Add Method Call
                 lastGraph.addElement(element);
 
             }
