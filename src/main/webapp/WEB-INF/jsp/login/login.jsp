@@ -9,11 +9,11 @@
     <jsp:param name="hide" value="1"/>
 </jsp:include>
 <section class="page">
-    <div class="jumbotron">
+    <div class="jumbotron login-jumbotron">
         <div class="container login-banner">
             <h1>ErRabbit</h1>
-            <p>Check Unaware Errors<br/>
-            Visual Tracking Remote Server Log4j Error Logs</p>
+            <p>Check unaware errors<br/>
+            Visual tracking remote logging service using Log4j</p>
             <p><a class="btn btn-default btn-lg" href="https://github.com/soleaf/ErRabbit" target="_blank" role="button">Learn more</a></p>
         </div>
     </div>

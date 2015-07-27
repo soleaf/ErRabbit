@@ -176,9 +176,15 @@ header .logout{
     font-size:12px;
 }
 
-.login-banner{
-    background: url("/img/logo_white_login.png") no-repeat bottom right;
+.login-jumbotron{
+    background: url("/img/login_top.png") no-repeat bottom right;
+    background-color: #F4F4F4;
 }
+
+.login-jumbotron H1{
+    color:#70CDD5;
+}
+
 .page_header{
     height:150px;
     background-color: #7BCCD4;
@@ -504,8 +510,11 @@ header .logout{
     padding-top:4px;
     padding-bottom:4px;
     padding-left:10px;
-    cursor: pointer;
     border-bottom: 1px solid #f4f4f4;
+}
+
+#report-list .report[data-e=true]{
+    cursor: pointer;
 }
 
 .report-list .report:HOVER{
@@ -695,8 +704,7 @@ header .logout{
 }
 
 .report-detail-popup .ThrowableInfo .graph .class{
-    border:1px solid #dddddd;
-    background-color: #FFF;
+    background-color: #f7f7f7;
     color:#979797;
     margin-top:2px;
     margin-bottom:2px;
@@ -721,7 +729,7 @@ header .logout{
 }
 
 .report-detail-popup .ThrowableInfo .graph .class_name{
-
+    text-decoration: underline;
 }
 
 .report-detail-popup .ThrowableInfo .graph .method{

@@ -2,6 +2,7 @@ package org.mintcode.errabbit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,32 +23,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/css/common.css").permitAll()
-                .antMatchers("/img/logo_white_login.png").permitAll()
+                .antMatchers("/img/login_top.png").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                    .formLogin()
-                    .loginPage("/login")
-                    .loginProcessingUrl("/login_process")
-                    .defaultSuccessUrl("/rabbit/list")
-                    .permitAll()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login_process")
+                .defaultSuccessUrl("/rabbit/list")
+                .permitAll()
                 .and()
-                    .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/login?logout")
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
                 .and()
                 .csrf().disable()
                 .httpBasic();
-                ;
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
+        auth.inMemoryAuthentication()
                 .withUser(username).password(password).roles("USER");
     }
 }
