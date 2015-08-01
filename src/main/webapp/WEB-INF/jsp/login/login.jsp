@@ -8,7 +8,7 @@
 <jsp:include page="../common/nav.jsp">
     <jsp:param name="hide" value="1"/>
 </jsp:include>
-<section class="page">
+<section class="page" id="login_page">
     <div class="jumbotron login-jumbotron">
         <div class="container login-banner">
             <h1>ErRabbit</h1>
