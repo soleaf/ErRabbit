@@ -3,6 +3,7 @@ package org.mintcode.errabbit.core.analysis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -99,6 +100,7 @@ public class AggregationAnalysis {
         // Group by
         if (req.group != null){
             op.add(new GroupOperation(Fields.fields((String[]) req.group.toArray())).count().as("count"));
+            op.add(new SortOperation(new Sort(Sort.Direction.ASC, (String[]) req.group.toArray())));
         }
 
         return op;
