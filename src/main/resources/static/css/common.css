@@ -581,6 +581,8 @@ header .logout{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color:#5CD0D6;
+    font-weight: bold;
 }
 
 .report-list .report .categoryName{
@@ -882,11 +884,9 @@ header .logout{
 
 .console #waiting{
     display: none;
-    margin-top: 100px;
     margin-left: auto;
     margin-right: auto;
     width:400px;
-    height:100px;
 }
 
 .console #retry{

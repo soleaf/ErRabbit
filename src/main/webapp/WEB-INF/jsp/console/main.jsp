@@ -27,17 +27,23 @@
             <!-- Report Time Line Area-->
         </div>
         <div class="report-list-box">
-            <ul class="report-list" id="report-list">
-                <!--  Report List Area -->
-            </ul>
-        </div>
-        <div id="waiting">
-            <div class="panel panel-default">
-                <div class="panel-heading"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Waiting for new log</div>
-                <div class="panel-body">
-                    <p>WebSocket connection is succeed. Log will be appear as arriving. Do not refresh this page.</p>
+            <div id="waiting">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Waiting for new log</div>
+                    <div class="panel-body">
+                        <p>WebSocket connection is succeed. Log will be appear as arriving. Do not refresh this page.</p>
+                    </div>
                 </div>
             </div>
+            <div style="clear:both;"></div>
+            <ul class="report-list" id="report-list">
+                <!--  Report List Area -->
+                <c:if test="${not empty preload}">
+                    <c:forEach items="${preload.content}" var="row">
+                        ${row.toHTML(true)}
+                    </c:forEach>
+                </c:if>
+            </ul>
         </div>
         <div id="retry">
             <div class="panel panel-warning">

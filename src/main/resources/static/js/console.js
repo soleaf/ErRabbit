@@ -6,6 +6,12 @@ $(document).ready(function () {
     disconnect();
     connect();
     initReportModalButton();
+    reportEvent();
+    setInterval(
+        function(){
+            extendSession();
+        }
+        , 1000 * 60 * 10);
 });
 
 function setConnected(connected) {
@@ -74,14 +80,24 @@ function disconnect() {
 function appendReports(message) {
     $("#waiting").fadeOut();
     $("#report-list").prepend(message);
+    reportEvent();
+}
+
+function reportEvent(){
     $("#report-list .report").click(function () {
 
         // Report Detail Information Layer Toggle
         var row = $(this);
         $.get(row.data('poload'), function (d) {
-            $("#popover_log_title").html(row.find(".time").text() + " " + row.find(".level").text());
-            $("#popover_log_body").html(d);
-            $("#popover_log").modal();
+            if ($($.parseHTML(d)).filter("#login_page").length > 0) {
+                alert("Session is expired");
+                window.location.href = "/login.err";
+            }
+            else{
+                $("#popover_log_title").html(row.find(".time").text() + " " + row.find(".level").text());
+                $("#popover_log_body").html(d);
+                $("#popover_log").modal();
+            }
         });
     });
 }
@@ -95,4 +111,18 @@ function initReportModalButton(){
         $("#popover_log_body .graph").hide();
         $("#popover_log_body .text").show();
     });
+}
+
+function extendSession(){
+    $.ajax({
+        type : "GET",
+        url : "/console/session.err",
+        success: function (data) {
+          console.log("extended session : ok");
+        }
+        ,fail: function(){
+            console.log("extended session : fail");
+        }
+    });
+
 }
