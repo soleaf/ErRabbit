@@ -46,21 +46,27 @@ function retrieveCalendar(rabbitId, year, month, selectedDay) {
     $.ajax({
         url: '/log/list_days.err?id=' + rabbitId + '&y=' + year + '&m=' + month +'&s=' + selectedDay,
         success: function (data) {
-            $("#report-calendar").html("");
-            $("#report-calendar").append(data);
-
-            if (selectedDay > 0){
-                $("#cal_d").val(selectedDay);
+            if ($($.parseHTML(data)).filter("#login_page").length > 0) {
+                alert("Session is expired");
+                window.location.href = "/login.err";
             }
+            else{
+                $("#report-calendar").html("");
+                $("#report-calendar").append(data);
 
-            $("#report-calendar .day").click(function(){
-                $("#cal_d").val($(this).attr("data-value"));
-                $("#report-list").html("");
-                retrieveReportsFromSelected();
-                $("#report-calendar .active").removeClass("active");
-                $(this).addClass("active");
-            });
-            hideLoading();
+                if (selectedDay > 0){
+                    $("#cal_d").val(selectedDay);
+                }
+
+                $("#report-calendar .day").click(function(){
+                    $("#cal_d").val($(this).attr("data-value"));
+                    $("#report-list").html("");
+                    retrieveReportsFromSelected();
+                    $("#report-calendar .active").removeClass("active");
+                    $(this).addClass("active");
+                });
+                hideLoading();
+            }
         }
         ,fail: function(){
             // todo : fail
