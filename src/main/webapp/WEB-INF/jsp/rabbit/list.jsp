@@ -69,6 +69,7 @@
         <div class="how_to_integration_banner">
             <p>How to integrate with your Application</p>
             <a href="https://github.com/soleaf/ErRabbit#make-your-application-connect-jms" role="button" class="btn btn-primary" target="_blank">SEE HOW TO</a>
+            <p><img src="/img/rabbit_handcuffs.png"/></p>
         </div>
     </div>
 </section>
