@@ -3,7 +3,8 @@ package org.mintcode.errabbit.controller.console;
 import org.apache.logging.log4j.Level;
 import org.mintcode.errabbit.core.analysis.AggregationAnalysis;
 import org.mintcode.errabbit.core.analysis.LogAggregationRequest;
-import org.mintcode.errabbit.core.analysis.LogAggregationResultSet;
+import org.mintcode.errabbit.core.analysis.LogAggregationResults;
+import org.mintcode.errabbit.core.analysis.result.LogAggregationResultSet;
 import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;
 import org.mintcode.errabbit.model.Rabbit;
 import org.slf4j.Logger;
@@ -108,7 +109,7 @@ public class AnalysisController {
             logger.trace("req : " + req);
 
             // Aggregation Query
-            LogAggregationResultSet result = analysis.aggregation(req);
+            LogAggregationResults result = analysis.aggregation(req);
             if (result != null){
                 model.addAttribute("result", result);
                 logger.trace("result : " + result);
@@ -121,7 +122,7 @@ public class AnalysisController {
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             // todo: make ErrorPage
-            model.addAttribute("e", e);
+            model.addAttribute("e", e);ㄴ
             return new ModelAndView("/anal/result");
         }
     }

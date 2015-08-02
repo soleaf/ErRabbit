@@ -1,5 +1,6 @@
 package org.mintcode.errabbit.core.analysis;
 
+import org.mintcode.errabbit.core.analysis.result.LogAggregationResultSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class AggregationAnalysis {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final HashMap<String,Object> mapType = new HashMap<String,Object>();
 
-    public LogAggregationResultSet aggregation(LogAggregationRequest request){
+    public LogAggregationResults aggregation(LogAggregationRequest request){
 
         List op = makeAggregationOpFromReq(request);
         logger.trace("op : " + op);
@@ -112,8 +113,8 @@ public class AggregationAnalysis {
      * @param result
      * @return
      */
-    private LogAggregationResultSet makeResult(LogAggregationRequest req, List<Map<String,Object>> result){
-        return new LogAggregationResultTable(result);
+    private LogAggregationResults makeResult(LogAggregationRequest req, List<Map<String,Object>> result){
+        return new LogAggregationResults(req, result);
     }
 
 }
