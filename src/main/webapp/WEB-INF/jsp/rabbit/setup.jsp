@@ -40,7 +40,7 @@
 
         <h4>2. Setup log4j2</h4>
 
-        <p>(1) Declare 'JSM Appender' to <code>log4j2.xml</code> with your ActiveMQ <b>URL, userName, password</b> And Make sure '<b>queueBindingName</b>' be <i>'errabbit.report.<code>[RabbitID]</code>'</i>
+        <p>(1) Declare 'JSM Appender' to <code>log4j2.xml</code> with your ActiveMQ <b>URL, userName, password</b> And Make sure '<b>queueBindingName</b>' be <i>'errabbit.log.<code>[RabbitID]</code>'</i>
         </p>
 
         <p>(2) And Add JMS Appender to Loggers.</p>
@@ -50,7 +50,7 @@
             &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&lt;Configuration status=&quot;info&quot; name=&quot;MyApp&quot; packages=&quot;org.mintcode.errabbit.example&quot;&gt;<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Appenders&gt;<br/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;JMS name=&quot;errabbit&quot; queueBindingName=&quot;errabbit.report.example&quot; factoryBindingName=&quot;ConnectionFactory&quot; providerURL=&quot;tcp://localhost:61616&quot; userName=&quot;sender&quot; password=&quot;senderpassword!&quot; /&gt;<br/>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;JMS name=&quot;errabbit&quot; queueBindingName=&quot;errabbit.log.example&quot; factoryBindingName=&quot;ConnectionFactory&quot; providerURL=&quot;tcp://localhost:61616&quot; userName=&quot;sender&quot; password=&quot;senderpassword!&quot; /&gt;<br/>
     p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Appenders&gt;<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&lt;Loggers&gt;<br/>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Root level=&quot;error&quot;&gt;<br/>
@@ -68,7 +68,7 @@
         <div class="well">
         java.naming.factory.initial = org.apache.activemq.jndi.ActiveMQInitialContextFactory<br/>
         java.naming.provider.url = tcp://localhost:61616<br/>
-        queue.errabbit.report.example=errabbit.report.example<br/>
+        queue.errabbit.log.example=errabbit.log.example<br/>
         </div>
 
         <h4>4. Use In Application Code</h4>

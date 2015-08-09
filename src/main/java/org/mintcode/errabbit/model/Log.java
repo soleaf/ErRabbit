@@ -12,8 +12,8 @@ import java.util.Date;
 /**
  * Created by soleaf on 2015. 2. 2..
  */
-@Document(collection = "reports")
-public class Report implements Serializable {
+@Document(collection = "logs")
+public class Log implements Serializable {
 
     @Id
     protected ObjectId id;
@@ -36,11 +36,11 @@ public class Report implements Serializable {
     @Indexed(unique = false)
     protected Date collectedDate;
 
-    public Report(){
+    public Log(){
 
     }
 
-    public Report(String rabbitId, ErrLoggingEvent loggingEvent){
+    public Log(String rabbitId, ErrLoggingEvent loggingEvent){
         this.rabbitId = rabbitId;
         this.loggingEvent = loggingEvent;
     }
@@ -93,7 +93,7 @@ public class Report implements Serializable {
 
     @Override
     public String toString() {
-        return "Report{" +
+        return "Log{" +
                 "id=" + id +
                 ", rabbitId='" + rabbitId + '\'' +
                 ", version='" + version + '\'' +

@@ -1,10 +1,10 @@
 package org.mintcode.errabbit.core.rabbit.managing;
 
 import org.mintcode.errabbit.core.CoreService;
+import org.mintcode.errabbit.core.log.dao.LogRepository;
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
-import org.mintcode.errabbit.core.report.dao.LogLevelDailyStatisticsRepository;
-import org.mintcode.errabbit.core.report.dao.ReportRepository;
+import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
 import org.mintcode.errabbit.model.Rabbit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
     private LogLevelDailyStatisticsRepository logLevelDailyStatisticsRepository;
 
     @Autowired
-    private ReportRepository reportRepository;
+    private LogRepository logRepository;
 
     @Autowired
     private CoreService coreService;
@@ -92,7 +92,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
     public boolean deleteRabbit(String id) {
 
         // Remove reports
-        reportRepository.deleteByRabbitId(id);
+        logRepository.deleteByRabbitId(id);
 
         // Remove counters
         logLevelDailyStatisticsRepository.deleteByRabbitId(id);
@@ -112,6 +112,6 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
 
     @Override
     public void cleanLog(String id, Integer begin, Integer end) {
-        reportRepository.deleteReportRangeOfLoggingEventDateInt(id, begin, end);
+        logRepository.deleteReportRangeOfLoggingEventDateInt(id, begin, end);
     }
 }

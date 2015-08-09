@@ -1,4 +1,4 @@
-package org.mintcode.errabbit.core.report.dao;
+package org.mintcode.errabbit.core.log.dao;
 
 import org.bson.types.ObjectId;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;

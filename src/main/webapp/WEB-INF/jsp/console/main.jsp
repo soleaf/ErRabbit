@@ -21,12 +21,12 @@
     <%--</ul>--%>
 <%--</div>--%>
 <section class="page">
-    <div class="report-area report-area_nosidebar" id="report-area">
+    <div class="log-area log-area_nosidebar" id="log-area">
 
-        <div class="report-timeLine">
-            <!-- Report Time Line Area-->
+        <div class="log-timeLine">
+            <!-- Log Time Line Area-->
         </div>
-        <div class="report-list-box">
+        <div class="log-list-box">
             <div id="waiting">
                 <div class="panel panel-default">
                     <div class="panel-heading"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Waiting for new log</div>
@@ -36,8 +36,8 @@
                 </div>
             </div>
             <div style="clear:both;"></div>
-            <ul class="report-list" id="report-list">
-                <!--  Report List Area -->
+            <ul class="log-list" id="log-list">
+                <!--  Log List Area -->
                 <c:if test="${not empty preload}">
                     <c:forEach items="${preload.content}" var="row">
                         ${row.toHTML(true)}

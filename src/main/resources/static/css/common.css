@@ -924,3 +924,12 @@ header .logout{
     margin-left:20px;
     margin-right:20px;
 }
+
+.report .rabbit-selection li{
+    padding-left:40px;
+}
+
+.report .rabbit-selection li:HOVER{
+    background-color: #7BCCD4;
+    color:#FFF;
+}

@@ -5,13 +5,12 @@ import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
 import org.mintcode.errabbit.model.Rabbit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.log4j.spi.LoggingEvent;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 import org.mintcode.errabbit.core.rabbit.name.RabbitNameCache;
-import org.mintcode.errabbit.core.report.dao.LogLevelDailyStatisticsRepository;
-import org.mintcode.errabbit.core.report.dao.ReportRepository;
+import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
+import org.mintcode.errabbit.core.log.dao.LogRepository;
 import org.mintcode.errabbit.model.ErrLoggingEvent;
-import org.mintcode.errabbit.model.Report;
+import org.mintcode.errabbit.model.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
@@ -32,7 +31,7 @@ public class ReportMessageListener implements MessageListener {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private ReportRepository reportRepository;
+    private LogRepository logRepository;
 
     @Autowired
     private RabbitRepository rabbitRepository;
@@ -87,17 +86,17 @@ public class ReportMessageListener implements MessageListener {
                 return;
             }
 
-            Report report = new Report();
-            report.setRabbitId(rabbitID);
-            report.setLoggingEvent(errLoggingEvent);
-            report.setCollectedDate(new Date());
-            logger.trace("Received new report " + report);
+            Log log = new Log();
+            log.setRabbitId(rabbitID);
+            log.setLoggingEvent(errLoggingEvent);
+            log.setCollectedDate(new Date());
+            logger.trace("Received new log " + log);
 
             // Add to dao
-            reportRepository.save(report);
+            logRepository.save(log);
 
             // Add to statistic dao
-            logLevelDailyStatisticsRepository.insertDailyStatistic(report);
+            logLevelDailyStatisticsRepository.insertDailyStatistic(log);
 
             // Mark unread
             if (rabbit.getRead()){
@@ -106,7 +105,7 @@ public class ReportMessageListener implements MessageListener {
             }
 
             // Forward to console
-            webSocketMessagingService.sendReportToConsole(report);
+            webSocketMessagingService.sendReportToConsole(log);
 
         } catch (Exception e) {
             e.printStackTrace();

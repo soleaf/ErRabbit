@@ -1,10 +1,10 @@
-package org.mintcode.errabbit.core.report.dao;
+package org.mintcode.errabbit.core.log.dao;
 
 import com.mongodb.WriteResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
-import org.mintcode.errabbit.model.Report;
+import org.mintcode.errabbit.model.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -28,14 +28,14 @@ public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStati
     @Autowired
     private MongoOperations mongoOperations;
 
-    public void insertDailyStatistic(Report report) {
+    public void insertDailyStatistic(Log log) {
 
         try {
 
 
             //COLLECTION_PREFIX + ".statistic"
         /*
-            report.statstic
+            log.statstic
                 {rabbit : 'rabbitID'
                 ,year : year
                 ,month : month
@@ -47,7 +47,7 @@ public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStati
 
             // Extracting collectedDate
             // todo: Consider timezone of client
-            Date date = new Date(report.getLoggingEvent().getTimeStamp());
+            Date date = new Date(log.getLoggingEvent().getTimeStamp());
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
             Integer year = cal.get(Calendar.YEAR);
@@ -59,7 +59,7 @@ public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStati
 
             // Upsert + $inc
             Query query = new Query();
-            query.addCriteria(Criteria.where("rabbitId").is(report.getRabbitId())
+            query.addCriteria(Criteria.where("rabbitId").is(log.getRabbitId())
                             .andOperator(
                                     Criteria.where("dateInt").is(dateInt),
                                     Criteria.where("year").is(year),
@@ -68,7 +68,7 @@ public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStati
                             )
             );
 
-            Update update = new Update().inc("level_" + report.getLoggingEvent().getLevel(), 1);
+            Update update = new Update().inc("level_" + log.getLoggingEvent().getLevel(), 1);
             mongoOperations.upsert(query, update, LogLevelDailyStatistics.class);
 
         } catch (Exception e) {

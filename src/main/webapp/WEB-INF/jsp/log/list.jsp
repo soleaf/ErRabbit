@@ -6,7 +6,7 @@
     <jsp:include page="../common/header_include.jsp"/>
     <script src="/js/log.js"></script>
 </head>
-<body class="report">
+<body class="log">
 <jsp:include page="../common/nav.jsp">
     <jsp:param name="rabbit" value="active"/>
 </jsp:include>
@@ -56,21 +56,21 @@
                 </c:choose>
                 <div class="clear"></div>
                 <c:if test="${not empty yearList}">
-                    <ol id="report-calendar"></ol>
+                    <ol id="log-calendar"></ol>
                 </c:if>
             </div>
         </div>
-        <div class="report-area" id="report-area" data-rabbitId="${rabbit.id}">
+        <div class="log-area" id="log-area" data-rabbitId="${rabbit.id}">
 
-            <div class="report-timeLine">
-                <!-- Report Time Line Area-->
+            <div class="log-timeLine">
+                <!-- Log Time Line Area-->
             </div>
-            <div class="report-list-box">
-                <%--<div class="report-head" id="report-head"></div>--%>
-                <ul class="report-list" id="report-list">
-                <!--  Report List Area -->
+            <div class="log-list-box">
+                <%--<div class="log-head" id="log-head"></div>--%>
+                <ul class="log-list" id="log-list">
+                <!--  Log List Area -->
                 </ul>
-                <button id="report-feed" class="btn btn-default btn-xs" type="button" data-page="0">More Feed</button>
+                <button id="log-feed" class="btn btn-default btn-xs" type="button" data-page="0">More Feed</button>
             </div>
         </div>
     </c:if>

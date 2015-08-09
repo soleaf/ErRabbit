@@ -38,7 +38,7 @@ public class CoreService {
 
     /**
      * Sync Rabbit Names to name dao
-     * This Sync need to Report listener check a report's rabbit name is valid.
+     * This Sync need to Log listener check a report's rabbit name is valid.
      */
     public void syncRabbitNameCache(){
         Map<String,Rabbit> rabbits = new HashMap<>();

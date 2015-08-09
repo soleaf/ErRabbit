@@ -1,10 +1,9 @@
-package org.mintcode.errabbit.core.report.dao;
+package org.mintcode.errabbit.core.log.dao;
 
 import com.mongodb.WriteResult;
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
-import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 import org.mintcode.errabbit.model.LogLevelHourStatistics;
-import org.mintcode.errabbit.model.Report;
+import org.mintcode.errabbit.model.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -17,7 +16,7 @@ import java.util.*;
  * Created by soleaf on 2015. 2. 19..
  */
 
-public class ReportRepositoryImpl implements ReportRepositoryCustom {
+public class LogRepositoryImpl implements LogRepositoryCustom {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -32,18 +31,18 @@ public class ReportRepositoryImpl implements ReportRepositoryCustom {
                                 Criteria.where("loggingEventDateInt").lte(end)
                         )
         );
-        return mongoOperations.remove(query, Report.class);
+        return mongoOperations.remove(query, Log.class);
     }
 
     @Override
-    public void insertHourStatistic(Report report) {
+    public void insertHourStatistic(Log log) {
 
         try {
 
 
             //COLLECTION_PREFIX + ".statistic"
         /*
-            report.statstic
+            log.statstic
                 {rabbit : 'rabbitID'
                 ,year : year
                 ,month : month
@@ -56,7 +55,7 @@ public class ReportRepositoryImpl implements ReportRepositoryCustom {
 
             // Extracting collectedDate
             // todo: Consider timezone of client
-            Date date = new Date(report.getLoggingEvent().getTimeStamp());
+            Date date = new Date(log.getLoggingEvent().getTimeStamp());
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
             Integer year = cal.get(Calendar.YEAR);
@@ -66,7 +65,7 @@ public class ReportRepositoryImpl implements ReportRepositoryCustom {
 
             // Upsert + $inc
             Query query = new Query();
-            query.addCriteria(Criteria.where("rabbitId").is(report.getRabbitId())
+            query.addCriteria(Criteria.where("rabbitId").is(log.getRabbitId())
                     .andOperator(Criteria.where("year").is(year),
                             Criteria.where("month").is(month),
                             Criteria.where("day").is(day),
@@ -74,7 +73,7 @@ public class ReportRepositoryImpl implements ReportRepositoryCustom {
                     )
             );
 
-            Update update = new Update().inc("level_" + report.getLoggingEvent().getLevel(), 1);
+            Update update = new Update().inc("level_" + log.getLoggingEvent().getLevel(), 1);
             mongoOperations.upsert(query, update, LogLevelHourStatistics.class);
 
         } catch (Exception e) {

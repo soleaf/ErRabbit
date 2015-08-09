@@ -13,7 +13,7 @@ import java.io.Serializable;
  * Created by soleaf on 2015. 2. 2..
  */
 
-@Document(collection = "reports.statistic.hour")
+@Document(collection = "logs.statistic.hour")
 @CompoundIndexes({@CompoundIndex(name = "by_id_date",def = "{rabbitId:1,year:1,month:1,day:1,hour:1}")})
 public class LogLevelHourStatistics implements Serializable {
 

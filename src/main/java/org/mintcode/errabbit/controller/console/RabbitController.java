@@ -2,8 +2,7 @@ package org.mintcode.errabbit.controller.console;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.mintcode.errabbit.core.CoreService;
-import org.mintcode.errabbit.core.report.dao.LogLevelDailyStatisticsRepository;
+import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 import org.mintcode.errabbit.model.Rabbit;
 import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;

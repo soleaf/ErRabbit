@@ -16,7 +16,7 @@
 //
 //
 ////    @Autowired
-////    private ReportRepository repository;
+////    private LogRepository repository;
 //
 //    @Test
 //    public void testGetStockCollectionNames() throws Exception {

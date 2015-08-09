@@ -1,8 +1,8 @@
-package org.mintcode.errabbit.core.report.dao;
+package org.mintcode.errabbit.core.log.dao;
 
 import com.mongodb.WriteResult;
+import org.mintcode.errabbit.model.Log;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
-import org.mintcode.errabbit.model.Report;
 
 /**
  * Created by soleaf on 4/6/15.
@@ -10,10 +10,10 @@ import org.mintcode.errabbit.model.Report;
 public interface LogLevelDailyStatisticsRepositoryCustom {
 
     /**
-     * Add Daily Statistic from report
-     * @param report
+     * Add Daily Statistic from log
+     * @param log
      */
-    public void insertDailyStatistic(Report report);
+    public void insertDailyStatistic(Log log);
 
     /**
      * Find First Statistic

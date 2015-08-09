@@ -6,13 +6,11 @@ import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;
 import org.mintcode.errabbit.core.rabbit.name.RabbitNameCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
-import org.mintcode.errabbit.core.report.dao.LogLevelDailyStatisticsRepository;
-import org.mintcode.errabbit.core.report.dao.ReportRepository;
-import org.mintcode.errabbit.model.ErStackTraceElement;
+import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
+import org.mintcode.errabbit.core.log.dao.LogRepository;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 import org.mintcode.errabbit.model.Rabbit;
-import org.mintcode.errabbit.model.Report;
+import org.mintcode.errabbit.model.Log;
 import org.mintcode.errabbit.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,7 +35,7 @@ public class LogController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private ReportRepository reportRepository;
+    private LogRepository logRepository;
 
     @Autowired
     private RabbitNameCache rabbitNameCache;
@@ -167,7 +165,7 @@ public class LogController {
         }
     }
 
-    // AJAX Report List DATA API for report
+    // AJAX Log List DATA API for report
     @RequestMapping(value = "list_data")
     public ModelAndView reportListData(Model model,
                              @RequestParam(value = "id", required = true) String id,
@@ -203,8 +201,8 @@ public class LogController {
             Integer loggingEventDateInt = Integer.parseInt(year + month + day);
             Sort sort = new Sort(Sort.Direction.DESC, "_id");
 
-            Page<Report> reportPage
-                    = reportRepository.findByRabbitIdAndLoggingEventDateInt(id
+            Page<Log> reportPage
+                    = logRepository.findByRabbitIdAndLoggingEventDateInt(id
                     , loggingEventDateInt
                     , new PageRequest(page, size, sort));
 
@@ -225,17 +223,17 @@ public class LogController {
 
     }
 
-    // AJAX Report PopOver DATA API for report
+    // AJAX Log PopOver DATA API for report
     @RequestMapping(value = "popover_data")
     public ModelAndView reportListData(Model model,
                                        @RequestParam(value = "id", required = true) String id
 
     ) {
         try{
-            Report report = reportRepository.findOne(new ObjectId(id));
-            Rabbit rabbit = rabbitNameCache.getRabbit(report.getRabbitId());
-            model.addAttribute("graphs", reportPresentation.makeTraceGraph(rabbit.getBasePackage(), report));
-            model.addAttribute("report", report);
+            Log log = logRepository.findOne(new ObjectId(id));
+            Rabbit rabbit = rabbitNameCache.getRabbit(log.getRabbitId());
+            model.addAttribute("graphs", reportPresentation.makeTraceGraph(rabbit.getBasePackage(), log));
+            model.addAttribute("report", log);
             return new ModelAndView("/log/popover_data");
         }
         catch (Exception e){

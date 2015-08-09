@@ -1,6 +1,6 @@
 package org.mintcode.errabbit.core.console;
 
-import org.mintcode.errabbit.model.Report;
+import org.mintcode.errabbit.model.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +19,12 @@ public class WebSocketMessagingService {
     private SimpMessagingTemplate template;
 
     /**
-     * Forward report to console page
-     * @param report
+     * Forward log to console page
+     * @param log
      */
-    public void sendReportToConsole(Report report){
+    public void sendReportToConsole(Log log){
         try{
-            template.convertAndSend("/topic/console", report.toHTML(true));
+            template.convertAndSend("/topic/console", log.toHTML(true));
         }
         catch (Exception e){
             logger.error(e.getMessage(),e);

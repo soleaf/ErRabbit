@@ -8,7 +8,7 @@
 </c:if>
 <c:if test="${not empty reports.content}">
     <c:forEach var="item" items="${reports.content}" varStatus="status">
-        <li class="report" data-id="${item.id}" data-e="<c:if test="${not empty item.loggingEvent.throwableInfo}">true</c:if>"  data-poload="/log/popover_data?id=${item.id}">
+        <li class="log" data-id="${item.id}" data-e="<c:if test="${not empty item.loggingEvent.throwableInfo}">true</c:if>"  data-poload="/log/popover_data?id=${item.id}">
             <span class="time">${format.format(item.loggingEvent.timeStampDate)}</span>
             <span class="level ${item.loggingEvent.level} <c:if test="${not empty item.loggingEvent.throwableInfo}"> has_exception</c:if>">${item.loggingEvent.level}</span>
             <div class="contgroup">

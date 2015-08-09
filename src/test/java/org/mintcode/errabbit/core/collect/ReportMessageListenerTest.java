@@ -6,9 +6,9 @@
 //import org.apache.log4j.spi.LoggingEvent;
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
-//import org.mintcode.errabbit.core.report.dao.ReportRepository;
+//import LogRepository;
 //import org.mintcode.errabbit.model.ErrLoggingEvent;
-//import org.mintcode.errabbit.model.Report;
+//import org.mintcode.errabbit.model.Log;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.data.domain.Page;
 //import org.springframework.data.domain.PageRequest;
@@ -29,7 +29,7 @@
 //    private final String rabbitId = "test_rabbit";
 //
 //    @Autowired
-//    ReportRepository reportRepository;
+//    LogRepository reportRepository;
 //
 //    @Test
 //    public void testOnMessage() throws Exception {
@@ -64,22 +64,22 @@
 //        // Waiting for Listener
 //        Thread.sleep(2000);
 //
-//        // Check Report was inserted repository.
+//        // Check Log was inserted repository.
 //        assertNotNull(reportRepository);
 //        PageRequest pageRequest = new PageRequest(0,1, Sort.Direction.DESC, "_id");
-//        Page<Report> reportPage = reportRepository.findByRabbitId(rabbitId, pageRequest);
+//        Page<Log> reportPage = reportRepository.findByRabbitId(rabbitId, pageRequest);
 //        assertNotNull(reportPage);
 //        assertFalse(reportPage.getContent().isEmpty());
 //
 //    }
 //
-//    public Report makeMessage(){
+//    public Log makeMessage(){
 //
 //        Logger logger = Logger.getLogger(getClass());
 //        LoggingEvent le = new LoggingEvent(
 //                "org.mintcode.errabbit.test.object",
 //                logger, Level.DEBUG, null, new IOException("It's Test Exception"));
-//        return new Report("test_rabbit", ErrLoggingEvent.fromLoggingEvent(le));
+//        return new Log("test_rabbit", ErrLoggingEvent.fromLoggingEvent(le));
 //
 //    }
 //

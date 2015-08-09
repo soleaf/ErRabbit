@@ -5,7 +5,7 @@
 //import org.apache.log4j.Logger;
 //import org.apache.log4j.spi.LoggingEvent;
 //import org.mintcode.errabbit.model.ErrLoggingEvent;
-//import org.mintcode.errabbit.model.Report;
+//import org.mintcode.errabbit.model.Log;
 //
 //import javax.jms.*;
 //import java.io.IOException;
@@ -53,13 +53,13 @@
 //    }
 //
 //
-//    public static Report makeMessage() {
+//    public static Log makeMessage() {
 //
 //        Logger logger = Logger.getLogger(DummyCollect.class);
 //        LoggingEvent le = new LoggingEvent(
 //                "org.mintcode.errabbit.test.object",
 //                logger, Level.DEBUG, null, new IOException("It's Test Exception"));
-//        return new Report("test_rabbit", ErrLoggingEvent.fromLoggingEvent(le));
+//        return new Log("test_rabbit", ErrLoggingEvent.fromLoggingEvent(le));
 //
 //    }
 //}

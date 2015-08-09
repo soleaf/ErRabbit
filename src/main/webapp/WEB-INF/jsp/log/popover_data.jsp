@@ -8,14 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:if test="${not empty report.loggingEvent.throwableInfo}">
-    <div class="report-detail-popup" data-id="${report.id}">
+<c:if test="${not empty log.loggingEvent.throwableInfo}">
+    <div class="log-detail-popup" data-id="${log.id}">
         <div class="ThrowableInfo">
             <div class="graph">
-                <div class="threadName">threadName: ${report.loggingEvent.threadName}</div>
+                <div class="threadName">threadName: ${log.loggingEvent.threadName}</div>
                 <ul>
                     <li>
-                        <div class="exception"> <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> ${report.loggingEvent.throwableInfo.rep[0]}
+                        <div class="exception"> <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> ${log.loggingEvent.throwableInfo.rep[0]}
                         </div>
                     </li>
                     <c:forEach var="stack" items="${graphs}" varStatus="status">
@@ -43,7 +43,7 @@
             </div>
             <div class="text">
                 <ul>
-                    <c:forEach var="rep" items="${report.loggingEvent.throwableInfo.rep}" varStatus="status">
+                    <c:forEach var="rep" items="${log.loggingEvent.throwableInfo.rep}" varStatus="status">
                         <li>${rep}</li>
                     </c:forEach>
                 </ul>
