@@ -112,7 +112,6 @@ public class AnalysisController {
             LogAggregationResults result = analysis.aggregation(req);
             if (result != null){
                 model.addAttribute("result", result);
-                logger.trace("result : " + result);
             }
 
             // Get Rabbit List
@@ -122,7 +121,7 @@ public class AnalysisController {
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             // todo: make ErrorPage
-            model.addAttribute("e", e);ㄴ
+            model.addAttribute("e", e);
             return new ModelAndView("/anal/result");
         }
     }

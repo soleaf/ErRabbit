@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:if test="${not empty req and empty result.result and empty e}">
+<c:if test="${not empty req and result.isEmpty() and empty e}">
     <!-- Not result -->
     <div class="panel panel-warning alert">
         <div class="panel-heading">
@@ -25,7 +25,7 @@
     </div>
 </c:if>
 
-<c:if test="${not empty result.result}">
+<c:if test="${not result.isEmpty()}">
     <!-- result -->
     <h4>Result</h4>
     <c:set var="groups" value="${req.columns}"/>
@@ -36,7 +36,7 @@
         </c:forEach>
         <th>count</th>
         </thead>
-        <c:forEach var="row" items="${result.result}">
+        <c:forEach var="row" items="${result.get('table').result}">
             <tr>
                 <c:choose>
                     <c:when test="${fn:length(groups) == 1}">

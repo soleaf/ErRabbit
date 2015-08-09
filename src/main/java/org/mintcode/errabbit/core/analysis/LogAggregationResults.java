@@ -24,4 +24,8 @@ public class LogAggregationResults {
     public LogAggregationResultSet get(String type){
         return results.get(type);
     }
+
+    public boolean isEmpty(){
+        return results.isEmpty();
+    }
 }
