@@ -176,6 +176,23 @@ header .logout{
     font-size:12px;
 }
 
+.main-form{
+    margin-bottom: 10px;
+
+}
+
+.main-form>.control-label{
+    color:#7BCCD4;
+    font-weight: bold;
+}
+.sub-form {
+    padding-left:20px;
+}
+
+.sub-form .sub-form-item .control-label{
+    color: #5d5d5d;
+}
+
 .login-jumbotron{
     background: url("/img/login_top.png") no-repeat bottom right;
     background-color: #F4F4F4;
@@ -925,6 +942,15 @@ header .logout{
     margin-right:20px;
 }
 
+.report .page .time INPUT{
+    width:50px;
+}
+
+.report .page .time .input-group-addon{
+    width: auto;
+}
+
+
 .report .rabbit-selection li{
     padding-left:40px;
 }
@@ -932,4 +958,8 @@ header .logout{
 .report .rabbit-selection li:HOVER{
     background-color: #7BCCD4;
     color:#FFF;
+}
+
+.report .rabbit-selection .li .checkbox>INPUT{
+    padding-left:10px;
 }
