@@ -50,8 +50,8 @@ public class AggregationAnalysis {
         List<AggregationOperation> op = new ArrayList<>();
 
         // Filter : RabbitId
-        if (req.getFilterRabbit() != null){
-            op.add(new MatchOperation(Criteria.where("rabbit").is(req.getFilterRabbit())));
+        if (req.getFilterRabbits() != null && !req.getFilterRabbits().isEmpty()){
+            op.add(new MatchOperation(Criteria.where("rabbit").in(req.getFilterRabbits())));
         }
 
         // Filter : Levels

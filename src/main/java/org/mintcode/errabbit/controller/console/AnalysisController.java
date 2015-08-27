@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by soleaf on 6/27/15.
@@ -74,7 +76,9 @@ public class AnalysisController {
             model.addAttribute("req", req);
 
             if (StringUtils.hasLength(rabbit)){
-                req.setFilterRabbit(rabbit);
+                Set<String> filterRabbits = new HashSet<>();
+                filterRabbits.add(rabbit);
+                req.setFilterRabbits(filterRabbits);
             }
 
             if (trace)

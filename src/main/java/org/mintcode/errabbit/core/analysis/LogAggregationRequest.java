@@ -11,7 +11,7 @@ import java.util.Set;
 public class LogAggregationRequest {
 
     // Filter (null = All)
-    private String filterRabbit;
+    private Set<String> filterRabbits;
     private Set<String> filterLevels = new HashSet<>();
     private Integer filterBeginDate; // ex 20150601
     private Integer filterEndDate; // ex 20150601
@@ -19,12 +19,12 @@ public class LogAggregationRequest {
     // Group By
     public List<String> group;
 
-    public String getFilterRabbit() {
-        return filterRabbit;
+    public Set<String> getFilterRabbits() {
+        return filterRabbits;
     }
 
-    public void setFilterRabbit(String filterRabbit) {
-        this.filterRabbit = filterRabbit;
+    public void setFilterRabbits(Set<String> filterRabbits) {
+        this.filterRabbits = filterRabbits;
     }
 
     public Set<String> getFilterLevels() {
@@ -81,7 +81,7 @@ public class LogAggregationRequest {
     @Override
     public String toString() {
         return "LogAggregationRequest{" +
-                "filterRabbit='" + filterRabbit + '\'' +
+                "filterRabbits='" + filterRabbits + '\'' +
                 ", filterLevels=" + filterLevels +
                 ", filterBeginDate=" + filterBeginDate +
                 ", filterEndDate=" + filterEndDate +
