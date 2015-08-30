@@ -11,6 +11,8 @@ public interface AnalysisRequest {
 
     public List<String> getColumns();
 
+    public List<String> getGroup();
+
     public String getTargetCollection();
 
     public List<AggregationOperation> makeAggregationOp();

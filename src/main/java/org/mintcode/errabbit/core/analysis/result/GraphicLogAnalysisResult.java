@@ -1,6 +1,7 @@
 package org.mintcode.errabbit.core.analysis.result;
 
 import org.mintcode.errabbit.core.analysis.FieldConverter;
+import org.mintcode.errabbit.core.analysis.request.AnalysisRequest;
 import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,12 +19,12 @@ public class GraphicLogAnalysisResult implements AnalysisResult {
 
     GraphicLogAnalysisResultItem root = new GraphicLogAnalysisResultItem("root");
 
-    public GraphicLogAnalysisResult(LogAnalysisRequest req, List<Map<String, Object>> list){
+    public GraphicLogAnalysisResult(AnalysisRequest req, List<Map<String, Object>> list){
         for (Map<String,Object> row : list){
             GraphicLogAnalysisResultItem superItem = null;
-            for (String group : req.group){
-                String field = "" + row.get(FieldConverter.converToFieldName(group));
-                logger.trace("group" + group + " key + "  + FieldConverter.converToFieldName(group) +  " row " + row.keySet());
+            for (String group : req.getGroup()){
+                String field = "" + row.get(FieldConverter.toFieldName(group));
+                logger.trace("group" + group + " key + "  + FieldConverter.toFieldName(group) +  " row " + row.keySet());
                 GraphicLogAnalysisResultItem target = findItem(superItem, field);
                 superItem = target;
             }

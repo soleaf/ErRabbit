@@ -1,6 +1,7 @@
 package org.mintcode.errabbit.core.report;
 
 import org.mintcode.errabbit.core.analysis.result.AnalysisResult;
+import org.mintcode.errabbit.core.analysis.result.AnalysisResultSet;
 
 import java.util.Date;
 
@@ -10,6 +11,30 @@ import java.util.Date;
 public class Report {
 
     private Date sendTime;
-    private AnalysisResult resultSet;
+    AnalysisResultSet logReport;
+    AnalysisResultSet logLevelReport;
 
+    public Date getSendTime() {
+        return sendTime;
+    }
+
+    public void setSendTime(Date sendTime) {
+        this.sendTime = sendTime;
+    }
+
+    public AnalysisResultSet getLogReport() {
+        return logReport;
+    }
+
+    public void setLogReport(AnalysisResultSet logReport) {
+        this.logReport = logReport;
+    }
+
+    public AnalysisResultSet getLogLevelReport() {
+        return logLevelReport;
+    }
+
+    public void setLogLevelReport(AnalysisResultSet logLevelReport) {
+        this.logLevelReport = logLevelReport;
+    }
 }

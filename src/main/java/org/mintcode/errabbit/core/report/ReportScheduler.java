@@ -22,6 +22,9 @@ public class ReportScheduler {
     @Autowired
     ReportDescriptionRepository repository;
 
+    @Autowired
+    ReportGenerator generator;
+
     @Scheduled(cron = "0 * * * * * *")
     public void check(){
         try{
@@ -41,7 +44,8 @@ public class ReportScheduler {
             cal.setTime(new Date());
             Integer nowHour = cal.get(Calendar.HOUR_OF_DAY);
             if (nowHour == description.getTime().getHour()){
-                // todo : Generate report
+                cal.add(Calendar.DAY_OF_MONTH, -1);
+                generator.generate(description, cal.getTime());
             }
         }
         catch (Exception e){

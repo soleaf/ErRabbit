@@ -1,5 +1,6 @@
 package org.mintcode.errabbit.core.analysis.result;
 
+import org.mintcode.errabbit.core.analysis.request.AnalysisRequest;
 import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
 
 import java.util.HashMap;
@@ -14,7 +15,7 @@ public class AnalysisResultSet {
     public static final String GRAPHIC = "graphic";
     Map<String,AnalysisResult> results = new HashMap<>();
 
-    public AnalysisResultSet(LogAnalysisRequest req, List<Map<String, Object>> result){
+    public AnalysisResultSet(AnalysisRequest req, List<Map<String, Object>> result){
         results.put(TABLE, new TableLogAnalysisResult(result));
         results.put(GRAPHIC, new GraphicLogAnalysisResult(req, result));
     }

@@ -1,5 +1,6 @@
 package org.mintcode.errabbit.core.analysis;
 
+import org.mintcode.errabbit.core.analysis.request.AnalysisRequest;
 import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
 import org.mintcode.errabbit.core.analysis.result.AnalysisResultSet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class AggregationAnalyzer {
 
     private final HashMap<String,Object> mapType = new HashMap<String,Object>();
 
-    public AnalysisResultSet aggregation(LogAnalysisRequest req) {
+    public AnalysisResultSet aggregation(AnalysisRequest req) {
         AggregationResults result = mongoTemplate.aggregate(Aggregation.newAggregation(req.makeAggregationOp()),
                 req.getTargetCollection(), mapType.getClass());
         return new AnalysisResultSet(req, result.getMappedResults());

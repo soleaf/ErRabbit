@@ -18,7 +18,7 @@ public class FieldConverter {
         dict.put("loggingEvent.categoryName", "categoryName");
     }
 
-    public static String converToFieldName(String collectionField){
+    public static String toFieldName(String collectionField){
         return dict.get(collectionField);
     }
 }

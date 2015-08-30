@@ -2,7 +2,6 @@ package org.mintcode.errabbit.controller.console;
 
 import org.apache.logging.log4j.Level;
 import org.mintcode.errabbit.core.analysis.AggregationAnalyzer;
-import org.mintcode.errabbit.core.analysis.LogAggregationAnalysis;
 import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
 import org.mintcode.errabbit.core.analysis.result.AnalysisResultSet;
 import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;
