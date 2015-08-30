@@ -30,9 +30,7 @@ public class CoreService {
 
     @PostConstruct
     private void startup(){
-
         logger.debug("ErRabbit Service initiating...");
-
         syncRabbitNameCache();
     }
 
