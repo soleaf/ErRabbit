@@ -1,6 +1,6 @@
 package org.mintcode.errabbit.core.report;
 
-import org.mintcode.errabbit.core.analysis.result.LogAggregationResultSet;
+import org.mintcode.errabbit.core.analysis.result.AnalysisResult;
 
 import java.util.Date;
 
@@ -10,6 +10,6 @@ import java.util.Date;
 public class Report {
 
     private Date sendTime;
-    private LogAggregationResultSet resultSet;
+    private AnalysisResult resultSet;
 
 }

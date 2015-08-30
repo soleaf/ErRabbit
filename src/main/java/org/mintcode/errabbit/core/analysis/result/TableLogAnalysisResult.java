@@ -6,15 +6,15 @@ import java.util.Map;
 /**
  * Created by soleaf on 7/12/15.
  */
-public class TableLogAggregationResultSet implements LogAggregationResultSet {
+public class TableLogAnalysisResult implements AnalysisResult {
 
     List<Map<String,Object>> list;
 
-    public TableLogAggregationResultSet(){
+    public TableLogAnalysisResult(){
 
     }
 
-    public TableLogAggregationResultSet(List<Map<String, Object>> list){
+    public TableLogAnalysisResult(List<Map<String, Object>> list){
         this.list = list;
     }
 

@@ -1,4 +1,10 @@
-package org.mintcode.errabbit.core.analysis;
+package org.mintcode.errabbit.core.analysis.request;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.aggregation.*;
+import org.springframework.data.mongodb.core.query.Criteria;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,7 +14,9 @@ import java.util.Set;
 /**
  * Created by soleaf on 6/28/15.
  */
-public class LogAggregationRequest {
+public class LogAnalysisRequest implements AnalysisRequest {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // Filter (null = All)
     private Set<String> filterRabbits;
@@ -78,9 +86,59 @@ public class LogAggregationRequest {
         return columns;
     }
 
+    public String getTargetCollection(){
+        return "report";
+    }
+
+    /**
+     * Make MongoAggregationOperations from LogAnalysisRequest
+     * @return
+     */
+    public  List<AggregationOperation> makeAggregationOp(){
+
+        List<AggregationOperation> op = new ArrayList<>();
+
+        // Filter : RabbitId
+        if (getFilterRabbits() != null && !getFilterRabbits().isEmpty()){
+            op.add(new MatchOperation(Criteria.where("rabbit").in(getFilterRabbits())));
+        }
+
+        // Filter : Levels
+        if (getFilterLevels().size() > 0){
+            logger.trace("levels " + getFilterLevels());
+            op.add(new MatchOperation(Criteria.where("loggingEvent.level").in(getFilterLevels())));
+        }
+
+        // Filter : Date
+        Criteria dateCriteria = null;
+        if (getFilterBeginDate() != null){
+            dateCriteria = Criteria.where("loggingEventDateInt").gte(getFilterBeginDate());
+        }
+        if (getFilterEndDate() != null){
+            if (dateCriteria == null){
+                dateCriteria = Criteria.where("loggingEventDateInt").lte(getFilterEndDate());
+            }
+            else{
+                dateCriteria = dateCriteria.andOperator(Criteria.where("loggingEventDateInt").lte(getFilterEndDate()));
+            }
+        }
+        if (dateCriteria != null){
+            op.add(new MatchOperation(dateCriteria));
+        }
+
+        // Group by
+        if (group != null){
+            op.add(new GroupOperation(Fields.fields((String[]) group.toArray())).count().as("count"));
+            op.add(new SortOperation(new Sort(Sort.Direction.ASC, (String[]) group.toArray())));
+        }
+
+        return op;
+    }
+
+
     @Override
     public String toString() {
-        return "LogAggregationRequest{" +
+        return "LogAnalysisRequest{" +
                 "filterRabbits='" + filterRabbits + '\'' +
                 ", filterLevels=" + filterLevels +
                 ", filterBeginDate=" + filterBeginDate +

@@ -9,17 +9,17 @@ import java.util.List;
 /**
  * Created by soleaf on 7/5/15.
  */
-public class GraphicLogAggregationResultItem {
+public class GraphicLogAnalysisResultItem {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     String field;
     Integer count = 0;
     double percent = 0.0;
-    GraphicLogAggregationResultItem superItem;
-    List<GraphicLogAggregationResultItem> subItems = new ArrayList<>();
+    GraphicLogAnalysisResultItem superItem;
+    List<GraphicLogAnalysisResultItem> subItems = new ArrayList<>();
 
-    public GraphicLogAggregationResultItem(String field) {
+    public GraphicLogAnalysisResultItem(String field) {
         this.field = field;
     }
 
@@ -35,20 +35,20 @@ public class GraphicLogAggregationResultItem {
         this.percent = percent;
     }
 
-    public List<GraphicLogAggregationResultItem> getSubItems() {
+    public List<GraphicLogAnalysisResultItem> getSubItems() {
         return subItems;
     }
 
-    public GraphicLogAggregationResultItem getSuperItem() {
+    public GraphicLogAnalysisResultItem getSuperItem() {
         return superItem;
     }
 
-    public void addSub(GraphicLogAggregationResultItem subItem) {
+    public void addSub(GraphicLogAnalysisResultItem subItem) {
         subItems.add(subItem);
         subItem.setSuperItem(this);
     }
 
-    public void setSuperItem(GraphicLogAggregationResultItem superItem) {
+    public void setSuperItem(GraphicLogAnalysisResultItem superItem) {
         this.superItem = superItem;
     }
 
@@ -77,7 +77,7 @@ public class GraphicLogAggregationResultItem {
             return;
         }
         if (!subItems.isEmpty()) {
-            for (GraphicLogAggregationResultItem item : subItems) {
+            for (GraphicLogAnalysisResultItem item : subItems) {
                 item.setPercent((item.getCount() * 100.0f) / count);
                 item.calcPercents();
             }
@@ -87,7 +87,7 @@ public class GraphicLogAggregationResultItem {
     public String debug(String prefix) {
         String thisDesc = "\n" + prefix + "- " + field + " (" + count + ", %" + percent + ")";
         if (!subItems.isEmpty()) {
-            for (GraphicLogAggregationResultItem item : subItems) {
+            for (GraphicLogAnalysisResultItem item : subItems) {
                 thisDesc += item.debug(prefix + "  ");
             }
         }
@@ -98,11 +98,11 @@ public class GraphicLogAggregationResultItem {
     public String toString() {
         StringBuffer sb = new StringBuffer();
         if (!subItems.isEmpty()) {
-            for (GraphicLogAggregationResultItem item : subItems) {
+            for (GraphicLogAnalysisResultItem item : subItems) {
                 sb.append(item.debug("  "));
             }
         }
-        return "GraphicLogAggregationResultItem : "
+        return "GraphicLogAnalysisResultItem : "
                 + field + " (" + count + ", %" + percent + ")"
                 + " >"
                 + sb.toString();

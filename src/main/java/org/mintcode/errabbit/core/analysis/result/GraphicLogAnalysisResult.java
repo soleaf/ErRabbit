@@ -1,7 +1,7 @@
 package org.mintcode.errabbit.core.analysis.result;
 
 import org.mintcode.errabbit.core.analysis.FieldConverter;
-import org.mintcode.errabbit.core.analysis.LogAggregationRequest;
+import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,19 +12,19 @@ import java.util.Map;
  * Graphical analytic result set
  * Created by soleaf on 15. 8. 1..
  */
-public class GraphicLogAggregationResultSet implements LogAggregationResultSet {
+public class GraphicLogAnalysisResult implements AnalysisResult {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    GraphicLogAggregationResultItem root = new GraphicLogAggregationResultItem("root");
+    GraphicLogAnalysisResultItem root = new GraphicLogAnalysisResultItem("root");
 
-    public GraphicLogAggregationResultSet(LogAggregationRequest req, List<Map<String,Object>> list){
+    public GraphicLogAnalysisResult(LogAnalysisRequest req, List<Map<String, Object>> list){
         for (Map<String,Object> row : list){
-            GraphicLogAggregationResultItem superItem = null;
+            GraphicLogAnalysisResultItem superItem = null;
             for (String group : req.group){
                 String field = "" + row.get(FieldConverter.converToFieldName(group));
                 logger.trace("group" + group + " key + "  + FieldConverter.converToFieldName(group) +  " row " + row.keySet());
-                GraphicLogAggregationResultItem target = findItem(superItem, field);
+                GraphicLogAnalysisResultItem target = findItem(superItem, field);
                 superItem = target;
             }
             superItem.addCount((Integer) row.get("count"));
@@ -33,9 +33,9 @@ public class GraphicLogAggregationResultSet implements LogAggregationResultSet {
         logger.debug(root.toString());
     }
 
-    protected GraphicLogAggregationResultItem findItem(GraphicLogAggregationResultItem superItem, String field){
+    protected GraphicLogAnalysisResultItem findItem(GraphicLogAnalysisResultItem superItem, String field){
 
-        GraphicLogAggregationResultItem parents;
+        GraphicLogAnalysisResultItem parents;
         if (superItem == null){
             parents = root;
         }
@@ -43,14 +43,14 @@ public class GraphicLogAggregationResultSet implements LogAggregationResultSet {
             parents = superItem;
         }
         if (!parents.subItems.isEmpty()){
-            for (GraphicLogAggregationResultItem item : parents.getSubItems()){
+            for (GraphicLogAnalysisResultItem item : parents.getSubItems()){
                 if (item.getField().equals(field)){
                     return item;
                 }
             }
         }
 
-        GraphicLogAggregationResultItem item = new GraphicLogAggregationResultItem(field);
+        GraphicLogAnalysisResultItem item = new GraphicLogAnalysisResultItem(field);
         parents.addSub(item);
         return item;
     }

@@ -1,10 +1,10 @@
 package org.mintcode.errabbit.controller.console;
 
 import org.apache.logging.log4j.Level;
-import org.mintcode.errabbit.core.analysis.AggregationAnalysis;
-import org.mintcode.errabbit.core.analysis.LogAggregationRequest;
-import org.mintcode.errabbit.core.analysis.LogAggregationResults;
-import org.mintcode.errabbit.core.analysis.result.LogAggregationResultSet;
+import org.mintcode.errabbit.core.analysis.AggregationAnalyzer;
+import org.mintcode.errabbit.core.analysis.LogAggregationAnalysis;
+import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
+import org.mintcode.errabbit.core.analysis.result.AnalysisResultSet;
 import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;
 import org.mintcode.errabbit.model.Rabbit;
 import org.slf4j.Logger;
@@ -36,7 +36,7 @@ public class AnalysisController {
     private RabbitManagingService rabbitManagingService;
 
     @Autowired
-    private AggregationAnalysis analysis;
+    private AggregationAnalyzer analyzer;
 
     // main
     @RequestMapping(value = "main")
@@ -72,7 +72,7 @@ public class AnalysisController {
     {
         try {
 
-            LogAggregationRequest req = new LogAggregationRequest();
+            LogAnalysisRequest req = new LogAnalysisRequest();
             model.addAttribute("req", req);
 
             if (StringUtils.hasLength(rabbit)){
@@ -113,7 +113,7 @@ public class AnalysisController {
             logger.trace("req : " + req);
 
             // Aggregation Query
-            LogAggregationResults result = analysis.aggregation(req);
+            AnalysisResultSet result = analyzer.aggregation(req);
             if (result != null){
                 model.addAttribute("result", result);
             }
