@@ -233,7 +233,7 @@ public class LogController {
             Log log = logRepository.findOne(new ObjectId(id));
             Rabbit rabbit = rabbitNameCache.getRabbit(log.getRabbitId());
             model.addAttribute("graphs", reportPresentation.makeTraceGraph(rabbit.getBasePackage(), log));
-            model.addAttribute("report", log);
+            model.addAttribute("log", log);
             return new ModelAndView("/log/popover_data");
         }
         catch (Exception e){

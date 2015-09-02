@@ -7,12 +7,12 @@ var rabbitId;
 $(document).ready(function(){
 
     // Get information
-    rabbitId = $("#report-area").attr("data-rabbitId");
+    rabbitId = $("#log-area").attr("data-rabbitId");
 
-    initReportFeedButton();
+    initlogFeedButton();
 
-    // init reportModal button event
-    initReportModalButton();
+    // init logModal button event
+    initlogModalButton();
 
     // Init calendarEvent
     initCalendarYear();
@@ -23,14 +23,14 @@ $(document).ready(function(){
         var today = new Date();
         var dd = today.getDate();
         retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val(), dd);
-        retrieveReports(rabbitId, 0, 100, $("#cal_y").val(), $("#cal_m").val(), dd);
+        retrievelogs(rabbitId, 0, 100, $("#cal_y").val(), $("#cal_m").val(), dd);
     }
 
     //initCalendarValueChanged();
 
 });
 
-function initReportModalButton(){
+function initlogModalButton(){
     $("#popover_log_btn_graph").click(function(){
         $("#popover_log_body .graph").show();
         $("#popover_log_body .text").hide();
@@ -47,22 +47,22 @@ function retrieveCalendar(rabbitId, year, month, selectedDay) {
         url: '/log/list_days.err?id=' + rabbitId + '&y=' + year + '&m=' + month +'&s=' + selectedDay,
         success: function (data) {
             if ($($.parseHTML(data)).filter("#login_page").length > 0) {
-                alert("Session is expired");
+                alert("Session has expired");
                 window.location.href = "/login.err";
             }
             else{
-                $("#report-calendar").html("");
-                $("#report-calendar").append(data);
+                $("#log-calendar").html("");
+                $("#log-calendar").append(data);
 
                 if (selectedDay > 0){
                     $("#cal_d").val(selectedDay);
                 }
 
-                $("#report-calendar .day").click(function(){
+                $("#log-calendar .day").click(function(){
                     $("#cal_d").val($(this).attr("data-value"));
-                    $("#report-list").html("");
-                    retrieveReportsFromSelected();
-                    $("#report-calendar .active").removeClass("active");
+                    $("#log-list").html("");
+                    retrievelogsFromSelected();
+                    $("#log-calendar .active").removeClass("active");
                     $(this).addClass("active");
                 });
                 hideLoading();
@@ -102,30 +102,30 @@ function initCalendarMonth(){
 
 function reloadCalendarFromSelected(){
     retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val(), -1);
-    $("#report-list").html("");
+    $("#log-list").html("");
 }
 
-function retrieveReportsFromSelected(){
-    retrieveReportsFromSelectedByPage(0);
+function retrievelogsFromSelected(){
+    retrievelogsFromSelectedByPage(0);
 }
 
-function retrieveReportsFromSelectedByPage(page){
-    retrieveReports(rabbitId, page, 100, $("#cal_y").val(), $("#cal_m").val(), $("#cal_d").val());
+function retrievelogsFromSelectedByPage(page){
+    retrievelogs(rabbitId, page, 100, $("#cal_y").val(), $("#cal_m").val(), $("#cal_d").val());
 }
 
-function initReportFeedButton(){
-    $("#report-feed").click(function(){
-        retrieveReportsFromSelectedByPage($(this).attr("data-page"));
+function initlogFeedButton(){
+    $("#log-feed").click(function(){
+        retrievelogsFromSelectedByPage($(this).attr("data-page"));
     });
 }
 
 /***
- * Get Reports
+ * Get logs
  * @param rabbitId
  * @param page
  * @param size
  */
-function retrieveReports(rabbitId, page, size, y, m, d) {
+function retrievelogs(rabbitId, page, size, y, m, d) {
 
     showLoading();
     $.ajax({
@@ -133,22 +133,22 @@ function retrieveReports(rabbitId, page, size, y, m, d) {
         + '&y=' + y + '&m=' + m + '&d=' + d,
         success : function(data) {
 
-            //$("#report-head").html(d + " th");
-            $("#report-list").append(data);
+            //$("#log-head").html(d + " th");
+            $("#log-list").append(data);
 
             // PagingInfo
-            totalPages = $("#report-list #page_total").val();
+            totalPages = $("#log-list #page_total").val();
             if (totalPages > parseInt(page)+1){
-                $("#report-feed").show();
-                $("#report-feed").attr("data-page", parseInt(page)+1);
+                $("#log-feed").show();
+                $("#log-feed").attr("data-page", parseInt(page)+1);
             }
             else{
-                $("#report-feed").hide();
+                $("#log-feed").hide();
             }
 
-            $("#report-list .report[data-e=true]").click(function(){
+            $("#log-list .log[data-e=true]").click(function(){
 
-                // Report Detail Information Layer Toggle
+                // log Detail Information Layer Toggle
                 var row = $(this);
                 $.get(row.data('poload'),function(d) {
 

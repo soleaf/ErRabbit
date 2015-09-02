@@ -494,16 +494,16 @@ header .logout{
     font-size: 10px;
 }
 
-.report-area{
+.log-area{
     margin-left:140px;
     height:100%;
     overflow: scroll;
 }
-.report-area_nosidebar{
+.log-area_nosidebar{
     margin-left:0px;
 }
 
-.report-area .report-head{
+.log-area .log-head{
     height:32px;
     line-height: 32px;
     padding-left:10px;
@@ -512,17 +512,13 @@ header .logout{
     color:#333;
 }
 
-.report-list-box {
+.log-list-box {
     /*margin: 20px;*/
     /*border: 1px solid #efefef;*/
     padding: 20px;
 }
 
-.report-list {
-
-}
-
-.report-list .report{
+.log-list .log{
     font-size: 13px;
     padding-top:4px;
     padding-bottom:4px;
@@ -530,19 +526,19 @@ header .logout{
     border-bottom: 1px solid #f4f4f4;
 }
 
-#report-list .report[data-e=true]{
+#log-list .log[data-e=true]{
     cursor: pointer;
 }
 
-.report-list .report:HOVER{
+.log-list .log:HOVER{
     background-color: #f9f9f9;
 }
 
-.report-list .report:HOVER .message{
+.log-list .log:HOVER .message{
     color:#000;
 }
 
-.report-list .report .level{
+.log-list .log .level{
     margin-left: 4px;
     margin-top:1px;
     border-width: 1px;
@@ -555,43 +551,43 @@ header .logout{
     float:left;
 }
 
-.report-list .report .DEBUG{
+.log-list .log .DEBUG{
     border-color: #868686;
     color: #868686;
 }
 
-.report-list .report .WARN{
+.log-list .log .WARN{
     border-color: #ffbf5e;
     color: #ffbf5e;
 }
 
-.report-list .report .ERROR{
+.log-list .log .ERROR{
     border-color: #FF8166;
     color:#FF8166;
 }
 
-.report-list .report .has_exception{
+.log-list .log .has_exception{
     background-color:#FF8166;
     color:#FFF;
 }
 
-.report-list .report .FATAL{
+.log-list .log .FATAL{
     border-color: #ff5572;
     color: #ff5572;
 }
 
-.report-list .report .time{
+.log-list .log .time{
     font-style: italic;
     color: #868686;
     float:left;
     width:90px;
 }
 
-.report-list .report .contgroup{
+.log-list .log .contgroup{
     margin-left:150px;
 }
 
-.report-list .report .rabbit_id{
+.log-list .log .rabbit_id{
     margin-left: 4px;
     width: 100px;
     display: inline-block;
@@ -602,28 +598,28 @@ header .logout{
     font-weight: bold;
 }
 
-.report-list .report .categoryName{
+.log-list .log .categoryName{
     margin-left: 4px;
     color: #5d5d5d;
     text-decoration: underline;
 }
 
-.report-list .report .message{
+.log-list .log .message{
     margin-top:1px;
     margin-left: 4px;
     color: #737373;
     display:block;
 }
 
-.report-list .report_active{
+.log-list .log_active{
     background-color: #f0f0f0;
 }
 
-.report-list .report_active .message{
+.log-list .log_active .message{
     color: #010101;
 }
 
-.report-list .empty{
+.log-list .empty{
     font-size:16px;
     text-align: center;
     magin-top:auto;
@@ -634,7 +630,7 @@ header .logout{
     color: #dcdcdc;
 }
 
-/*.report-detail-popup{*/
+/*.log-detail-popup{*/
     /*background-color: #f9f9f9;*/
     /*display: none;*/
     /*position: fixed;*/
@@ -648,13 +644,13 @@ header .logout{
     /*padding-right:10px;*/
 /*}*/
 
-.report-detail-popup .report-tab{
+.log-detail-popup .log-tab{
     border-bottom:1px solid #dfdfdf;
     margin-bottom: 10px;
     height:30px;
 }
 
-.report-detail-popup .report-tab li{
+.log-detail-popup .log-tab li{
     display: inline-block;
     padding-left: 15px;
     padding-right: 15px;
@@ -667,50 +663,50 @@ header .logout{
     font-size:12px;
 }
 
-.report-detail-popup .report-tab .active{
+.log-detail-popup .log-tab .active{
     color: #222222;
 }
 
-.report-detail-popup .summary{
+.log-detail-popup .summary{
 
 }
 
-.report-detail-popup .summary .key{
+.log-detail-popup .summary .key{
 
 }
 
-.report-detail-popup .summary .val{
+.log-detail-popup .summary .val{
 
 }
 
-.report-detail-popup .locationInfo>TABLE{
+.log-detail-popup .locationInfo>TABLE{
     width:400px;
     font-size:12px;
 }
 
-.report-detail-popup .ThrowableInfo{
+.log-detail-popup .ThrowableInfo{
     position: relative;
 
 }
-.report-detail-popup .ThrowableInfo .graph{
+.log-detail-popup .ThrowableInfo .graph{
 
 }
 
-.report-detail-popup .ThrowableInfo .graph .threadName{
+.log-detail-popup .ThrowableInfo .graph .threadName{
     color: #aeaeae;
 }
 
-.report-detail-popup .ThrowableInfo .graph .threadName .value{
+.log-detail-popup .ThrowableInfo .graph .threadName .value{
     color: #828282;
 }
 
-.report-detail-popup .ThrowableInfo .graph .arrow{
+.log-detail-popup .ThrowableInfo .graph .arrow{
     margin-bottom:2px;
     color: #ebebeb;
     margin-top:4px;
 }
 
-.report-detail-popup .ThrowableInfo .graph .exception{
+.log-detail-popup .ThrowableInfo .graph .exception{
     background-color: #EF8A6F;
     padding:8px;
     color: #fafafa;
@@ -722,7 +718,7 @@ header .logout{
     border-radius: 5px;
 }
 
-.report-detail-popup .ThrowableInfo .graph .class{
+.log-detail-popup .ThrowableInfo .graph .class{
     background-color: #f7f7f7;
     color:#979797;
     margin-top:2px;
@@ -733,25 +729,25 @@ header .logout{
     max-width: 100%;
 }
 
-.report-detail-popup .ThrowableInfo .glyphicon-file{
+.log-detail-popup .ThrowableInfo .glyphicon-file{
     float:left;
 }
 
-.report-detail-popup .ThrowableInfo .graph .class_name_set{
+.log-detail-popup .ThrowableInfo .graph .class_name_set{
     display:block;
     word-wrap: break-word;
     margin-left:18px;
 }
 
-.report-detail-popup .ThrowableInfo .graph .package_name{
+.log-detail-popup .ThrowableInfo .graph .package_name{
     color: #bababa;
 }
 
-.report-detail-popup .ThrowableInfo .graph .class_name{
+.log-detail-popup .ThrowableInfo .graph .class_name{
     text-decoration: underline;
 }
 
-.report-detail-popup .ThrowableInfo .graph .method{
+.log-detail-popup .ThrowableInfo .graph .method{
     background-color: #efefef;
     color: #616161;
     padding:2px;
@@ -765,61 +761,61 @@ header .logout{
     clear:both;
 }
 
-.report-detail-popup .ThrowableInfo .graph .base-package{
+.log-detail-popup .ThrowableInfo .graph .base-package{
     background-color: #7BCCD4;
     border-color:#7BCCD4;
     color:#fff;
     display: inline-block;
 }
 
-.report-detail-popup .ThrowableInfo .graph .base-package .package_name{
+.log-detail-popup .ThrowableInfo .graph .base-package .package_name{
     color: #dafaff;
 }
 
 
-.report-detail-popup .ThrowableInfo .graph .base-package-arrow{
+.log-detail-popup .ThrowableInfo .graph .base-package-arrow{
     padding:2px;
     display: block;
     color: #b9b9b9;
 }
 
-.report-detail-popup .ThrowableInfo .graph .base-package .method{
+.log-detail-popup .ThrowableInfo .graph .base-package .method{
     background-color: #C8FFF8;
     /*color: #009c8a;*/
 }
 
-.report-detail-popup .ThrowableInfo .graph .method .lineNumber{
+.log-detail-popup .ThrowableInfo .graph .method .lineNumber{
     font-size:10px;
 }
 
-.report-detail-popup .ThrowableInfo .graph .fileName{
+.log-detail-popup .ThrowableInfo .graph .fileName{
     font-size:11px;
     color: #878787;
     display: block;
 }
-.report-detail-popup .ThrowableInfo .graph .base-package-fileName{
+.log-detail-popup .ThrowableInfo .graph .base-package-fileName{
     font-size:11px;
     color: #878787;
     display: block;
 }
 
-.report-detail-popup .ThrowableInfo .graph .base-package-toggle{
+.log-detail-popup .ThrowableInfo .graph .base-package-toggle{
     margin-top:10px;
     margin-bottom:10px;
     background-color: #f9f9f9;
     color:#adadad;
 }
 
-.report-detail-popup .ThrowableInfo .text{
+.log-detail-popup .ThrowableInfo .text{
     display: none;
     max-width:100%;
 }
 
-.report-detail-popup .ThrowableInfo .text li{
+.log-detail-popup .ThrowableInfo .text li{
     font-size:12px;
 }
 
-.report-detail-popup .close{
+.log-detail-popup .close{
     position: absolute;
     font-size:12px;
     top:0px;
@@ -828,16 +824,16 @@ header .logout{
     right:0px;
 }
 
-.report-detail-popup .close SPAN{
+.log-detail-popup .close SPAN{
     line-height: 30px;
 }
 
-#report-calendar{
+#log-calendar{
     list-style: none;
     padding-left: 0px;
 }
 
-#report-calendar LI{
+#log-calendar LI{
     /*height:24px;*/
     font-size:13px;
     border-bottom: 1px solid #ececec;
@@ -849,20 +845,20 @@ header .logout{
     cursor: pointer;
 }
 
-#report-calendar LI .badge{
+#log-calendar LI .badge{
     float:right;
 }
 
-#report-calendar LI:HOVER{
+#log-calendar LI:HOVER{
     background-color: #ececec;
 }
 
-#report-calendar LI:ACTIVE{
+#log-calendar LI:ACTIVE{
     background-color: #7BCCD4;
     color:#FFF;
 }
 
-#report-calendar .active{
+#log-calendar .active{
     color:#7BCCD4;
     background-color: #ececec;
 }
@@ -942,24 +938,24 @@ header .logout{
     margin-right:20px;
 }
 
-.report .page .time INPUT{
+.log .page .time INPUT{
     width:50px;
 }
 
-.report .page .time .input-group-addon{
+.log .page .time .input-group-addon{
     width: auto;
 }
 
 
-.report .rabbit-selection li{
+.log .rabbit-selection li{
     padding-left:40px;
 }
 
-.report .rabbit-selection li:HOVER{
+.log .rabbit-selection li:HOVER{
     background-color: #7BCCD4;
     color:#FFF;
 }
 
-.report .rabbit-selection .li .checkbox>INPUT{
+.log .rabbit-selection .li .checkbox>INPUT{
     padding-left:10px;
 }
