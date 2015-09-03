@@ -79,7 +79,7 @@ function disconnect() {
 
 function appendReports(message) {
     $("#waiting").fadeOut();
-    $("#report-list").prepend(message);
+    $("#log-list").prepend(message);
     reportEvent();
 }
 
