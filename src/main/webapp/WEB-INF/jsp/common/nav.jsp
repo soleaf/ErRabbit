@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <header>
     <c:if test="${empty param.hide}">
-    <h1>ErRabbit</h1>
+    <a href="/rabbit/list.err"><h1>ErRabbit</h1></a>
     <nav>
         <ul>
             <li class="${param.rabbit}"><a href="/rabbit/list.err">Rabbits</a></li>

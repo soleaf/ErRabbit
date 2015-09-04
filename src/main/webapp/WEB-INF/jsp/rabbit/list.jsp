@@ -11,6 +11,18 @@
     <jsp:param name="rabbit" value="active"/>
 </jsp:include>
 <section class="page">
+
+    <div class="jumbotron how_to_integration_banner">
+        <div class="container">
+            <p class="img"><img src="/img/rabbit_handcuffs.png"/></p>
+            <div class="title">
+                <p class="head">How to integrate with your application</p>
+                <p class="description">Using Log4j 1.2 or 2.x</p>
+                <a href="https://github.com/soleaf/ErRabbit#make-your-application-connect-jms" role="button" class="btn btn-default" target="_blank">SEE HOW TO</a>
+            </div>
+        </div>
+    </div>
+
     <jsp:include page="side.jsp">
         <jsp:param name="list" value="active"/>
     </jsp:include>
@@ -65,12 +77,6 @@
                 </c:forEach>
             </ul>
         </c:if>
-
-        <div class="how_to_integration_banner">
-            <p>How to integrate with your Application</p>
-            <a href="https://github.com/soleaf/ErRabbit#make-your-application-connect-jms" role="button" class="btn btn-primary" target="_blank">SEE HOW TO</a>
-            <p><img src="/img/rabbit_handcuffs.png"/></p>
-        </div>
     </div>
 </section>
 
