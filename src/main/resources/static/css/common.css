@@ -99,7 +99,6 @@ UL LI{
     height:100%;
     position: fixed;
     z-index: 999999;
-    background-color: rgba(255, 255, 255, 0.80);
     top:0px;
     left:0px;
 }
