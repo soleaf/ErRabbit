@@ -14,7 +14,7 @@
             <h1>ErRabbit</h1>
             <p>Check unaware errors<br/>
             Visual tracking remote logging service using Log4j</p>
-            <p><a class="btn btn-default btn-lg" href="https://github.com/soleaf/ErRabbit" target="_blank" role="button">Learn more</a></p>
+            <p><a class="btn btn-primary" href="https://github.com/soleaf/ErRabbit" target="_blank" role="button">Learn more</a></p>
         </div>
     </div>
     <div class="login">

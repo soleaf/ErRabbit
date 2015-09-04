@@ -3,7 +3,6 @@
  */
 function showLoading(){
     $("#loading").fadeIn(100);
-
 }
 
 function hideLoading(){

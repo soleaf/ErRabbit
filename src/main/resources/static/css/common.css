@@ -104,19 +104,81 @@ UL LI{
     left:0px;
 }
 
-.loading_box>DIV{
-    display: inline-block;
+/*.loading_box>DIV{*/
+    /*display: inline-block;*/
+    /*display: block;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*margin-top: 200px;*/
+    /*width:100px;*/
+    /*height:30px;*/
+    /*line-height: 30px;*/
+    /*text-align: center;*/
+    /*background-color: #4d4d4d;*/
+    /*border-radius: 2px;*/
+    /*color: #FFF;*/
+/*}*/
+
+.jumper {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 200px;
-    width:100px;
-    height:30px;
-    line-height: 30px;
-    text-align: center;
-    background-color: #4d4d4d;
-    border-radius: 2px;
-    color: #FFF;
+    position: absolute;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+}
+.jumper > div {
+    background-color: #5CD0D6;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    position: absolute;
+    opacity: 0;
+    width: 50px;
+    height: 50px;
+    -webkit-animation: jumper 1s 0s linear infinite;
+    animation: jumper 1s 0s linear infinite;
+}
+.jumper > div:nth-child(2) {
+    -webkit-animation-delay: 0.33333s;
+    animation-delay: 0.33333s;
+}
+.jumper > div:nth-child(3) {
+    -webkit-animation-delay: 0.66666s;
+    animation-delay: 0.66666s;
+}
+@-webkit-keyframes jumper {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    5% {
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+@keyframes jumper {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    5% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 header h1{
@@ -199,8 +261,13 @@ header .logout{
     background-color: #F4F4F4;
 }
 
+.login-jumbotron P{
+    font-size:16px;
+}
+
 .login-jumbotron H1{
     color:#70CDD5;
+    font-size:40px;
 }
 
 .page_header{
