@@ -1,7 +1,10 @@
 package org.mintcode.errabbit.core.rabbit.managing;
 
+import org.bson.types.ObjectId;
 import org.mintcode.errabbit.core.CoreService;
 import org.mintcode.errabbit.core.log.dao.LogRepository;
+import org.mintcode.errabbit.core.rabbit.dao.RabbitGroupRepository;
+import org.mintcode.errabbit.model.RabbitGroup;
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
 import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
@@ -29,6 +32,9 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
 
     @Autowired
     private CoreService coreService;
+
+    @Autowired
+    private RabbitGroupRepository groupRepository;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -100,6 +106,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         // Remove rabbit;
         rabbitRepository.deleteById(id);
 
+        // Refresh rabbit name cache
         coreService.syncRabbitNameCache();
 
         return true;
@@ -114,4 +121,38 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
     public void cleanLog(String id, Integer begin, Integer end) {
         logRepository.deleteReportRangeOfLoggingEventDateInt(id, begin, end);
     }
+
+    @Override
+    public RabbitGroup makeNewGroup(String name) {
+        return groupRepository.insert(new RabbitGroup());
+    }
+
+    @Override
+    public RabbitGroup saveGroup(RabbitGroup group) {
+        return groupRepository.save(group);
+    }
+
+    @Override
+    public RabbitGroup findGroupById(ObjectId id) {
+        return groupRepository.findOne(id);
+    }
+
+    @Override
+    public void deleteGroup(RabbitGroup group) throws TryToUsedRabbitGroupException {
+
+        // Check group is used
+        for (Rabbit rabbit : getRabbits()){
+            if (rabbit.getGroup().equals(group)){
+                throw new TryToUsedRabbitGroupException(group);
+            }
+        }
+
+        groupRepository.delete(group);
+    }
+
+    @Override
+    public List<RabbitGroup> getGroups() {
+        return groupRepository.findAll();
+    }
+
 }

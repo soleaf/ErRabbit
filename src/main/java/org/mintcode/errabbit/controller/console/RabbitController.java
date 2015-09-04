@@ -1,5 +1,8 @@
 package org.mintcode.errabbit.controller.console;
 
+import org.bson.types.ObjectId;
+import org.mintcode.errabbit.core.rabbit.managing.TryToUsedRabbitGroupException;
+import org.mintcode.errabbit.model.RabbitGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
@@ -204,4 +207,64 @@ public class RabbitController {
         }
     }
 
+    @RequestMapping(value = "group")
+    public String groupList(Model model){
+        try{
+            model.addAttribute("list", rabbitManagingService.getGroups());
+            return "/rabbit/group";
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            model.addAttribute("error", e.getMessage());
+            return "redirect:list.err";
+        }
+    }
+
+    @RequestMapping(value = "group_insert")
+    public String groupInsert(@RequestParam String name, Model model){
+        try{
+            rabbitManagingService.makeNewGroup(name);
+            return "redirect:group.err";
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            model.addAttribute("error", e.getMessage());
+            return "redirect:list.err";
+        }
+    }
+
+    @RequestMapping(value = "group_modify")
+    public String groupModify(@RequestParam String id, @RequestParam String name, Model model){
+        try{
+            RabbitGroup group = rabbitManagingService.findGroupById(new ObjectId(id));
+            if (group == null){
+                return "redirect:group.err?error=not_found_group_id";
+            }
+            group.setName(name);
+            rabbitManagingService.saveGroup(group);
+            return "redirect:group.err";
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            model.addAttribute("error", e.getMessage());
+            return "redirect:list.err";
+        }
+    }
+
+    @RequestMapping(value = "group_delete")
+    public String groupDelete(@RequestParam String id, Model model){
+        try {
+            RabbitGroup group = rabbitManagingService.findGroupById(new ObjectId(id));
+            if (group == null) {
+                return "redirect:group.err?error=not_found_group_id";
+            }
+            rabbitManagingService.deleteGroup(group);
+            return "redirect:group.err";
+        } catch (TryToUsedRabbitGroupException e){
+            logger.error(e.getMessage(), e);
+            model.addAttribute("error", e.getMessage());
+            return "redirect:group.err?error="+e.getMessage();
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            model.addAttribute("error", e.getMessage());
+            return "redirect:group.err?error="+e.getMessage();
+        }
+    }
 }

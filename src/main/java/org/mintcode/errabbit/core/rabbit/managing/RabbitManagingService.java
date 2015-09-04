@@ -1,6 +1,8 @@
 package org.mintcode.errabbit.core.rabbit.managing;
 
+import org.bson.types.ObjectId;
 import org.mintcode.errabbit.model.Rabbit;
+import org.mintcode.errabbit.model.RabbitGroup;
 
 import java.util.List;
 
@@ -54,4 +56,37 @@ public interface RabbitManagingService {
      */
     public void cleanLog(String id, Integer begin, Integer end);
 
+    /**
+     * New rabbit group with name
+     * @param name
+     */
+    public RabbitGroup makeNewGroup(String name);
+
+    /**
+     * Save rabbit group
+     * @param group
+     * @return
+     */
+    public RabbitGroup saveGroup(RabbitGroup group);
+
+    /**
+     * Find rabbir group by ObjectId
+     * @param id
+     * @return
+     */
+    public RabbitGroup findGroupById(ObjectId id);
+
+    /**
+     * delete rabbit group
+     * with check group has been used.
+     * @param group
+     * @return
+     */
+    public void deleteGroup(RabbitGroup group) throws TryToUsedRabbitGroupException;
+
+    /**
+     * Get all rabbit groups
+     * @return
+     */
+    public List<RabbitGroup> getGroups();
 }

@@ -1,6 +1,8 @@
 package org.mintcode.errabbit.model;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -31,6 +33,10 @@ public class Rabbit implements Serializable {
 
     // Collect only log has Throwable exception;
     private Boolean collectionOnlyException;
+
+    // Group
+    @DBRef
+    private RabbitGroup group;
 
     /**
      * Getter and Setter
@@ -82,6 +88,14 @@ public class Rabbit implements Serializable {
 
     public void setCollectionOnlyException(Boolean collectionOnlyException) {
         this.collectionOnlyException = collectionOnlyException;
+    }
+
+    public RabbitGroup getGroup() {
+        return group;
+    }
+
+    public void setGroup(RabbitGroup group) {
+        this.group = group;
     }
 
     @Override
