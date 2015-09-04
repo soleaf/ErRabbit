@@ -87,7 +87,7 @@ public class LogAnalysisRequest implements AnalysisRequest {
     }
 
     public String getTargetCollection(){
-        return "report";
+        return "logs";
     }
 
     /**
