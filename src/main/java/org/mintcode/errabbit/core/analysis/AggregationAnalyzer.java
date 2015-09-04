@@ -2,7 +2,6 @@ package org.mintcode.errabbit.core.analysis;
 
 
 import org.mintcode.errabbit.core.analysis.request.AnalysisRequest;
-import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
 import org.mintcode.errabbit.core.analysis.result.AnalysisResultSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
