@@ -110,6 +110,7 @@ public class AnalysisController {
             }
 
             logger.trace("req : " + req);
+            logger.trace("analyzer : " + analyzer);
 
             // Aggregation Query
             AnalysisResultSet result = analyzer.aggregation(req);
