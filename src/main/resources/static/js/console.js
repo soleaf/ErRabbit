@@ -84,7 +84,7 @@ function appendReports(message) {
 }
 
 function reportEvent(){
-    $("#report-list .report").click(function () {
+    $("#log-list .log").click(function () {
 
         // Report Detail Information Layer Toggle
         var row = $(this);
