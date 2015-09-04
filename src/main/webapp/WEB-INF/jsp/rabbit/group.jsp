@@ -39,6 +39,30 @@
   </div>
 </section>
 
+<!-- Form Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="">
+            <input type="hidden" name="id" />
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">New Group</h4>
+                </div>
+                <div class="modal-body">
+                    <label>name</label>
+                    <input name="name" class="form-control" />
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id" id="clean_id" value=""/>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+                    <button type="submit" class="btn btn-primary">OK</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
