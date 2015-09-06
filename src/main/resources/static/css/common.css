@@ -612,6 +612,12 @@ header .logout{
     color:#333;
 }
 
+.log-area #log-feed{
+    width:100px;
+    margin-top:20px;
+    display: none;
+}
+
 .log-list-box {
     /*margin: 20px;*/
     /*border: 1px solid #efefef;*/
