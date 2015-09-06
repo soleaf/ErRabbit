@@ -22,8 +22,9 @@ $(document).ready(function(){
     if ($("#cal_y").val() != null && $("#cal_m").val() != null){
         var today = new Date();
         var dd = today.getDate();
-        retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val(), dd);
-        retrievelogs(rabbitId, 0, 100, $("#cal_y").val(), $("#cal_m").val(), dd);
+        retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val(), dd, function(){
+            retrievelogs(rabbitId, 0, 100, $("#cal_y").val(), $("#cal_m").val(), dd);
+        });
     }
 
     //initCalendarValueChanged();
@@ -41,7 +42,7 @@ function initlogModalButton(){
     });
 }
 
-function retrieveCalendar(rabbitId, year, month, selectedDay) {
+function retrieveCalendar(rabbitId, year, month, selectedDay, callback) {
     showLoading();
     $.ajax({
         url: '/log/list_days.err?id=' + rabbitId + '&y=' + year + '&m=' + month +'&s=' + selectedDay,
@@ -66,6 +67,9 @@ function retrieveCalendar(rabbitId, year, month, selectedDay) {
                     $(this).addClass("active");
                 });
                 hideLoading();
+                if (callback != null){
+                    callback();
+                }
             }
         }
         ,fail: function(){
@@ -101,7 +105,7 @@ function initCalendarMonth(){
 }
 
 function reloadCalendarFromSelected(){
-    retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val(), -1);
+    retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val(), -1, null);
     $("#log-list").html("");
 }
 
