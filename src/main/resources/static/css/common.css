@@ -58,14 +58,18 @@ UL LI{
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 .btn-default{
-    color: #c0c0c0;
+    color: #9a9a9a;
     border-color: #c0c0c0;
     background-color: #fbfbfb;
 }
+
+.btn-gray{
+    background-color: #F4F4F4;
+}
 .btn-primary{
     border: 1px solid #7BCCD4;
-    color :#7BCCD4;
-    background-color: #fff;
+    color :#FFF;
+    background-color: #7BCCD4;
 }
 .btn-primary:HOVER {
     color:#fff;
@@ -258,6 +262,7 @@ header .logout{
 .login-jumbotron{
     background: url("/img/login_top.png") no-repeat bottom right;
     background-color: #F4F4F4;
+    padding-top:120px;
 }
 
 .login-jumbotron P{
@@ -266,7 +271,8 @@ header .logout{
 
 .login-jumbotron H1{
     color:#70CDD5;
-    font-size:40px;
+    font-size:45px;
+    marign-bottom:20px;
 }
 
 .page_header{
@@ -1036,24 +1042,24 @@ header .logout{
     margin-right:20px;
 }
 
-.log .page .time INPUT{
+.report .page .time INPUT{
     width:50px;
 }
 
-.log .page .time .input-group-addon{
+.report .page .time .input-group-addon{
     width: auto;
 }
 
 
-.log .rabbit-selection li{
+.report .rabbit-selection li{
     padding-left:40px;
 }
 
-.log .rabbit-selection li:HOVER{
+.report .rabbit-selection li:HOVER{
     background-color: #7BCCD4;
     color:#FFF;
 }
 
-.log .rabbit-selection .li .checkbox>INPUT{
+.report .rabbit-selection .li .checkbox>INPUT{
     padding-left:10px;
 }
