@@ -29,34 +29,55 @@
     <div class="page-side-margin">
         <h3>${title}</h3>
         <p>Rabbit is a target application to track log.</p>
-
         <div class="form-horizontal rabbit-form">
             <form class="form" action="${action}">
                 <c:if test="${not empty modifying}">
                     <c:set var="rabbitId" value="${rabbit.id}"/>
                     <c:set var="basePackage" value="${rabbit.basePackage}"/>
+                    <c:set var="groupId" value="${rabbit.group.id}"/>
                     <c:if test="${rabbit.collectionOnlyException}">
                         <c:set var="collectionOnlyException" value="checked"/>
                     </c:if>
                 </c:if>
-                <div>
-                    <label for="id" class="control-label">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" placeholder="Rabbit ID" value="${rabbitId}" ${idReadOnly}>
-                    <span class="help-block">It's used to identify a rabbitId on Log4j appender property.</span>
+                <div class="main-form">
+                    <label class="control-label">GENERAL</label>
+                    <div class="sub-form">
+                        <label for="id" class="control-label">ID</label>
+                        <input type="text" class="form-control" id="id" name="id" placeholder="Rabbit ID" value="${rabbitId}" ${idReadOnly}>
+                        <span class="help-block">It's used to identify a rabbitId on Log4j appender property.</span>
+                    </div>
+                    <div class="sub-form">
+                        <label for="basePackage" class="control-label">Base package</label>
+                        <input type="text" class="form-control" id="basePackage" name="basePackage"
+                               placeholder="org.mintcode.errabbit" value="${basePackage}">
+                        <span class="help-block">It will be help you to recognize your package in throwable stack.</span>
+                    </div>
+                    <div class="sub-form">
+                        <label for="group" class="control-label">Group</label>
+                        <select class="form-control" id="group" name="group">
+                            <option value="(none)">(none)</option>
+                            <c:if test="${not empty groups}">
+                                <c:forEach var="item" items="${groups}">
+                                    <option value="${item.id}" <c:if test="${groupId == item.id}">selected</c:if>>${item.name}</option>
+                                </c:forEach>
+                            </c:if>
+                        </select>
+                        <span class="help-block">Management group</span>
+                    </div>
                 </div>
-                <div>
-                    <label for="basePackage" class="control-label">Base package</label>
-                    <input type="text" class="form-control" id="basePackage" name="basePackage"
-                           placeholder="org.mintcode.errabbit" value="${basePackage}">
-                    <span class="help-block">It will be help you to recognize your package in throwable stack.</span>
+
+                <div class="main-form">
+                    <label class="control-label">OPTION</label>
+                    <div class="sub-form">
+                        <br/>
+                        <label>
+                            <input type="checkbox" name="onlyException" value="true" ${collectionOnlyException}/>
+                            Collect only exception
+                        </label>
+                        <span class="help-block">Discard any other logs has no throwable exception</span>
+                    </div>
                 </div>
-                <div>
-                    <label>
-                        <input type="checkbox" name="onlyException" value="true" ${collectionOnlyException}/>
-                        Collect only exception
-                    </label>
-                    <span class="help-block">Discard any other logs has no throwable exception</span>
-                </div>
+
                 <c:if test="${not empty e}">
                     <div class="alert alert-warning alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span

@@ -137,8 +137,7 @@
                 </div>
             </div>
             <div class="page-side-element page-side-sub-element">
-                <button id="run" type="button" class="btn btn-primary btn-block btn-sm"><span class="glyphicon glyphicon-play"
-                                                                                     aria-hidden="true"></span> RUN
+                <button id="run" type="button" class="btn btn-primary btn-block btn-sm">RUN
                 </button>
             </div>
         </form>

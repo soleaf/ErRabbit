@@ -51,10 +51,12 @@ public class RabbitController {
                     lastStatics.put(rabbit, statistics);
                 }
             }
-            model.addAttribute("list", rabbitList);
+            model.addAttribute("groups", rabbitManagingService.
+                    getRabbitGroupWithRabbitSorted(rabbitManagingService.getRabbitsByGroup(rabbitList)));
             model.addAttribute("lastStatics", lastStatics);
             model.addAttribute("info", info);
             model.addAttribute("error", error);
+            model.addAttribute("group", rabbitManagingService.getGroups());
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             model.addAttribute("error", e.getMessage());
@@ -65,7 +67,8 @@ public class RabbitController {
 
     // New Rabbit form
     @RequestMapping(value = "insert")
-    public ModelAndView insertForm() {
+    public ModelAndView insertForm(Model model) {
+        model.addAttribute("groups", rabbitManagingService.getGroups());
         return new ModelAndView("/rabbit/form");
     }
 
@@ -73,10 +76,21 @@ public class RabbitController {
     @RequestMapping(value = "insert_action")
     public String insertAction(@RequestParam(value = "id", required = true) String id,
                                @RequestParam(value = "basePackage", required = true) String basePackage,
+                               @RequestParam(value = "group", required = false) String groupId,
                                @RequestParam(value = "onlyException", required = false, defaultValue = "false") Boolean onlyException,
                                Model model) {
         try {
-            Rabbit newRabbit = rabbitManagingService.makeNewRabbit(id, basePackage, onlyException);
+
+            RabbitGroup group = null;
+            if (groupId != null && !groupId.isEmpty()){
+                group = rabbitManagingService.getGroup(new ObjectId(groupId));
+                logger.trace("set group > " + group);
+                if (group == null){
+                    return "redirect:insert.err?error=invalid_group_id";
+                }
+            }
+
+            Rabbit newRabbit = rabbitManagingService.makeNewRabbit(id, basePackage, onlyException, group);
             logger.info("Made new Rabbit > " + newRabbit);
 
             model.addAttribute("info", String.format("Success to make Rabbit '%s'", id));
@@ -94,9 +108,9 @@ public class RabbitController {
                              Model model){
 
         model.addAttribute("modifying", true);
-
         try {
             Rabbit rabbit = rabbitManagingService.getRabbitById(id);
+            model.addAttribute("groups", rabbitManagingService.getGroups());
             if (rabbit == null) {
                 throw new RabbitNotExistException(id);
             }
@@ -113,14 +127,29 @@ public class RabbitController {
     @RequestMapping(value = "modify_action")
     public String modifyAction(@RequestParam(value = "id", required = true) String id,
                                @RequestParam(value = "basePackage", required = true) String basePackage,
+                               @RequestParam(value = "group", required = false) String groupId,
                                @RequestParam(value = "onlyException", required = false, defaultValue = "false") Boolean onlyException,
                                Model model) {
         try {
-
             Rabbit rabbit = rabbitManagingService.getRabbitById(id);
             if (rabbit == null) {
                 throw new RabbitNotExistException(id);
             }
+
+            if (groupId != null && !groupId.isEmpty()){
+                if (groupId.equals("(none)")){
+                    rabbit.setGroup(null);
+                }
+                else{
+                    RabbitGroup group = rabbitManagingService.getGroup(new ObjectId(groupId));
+                    if (group == null){
+                        return "redirect:insert.err?error=invalid_group_id";
+                    }
+                    logger.trace("set group");
+                    rabbit.setGroup(group);
+                }
+            }
+
             rabbit.setBasePackage(basePackage);
             rabbit.setCollectionOnlyException(onlyException);
             Rabbit savedRabbit = rabbitManagingService.saveRabbit(rabbit);
@@ -219,52 +248,51 @@ public class RabbitController {
         }
     }
 
-    @RequestMapping(value = "group_insert")
+    @RequestMapping(value = "group/insert")
     public String groupInsert(@RequestParam String name, Model model){
         try{
+            logger.trace("name : " + name);
             rabbitManagingService.makeNewGroup(name);
-            return "redirect:group.err";
+            return "redirect:/rabbit/group.err";
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             model.addAttribute("error", e.getMessage());
-            return "redirect:list.err";
+            return "redirect:/rabbit/group.err?error="+e.getMessage();
         }
     }
 
-    @RequestMapping(value = "group_modify")
+    @RequestMapping(value = "group/modify")
     public String groupModify(@RequestParam String id, @RequestParam String name, Model model){
         try{
-            RabbitGroup group = rabbitManagingService.findGroupById(new ObjectId(id));
+            logger.trace("id : " + id);
+            RabbitGroup group = rabbitManagingService.getGroup(new ObjectId(id));
             if (group == null){
-                return "redirect:group.err?error=not_found_group_id";
+                return "redirect:/rabbit/group.err?error=not_found_group_id";
             }
             group.setName(name);
             rabbitManagingService.saveGroup(group);
-            return "redirect:group.err";
+            return "redirect:/rabbit/group.err";
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             model.addAttribute("error", e.getMessage());
-            return "redirect:list.err";
+            return "redirect:/rabbit/group.err?error="+e.getMessage();
         }
     }
 
-    @RequestMapping(value = "group_delete")
+    @RequestMapping(value = "group/delete")
     public String groupDelete(@RequestParam String id, Model model){
         try {
-            RabbitGroup group = rabbitManagingService.findGroupById(new ObjectId(id));
+            logger.trace("id : " + id);
+            RabbitGroup group = rabbitManagingService.getGroup(new ObjectId(id));
             if (group == null) {
                 return "redirect:group.err?error=not_found_group_id";
             }
             rabbitManagingService.deleteGroup(group);
-            return "redirect:group.err";
-        } catch (TryToUsedRabbitGroupException e){
-            logger.error(e.getMessage(), e);
-            model.addAttribute("error", e.getMessage());
-            return "redirect:group.err?error="+e.getMessage();
+            return "redirect:/rabbit/group.err";
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             model.addAttribute("error", e.getMessage());
-            return "redirect:group.err?error="+e.getMessage();
+            return "redirect:/rabbit/group.err?error="+e.getMessage();
         }
     }
 }

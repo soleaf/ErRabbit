@@ -72,9 +72,15 @@ UL LI{
     background-color: #7BCCD4;
 }
 .btn-primary:HOVER {
-    color:#fff;
-    background-color: #7BCCD4;
+    color: #FFF;
+    background-color: #70b9c1;
     border: 1px solid #7BCCD4;
+}
+
+.btn-primary:active {
+    color: #FFF;
+    background-color: #5d9aa1;
+    border: 1px solid #5d9aa1;
 }
 
 .btn-page-navi {
@@ -369,6 +375,12 @@ header .logout{
 
 
 /** RABBITS **/
+.rabbit .page .rabbit-group{
+    font-size:12px;
+    margin-top:10px;
+    color: #7BCCD4;
+    font-weight: bold;
+}
 .page .list_rabbit{
     margin:0px;
     padding:0px;
@@ -1068,4 +1080,13 @@ header .logout{
 
 .report .rabbit-selection .li .checkbox>INPUT{
     padding-left:10px;
+}
+
+.rabbit-group .table{
+    max-width:500px;
+}
+
+.rabbit-group .alert{
+    display: inline-block;
+    margin-top:20px;
 }

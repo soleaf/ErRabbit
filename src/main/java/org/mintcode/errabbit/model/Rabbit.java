@@ -91,7 +91,12 @@ public class Rabbit implements Serializable {
     }
 
     public RabbitGroup getGroup() {
-        return group;
+        if (group == null){
+            return RabbitGroup.noneGroup();
+        }
+        else{
+            return group;
+        }
     }
 
     public void setGroup(RabbitGroup group) {

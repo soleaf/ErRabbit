@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 import org.mintcode.errabbit.core.CoreService;
 import org.mintcode.errabbit.core.log.dao.LogRepository;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitGroupRepository;
+import org.mintcode.errabbit.core.rabbit.name.RabbitGroupNameComparator;
 import org.mintcode.errabbit.model.RabbitGroup;
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
@@ -12,8 +13,7 @@ import org.mintcode.errabbit.model.Rabbit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by soleaf on 2015. 1. 8..
@@ -44,6 +44,11 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
                                 String basePackage,
                                 Boolean collectOnlyException) throws AlreadyExistRabbitIDException,
             InvalidRabbitNameException, InvalidBasePackageException {
+            return makeNewRabbit(id, basePackage, collectOnlyException, null);
+    }
+
+    @Override
+    public Rabbit makeNewRabbit(String id, String basePackage, Boolean collectOnlyException, RabbitGroup group) throws AlreadyExistRabbitIDException, InvalidRabbitNameException, InvalidBasePackageException {
 
         // Rabbit Name Validation
         if (id == null){
@@ -68,6 +73,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         rabbit.setBasePackage(basePackage);
         rabbit.setRegDate(new Date());
         rabbit.setCollectionOnlyException(collectOnlyException);
+        rabbit.setGroup(group);
 
         rabbitRepository.save(rabbit);
 
@@ -92,6 +98,45 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
             return null;
         }
 
+    }
+
+    @Override
+    public Map<RabbitGroup, Set<Rabbit>> getRabbitsByGroup(List<Rabbit> rabbits) {
+        Map<RabbitGroup, Set<Rabbit>> map = new HashMap<>();
+        if (rabbits == null){
+            rabbits = getRabbits();
+        }
+        for (Rabbit r : rabbits){
+            RabbitGroup group = r.getGroup();
+            Set<Rabbit> set = null;
+            if (map.containsKey(group)){
+                set =  map.get(group);
+            }
+            else{
+                set = new HashSet<>();
+                map.put(group, set);
+            }
+            set.add(r);
+        }
+        return map;
+    }
+
+    public List<RabbitGroup> getRabbitGroupWithRabbitSorted(Map<RabbitGroup, Set<Rabbit>> rabbitGroupSetMap){
+        if (rabbitGroupSetMap == null){
+            rabbitGroupSetMap = getRabbitsByGroup();
+        }
+        List<RabbitGroup> list = new ArrayList<>();
+        for (RabbitGroup r : rabbitGroupSetMap.keySet()){
+            r.setRabbitSet(rabbitGroupSetMap.get(r));
+            list.add(r);
+        }
+        Collections.sort(list, new RabbitGroupNameComparator());
+        return list;
+    }
+
+    @Override
+    public Map<RabbitGroup, Set<Rabbit>> getRabbitsByGroup() {
+        return getRabbitsByGroup(null);
     }
 
     @Override
@@ -124,7 +169,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
 
     @Override
     public RabbitGroup makeNewGroup(String name) {
-        return groupRepository.insert(new RabbitGroup());
+        return groupRepository.insert(new RabbitGroup(name));
     }
 
     @Override
@@ -133,7 +178,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
     }
 
     @Override
-    public RabbitGroup findGroupById(ObjectId id) {
+    public RabbitGroup getGroup(ObjectId id) {
         return groupRepository.findOne(id);
     }
 
@@ -141,9 +186,14 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
     public void deleteGroup(RabbitGroup group) throws TryToUsedRabbitGroupException {
 
         // Check group is used
-        for (Rabbit rabbit : getRabbits()){
-            if (rabbit.getGroup().equals(group)){
-                throw new TryToUsedRabbitGroupException(group);
+        if (getGroups() != null && !getGroups().isEmpty()){
+            for (Rabbit rabbit : getRabbits()){
+                if (rabbit.getGroup() == null){
+                    continue;
+                }
+                if (rabbit.getGroup().equals(group)){
+                    throw new TryToUsedRabbitGroupException(group);
+                }
             }
         }
 

@@ -5,6 +5,8 @@ import org.mintcode.errabbit.model.Rabbit;
 import org.mintcode.errabbit.model.RabbitGroup;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * RabbitManagingService
@@ -22,6 +24,12 @@ public interface RabbitManagingService {
                                 Boolean collectOnlyException) throws AlreadyExistRabbitIDException,
             InvalidRabbitNameException, InvalidBasePackageException;
 
+    public Rabbit makeNewRabbit(String id,
+                                String basePackage,
+                                Boolean collectOnlyException,
+                                RabbitGroup group) throws AlreadyExistRabbitIDException,
+            InvalidRabbitNameException, InvalidBasePackageException;
+
     /**
      * Save modified rabbit
      * @param rabbit
@@ -35,10 +43,29 @@ public interface RabbitManagingService {
     public List<Rabbit> getRabbits();
 
     /**
-     * Delete a Rabbit and related Objects
-     * @param id
+     * Getting Rabbit group by RabbitGroup
      * @return
      */
+    public Map<RabbitGroup, Set<Rabbit>> getRabbitsByGroup(List<Rabbit> rabbits);
+
+    /**
+     * Getting Rabbit group by RabbitGroup
+     * @return
+     */
+    public Map<RabbitGroup, Set<Rabbit>> getRabbitsByGroup();
+
+    /**
+     * Getting Rabbit group by RabbitGroup and sort.
+     * @param rabbitGroupSetMap
+     * @return
+     */
+    public List<RabbitGroup> getRabbitGroupWithRabbitSorted(Map<RabbitGroup, Set<Rabbit>> rabbitGroupSetMap);
+
+        /**
+         * Delete a Rabbit and related Objects
+         * @param id
+         * @return
+         */
     public boolean deleteRabbit(String id);
 
     /**
@@ -74,7 +101,7 @@ public interface RabbitManagingService {
      * @param id
      * @return
      */
-    public RabbitGroup findGroupById(ObjectId id);
+    public RabbitGroup getGroup(ObjectId id);
 
     /**
      * delete rabbit group

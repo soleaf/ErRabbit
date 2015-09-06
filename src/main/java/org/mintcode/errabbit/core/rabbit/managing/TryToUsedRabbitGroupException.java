@@ -7,10 +7,8 @@ import org.mintcode.errabbit.model.RabbitGroup;
  */
 public class TryToUsedRabbitGroupException extends Exception{
 
-    private RabbitGroup rabbitGroup;
-
     public TryToUsedRabbitGroupException(RabbitGroup rabbitGroup) {
-        super(rabbitGroup + " is used. Cant' remove it now.");
-        this.rabbitGroup = rabbitGroup;
+        super(rabbitGroup.getName() + " is used. Cant' remove it now.");
     }
+
 }
