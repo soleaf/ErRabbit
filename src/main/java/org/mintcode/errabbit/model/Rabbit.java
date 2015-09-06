@@ -51,7 +51,12 @@ public class Rabbit implements Serializable {
     }
 
     public String getLabel() {
-        return label;
+        if (label == null){
+            return id;
+        }
+        else{
+            return label;
+        }
     }
 
     public void setLabel(String label) {

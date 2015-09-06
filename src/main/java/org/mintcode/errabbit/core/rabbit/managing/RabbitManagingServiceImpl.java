@@ -5,6 +5,7 @@ import org.mintcode.errabbit.core.CoreService;
 import org.mintcode.errabbit.core.log.dao.LogRepository;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitGroupRepository;
 import org.mintcode.errabbit.core.rabbit.name.RabbitGroupNameComparator;
+import org.mintcode.errabbit.core.rabbit.name.RabbitNameComparator;
 import org.mintcode.errabbit.model.RabbitGroup;
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
@@ -37,6 +38,9 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
     private RabbitGroupRepository groupRepository;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private RabbitNameComparator rabbitNameComparator = new RabbitNameComparator();
+    private RabbitGroupNameComparator rabbitGroupNameComparator = new RabbitGroupNameComparator();
 
 
     @Override
@@ -127,10 +131,11 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         }
         List<RabbitGroup> list = new ArrayList<>();
         for (RabbitGroup r : rabbitGroupSetMap.keySet()){
-            r.setRabbitSet(rabbitGroupSetMap.get(r));
+            r.setRabbits(new ArrayList<>(rabbitGroupSetMap.get(r)));
             list.add(r);
+            Collections.sort(r.getRabbits(), rabbitNameComparator);
         }
-        Collections.sort(list, new RabbitGroupNameComparator());
+        Collections.sort(list, rabbitGroupNameComparator);
         return list;
     }
 

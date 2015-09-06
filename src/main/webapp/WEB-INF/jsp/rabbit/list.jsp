@@ -44,7 +44,7 @@
         <c:forEach var="group" items="${groups}" varStatus="status">
         <h3 class="rabbit-group">${group.name}</h3>
         <ul class="list_rabbit row">
-            <c:forEach var="item" items="${group.rabbitSet}" varStatus="status">
+            <c:forEach var="item" items="${group.rabbits}" varStatus="status">
                 <li class="col-md-4">
                     <div class="icon">
                             ${fn:toUpperCase(fn:substring(item.id, 0, 1))}

@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import org.springframework.data.annotation.Transient;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,7 +21,7 @@ public class RabbitGroup implements Serializable {
     private String name;
 
     @Transient
-    private Set<Rabbit> rabbitSet;
+    private List<Rabbit> rabbitSet;
 
     public RabbitGroup(){
 
@@ -50,11 +51,11 @@ public class RabbitGroup implements Serializable {
         this.id = id;
     }
 
-    public Set<Rabbit> getRabbitSet() {
+    public List<Rabbit> getRabbits() {
         return rabbitSet;
     }
 
-    public void setRabbitSet(Set<Rabbit> rabbitSet) {
+    public void setRabbits(List<Rabbit> rabbitSet) {
         this.rabbitSet = rabbitSet;
     }
 
