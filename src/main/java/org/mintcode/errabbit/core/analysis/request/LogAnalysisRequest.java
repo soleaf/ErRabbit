@@ -100,6 +100,7 @@ public class LogAnalysisRequest implements AnalysisRequest {
 
         // Filter : RabbitId
         if (getFilterRabbits() != null && !getFilterRabbits().isEmpty()){
+            logger.trace("rabbit " + getFilterRabbits());
             op.add(new MatchOperation(Criteria.where("rabbit").in(getFilterRabbits())));
         }
 
@@ -112,13 +113,16 @@ public class LogAnalysisRequest implements AnalysisRequest {
         // Filter : Date
         Criteria dateCriteria = null;
         if (getFilterBeginDate() != null){
+            logger.trace("loggingEventDateInt gte " + getFilterBeginDate());
             dateCriteria = Criteria.where("loggingEventDateInt").gte(getFilterBeginDate());
         }
         if (getFilterEndDate() != null){
             if (dateCriteria == null){
+                logger.trace("loggingEventDateInt lte " + getFilterEndDate());
                 dateCriteria = Criteria.where("loggingEventDateInt").lte(getFilterEndDate());
             }
             else{
+                logger.trace("loggingEventDateInt lte " + getFilterEndDate());
                 dateCriteria = dateCriteria.andOperator(Criteria.where("loggingEventDateInt").lte(getFilterEndDate()));
             }
         }
@@ -128,8 +132,17 @@ public class LogAnalysisRequest implements AnalysisRequest {
 
         // Group by
         if (group != null){
-            op.add(new GroupOperation(Fields.fields((String[]) group.toArray())).count().as("count"));
-            op.add(new SortOperation(new Sort(Sort.Direction.ASC, (String[]) group.toArray())));
+            logger.debug("group > " + group);
+            String[] fieldsStr = new String[group.size()];
+            for (int i = 0 ; i < group.size() ; i++){
+                fieldsStr[i] = group.get(i);
+            }
+
+            Fields files = Fields.fields(fieldsStr);
+//            Fields files = Fields.fields((String[]) group.toArray());
+            op.add(new GroupOperation(files).count().as("count"));
+            op.add(new SortOperation(new Sort(Sort.Direction.ASC, fieldsStr)));
+//            op.add(new SortOperation(new Sort(Sort.Direction.ASC, (String[]) group.toArray())));
         }
 
         return op;

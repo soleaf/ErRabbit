@@ -3,13 +3,14 @@ package org.mintcode.errabbit.core.analysis.result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by soleaf on 7/5/15.
  */
-public class GraphicLogAnalysisResultItem {
+public class GraphicLogAnalysisResultItem implements Serializable {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -72,7 +73,7 @@ public class GraphicLogAnalysisResultItem {
      * Calculate percents of sub items and sub items
      */
     public void calcPercents() {
-        if (count < 1){
+        if (count == 0){
             logger.info("can't divide by zero");
             return;
         }

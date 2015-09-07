@@ -9,8 +9,10 @@ import org.mintcode.errabbit.core.analysis.request.LogLevelAnalysisRequest;
 import org.mintcode.errabbit.core.analysis.result.AnalysisResultSet;
 import org.mintcode.errabbit.core.report.dao.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -34,13 +36,14 @@ public class ReportGenerator {
         try{
             Integer targetDateInt = Integer.parseInt(format.format(date));
             AnalysisResultSet logAggregation = makeLogAnal(description, targetDateInt);
-            AnalysisResultSet logLevelAggregation = makeLogLevelAnal(description, targetDateInt);
+//            AnalysisResultSet logLevelAggregation = makeLogLevelAnal(description, targetDateInt);
 
             Report report = new Report();
             report.setSendTime(new Date());
-            report.setLogLevelReport(logLevelAggregation);
+//            report.setLogLevelReport(logLevelAggregation);
             report.setLogReport(logAggregation);
 
+            logger.debug("generated > " + report);
             reportRepository.save(report);
             return true;
         }
@@ -67,6 +70,10 @@ public class ReportGenerator {
         req.setFilterBeginDate(targetDateInt);
         req.setFilterEndDate(targetDateInt);
         req.setFilterLevels(levelSet);
+        req.setGroup(group);
+
+        logger.trace("logAnalReq > " +req);
+
         return analyzer.aggregation(req);
     }
 
@@ -81,6 +88,7 @@ public class ReportGenerator {
         req.setFilterRabbits(description.getTargets());
         req.setFilterBeginDate(targetDateInt);
         req.setFilterEndDate(targetDateInt);
+        req.setGroup(group);
         return analyzer.aggregation(req);
     }
 

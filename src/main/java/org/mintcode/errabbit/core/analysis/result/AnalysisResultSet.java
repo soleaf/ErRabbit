@@ -5,6 +5,7 @@ import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +13,11 @@ import java.util.Map;
 /**
  * Created by soleaf on 15. 8. 2..
  */
-public class AnalysisResultSet {
+public class AnalysisResultSet implements Serializable {
+
     public static final String TABLE = "table";
     public static final String GRAPHIC = "graphic";
+
     Map<String,AnalysisResult> results = new HashMap<>();
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
