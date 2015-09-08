@@ -5,13 +5,14 @@ import org.mintcode.errabbit.core.analysis.result.AnalysisResultSet;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by soleaf on 15. 8. 9..
  */
 @Document(collection = "reports")
-public class Report {
+public class Report implements Serializable{
 
     @Id
     private ObjectId id;

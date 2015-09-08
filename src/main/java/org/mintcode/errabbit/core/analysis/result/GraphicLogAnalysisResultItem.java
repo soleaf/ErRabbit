@@ -2,6 +2,7 @@ package org.mintcode.errabbit.core.analysis.result;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.annotation.Transient;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ import java.util.List;
  */
 public class GraphicLogAnalysisResultItem implements Serializable {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Transient
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     String field;
     Integer count = 0;

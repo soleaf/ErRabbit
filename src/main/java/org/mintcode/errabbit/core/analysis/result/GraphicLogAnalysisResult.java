@@ -5,6 +5,7 @@ import org.mintcode.errabbit.core.analysis.request.AnalysisRequest;
 import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.annotation.Transient;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,8 @@ import java.util.Map;
  */
 public class GraphicLogAnalysisResult implements AnalysisResult {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Transient
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     GraphicLogAnalysisResultItem root = new GraphicLogAnalysisResultItem("root");
 

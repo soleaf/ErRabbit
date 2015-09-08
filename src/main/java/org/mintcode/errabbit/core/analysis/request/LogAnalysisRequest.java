@@ -2,6 +2,7 @@ package org.mintcode.errabbit.core.analysis.request;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -16,6 +17,7 @@ import java.util.Set;
  */
 public class LogAnalysisRequest implements AnalysisRequest {
 
+    @Transient
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // Filter (null = All)
