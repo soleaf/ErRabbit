@@ -84,8 +84,7 @@ function appendReports(message) {
 }
 
 function reportEvent(){
-    $("#log-list .log").click(function () {
-
+    $("#log-list .log[data-e='true']").click(function () {
         // Report Detail Information Layer Toggle
         var row = $(this);
         $.get(row.data('poload'), function (d) {

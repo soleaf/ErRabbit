@@ -9,7 +9,7 @@ $(document).ready(function(){
 
     //Group by
     $("#groupby_available li").click(function(){
-        $checkBox  = $(this).find("INPUT");
+        $checkBox = $(this).find("INPUT");
         selectGroupByAvailable($checkBox.val(), $checkBox.attr("data-label"));
     });
 
@@ -55,6 +55,7 @@ $(document).ready(function(){
 
 function selectRabbit(value, label){
     $("#frm_rabbit_button").text(label);
+    $("#frm_anal INPUT[name='rabbit']").val(value);
 }
 
 function selectGroupByAvailable(value, label){
@@ -65,7 +66,7 @@ function selectGroupByAvailable(value, label){
     $("#groupby_selected").append(html);
     $("#groupby_available LI INPUT[value='" + value+  "']").parent().remove();
     $("#groupby_selected LI INPUT[value='" + value+  "']").parent().click(function(){
-        $checkBox  = $(this).find("INPUT");
+        $checkBox = $(this).find("INPUT");
         selectGroupBySelected($checkBox.val(), $checkBox.attr("data-label"));
     });
     addGroupByItemVal(value);

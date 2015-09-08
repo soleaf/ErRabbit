@@ -70,11 +70,10 @@ public class AnalysisController {
                                     )
     {
         try {
-
             LogAnalysisRequest req = new LogAnalysisRequest();
             model.addAttribute("req", req);
 
-            if (StringUtils.hasLength(rabbit)){
+            if (rabbit != null && rabbit.length() > 0){
                 Set<String> filterRabbits = new HashSet<>();
                 filterRabbits.add(rabbit);
                 req.setFilterRabbits(filterRabbits);
