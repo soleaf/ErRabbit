@@ -22,6 +22,7 @@ public class LogLevelHourStatistics implements Serializable {
                 ,year : year
                 ,month : month
                 ,day : day
+                ,hour : hour
                 ,level_ERROR : n
                 ,level_INFO : n
                 ...}

@@ -1,6 +1,7 @@
 package org.mintcode.errabbit.core.collect;
 
 import org.mintcode.errabbit.core.console.WebSocketMessagingService;
+import org.mintcode.errabbit.core.log.dao.LogLevelHourlyStatisticsRepository;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
 import org.mintcode.errabbit.model.Rabbit;
 import org.slf4j.Logger;
@@ -41,6 +42,9 @@ public class ReportMessageListener implements MessageListener {
 
     @Autowired
     private LogLevelDailyStatisticsRepository logLevelDailyStatisticsRepository;
+
+    @Autowired
+    private LogLevelHourlyStatisticsRepository logLevelHourlyStatisticsRepository;
 
     @Autowired
     private WebSocketMessagingService webSocketMessagingService;
@@ -96,7 +100,8 @@ public class ReportMessageListener implements MessageListener {
             logRepository.save(log);
 
             // Add to statistic dao
-            logLevelDailyStatisticsRepository.insertDailyStatistic(log);
+            logLevelDailyStatisticsRepository.insertStatistic(log);
+            logLevelHourlyStatisticsRepository.insertStatistic(log);
 
             // Mark unread
             if (rabbit.getRead()){

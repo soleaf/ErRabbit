@@ -4,28 +4,18 @@ import com.mongodb.WriteResult;
 import org.mintcode.errabbit.model.Log;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 
+import java.util.List;
+
 /**
- * Created by soleaf on 4/6/15.
+ * Created by soleaf on 15. 9. 8..
  */
-public interface LogLevelDailyStatisticsRepositoryCustom {
+public interface LogLevelHourlyStatisticsRepositoryCustom {
 
     /**
      * Add Daily Statistic from log
      * @param log
      */
     public void insertStatistic(Log log);
-
-    /**
-     * Find First Statistic
-     * @return
-     */
-    public LogLevelDailyStatistics findByRabbitIdOnFirst(String rabbitId);
-
-    /**
-     * Find Last Statistic
-     * @return
-     */
-    public LogLevelDailyStatistics findByRabbitIdOnLast(String rabbitId);
 
     /**
      * Delete objects on range of days
