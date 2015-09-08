@@ -26,11 +26,6 @@ public class ReportScheduler {
     @Autowired
     ReportGenerator generator;
 
-    @PostConstruct
-    public void test(){
-        check();
-    }
-
     @Scheduled(cron = "0 * * * * * *")
     public void check(){
         try{
@@ -41,18 +36,18 @@ public class ReportScheduler {
             }
 
             ReportDescription description = descriptionList.get(0);
-//            if (!description.getActive()){
-//                logger.trace("description is not active");
-//                return;
-//            }
+            if (!description.getActive()){
+                logger.trace("description is not active");
+                return;
+            }
 
             Calendar cal = Calendar.getInstance();
             cal.setTime(new Date());
-//            Integer nowHour = cal.get(Calendar.HOUR_OF_DAY);
-//            if (nowHour == description.getTime().getHour()){
+            Integer nowHour = cal.get(Calendar.HOUR_OF_DAY);
+            if (nowHour == description.getTime().getHour()){
                 cal.add(Calendar.DAY_OF_MONTH, -1);
                 generator.generate(description, cal.getTime());
-//            }
+            }
         }
         catch (Exception e){
             logger.error(e.getMessage(), e);

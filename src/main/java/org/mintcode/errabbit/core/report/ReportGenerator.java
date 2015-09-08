@@ -8,6 +8,7 @@ import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
 import org.mintcode.errabbit.core.analysis.request.LogLevelAnalysisRequest;
 import org.mintcode.errabbit.core.analysis.result.AnalysisResultSet;
 import org.mintcode.errabbit.core.report.dao.ReportRepository;
+import org.mintcode.errabbit.model.LogLevelHourStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -36,12 +37,10 @@ public class ReportGenerator {
         try{
             Integer targetDateInt = Integer.parseInt(format.format(date));
             AnalysisResultSet logAggregation = makeLogAnal(description, targetDateInt);
-            AnalysisResultSet logLevelAggregation = makeLogLevelAnal(description, targetDateInt);
 
             Report report = new Report();
             report.setSendTime(new Date());
             report.setLogReport(logAggregation);
-            report.setLogLevelReport(logLevelAggregation);
 
             logger.debug("generated > " + report);
             reportRepository.save(report);
@@ -72,23 +71,8 @@ public class ReportGenerator {
         req.setFilterLevels(levelSet);
         req.setGroup(group);
 
-        logger.trace("logAnalReq > " +req);
+        logger.trace("logAnalReq > " + req);
 
-        return analyzer.aggregation(req);
-    }
-
-    private AnalysisResultSet makeLogLevelAnal(ReportDescription description, Integer targetDateInt){
-        // Make logLevel count table group by rabbit.
-        List<String> group = new ArrayList<>();
-        group.add("rabbitId");
-        group.add("loggingEvent.categoryName");
-        group.add("loggingEvent.loggingEvent.categoryName");
-
-        LogLevelAnalysisRequest req = new LogLevelAnalysisRequest();
-        req.setFilterRabbits(description.getTargets());
-        req.setFilterBeginDate(targetDateInt);
-        req.setFilterEndDate(targetDateInt);
-        req.setGroup(group);
         return analyzer.aggregation(req);
     }
 

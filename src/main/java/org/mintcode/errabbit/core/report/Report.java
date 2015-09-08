@@ -19,7 +19,6 @@ public class Report implements Serializable{
 
     private Date sendTime;
     AnalysisResultSet logReport;
-    AnalysisResultSet logLevelReport;
 
     public ObjectId getId() {
         return id;
@@ -45,11 +44,4 @@ public class Report implements Serializable{
         this.logReport = logReport;
     }
 
-    public AnalysisResultSet getLogLevelReport() {
-        return logLevelReport;
-    }
-
-    public void setLogLevelReport(AnalysisResultSet logLevelReport) {
-        this.logLevelReport = logLevelReport;
-    }
 }
