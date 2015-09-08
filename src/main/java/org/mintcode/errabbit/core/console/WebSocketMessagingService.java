@@ -1,6 +1,8 @@
 package org.mintcode.errabbit.core.console;
 
+import org.mintcode.errabbit.core.rabbit.name.RabbitNameCache;
 import org.mintcode.errabbit.model.Log;
+import org.mintcode.errabbit.model.Rabbit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +20,20 @@ public class WebSocketMessagingService {
     @Autowired
     private SimpMessagingTemplate template;
 
+    @Autowired
+    private RabbitNameCache rabbitNameCache;
+
     /**
      * Forward log to console page
      * @param log
      */
     public void sendReportToConsole(Log log){
         try{
+            Rabbit rabbit = rabbitNameCache.getRabbit(log.getRabbitId());
+            if (rabbit.getHideOnConsole()){
+                return;
+            }
+
             template.convertAndSend("/topic/console", log.toHTML(true));
         }
         catch (Exception e){

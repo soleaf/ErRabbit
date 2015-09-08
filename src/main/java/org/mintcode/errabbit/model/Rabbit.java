@@ -34,6 +34,9 @@ public class Rabbit implements Serializable {
     // Collect only log has Throwable exception;
     private Boolean collectionOnlyException;
 
+    // Hide on console
+    private Boolean hideOnConsole;
+
     // Group
     @DBRef
     private RabbitGroup group;
@@ -104,6 +107,14 @@ public class Rabbit implements Serializable {
         }
     }
 
+    public Boolean getHideOnConsole() {
+        return hideOnConsole == null ? false : hideOnConsole;
+    }
+
+    public void setHideOnConsole(Boolean hideOnConsole) {
+        this.hideOnConsole = hideOnConsole;
+    }
+
     public void setGroup(RabbitGroup group) {
         this.group = group;
     }
@@ -117,6 +128,8 @@ public class Rabbit implements Serializable {
                 ", read=" + read +
                 ", basePackage='" + basePackage + '\'' +
                 ", collectionOnlyException=" + collectionOnlyException +
+                ", hideOnConsole=" + hideOnConsole +
+                ", group=" + group +
                 '}';
     }
 }

@@ -78,6 +78,7 @@ public class RabbitController {
                                @RequestParam(value = "basePackage", required = true) String basePackage,
                                @RequestParam(value = "group", required = false) String groupId,
                                @RequestParam(value = "onlyException", required = false, defaultValue = "false") Boolean onlyException,
+                               @RequestParam(value = "hideOnConsole", required = false, defaultValue = "false") Boolean hideOnConsole,
                                Model model) {
         try {
 
@@ -90,7 +91,7 @@ public class RabbitController {
                 }
             }
 
-            Rabbit newRabbit = rabbitManagingService.makeNewRabbit(id, basePackage, onlyException, group);
+            Rabbit newRabbit = rabbitManagingService.makeNewRabbit(id, basePackage, onlyException, group, hideOnConsole);
             logger.info("Made new Rabbit > " + newRabbit);
 
             model.addAttribute("info", String.format("Success to make Rabbit '%s'", id));
@@ -129,6 +130,7 @@ public class RabbitController {
                                @RequestParam(value = "basePackage", required = true) String basePackage,
                                @RequestParam(value = "group", required = false) String groupId,
                                @RequestParam(value = "onlyException", required = false, defaultValue = "false") Boolean onlyException,
+                               @RequestParam(value = "hideOnConsole", required = false, defaultValue = "false") Boolean hideOnConsole,
                                Model model) {
         try {
             Rabbit rabbit = rabbitManagingService.getRabbitById(id);
@@ -152,6 +154,7 @@ public class RabbitController {
 
             rabbit.setBasePackage(basePackage);
             rabbit.setCollectionOnlyException(onlyException);
+            rabbit.setHideOnConsole(hideOnConsole);
             Rabbit savedRabbit = rabbitManagingService.saveRabbit(rabbit);
 
             logger.info("Modify Rabbit > " + savedRabbit);

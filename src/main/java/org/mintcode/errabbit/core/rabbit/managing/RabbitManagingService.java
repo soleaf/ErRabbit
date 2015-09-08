@@ -21,13 +21,9 @@ public interface RabbitManagingService {
      */
     public Rabbit makeNewRabbit(String id,
                                 String basePackage,
-                                Boolean collectOnlyException) throws AlreadyExistRabbitIDException,
-            InvalidRabbitNameException, InvalidBasePackageException;
-
-    public Rabbit makeNewRabbit(String id,
-                                String basePackage,
                                 Boolean collectOnlyException,
-                                RabbitGroup group) throws AlreadyExistRabbitIDException,
+                                RabbitGroup group,
+                                Boolean hideOnConsole) throws AlreadyExistRabbitIDException,
             InvalidRabbitNameException, InvalidBasePackageException;
 
     /**

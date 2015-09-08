@@ -42,17 +42,13 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
     private RabbitNameComparator rabbitNameComparator = new RabbitNameComparator();
     private RabbitGroupNameComparator rabbitGroupNameComparator = new RabbitGroupNameComparator();
 
-
     @Override
     public Rabbit makeNewRabbit(String id,
                                 String basePackage,
-                                Boolean collectOnlyException) throws AlreadyExistRabbitIDException,
-            InvalidRabbitNameException, InvalidBasePackageException {
-            return makeNewRabbit(id, basePackage, collectOnlyException, null);
-    }
-
-    @Override
-    public Rabbit makeNewRabbit(String id, String basePackage, Boolean collectOnlyException, RabbitGroup group) throws AlreadyExistRabbitIDException, InvalidRabbitNameException, InvalidBasePackageException {
+                                Boolean collectOnlyException,
+                                RabbitGroup group,
+                                Boolean hideOnConsole)
+            throws AlreadyExistRabbitIDException, InvalidRabbitNameException, InvalidBasePackageException {
 
         // Rabbit Name Validation
         if (id == null){
@@ -78,6 +74,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         rabbit.setRegDate(new Date());
         rabbit.setCollectionOnlyException(collectOnlyException);
         rabbit.setGroup(group);
+        rabbit.setHideOnConsole(hideOnConsole);
 
         rabbitRepository.save(rabbit);
 

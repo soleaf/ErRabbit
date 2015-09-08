@@ -38,6 +38,9 @@
                     <c:if test="${rabbit.collectionOnlyException}">
                         <c:set var="collectionOnlyException" value="checked"/>
                     </c:if>
+                    <c:if test="${rabbit.hideOnConsole}">
+                        <c:set var="hideOnConsole" value="checked"/>
+                    </c:if>
                 </c:if>
                 <div class="main-form">
                     <label class="control-label">GENERAL</label>
@@ -75,6 +78,13 @@
                             Collect only exception
                         </label>
                         <span class="help-block">Discard any other logs has no throwable exception</span>
+                    </div>
+                    <div class="sub-form">
+                        <label>
+                            <input type="checkbox" name="hideOnConsole" value="true" ${hideOnConsole}/>
+                            Hide on console
+                        </label>
+                        <span class="help-block">Hide this rabbit's logs on console page</span>
                     </div>
                 </div>
 
