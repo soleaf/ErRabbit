@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
+ * Login page
  * Created by soleaf on 2015. 4. 13..
  */
 @Controller
@@ -17,7 +18,7 @@ public class LoginController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping(value = "/login")
-    public String list(Model model,
+    public String login(Model model,
                              @RequestParam(value = "error", required = false) String error,
                              @RequestParam(value = "logout", required = false) String logout){
 

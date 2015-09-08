@@ -37,7 +37,7 @@ public class RabbitController {
     LogLevelDailyStatisticsRepository logLevelDailyStatisticsRepository;
 
     // List of all Rabbits
-    @RequestMapping(value = {"list"})
+    @RequestMapping(value = "list")
     public ModelAndView list(Model model,
                              @RequestParam(value = "info", required = false) String info,
                              @RequestParam(value = "error", required = false) String error) {
@@ -233,12 +233,16 @@ public class RabbitController {
         return "/rabbit/setup";
     }
 
+    /**
+     * Not Found Rabbit
+     */
     public class RabbitNotExistException extends Exception {
         public RabbitNotExistException(String id) {
             super(String.format("Rabbit '%s' is not exist", id));
         }
     }
 
+    // Group list  UI
     @RequestMapping(value = "group")
     public String groupList(Model model){
         try{
@@ -251,6 +255,7 @@ public class RabbitController {
         }
     }
 
+    // Group insert action
     @RequestMapping(value = "group/insert")
     public String groupInsert(@RequestParam String name, Model model){
         try{
@@ -264,6 +269,7 @@ public class RabbitController {
         }
     }
 
+    // group modify action
     @RequestMapping(value = "group/modify")
     public String groupModify(@RequestParam String id, @RequestParam String name, Model model){
         try{
@@ -282,6 +288,7 @@ public class RabbitController {
         }
     }
 
+    // group delete action
     @RequestMapping(value = "group/delete")
     public String groupDelete(@RequestParam String id, Model model){
         try {

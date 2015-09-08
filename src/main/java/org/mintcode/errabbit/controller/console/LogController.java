@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
+ * Explorer logs for a rabbit
  * Created by soleaf on 2/16/15.
  */
 @Controller
@@ -49,7 +50,7 @@ public class LogController {
     @Autowired
     private ReportPresentation reportPresentation;
 
-    // List for report
+    // Main UI
     @RequestMapping(value = "list")
     public ModelAndView list(Model model,
                              @RequestParam(value = "id", required = true) String id) {
@@ -141,6 +142,11 @@ public class LogController {
 
     }
 
+    /**
+     * DayCell
+     * Calendar day cell class has LogLevelStatistics
+     * It' using to show each day's log counts on UI
+     */
     public class DayCell {
         private Integer dayOfMonth;
         private LogLevelDailyStatistics statistics;
@@ -165,7 +171,7 @@ public class LogController {
         }
     }
 
-    // AJAX Log List DATA API for report
+    // log list data (ajax)
     @RequestMapping(value = "list_data")
     public ModelAndView reportListData(Model model,
                              @RequestParam(value = "id", required = true) String id,
@@ -216,14 +222,13 @@ public class LogController {
         catch (Exception e){
             e.printStackTrace();
             logger.error(e.getMessage(),e);
-            // todo: make ErrorPage
             model.addAttribute("e",e);
             return new ModelAndView("/log/list_data");
         }
 
     }
 
-    // AJAX Log PopOver DATA API for report
+    // Log popover data (ajax)
     @RequestMapping(value = "popover_data")
     public ModelAndView reportListData(Model model,
                                        @RequestParam(value = "id", required = true) String id

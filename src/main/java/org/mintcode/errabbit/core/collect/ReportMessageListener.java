@@ -51,7 +51,7 @@ public class ReportMessageListener implements MessageListener {
 
     @PostConstruct
     public void onStartup(){
-        logger.info("ActiveMQ Listener ready");
+        logger.info("ActiveMQ listener ready");
     }
 
     public void onMessage(Message message) {

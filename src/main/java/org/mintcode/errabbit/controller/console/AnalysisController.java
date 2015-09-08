@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * Analysis is user query tool to handle data aggregation
  * Created by soleaf on 6/27/15.
  */
 @Controller
@@ -37,7 +38,7 @@ public class AnalysisController {
     @Autowired
     private AggregationAnalyzer analyzer;
 
-    // main
+    // Main UI
     @RequestMapping(value = "main")
     public ModelAndView list(Model model) {
         try {
@@ -46,15 +47,13 @@ public class AnalysisController {
             model.addAttribute(rabbitList);
             return new ModelAndView("/anal/main");
         } catch (Exception e) {
-            e.printStackTrace();
             logger.error(e.getMessage(), e);
-            // todo: make ErrorPage
             model.addAttribute("e", e);
             return new ModelAndView("/anal/main");
         }
     }
 
-    // Aggregation
+    // Aggregation (Ajax call)
     @RequestMapping(value = "aggregation", method = RequestMethod.POST)
     public ModelAndView aggregation(Model model,
                                     @RequestParam(value = "rabbit") String rabbit,
@@ -70,6 +69,7 @@ public class AnalysisController {
                                     )
     {
         try {
+
             LogAnalysisRequest req = new LogAnalysisRequest();
             model.addAttribute("req", req);
 
@@ -120,10 +120,11 @@ public class AnalysisController {
             // Get Rabbit List
             List<Rabbit> rabbitList = rabbitManagingService.getRabbits();
             model.addAttribute(rabbitList);
+
             return new ModelAndView("/anal/result");
+
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            // todo: make ErrorPage
             model.addAttribute("e", e);
             return new ModelAndView("/anal/result");
         }

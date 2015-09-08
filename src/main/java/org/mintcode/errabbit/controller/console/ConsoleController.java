@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
+ * Receive all logs on one page through web socket.
  * Created by soleaf on 15. 6. 7..
  */
 @Controller
@@ -24,6 +25,7 @@ public class ConsoleController {
     @Autowired
     LogRepository logRepository;
 
+    // Main UI
     @RequestMapping(value = "main")
     public String main(Model model){
         try{
@@ -40,6 +42,7 @@ public class ConsoleController {
         }
     }
 
+    // Extend login session call (Ajax)
     @RequestMapping(value = "session")
     public String extendSession(Model model) {
         return  "/console/session";
