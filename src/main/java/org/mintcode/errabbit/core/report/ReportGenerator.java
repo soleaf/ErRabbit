@@ -36,12 +36,12 @@ public class ReportGenerator {
         try{
             Integer targetDateInt = Integer.parseInt(format.format(date));
             AnalysisResultSet logAggregation = makeLogAnal(description, targetDateInt);
-//            AnalysisResultSet logLevelAggregation = makeLogLevelAnal(description, targetDateInt);
+            AnalysisResultSet logLevelAggregation = makeLogLevelAnal(description, targetDateInt);
 
             Report report = new Report();
             report.setSendTime(new Date());
-//            report.setLogLevelReport(logLevelAggregation);
             report.setLogReport(logAggregation);
+            report.setLogLevelReport(logLevelAggregation);
 
             logger.debug("generated > " + report);
             reportRepository.save(report);

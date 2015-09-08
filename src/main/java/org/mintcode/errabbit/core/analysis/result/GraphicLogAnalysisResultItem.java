@@ -18,12 +18,34 @@ public class GraphicLogAnalysisResultItem implements Serializable {
 
     String field;
     Integer count = 0;
-    double percent = 0.0;
+    Double percent = 0.0;
+
+    @Transient
     GraphicLogAnalysisResultItem superItem;
-    List<GraphicLogAnalysisResultItem> subItems = new ArrayList<>();
+    List<GraphicLogAnalysisResultItem> subItems;
+
+    public GraphicLogAnalysisResultItem(){
+
+    }
 
     public GraphicLogAnalysisResultItem(String field) {
         this.field = field;
+    }
+
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public void setPercent(Double percent) {
+        this.percent = percent;
+    }
+
+    public void setSubItems(List<GraphicLogAnalysisResultItem> subItems) {
+        this.subItems = subItems;
     }
 
     public String getField() {
@@ -47,6 +69,9 @@ public class GraphicLogAnalysisResultItem implements Serializable {
     }
 
     public void addSub(GraphicLogAnalysisResultItem subItem) {
+        if (subItems == null){
+            subItems = new ArrayList<>();
+        }
         subItems.add(subItem);
         subItem.setSuperItem(this);
     }
@@ -79,7 +104,7 @@ public class GraphicLogAnalysisResultItem implements Serializable {
             logger.info("can't divide by zero");
             return;
         }
-        if (!subItems.isEmpty()) {
+        if (subItems != null && !subItems.isEmpty()) {
             for (GraphicLogAnalysisResultItem item : subItems) {
                 item.setPercent((item.getCount() * 100.0f) / count);
                 item.calcPercents();
@@ -89,7 +114,7 @@ public class GraphicLogAnalysisResultItem implements Serializable {
 
     public String debug(String prefix) {
         String thisDesc = "\n" + prefix + "- " + field + " (" + count + ", %" + percent + ")";
-        if (!subItems.isEmpty()) {
+        if (subItems != null && !subItems.isEmpty()) {
             for (GraphicLogAnalysisResultItem item : subItems) {
                 thisDesc += item.debug(prefix + "  ");
             }
@@ -100,7 +125,7 @@ public class GraphicLogAnalysisResultItem implements Serializable {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        if (!subItems.isEmpty()) {
+        if (subItems != null && !subItems.isEmpty()) {
             for (GraphicLogAnalysisResultItem item : subItems) {
                 sb.append(item.debug("  "));
             }

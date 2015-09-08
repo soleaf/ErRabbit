@@ -87,7 +87,7 @@ public class LogLevelAnalysisRequest implements AnalysisRequest {
 
         // Filter : RabbitId
         if (getFilterRabbits() != null && !getFilterRabbits().isEmpty()){
-            op.add(new MatchOperation(Criteria.where("rabbit").in(getFilterRabbits())));
+            op.add(new MatchOperation(Criteria.where("rabbitId").in(getFilterRabbits())));
         }
 
         // Filter : Date
@@ -109,10 +109,22 @@ public class LogLevelAnalysisRequest implements AnalysisRequest {
 
         // Group by
         if (group != null){
-            op.add(new GroupOperation(Fields.fields((String[]) group.toArray())).count().as("count"));
-            op.add(new SortOperation(new Sort(Sort.Direction.ASC, (String[]) group.toArray())));
+
+            logger.debug("group > " + group);
+            String[] fieldsStr = new String[group.size()];
+            for (int i = 0 ; i < group.size() ; i++){
+                fieldsStr[i] = group.get(i);
+            }
+
+            Fields files = Fields.fields(fieldsStr);
+            op.add(new GroupOperation(files).count().as("count"));
+            op.add(new SortOperation(new Sort(Sort.Direction.ASC, fieldsStr)));
         }
         return op;
+    }
+
+    public void setCollection(String collection) {
+        this.collection = collection;
     }
 
     @Override

@@ -2,7 +2,6 @@ package org.mintcode.errabbit.core.analysis.result;
 
 import org.mintcode.errabbit.core.analysis.FieldConverter;
 import org.mintcode.errabbit.core.analysis.request.AnalysisRequest;
-import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Transient;
@@ -19,9 +18,14 @@ public class GraphicLogAnalysisResult implements AnalysisResult {
     @Transient
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    GraphicLogAnalysisResultItem root = new GraphicLogAnalysisResultItem("root");
+    private GraphicLogAnalysisResultItem root;
+
+    public GraphicLogAnalysisResult(){
+
+    }
 
     public GraphicLogAnalysisResult(AnalysisRequest req, List<Map<String, Object>> list){
+        root = new GraphicLogAnalysisResultItem("root");
         for (Map<String,Object> row : list){
             GraphicLogAnalysisResultItem superItem = null;
             for (String group : req.getGroup()){
@@ -45,7 +49,7 @@ public class GraphicLogAnalysisResult implements AnalysisResult {
         else{
             parents = superItem;
         }
-        if (!parents.subItems.isEmpty()){
+        if (parents.subItems != null && !parents.subItems.isEmpty()){
             for (GraphicLogAnalysisResultItem item : parents.getSubItems()){
                 if (item.getField().equals(field)){
                     return item;
@@ -56,6 +60,14 @@ public class GraphicLogAnalysisResult implements AnalysisResult {
         GraphicLogAnalysisResultItem item = new GraphicLogAnalysisResultItem(field);
         parents.addSub(item);
         return item;
+    }
+
+    public void setRoot(GraphicLogAnalysisResultItem root) {
+        this.root = root;
+    }
+
+    public GraphicLogAnalysisResultItem getRoot() {
+        return root;
     }
 
     @Override

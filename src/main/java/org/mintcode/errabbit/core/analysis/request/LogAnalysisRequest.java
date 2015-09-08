@@ -103,7 +103,7 @@ public class LogAnalysisRequest implements AnalysisRequest {
         // Filter : RabbitId
         if (getFilterRabbits() != null && !getFilterRabbits().isEmpty()){
             logger.trace("rabbit " + getFilterRabbits());
-            op.add(new MatchOperation(Criteria.where("rabbit").in(getFilterRabbits())));
+            op.add(new MatchOperation(Criteria.where("rabbitId").in(getFilterRabbits())));
         }
 
         // Filter : Levels
@@ -149,7 +149,6 @@ public class LogAnalysisRequest implements AnalysisRequest {
 
         return op;
     }
-
 
     @Override
     public String toString() {

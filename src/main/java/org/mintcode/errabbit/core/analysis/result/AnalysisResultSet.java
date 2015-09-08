@@ -24,6 +24,14 @@ public class AnalysisResultSet implements Serializable {
     @Transient
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    public AnalysisResultSet(){
+
+    }
+
+    public void setResults(Map<String, AnalysisResult> results) {
+        this.results = results;
+    }
+
     public AnalysisResultSet(AnalysisRequest req, List<Map<String, Object>> result){
         logger.trace("result > " + result);
         results.put(TABLE, new TableLogAnalysisResult(result));
