@@ -79,6 +79,10 @@ function disconnect() {
 
 function appendReports(message) {
     $("#waiting").fadeOut();
+    // Remove Over line
+    if ($("#log-list .log").length > 1000){
+        $("#log-list .log").last().remove();
+    }
     $("#log-list").prepend(message);
     reportEvent();
 }
