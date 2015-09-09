@@ -44,7 +44,7 @@ public class ReportScheduler {
             Calendar cal = Calendar.getInstance();
             cal.setTime(new Date());
             Integer nowHour = cal.get(Calendar.HOUR_OF_DAY);
-            if (nowHour == description.getTime().getHour()){
+            if (nowHour.equals(description.getTime().getHour())){
                 cal.add(Calendar.DAY_OF_MONTH, -1);
                 generator.generate(description, cal.getTime());
             }
