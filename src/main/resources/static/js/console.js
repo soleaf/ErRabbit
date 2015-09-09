@@ -121,10 +121,10 @@ function extendSession(){
         type : "GET",
         url : "/console/session.err",
         success: function (data) {
-          console.log("extended session : ok");
+
         }
         ,fail: function(){
-            console.log("extended session : fail");
+            // todo show erormessage
         }
     });
 
