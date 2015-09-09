@@ -132,6 +132,7 @@ function initlogFeedButton(){
 function retrievelogs(rabbitId, page, size, y, m, d) {
 
     showLoading();
+    $("#log-feed").fadeOut();
     $.ajax({
         url : '/log/list_data.err?id=' + rabbitId + '&page=' + page + '&size=' + size
         + '&y=' + y + '&m=' + m + '&d=' + d,
@@ -141,28 +142,25 @@ function retrievelogs(rabbitId, page, size, y, m, d) {
             $("#log-list").append(data);
 
             // PagingInfo
-            totalPages = $("#log-list #page_total").val();
+            var totalPages = $("#log-list #page_total").val();
             if (totalPages > parseInt(page)+1){
-                $("#log-feed").show();
+                $("#log-feed").fadeIn();
                 $("#log-feed").attr("data-page", parseInt(page)+1);
             }
             else{
-                $("#log-feed").hide();
+                $("#log-feed").fadeOut();
             }
 
             $("#log-list .log[data-e=true]").click(function(){
-
                 // log Detail Information Layer Toggle
                 var row = $(this);
                 $.get(row.data('poload'),function(d) {
-
                     $("#popover_log_title").html(row.find(".time").text() + " " + row.find(".level").text());
                     $("#popover_log_body").html(d);
                     $("#popover_log").modal();
 
                 });
             });
-
             hideLoading();
         }
     });
