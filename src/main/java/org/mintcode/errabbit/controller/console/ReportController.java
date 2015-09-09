@@ -4,9 +4,13 @@ import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;
 import org.mintcode.errabbit.core.report.ReportDescription;
 import org.mintcode.errabbit.core.report.ReportDescriptionTime;
 import org.mintcode.errabbit.core.report.dao.ReportDescriptionRepository;
+import org.mintcode.errabbit.core.report.dao.ReportRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +35,17 @@ public class ReportController {
 
     @Autowired
     ReportDescriptionRepository descriptionRepository;
+
+    @Autowired
+    ReportRepository reportRepository;
+
+//    @RequestMapping(value = "list")
+//    public ModelAndView list(@RequestParam(defaultValue = "0", required = false) Integer page,
+//                             @RequestParam(defaultValue = "10", required = false) Integer size){
+//        Pageable pageReq = new PageRequest(page, size, Sort.Direction.DESC);
+//        reportRepository.findAll()
+//
+//    }
 
     @RequestMapping(value = {"settings"})
     public ModelAndView settings(Model model){
