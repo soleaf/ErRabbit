@@ -34,7 +34,7 @@ public class AnalysisResultSet implements Serializable {
 
     public AnalysisResultSet(AnalysisRequest req, List<Map<String, Object>> result){
         logger.trace("result > " + result);
-        results.put(TABLE, new TableLogAnalysisResult(result));
+        results.put(TABLE, new TableLogAnalysisResult(req, result));
         results.put(GRAPHIC, new GraphicLogAnalysisResult(req, result));
     }
 
