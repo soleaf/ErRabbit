@@ -97,6 +97,10 @@ function addGroupByItemVal(val){
 function removeGroupByItemVal(val){
     var array = $("#groupBy").val();
     array = array.replace(val+",","");
-    array = array.replace(val,"");
+    array = array.replace(val,"");;
+    if (array.indexOf(",") == 0)
+        array = array.substring(1, array.length);
+    if (array.lastIndexOf(",") == array.length-1)
+        array = array.substring(0, array.length-1);
     $("#groupBy").val(array);
 }
