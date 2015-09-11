@@ -34,7 +34,7 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.heartbeat.outgoing = 20000; // client will send heartbeats every 20000ms
     stompClient.heartbeat.incoming = 0;     // client does not want to receive heartbeats
-    // from the server
+    stompClient.debug = function(str) {};
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
@@ -43,16 +43,13 @@ function connect() {
             }
         );
     }, function () {
-        console.log('STOMP: Reconnecting in 10 seconds');
         setTimeout(function () {
             connect();
         }, 10000);
-
     });
 
     socket.onclose = function () {
         //todo : notify close as window
-        console.log('STOMP: Reconnecting in 10 seconds');
         if (retry < 5) {
             $("#con_connecting").css("display", "inline-block");
             $("#con_success").hide();

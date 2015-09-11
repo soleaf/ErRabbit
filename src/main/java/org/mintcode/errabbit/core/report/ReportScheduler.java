@@ -26,7 +26,7 @@ public class ReportScheduler {
     @Autowired
     ReportGenerator generator;
 
-    @Scheduled(cron = "0 * * * * * *")
+    @Scheduled(cron = "0 * * * * *")
     public void check(){
         try{
             List<ReportDescription> descriptionList = repository.findAll();

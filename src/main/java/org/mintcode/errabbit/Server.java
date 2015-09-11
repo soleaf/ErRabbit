@@ -10,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -22,6 +23,7 @@ import javax.servlet.Filter;
  * Created by soleaf on 2015. 4. 20..
  */
 @SpringBootApplication
+@EnableScheduling
 @ImportResource( {"classpath:mq-listener.xml" } )
 public class Server {
 

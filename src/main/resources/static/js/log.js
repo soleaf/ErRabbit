@@ -132,7 +132,7 @@ function initlogFeedButton(){
 function retrievelogs(rabbitId, page, size, y, m, d) {
 
     showLoading();
-    $("#log-feed").fadeOut();
+    $("#log-feed").hide();
     $.ajax({
         url : '/log/list_data.err?id=' + rabbitId + '&page=' + page + '&size=' + size
         + '&y=' + y + '&m=' + m + '&d=' + d,
