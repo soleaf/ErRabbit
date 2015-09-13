@@ -148,7 +148,7 @@ function retrievelogs(rabbitId, page, size, y, m, d) {
                 $("#log-feed").attr("data-page", parseInt(page)+1);
             }
             else{
-                $("#log-feed").fadeOut();
+                $("#log-feed").hide();
             }
 
             $("#log-list .log[data-e=true]").click(function(){

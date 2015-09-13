@@ -14,7 +14,7 @@
 </head>
 <body class="report">
 <jsp:include page="../common/nav.jsp">
-    <jsp:param name="log" value="active"/>
+    <jsp:param name="report" value="active"/>
 </jsp:include>
 <section class="page">
     <jsp:include page="side.jsp">

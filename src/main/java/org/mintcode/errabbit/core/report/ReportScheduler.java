@@ -26,6 +26,7 @@ public class ReportScheduler {
     @Autowired
     ReportGenerator generator;
 
+
     @Scheduled(cron = "0 0 * * * *")
     public void check(){
         try{

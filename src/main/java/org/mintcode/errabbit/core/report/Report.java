@@ -6,7 +6,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by soleaf on 15. 8. 9..
@@ -14,11 +17,15 @@ import java.util.Date;
 @Document(collection = "reports")
 public class Report implements Serializable{
 
+    private static final DateFormat format = new SimpleDateFormat("yyyy.MM.dd");
+
     @Id
     private ObjectId id;
-
     private Date sendTime;
-    AnalysisResultSet logReport;
+    private Date targetDate;
+    private Boolean read = false;
+    private AnalysisResultSet logReport;
+    private Set<String> targets;
 
     public ObjectId getId() {
         return id;
@@ -44,4 +51,42 @@ public class Report implements Serializable{
         this.logReport = logReport;
     }
 
+    public Boolean getRead() {
+        return read == null ? false : read;
+    }
+
+    public void setRead(Boolean read) {
+        this.read = read;
+    }
+
+    public Set<String> getTargets() {
+        return targets;
+    }
+
+    public void setTargets(Set<String> targets) {
+        this.targets = targets;
+    }
+
+    public Date getTargetDate() {
+        return targetDate;
+    }
+
+    public void setTargetDate(Date targetDate) {
+        this.targetDate = targetDate;
+    }
+
+    public String getTargetDateWithFormat(){
+        return format.format(targetDate);
+    }
+    @Override
+    public String toString() {
+        return "Report{" +
+                "id=" + id +
+                ", sendTime=" + sendTime +
+                ", targetDate=" + targetDate +
+                ", read=" + read +
+                ", logReport=" + logReport +
+                ", targets=" + targets +
+                '}';
+    }
 }

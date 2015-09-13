@@ -83,6 +83,14 @@ UL LI{
     border: 1px solid #5d9aa1;
 }
 
+.panel-primary{
+    border-color: #7BCCD4;
+}
+.panel-primary>.panel-heading{
+    background-color: #7BCCD4;
+    border-bottom-color: #7BCCD4;
+}
+
 .btn-page-navi {
     height: 25px;
     padding:0px;
@@ -1089,4 +1097,58 @@ header .logout{
 .rabbit-group .alert{
     display: inline-block;
     margin-top:20px;
+}
+
+.report .report-list{
+    margin-top:10px;
+    max-width:500px;
+}
+.report .report-list .delete{
+    float:right;
+}
+.report .report-list .detail{
+/*float:right;*/
+}
+.report .report-list .date,
+.report .report-list .delete{
+    color: #878787;
+    font-size:12px;
+}
+
+.report .rank .level{
+    padding-left:15px;
+}
+.report .rank .count{
+    padding-right:15px;
+}
+
+.report .rank>tbody>tr>.level{
+    font-weight: bold;
+}
+.report .rank>tbody>tr>.className{
+    text-decoration: underline;
+}
+.report .rank .DEBUG{
+    color: #868686;
+}
+
+.report .rank .WARN{
+    color: #ffbf5e;
+}
+
+.report .rank .ERROR{
+    color: #FF8166;
+}
+
+.report .rank.FATAL{
+    color: #ff5572;
+}
+
+.report .page .chapter{
+    max-width:800px;
+    margin-bottom: 20px;
+}
+
+.report .page h3{
+    color:#7BCCD4;
 }

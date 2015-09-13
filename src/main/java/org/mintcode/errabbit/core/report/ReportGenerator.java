@@ -40,8 +40,9 @@ public class ReportGenerator {
 
             Report report = new Report();
             report.setSendTime(new Date());
+            report.setTargetDate(date);
             report.setLogReport(logAggregation);
-
+            report.setTargets(description.getTargets());
             logger.debug("generated > " + report);
             reportRepository.save(report);
             return true;
@@ -62,7 +63,7 @@ public class ReportGenerator {
         List<String> group = new ArrayList<>();
         group.add("rabbitId");
         group.add("loggingEvent.categoryName");
-        group.add("loggingEvent.loggingEvent.categoryName");
+        group.add("loggingEvent.level");
 
         LogAnalysisRequest req = new LogAnalysisRequest();
         req.setFilterRabbits(description.getTargets());

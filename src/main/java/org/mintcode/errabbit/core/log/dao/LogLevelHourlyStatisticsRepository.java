@@ -18,4 +18,6 @@ public interface LogLevelHourlyStatisticsRepository extends MongoRepository<LogL
 
     public List<LogLevelHourStatistics> deleteByRabbitId(String rabbitId);
 
+    public List<LogLevelHourStatistics> findByRabbitIdAndDateInt(String rabbitId, Integer dateInt);
+
 }

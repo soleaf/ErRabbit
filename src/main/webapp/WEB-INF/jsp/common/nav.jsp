@@ -8,7 +8,7 @@
             <li class="${param.rabbit}"><a href="/rabbit/list.err">Rabbits</a></li>
             <li class="${param.console}"><a href="/console/main.err">Console</a></li>
             <li class="${param.anal}"><a href="/anal/main.err">Analysis</a></li>
-            <li class="${param.log}"><a href="/report/settings.err">Reports</a></li>
+            <li class="${param.report}"><a href="/report/list.err">Reports</a></li>
         </ul>
         <a class="logout" href="/logout">LogOut</a>
     </nav>

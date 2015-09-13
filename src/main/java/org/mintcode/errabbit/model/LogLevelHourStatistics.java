@@ -54,6 +54,9 @@ public class LogLevelHourStatistics implements Serializable {
 
     private Integer level_ERROR;
 
+    @Indexed
+    private Integer dateInt;
+
     public ObjectId getId() {
         return id;
     }
@@ -94,8 +97,12 @@ public class LogLevelHourStatistics implements Serializable {
         this.day = day;
     }
 
+    public Integer getValZero(Integer i){
+        return i == null ? 0 : i;
+    }
+
     public Integer getLevel_DEBUG() {
-        return level_DEBUG;
+        return getValZero(level_DEBUG);
     }
 
     public void setLevel_DEBUG(Integer level_DEBUG) {
@@ -103,7 +110,7 @@ public class LogLevelHourStatistics implements Serializable {
     }
 
     public Integer getLevel_INFO() {
-        return level_INFO;
+        return getValZero(level_INFO);
     }
 
     public void setLevel_INFO(Integer level_INFO) {
@@ -111,7 +118,7 @@ public class LogLevelHourStatistics implements Serializable {
     }
 
     public Integer getLevel_TRACE() {
-        return level_TRACE;
+        return getValZero(level_TRACE);
     }
 
     public void setLevel_TRACE(Integer level_TRACE) {
@@ -119,7 +126,7 @@ public class LogLevelHourStatistics implements Serializable {
     }
 
     public Integer getLevel_WARN() {
-        return level_WARN;
+        return getValZero(level_WARN);
     }
 
     public void setLevel_WARN(Integer level_WARN) {
@@ -127,7 +134,7 @@ public class LogLevelHourStatistics implements Serializable {
     }
 
     public Integer getLevel_FATAL() {
-        return level_FATAL;
+        return getValZero(level_FATAL);
     }
 
     public void setLevel_FATAL(Integer level_FATAL) {
@@ -135,7 +142,7 @@ public class LogLevelHourStatistics implements Serializable {
     }
 
     public Integer getLevel_ERROR() {
-        return level_ERROR;
+        return getValZero(level_ERROR);
     }
 
     public void setLevel_ERROR(Integer level_ERROR) {
@@ -148,6 +155,42 @@ public class LogLevelHourStatistics implements Serializable {
 
     public void setHour(Integer hour) {
         this.hour = hour;
+    }
+
+    public Integer getDateInt() {
+        return dateInt;
+    }
+
+    public void setDateInt(Integer dateInt) {
+        this.dateInt = dateInt;
+    }
+
+    public void add(LogLevelHourStatistics statistics){
+
+        if (level_DEBUG == null){
+            level_DEBUG = 0;
+        }
+        if (level_TRACE == null){
+            level_TRACE = 0;
+        }
+        if (level_INFO == null){
+            level_INFO = 0;
+        }
+        if (level_WARN == null){
+            level_WARN = 0;
+        }
+        if (level_FATAL == null){
+            level_FATAL = 0;
+        }
+        if (level_ERROR == null){
+            level_ERROR = 0;
+        }
+        level_DEBUG += statistics.getLevel_DEBUG();
+        level_TRACE += statistics.getLevel_TRACE();
+        level_INFO += statistics.getLevel_INFO();
+        level_ERROR += statistics.getLevel_ERROR();
+        level_WARN += statistics.getLevel_WARN();
+        level_FATAL += statistics.getLevel_FATAL();
     }
 
     @Override
