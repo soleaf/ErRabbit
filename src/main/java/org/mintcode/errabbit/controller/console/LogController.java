@@ -53,7 +53,11 @@ public class LogController {
     // Main UI
     @RequestMapping(value = "list")
     public ModelAndView list(Model model,
-                             @RequestParam(value = "id", required = true) String id) {
+                             @RequestParam(value = "id", required = true) String id,
+                             @RequestParam(required = false) Integer y,
+                             @RequestParam(required = false) Integer m,
+                             @RequestParam(required = false) Integer d
+                             ) {
         try{
             Rabbit rabbit = rabbitNameCache.getRabbit(id);
             if (rabbit == null){
@@ -76,14 +80,23 @@ public class LogController {
                 Date today = new Date();
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(today);
-
-                for (int y = firstDayStatistic.getYear(); y <= cal.get(Calendar.YEAR) ; y++){
-                    yearList.add(y);
+                for (int listYear = firstDayStatistic.getYear(); listYear <= cal.get(Calendar.YEAR) ; listYear++){
+                    yearList.add(listYear);
                 }
                 model.addAttribute("yearList",yearList);
-                model.addAttribute("today_y", cal.get(Calendar.YEAR));
-                model.addAttribute("today_m", cal.get(Calendar.MONTH) +1); // warn : jan.=1
-                model.addAttribute("today_d", cal.get(Calendar.DAY_OF_MONTH));
+
+                // filter by param
+                if (y != null && m != null && d != null){
+                    model.addAttribute("today_y", y);
+                    model.addAttribute("today_m", m); // warn : jan.=1
+                    model.addAttribute("today_d", d);
+                    logger.trace("selected date y="+ y+ " m="+m +" d="+d);
+                }
+                else{
+                    model.addAttribute("today_y", cal.get(Calendar.YEAR));
+                    model.addAttribute("today_m", cal.get(Calendar.MONTH) + 1); // warn : jan.=1
+                    model.addAttribute("today_d", cal.get(Calendar.DAY_OF_MONTH));
+                }
             }
 
             model.addAttribute(rabbit);
@@ -179,7 +192,9 @@ public class LogController {
                              @RequestParam(value = "size", required = false) Integer size,
                              @RequestParam(value = "y", required = true) String year,
                              @RequestParam(value = "m", required = true) String month,
-                             @RequestParam(value = "d", required = true) String day
+                             @RequestParam(value = "d", required = true) String day,
+                             @RequestParam(value = "level", required = false) String level,
+                             @RequestParam(value = "class", required = false) String className
     ) {
         try{
 
@@ -207,24 +222,41 @@ public class LogController {
             Integer loggingEventDateInt = Integer.parseInt(year + month + day);
             Sort sort = new Sort(Sort.Direction.DESC, "_id");
 
-            Page<Log> reportPage
-                    = logRepository.findByRabbitIdAndLoggingEventDateInt(id
-                    , loggingEventDateInt
-                    , new PageRequest(page, size, sort));
-
+            Page<Log> reportPage = null;
+            if (level == null && className == null){
+                reportPage = logRepository.findByRabbitIdAndLoggingEventDateInt(id
+                        , loggingEventDateInt
+                        , new PageRequest(page, size, sort));
+            }
+            else if (level !=null && className == null){
+                reportPage = logRepository.findByRabbitIdAndLoggingEventDateIntAndLevel(id
+                        , loggingEventDateInt
+                        , level
+                        , new PageRequest(page, size, sort));
+            }
+            else if (level ==null && className != null){
+                reportPage = logRepository.findByRabbitIdAndLoggingEventDateIntAndClassName(id
+                        , loggingEventDateInt
+                        , className
+                        , new PageRequest(page, size, sort));
+            }
+            else if (level !=null && className != null){
+                reportPage = logRepository.findByRabbitIdAndLoggingEventDateIntAndLevelAndClassName(id
+                        , loggingEventDateInt
+                        , level
+                        , className
+                        , new PageRequest(page, size, sort));
+            }
+            logger.trace("level="+level + ", className="+className);
             logger.trace("Result of retrieve reportPage > " + reportPage.getContent().size());
             model.addAttribute("reports", reportPage);
-//            model.addAttribute("graphs", reportPresentation.makeTraceGraph(rabbit.getBasePackage(), reportPage));
             model.addAttribute("format", new SimpleDateFormat("HH:mm:ss:SSS"));
-            return new ModelAndView("/log/list_data");
-
         }
         catch (Exception e){
-            e.printStackTrace();
             logger.error(e.getMessage(),e);
             model.addAttribute("e",e);
-            return new ModelAndView("/log/list_data");
         }
+        return new ModelAndView("/log/list_data");
 
     }
 
@@ -239,15 +271,12 @@ public class LogController {
             Rabbit rabbit = rabbitNameCache.getRabbit(log.getRabbitId());
             model.addAttribute("graphs", reportPresentation.makeTraceGraph(rabbit.getBasePackage(), log));
             model.addAttribute("log", log);
-            return new ModelAndView("/log/popover_data");
         }
         catch (Exception e){
-            e.printStackTrace();
             logger.error(e.getMessage(),e);
-            // todo: make ErrorPage
             model.addAttribute("e",e);
-            return new ModelAndView("/log/popover_data");
         }
+        return new ModelAndView("/log/popover_data");
     }
 
 

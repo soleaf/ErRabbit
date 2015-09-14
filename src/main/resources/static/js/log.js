@@ -3,6 +3,7 @@
  */
 
 var rabbitId;
+var isFilter;
 
 $(document).ready(function(){
 
@@ -18,10 +19,15 @@ $(document).ready(function(){
     initCalendarYear();
     initCalendarMonth();
 
+    // Filter
+    initFilterButtons();
+    if ($("#filter_init").val() == "true"){
+        filterButtonToggle(true);
+    }
+
     // Retrieve calendar
     if ($("#cal_y").val() != null && $("#cal_m").val() != null){
-        var today = new Date();
-        var dd = today.getDate();
+        var dd = $("#cal_d").val();
         retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val(), dd, function(){
             retrievelogs(rabbitId, 0, 100, $("#cal_y").val(), $("#cal_m").val(), dd);
         });
@@ -30,6 +36,32 @@ $(document).ready(function(){
     //initCalendarValueChanged();
 
 });
+
+function initFilterButtons(){
+    $("#filter_apply").click(function(){
+        filterButtonToggle(true);
+        $("#log-list").html("");
+        retrievelogs(rabbitId, 0, 100, $("#cal_y").val(), $("#cal_m").val(), $("#cal_d").val());
+        $('#filterModal').modal('hide');
+
+    });
+    $("#filter_clear").click(function(){
+        filterButtonToggle(false);
+        $("#log-list").html("");
+        retrievelogs(rabbitId, 0, 100, $("#cal_y").val(), $("#cal_m").val(), $("#cal_d").val());
+        $('#filterModal').modal('hide');
+    });
+}
+
+function filterButtonToggle(active){
+    isFilter = active;
+    if (active){
+        $("#filter_button").addClass("filter-apply");
+    }
+    else{
+        $("#filter_button").removeClass("filter-apply");
+    }
+}
 
 function initlogModalButton(){
     $("#popover_log_btn_graph").click(function(){
@@ -65,6 +97,7 @@ function retrieveCalendar(rabbitId, year, month, selectedDay, callback) {
                     retrievelogsFromSelected();
                     $("#log-calendar .active").removeClass("active");
                     $(this).addClass("active");
+                    filterButtonToggle(false);
                 });
                 hideLoading();
                 if (callback != null){
@@ -89,6 +122,7 @@ function initCalendarYear(){
         $("#cal_y").val(value);
         $("#dropdownMenu_year_dropdown .value").text(value);
         reloadCalendarFromSelected();
+        filterButtonToggle(false);
     });
 }
 
@@ -101,12 +135,14 @@ function initCalendarMonth(){
         $("#cal_m").val(value);
         $("#dropdownMenu_month_dropdown .value").text(value);
         reloadCalendarFromSelected();
+        filterButtonToggle(false);
     });
 }
 
 function reloadCalendarFromSelected(){
-    retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val(), -1, null);
     $("#log-list").html("");
+    retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val(), -1, null);
+    filterButtonToggle(false);
 }
 
 function retrievelogsFromSelected(){
@@ -131,10 +167,18 @@ function initlogFeedButton(){
  */
 function retrievelogs(rabbitId, page, size, y, m, d) {
 
+    var url = '/log/list_data.err?id=' + rabbitId + '&page=' + page + '&size=' + size;
+    if (isFilter && $("#filter_level").val() != "ALL"){
+        url = url + "&level=" + $("#filter_level").val();
+    }
+    if (isFilter && $("#filter_class").val().length > 0){
+        url = url + "&class=" +  $("#filter_class").val();
+    }
+
     showLoading();
     $("#log-feed").hide();
     $.ajax({
-        url : '/log/list_data.err?id=' + rabbitId + '&page=' + page + '&size=' + size
+        url : encodeURI(url)
         + '&y=' + y + '&m=' + m + '&d=' + d,
         success : function(data) {
 

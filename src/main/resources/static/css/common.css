@@ -534,6 +534,27 @@ header .logout{
     color: #1b1b1b;
 }
 
+.page-navi .filter{
+    float:right;
+    height:100%;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.page-navi .filter:HOVER{
+    background-color: #7BCCD4;
+    color:#fff;
+}
+.page-navi .filter:ACTIVE{
+    background-color: #c0c0c0;
+    color:#fff;
+}
+
+.page-navi .filter-apply{
+    background-color: #7BCCD4;
+    color:#fff;
+}
+
 .page-side {
     width:140px;
     float:left;
@@ -845,7 +866,7 @@ header .logout{
 }
 
 .log-detail-popup .ThrowableInfo .graph .class{
-    background-color: #f7f7f7;
+    background-color: #f1f1f1;
     color:#979797;
     margin-top:2px;
     margin-bottom:2px;

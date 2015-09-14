@@ -4,3 +4,4 @@ target/*
 .idea
 *.log
 *.log.*
+application.properties
