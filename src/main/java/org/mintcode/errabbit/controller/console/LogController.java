@@ -71,6 +71,9 @@ public class LogController {
                 rabbitManagingService.saveRabbit(rabbit);
             }
 
+            model.addAttribute("groups", rabbitManagingService.
+                    getRabbitGroupWithRabbitSorted(rabbitManagingService.getRabbitsByGroup()));
+
             // Get first day of report
             LogLevelDailyStatistics firstDayStatistic = logLevelDailyStatisticsRepository.findByRabbitIdOnFirst(id);
             List<Integer> yearList = new ArrayList<Integer>();

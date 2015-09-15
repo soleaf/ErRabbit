@@ -83,7 +83,7 @@ public class RabbitController {
         try {
 
             RabbitGroup group = null;
-            if (groupId != null && !groupId.isEmpty()){
+            if (groupId != null && !groupId.isEmpty() && !groupId.equals("(none)")){
                 group = rabbitManagingService.getGroup(new ObjectId(groupId));
                 logger.trace("set group > " + group);
                 if (group == null){

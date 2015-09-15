@@ -36,14 +36,19 @@
                 <div class="main-form rabbit-selection">
                     <label class="control-label">TARGETS</label>
                     <ul class="list-group">
-                        <c:if test="${not empty rabbits}">
-                        <c:forEach items="${rabbits}" var="rabbit">
-                        <li class="list-group-item">
-                            <label class="checkbox">
-                                <input name="targets" type="checkbox" value="${rabbit.id}" <c:if test="${fn:contains(description.targets, rabbit.id)}">checked</c:if>> ${rabbit.id}
-                            </label>
-                        </li>
-                        </c:forEach>
+                        <c:if test="${not empty groups}">
+                            <c:forEach var="group" items="${groups}" varStatus="status">
+                                <li class="list-group-item rabbit-group">
+                                    ${group.name}
+                                </li>
+                                <c:forEach items="${group.rabbits}" var="rabbit">
+                                    <li class="list-group-item rabbit-item">
+                                        <label class="checkbox">
+                                            <input name="targets" type="checkbox" value="${rabbit.id}" <c:if test="${fn:contains(description.targets, rabbit.id)}">checked</c:if>> ${rabbit.id}
+                                        </label>
+                                    </li>
+                                </c:forEach>
+                            </c:forEach>
                         </c:if>
                     </ul>
                 </div>

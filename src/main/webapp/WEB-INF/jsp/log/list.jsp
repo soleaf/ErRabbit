@@ -12,9 +12,9 @@
 </jsp:include>
 <div class="page-navi">
     <ul>
-        <li><span class="glyphicon glyphicon-th" aria-hidden="true"></span> <a href="/rabbit/list.err">ROOT</a></li>
-        <li class="arrow"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>&nbsp;</li>
-        <li>${rabbit.id}</li>
+        <%--<li><span class="glyphicon glyphicon-th" aria-hidden="true"></span> <a href="/rabbit/list.err">ROOT</a></li>--%>
+        <%--<li class="arrow"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>&nbsp;</li>--%>
+        <li class="page-navi-button page-navi-rabbit-selection" data-toggle="modal" data-target="#changeRabbitModal"><span class="glyphicon glyphicon-th"  aria-hidden="true"></span>&nbsp;${rabbit.id}</li>
         <li class="filter" data-toggle="modal" data-target="#filterModal" id="filter_button">
             <span class="glyphicon glyphicon-filter glyphicon" aria-hidden="true"></span>
             <span id="filter_button_text">FILTER</span>
@@ -124,6 +124,32 @@
     </div>
 </div>
 
+<!-- Rabbit Select Modal -->
+<div class="modal fade" id="changeRabbitModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">CHANGE RABBIT</h4>
+            </div>
+            <div class="modal-body">
+                <c:if test="${not empty groups}">
+                    <c:forEach var="group" items="${groups}" varStatus="status">
+                        <div class="rabbit-group">
+                            <div class="rabbit-group-name">${group.name}</div>
+                            <div class="row">
+                            <c:forEach items="${group.rabbits}" var="rabbitItem">
+                                <a href="/log/list.err?id=${rabbitItem.id}"><div class="col-md-4 rabbit-item">${rabbitItem.id}</div></a>
+                            </c:forEach>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </c:if>
+            </div>
+        </div>
+    </div>
+</div>
 <jsp:include page="../common/footer.jsp"/>
 <jsp:include page="popover_view.jsp"/>
 </body>

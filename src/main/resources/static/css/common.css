@@ -517,7 +517,7 @@ header .logout{
 }
 
 .page-navi>UL{
-    margin-left: 10px;
+    /*margin-left: 10px;*/
     height:30px;
     /*height:14px;*/
 }
@@ -536,6 +536,17 @@ header .logout{
 
 .page-navi>UL>LI>A{
     color: #1b1b1b;
+}
+
+.page-navi .page-navi-button{
+    padding-left:10px;
+    padding-right:10px;
+    cursor: pointer;
+}
+
+.page-navi .page-navi-button:HOVER{
+    background-color: #7BCCD4;
+    color:#fff;
 }
 
 .page-navi .filter{
@@ -558,6 +569,10 @@ header .logout{
 .page-navi .filter-apply{
     background-color: #7BCCD4;
     color:#fff;
+}
+
+.page-navi .page-navi-rabbit-selection{
+    min-width: 140px;
 }
 
 .page-side {
@@ -1018,6 +1033,35 @@ header .logout{
     background-color: #ececec;
 }
 
+#changeRabbitModal .rabbit-group{
+    margin-bottom:20px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+#changeRabbitModal .rabbit-group-name{
+    color: #9a9a9a;
+    font-weight: bold;
+    font-size:12px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+#changeRabbitModal .rabbit-item{
+    padding-top:3px;
+    padding-bottom: 3px;
+    border-radius: 4px;
+}
+
+#changeRabbitModal .rabbit-item:HOVER{
+    background-color: #7BCCD4;
+    color:#FFF;
+}
+#changeRabbitModal .rabbit-item:HOVER a{
+    color:#FFF;
+}
+
+
 .calendar .empty{
     font-size:16px;
     text-align: center;
@@ -1105,14 +1149,25 @@ header .logout{
     width: auto;
 }
 
-
-.report .rabbit-selection li{
+.report .rabbit-selection .rabbit-item{
     padding-left:40px;
+    border-top:1px solid #eaeaea;
 }
-
-.report .rabbit-selection li:HOVER{
+.report .rabbit-selection .rabbit-item:HOVER{
     background-color: #7BCCD4;
     color:#FFF;
+}
+
+.report .rabbit-selection .rabbit-group{
+    padding:10px;
+    color: #2b2b2b;
+    font-weight: bold;
+    background-color: #fafafa;
+}
+.report .rabbit-selection .rabbit-group:HOVER{
+    color: #2b2b2b;
+    font-weight: bold;
+    background-color: #fff;
 }
 
 .report .rabbit-selection .li .checkbox>INPUT{

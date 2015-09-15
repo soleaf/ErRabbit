@@ -139,7 +139,8 @@ public class ReportController {
 
     @RequestMapping(value = {"settings"})
     public ModelAndView settings(Model model){
-        model.addAttribute("rabbits", rabbitManagingService.getRabbits());
+        model.addAttribute("groups", rabbitManagingService.
+                getRabbitGroupWithRabbitSorted(rabbitManagingService.getRabbitsByGroup()));
         List<ReportDescription> descriptions = descriptionRepository.findAll();
         if (descriptions != null && !descriptions.isEmpty()){
             model.addAttribute("description", descriptions.get(0));

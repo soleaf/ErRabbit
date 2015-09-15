@@ -39,7 +39,6 @@ $(document).ready(function(){
 
 function initFilterButtons(){
     $("#filter_apply").click(function(){
-
         if($("#filter_level").val() == "ALL" && $("#filter_class").val().length < 1){
             alert("Input class");
             return;
@@ -114,12 +113,12 @@ function retrieveCalendar(rabbitId, year, month, selectedDay, callback) {
                 }
 
                 $("#log-calendar .day").click(function(){
+                    filterButtonToggle(false);
                     $("#cal_d").val($(this).attr("data-value"));
                     $("#log-list").html("");
                     retrievelogsFromSelected();
                     $("#log-calendar .active").removeClass("active");
                     $(this).addClass("active");
-                    filterButtonToggle(false);
                 });
                 hideLoading();
                 if (callback != null){
@@ -153,18 +152,18 @@ function initCalendarYear(){
  */
 function initCalendarMonth(){
     $("#dropdownMenu_month_dropdown LI A").click(function(){
-        value = $(this).attr("data-value");
+        filterButtonToggle(false);
+        var value = $(this).attr("data-value");
         $("#cal_m").val(value);
         $("#dropdownMenu_month_dropdown .value").text(value);
         reloadCalendarFromSelected();
-        filterButtonToggle(false);
     });
 }
 
 function reloadCalendarFromSelected(){
+    filterButtonToggle(false);
     $("#log-list").html("");
     retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val(), -1, null);
-    filterButtonToggle(false);
 }
 
 function retrievelogsFromSelected(){
