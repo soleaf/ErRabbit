@@ -39,11 +39,15 @@ $(document).ready(function(){
 
 function initFilterButtons(){
     $("#filter_apply").click(function(){
+
+        if($("#filter_level").val() == "ALL" && $("#filter_class").val().length < 1){
+            alert("Input class");
+            return;
+        }
         filterButtonToggle(true);
         $("#log-list").html("");
         retrievelogs(rabbitId, 0, 100, $("#cal_y").val(), $("#cal_m").val(), $("#cal_d").val());
         $('#filterModal').modal('hide');
-
     });
     $("#filter_clear").click(function(){
         filterButtonToggle(false);
@@ -57,9 +61,27 @@ function filterButtonToggle(active){
     isFilter = active;
     if (active){
         $("#filter_button").addClass("filter-apply");
+
+        var filterText = "";
+        if (isFilter && $("#filter_level").val() != "ALL"){
+            filterText = "level='"+$("#filter_level").val() + "'"
+        }
+        if (isFilter && $("#filter_class").val().length > 0){
+            if (filterText.length > 0){
+                filterText = filterText + " class='" + $("#filter_class").val() +"'";
+            }
+            else{
+                filterText = filterText + "class='" + $("#filter_class").val() +"'";
+            }
+        }
+
+        $("#filter_button_text").text(filterText);
     }
     else{
         $("#filter_button").removeClass("filter-apply");
+        $("#filter_button_text").text("FILTER");
+        $("#filter_level").val("ALL");
+        $("#filter_class").val("");
     }
 }
 

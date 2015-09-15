@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 
@@ -78,6 +79,23 @@ public class Report implements Serializable{
     public String getTargetDateWithFormat(){
         return format.format(targetDate);
     }
+
+    private Calendar targetDateCal(){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(targetDate);
+        return cal;
+    }
+
+    public Integer getTargetYear(){
+        return targetDateCal().get(Calendar.YEAR);
+    }
+    public Integer getTargetMonth(){
+        return targetDateCal().get(Calendar.MONTH);
+    }
+    public Integer getTargetDay(){
+        return targetDateCal().get(Calendar.DAY_OF_MONTH);
+    }
+
     @Override
     public String toString() {
         return "Report{" +

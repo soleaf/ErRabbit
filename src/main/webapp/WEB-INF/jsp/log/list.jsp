@@ -17,7 +17,7 @@
         <li>${rabbit.id}</li>
         <li class="filter" data-toggle="modal" data-target="#filterModal" id="filter_button">
             <span class="glyphicon glyphicon-filter glyphicon" aria-hidden="true"></span>
-            FILTER
+            <span id="filter_button_text">FILTER</span>
         </li>
     </ul>
 </div>

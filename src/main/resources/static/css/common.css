@@ -91,6 +91,10 @@ UL LI{
     border-bottom-color: #7BCCD4;
 }
 
+a {
+   color: #2e9596;
+}
+
 .btn-page-navi {
     height: 25px;
     padding:0px;
@@ -1150,9 +1154,6 @@ header .logout{
 .report .rank>tbody>tr>.level{
     font-weight: bold;
 }
-.report .rank>tbody>tr>.className{
-    text-decoration: underline;
-}
 .report .rank .DEBUG{
     color: #868686;
 }
@@ -1171,7 +1172,18 @@ header .logout{
 
 .report .page .chapter{
     max-width:800px;
-    margin-bottom: 20px;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom:2px dotted #dadada;
+}
+
+.report .page .chapter h4 small A{
+    color: #a3a3a3;
+}
+
+.report .page .chapter .table{
+    margin-bottom:5px;
+    border-bottom: 1px solid #d8d8d8;
 }
 
 .report .page h3{
