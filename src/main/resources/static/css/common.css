@@ -811,6 +811,22 @@ header .logout{
     /*padding-right:10px;*/
 /*}*/
 
+.log-detail-popup .message{
+    background-color:#fff;
+    border-top: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
+    margin: -20px -20px 20px;
+    padding: 20px;
+    font-size:12px;
+    overflow: scroll;
+    background-color:#F1F1F1;
+    color: #2f2f2f;
+}
+
+.log-detail-popup .message:HOVER{
+    color:#000;
+}
+
 .log-detail-popup .log-tab{
     border-bottom:1px solid #dfdfdf;
     margin-bottom: 10px;
@@ -844,6 +860,10 @@ header .logout{
 
 .log-detail-popup .summary .val{
 
+}
+
+.log-detail-popup #popover_log_btn_showeothers{
+    display: none;
 }
 
 .log-detail-popup .locationInfo>TABLE{
@@ -979,6 +999,7 @@ header .logout{
 .log-detail-popup .ThrowableInfo .text{
     display: none;
     max-width:100%;
+    overflow: scroll;
 }
 
 .log-detail-popup .ThrowableInfo .text li{

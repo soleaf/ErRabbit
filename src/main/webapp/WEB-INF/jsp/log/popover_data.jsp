@@ -10,6 +10,9 @@
 
 <c:if test="${not empty log.loggingEvent.throwableInfo}">
     <div class="log-detail-popup" data-id="${log.id}">
+        <div class="message">
+            ${log.loggingEvent.renderedMessage}
+        </div>
         <div class="ThrowableInfo">
             <div class="graph">
                 <div class="threadName">threadName: ${log.loggingEvent.threadName}</div>
@@ -19,7 +22,7 @@
                         </div>
                     </li>
                     <c:forEach var="stack" items="${graphs}" varStatus="status">
-                        <li>
+                        <li class="<c:if test="${not stack.isDefaultHidden()}">another-package-set</c:if>">
                             <div class='arrow <c:if test="${stack.isDefaultHidden()}">base-package-arrow</c:if>'>
                                 <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></div>
                             <div class='class <c:if test="${stack.isDefaultHidden()}">base-package</c:if>'>

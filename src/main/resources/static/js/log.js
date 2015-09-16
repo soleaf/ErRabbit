@@ -88,10 +88,24 @@ function initlogModalButton(){
     $("#popover_log_btn_graph").click(function(){
         $("#popover_log_body .graph").show();
         $("#popover_log_body .text").hide();
+        $("#popover_log_btn_text").show();
+        $(this).hide();
     });
     $("#popover_log_btn_text").click(function(){
         $("#popover_log_body .graph").hide();
         $("#popover_log_body .text").show();
+        $("#popover_log_btn_graph").show();
+        $(this).hide();
+    });
+    $("#popover_log_btn_hideothers").click(function(){
+        $("#popover_log_body .another-package-set").hide();
+        $("#popover_log_btn_showeothers").show();
+        $(this).hide();
+    });
+    $("#popover_log_btn_showeothers").click(function(){
+        $("#popover_log_body .another-package-set").show();
+        $("#popover_log_btn_hideothers").show();
+        $(this).hide();
     });
 }
 
@@ -220,10 +234,22 @@ function retrievelogs(rabbitId, page, size, y, m, d) {
                 // log Detail Information Layer Toggle
                 var row = $(this);
                 $.get(row.data('poload'),function(d) {
-                    $("#popover_log_title").html(row.find(".time").text() + " " + row.find(".level").text());
-                    $("#popover_log_body").html(d);
-                    $("#popover_log").modal();
 
+                    if ($($.parseHTML(d)).filter("#login_page").length > 0) {
+                        alert("Session is expired");
+                        window.location.href = "/login.err";
+                    }
+                    else {
+                        // init filter button
+                        $("#popover_log_btn_showeothers").hide();
+                        $("#popover_log_btn_hideothers").show();
+                        $("#popover_log_btn_text").show();
+                        $("#popover_log_btn_graph").hide();
+
+                        $("#popover_log_title").html(row.find(".time").text() + " " + row.find(".level").text());
+                        $("#popover_log_body").html(d);
+                        $("#popover_log").modal();
+                    }
                 });
             });
             hideLoading();
