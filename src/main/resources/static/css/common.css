@@ -34,6 +34,14 @@ UL LI{
 .modal-dialog{
     z-index:999999;
 }
+.btn{
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
+}
 .btn:focus,
 .btn:active:focus,
 .btn.active:focus,
@@ -49,6 +57,12 @@ UL LI{
 .btn.focus {
     /*color: #666666;*/
     text-decoration: none;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 .btn:active,
 .btn.active {
@@ -250,6 +264,12 @@ header nav A{
 header nav A:HOVER{
     color:#7BCCD4;
     text-decoration: none;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 
 header .logout{
@@ -346,6 +366,12 @@ header .logout{
 
 .side LI:HOVER A{
     color:#000;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 
 .side LI SPAN{
@@ -357,6 +383,12 @@ header .logout{
 
 .side LI:HOVER SPAN{
     color:#000;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 
 .side LI A{
@@ -420,6 +452,12 @@ header .logout{
 
 .page .list_rabbit li:HOVER .icon{
     background: #7BCCD4;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 
 .page .list_rabbit li>SPAN{
@@ -455,10 +493,22 @@ header .logout{
 
 .page .list_rabbit li:HOVER .action A {
     color:#595959;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 .page .list_rabbit li>.action A:HOVER{
     text-decoration: none;
     color:#7BCCD4;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 
 .page .list_rabbit li>.name{
@@ -542,11 +592,23 @@ header .logout{
     padding-left:10px;
     padding-right:10px;
     cursor: pointer;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 
 .page-navi .page-navi-button:HOVER{
     background-color: #7BCCD4;
     color:#fff;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 
 .page-navi .filter{
@@ -555,11 +617,23 @@ header .logout{
     padding-left:10px;
     padding-right:10px;
     cursor: pointer;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 
 .page-navi .filter:HOVER{
     background-color: #7BCCD4;
     color:#fff;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 .page-navi .filter:ACTIVE{
     background-color: #c0c0c0;
@@ -1072,14 +1146,32 @@ header .logout{
     padding-top:3px;
     padding-bottom: 3px;
     border-radius: 4px;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 
 #changeRabbitModal .rabbit-item:HOVER{
     background-color: #7BCCD4;
     color:#FFF;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 #changeRabbitModal .rabbit-item:HOVER a{
     color:#FFF;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    /* ...and now for the proper property */
+    transition:.5s;
 }
 
 
@@ -1208,6 +1300,7 @@ header .logout{
     margin-top:10px;
     max-width:500px;
 }
+
 .report .report-list .delete{
     float:right;
 }
@@ -1219,6 +1312,7 @@ header .logout{
     color: #878787;
     font-size:12px;
 }
+
 
 .report .rank .level{
     padding-left:15px;
