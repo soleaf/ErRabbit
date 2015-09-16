@@ -1,5 +1,7 @@
 package org.mintcode.errabbit.core.rabbit.name;
 
+import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
+import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 import org.mintcode.errabbit.model.Rabbit;
 
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.Map;
  * Speed access rabbit names
  * Created by soleaf on 2015. 2. 8..
  */
-public interface RabbitNameCache {
+public interface RabbitCache {
 
     /**
      * Init or update rabbitID List
@@ -32,4 +34,21 @@ public interface RabbitNameCache {
      */
     public Rabbit getRabbit(String id);
 
+    /**
+     * Sync DailyStatistics;
+     */
+    public void syncDailyStatistics();
+
+    /**
+     * Update dailyStatistics
+     * @param rabbitId
+     * @param level
+     */
+    public void updateDailyStatistics(String rabbitId, String level);
+
+    /**
+     * Get DailyStatistics
+     * @return
+     */
+    public LogLevelDailyStatisticsRepository getLogLevelDailyStatisticsRepository();
 }
