@@ -54,9 +54,9 @@
                     </div>
                     <div class="conts recent">
                         <c:choose>
-                            <c:when test="${not empty lastStatics.get(item)}">
-                                <span>Recent ${lastStatics.get(item).year}. ${lastStatics.get(item).month}. ${lastStatics.get(item).day}</span>
-                                <span>(${lastStatics.get(item).calcTotal()})</span>
+                            <c:when test="${not empty lastStatics.get(item.id)}">
+                                <span>Recent ${lastStatics.get(item.id).year}. ${lastStatics.get(item.id).month}. ${lastStatics.get(item.id).day}</span>
+                                <span>(${lastStatics.get(item.id).calcTotal()})</span>
                                 <c:if test="${!item.read}">
                                     <span class="new">UNREAD</span>
                                 </c:if>

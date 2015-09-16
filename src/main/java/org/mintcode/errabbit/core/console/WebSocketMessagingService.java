@@ -1,6 +1,6 @@
 package org.mintcode.errabbit.core.console;
 
-import org.mintcode.errabbit.core.rabbit.name.RabbitNameCache;
+import org.mintcode.errabbit.core.rabbit.name.RabbitCache;
 import org.mintcode.errabbit.model.Log;
 import org.mintcode.errabbit.model.Rabbit;
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ public class WebSocketMessagingService {
     private SimpMessagingTemplate template;
 
     @Autowired
-    private RabbitNameCache rabbitNameCache;
+    private RabbitCache rabbitCache;
 
     /**
      * Forward log to console page
@@ -29,7 +29,7 @@ public class WebSocketMessagingService {
      */
     public void sendReportToConsole(Log log){
         try{
-            Rabbit rabbit = rabbitNameCache.getRabbit(log.getRabbitId());
+            Rabbit rabbit = rabbitCache.getRabbit(log.getRabbitId());
             if (rabbit.getHideOnConsole()){
                 return;
             }

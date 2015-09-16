@@ -7,7 +7,7 @@ import org.mintcode.errabbit.model.Rabbit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
-import org.mintcode.errabbit.core.rabbit.name.RabbitNameCache;
+import org.mintcode.errabbit.core.rabbit.name.RabbitCache;
 import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
 import org.mintcode.errabbit.core.log.dao.LogRepository;
 import org.mintcode.errabbit.model.ErrLoggingEvent;
@@ -38,7 +38,7 @@ public class ReportMessageListener implements MessageListener {
     private RabbitRepository rabbitRepository;
 
     @Autowired
-    private RabbitNameCache nameRepository;
+    private RabbitCache rabbitCache;
 
     @Autowired
     private LogLevelDailyStatisticsRepository logLevelDailyStatisticsRepository;
@@ -60,7 +60,7 @@ public class ReportMessageListener implements MessageListener {
             // Extract message
             String rabbitID = extractRabbitIDFromMessage(message);
 
-            Rabbit rabbit = nameRepository.getRabbit(rabbitID);
+            Rabbit rabbit = rabbitCache.getRabbit(rabbitID);
             if (rabbit == null) {
                 logger.error(String.format("Rabbit ID %s is invalid", rabbitID));
                 return;
@@ -103,10 +103,14 @@ public class ReportMessageListener implements MessageListener {
             logLevelDailyStatisticsRepository.insertStatistic(log);
             logLevelHourlyStatisticsRepository.insertStatistic(log);
 
+            // Update cache
+            rabbitCache.updateDailyStatistics(rabbitID, log.getLoggingEvent().getLevel());
+
             // Mark unread
             if (rabbit.getRead()){
                 rabbit.setRead(false);
                 rabbitRepository.save(rabbit);
+                rabbitCache.getRabbit(rabbitID).setRead(false);
             }
 
             // Forward to console

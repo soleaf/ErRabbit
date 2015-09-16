@@ -1,14 +1,14 @@
 package org.mintcode.errabbit.core;
 
+import org.mintcode.errabbit.core.report.dao.ReportRepository;
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
-import org.mintcode.errabbit.core.rabbit.name.RabbitNameCache;
+import org.mintcode.errabbit.core.rabbit.name.RabbitCache;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
 import org.mintcode.errabbit.model.Rabbit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +24,15 @@ public class CoreService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private RabbitNameCache nameRepository;
+    private RabbitCache nameRepository;
+
     @Autowired
     private RabbitRepository rabbitRepository;
+
+    @Autowired
+    private ReportRepository reportRepository;
+
+    private Integer unreadReport = 0;
 
     @PostConstruct
     private void startup(){
@@ -45,7 +51,14 @@ public class CoreService {
             rabbits.put(rabbit.getId(),rabbit);
         }
         nameRepository.updateRabbitIdList(rabbits);
+        nameRepository.syncDailyStatistics();
     }
 
-
+    /**
+     * Get Unread report count
+     * Used on navigation menu report's badge
+     */
+    public void syncUnreadReportCount(){
+        unreadReport = reportRepository.getUnreadCount();
+    }
 }

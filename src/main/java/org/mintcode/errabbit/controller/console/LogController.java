@@ -3,7 +3,7 @@ package org.mintcode.errabbit.controller.console;
 import org.bson.types.ObjectId;
 import org.mintcode.errabbit.core.console.ReportPresentation;
 import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;
-import org.mintcode.errabbit.core.rabbit.name.RabbitNameCache;
+import org.mintcode.errabbit.core.rabbit.name.RabbitCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
@@ -39,7 +39,7 @@ public class LogController {
     private LogRepository logRepository;
 
     @Autowired
-    private RabbitNameCache rabbitNameCache;
+    private RabbitCache rabbitCache;
 
     @Autowired
     private RabbitManagingService rabbitManagingService;
@@ -59,7 +59,7 @@ public class LogController {
                              @RequestParam(required = false) Integer d
                              ) {
         try{
-            Rabbit rabbit = rabbitNameCache.getRabbit(id);
+            Rabbit rabbit = rabbitCache.getRabbit(id);
             if (rabbit == null){
                 model.addAttribute("e",new Exception("Can't find rabbit"));
                 return new ModelAndView("/log/list");
@@ -72,7 +72,7 @@ public class LogController {
             }
 
             model.addAttribute("groups", rabbitManagingService.
-                    getRabbitGroupWithRabbitSorted(rabbitManagingService.getRabbitsByGroup()));
+                    getRabbitGroupWithRabbitSorted(rabbitManagingService.getRabbitsByGroup(rabbitCache.getRabbits())));
 
             // Get first day of report
             LogLevelDailyStatistics firstDayStatistic = logLevelDailyStatisticsRepository.findByRabbitIdOnFirst(id);
@@ -201,7 +201,7 @@ public class LogController {
     ) {
         try{
 
-            Rabbit rabbit = rabbitNameCache.getRabbit(id);
+            Rabbit rabbit = rabbitCache.getRabbit(id);
             if (rabbit == null){
                 model.addAttribute("e",new Exception("Can't find rabbit"));
                 return new ModelAndView("/log/list");
@@ -271,7 +271,7 @@ public class LogController {
     ) {
         try{
             Log log = logRepository.findOne(new ObjectId(id));
-            Rabbit rabbit = rabbitNameCache.getRabbit(log.getRabbitId());
+            Rabbit rabbit = rabbitCache.getRabbit(log.getRabbitId());
             model.addAttribute("graphs", reportPresentation.makeTraceGraph(rabbit.getBasePackage(), log));
             model.addAttribute("log", log);
         }

@@ -3,6 +3,7 @@ package org.mintcode.errabbit.core.report;
 import org.apache.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.mintcode.errabbit.core.CoreService;
 import org.mintcode.errabbit.core.analysis.AggregationAnalyzer;
 import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
 import org.mintcode.errabbit.core.analysis.request.LogLevelAnalysisRequest;

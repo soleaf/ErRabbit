@@ -2,6 +2,7 @@ package org.mintcode.errabbit.core.report;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.mintcode.errabbit.core.CoreService;
 import org.mintcode.errabbit.core.report.dao.ReportDescriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -26,6 +27,9 @@ public class ReportScheduler {
     @Autowired
     ReportGenerator generator;
 
+    @Autowired
+    CoreService coreService;
+
 
     @Scheduled(cron = "0 0 * * * *")
     public void check(){
@@ -48,6 +52,7 @@ public class ReportScheduler {
             if (nowHour.equals(description.getTime().getHour())){
                 cal.add(Calendar.DAY_OF_MONTH, -1);
                 generator.generate(description, cal.getTime());
+                coreService.syncUnreadReportCount();
             }
         }
         catch (Exception e){

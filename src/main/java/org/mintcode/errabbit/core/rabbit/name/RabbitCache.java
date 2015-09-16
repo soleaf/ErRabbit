@@ -35,6 +35,12 @@ public interface RabbitCache {
     public Rabbit getRabbit(String id);
 
     /**
+     * Get All rabbits as list
+     * @return
+     */
+    public List<Rabbit> getRabbits();
+
+    /**
      * Sync DailyStatistics;
      */
     public void syncDailyStatistics();
@@ -50,5 +56,5 @@ public interface RabbitCache {
      * Get DailyStatistics
      * @return
      */
-    public LogLevelDailyStatisticsRepository getLogLevelDailyStatisticsRepository();
+    public Map<String, LogLevelDailyStatistics> getDailyStatisticsMap();
 }

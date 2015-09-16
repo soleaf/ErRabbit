@@ -1,7 +1,10 @@
 package org.mintcode.errabbit.controller.console;
 
 import org.bson.types.ObjectId;
+import org.mintcode.errabbit.core.log.dao.LogLevelHourlyStatisticsRepository;
 import org.mintcode.errabbit.core.rabbit.managing.TryToUsedRabbitGroupException;
+import org.mintcode.errabbit.core.rabbit.name.RabbitCache;
+import org.mintcode.errabbit.model.LogLevelHourStatistics;
 import org.mintcode.errabbit.model.RabbitGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +39,12 @@ public class RabbitController {
     @Autowired
     LogLevelDailyStatisticsRepository logLevelDailyStatisticsRepository;
 
+    @Autowired
+    LogLevelHourlyStatisticsRepository logLevelHourlyStatisticsRepository;
+
+    @Autowired
+    RabbitCache rabbitCache;
+
     // List of all Rabbits
     @RequestMapping(value = "list")
     public ModelAndView list(Model model,
@@ -43,17 +52,10 @@ public class RabbitController {
                              @RequestParam(value = "error", required = false) String error) {
 
         try {
-            List<Rabbit> rabbitList = rabbitManagingService.getRabbits();
-            Map<Rabbit, LogLevelDailyStatistics> lastStatics = new HashMap<Rabbit, LogLevelDailyStatistics>();
-            for (Rabbit rabbit : rabbitList) {
-                LogLevelDailyStatistics statistics = logLevelDailyStatisticsRepository.findByRabbitIdOnLast(rabbit.getId());
-                if (statistics != null) {
-                    lastStatics.put(rabbit, statistics);
-                }
-            }
+            List<Rabbit> rabbitList = rabbitCache.getRabbits();
             model.addAttribute("groups", rabbitManagingService.
                     getRabbitGroupWithRabbitSorted(rabbitManagingService.getRabbitsByGroup(rabbitList)));
-            model.addAttribute("lastStatics", lastStatics);
+            model.addAttribute("lastStatics", rabbitCache.getDailyStatisticsMap());
             model.addAttribute("info", info);
             model.addAttribute("error", error);
             model.addAttribute("group", rabbitManagingService.getGroups());
@@ -216,6 +218,10 @@ public class RabbitController {
 
             // Clean logLevelDailyStatistics
             logLevelDailyStatisticsRepository.deleteDailyStatisticRangeOfLoggingEventDateInt(id,
+                    beginDateInteger, endDateInteger);
+
+            // Clean logLevelHourlyStatistics
+            logLevelHourlyStatisticsRepository.deleteDailyStatisticRangeOfLoggingEventDateInt(id,
                     beginDateInteger, endDateInteger);
 
             model.addAttribute("info", String.format("Success to clean Rabbit '%s'", id));

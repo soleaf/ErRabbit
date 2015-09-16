@@ -1,6 +1,7 @@
 package org.mintcode.errabbit.controller.console;
 
 import org.bson.types.ObjectId;
+import org.mintcode.errabbit.core.CoreService;
 import org.mintcode.errabbit.core.log.dao.LogLevelHourlyStatisticsRepository;
 import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;
 import org.mintcode.errabbit.core.report.Report;
@@ -47,6 +48,9 @@ public class ReportController {
     @Autowired
     ReportRepository reportRepository;
 
+    @Autowired
+    CoreService coreService;
+
     @RequestMapping(value = {"list"})
     public ModelAndView list(Model model){
         return new ModelAndView("/report/list");
@@ -74,7 +78,7 @@ public class ReportController {
         try{
             // Report
             Report report = reportRepository.findOne(new ObjectId(id));
-            model.addAttribute("report",report);
+            model.addAttribute("report", report);
 
             // Sum logHourlySet
             Map<Integer, LogLevelHourStatistics> logLevelhourlySet = new HashMap<>();
@@ -115,6 +119,8 @@ public class ReportController {
             // Mark read
             report.setRead(true);
             reportRepository.save(report);
+
+            coreService.syncUnreadReportCount();
         }
         catch (Exception e){
             logger.error(e.getMessage(), e);

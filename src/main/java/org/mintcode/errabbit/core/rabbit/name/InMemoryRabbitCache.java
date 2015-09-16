@@ -7,7 +7,7 @@ import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by soleaf on 2015. 2. 8..
@@ -43,7 +43,12 @@ public class InMemoryRabbitCache implements RabbitCache {
         return rabbits.get(id);
     }
 
+    public List<Rabbit> getRabbits(){
+        return new ArrayList<Rabbit>(rabbits.values());
+    }
+
     public void syncDailyStatistics(){
+        dailyStatisticsMap = new HashMap<>();
         for (Rabbit rabbit : rabbits.values()) {
             LogLevelDailyStatistics statistics = logLevelDailyStatisticsRepository.findByRabbitIdOnLast(rabbit.getId());
             if (statistics != null) {
@@ -54,6 +59,16 @@ public class InMemoryRabbitCache implements RabbitCache {
 
     public void updateDailyStatistics(String rabbitId, String level){
         LogLevelDailyStatistics statistics = dailyStatisticsMap.get(rabbitId);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        if (cal.get(Calendar.YEAR) != statistics.getYear() ||
+                cal.get(Calendar.MONTH) != statistics.getMonth() ||
+                cal.get(Calendar.DAY_OF_MONTH) != statistics.getDateInt()){
+            syncDailyStatistics();
+            return ;
+        }
+
         if (level.equals("TRACE"))
             statistics.setLevel_TRACE(statistics.getLevel_TRACE() + 1);
         else if (level.equals("DEBUG"))
@@ -68,7 +83,7 @@ public class InMemoryRabbitCache implements RabbitCache {
             statistics.setLevel_FATAL(statistics.getLevel_FATAL() + 1);
     }
 
-    public LogLevelDailyStatisticsRepository getLogLevelDailyStatisticsRepository() {
-        return logLevelDailyStatisticsRepository;
+    public Map<String, LogLevelDailyStatistics> getDailyStatisticsMap() {
+        return dailyStatisticsMap;
     }
 }
