@@ -10,7 +10,7 @@
     <c:forEach var="item" items="${list.content}" varStatus="status">
         <li>
             <div class="panel panel-default <c:if test="${not item.read}">panel-primary</c:if>">
-                <div class="panel-heading">${item.targetDateWithFormat}</div>
+                <div class="panel-heading"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> ${item.targetDateWithFormat}</div>
                 <table class="table rank">
                     <thead>
                         <th class="level">level</th>
@@ -36,7 +36,7 @@
                 </ul>
                 <div class="panel-body">
                     <div>
-                        <a href="/report/detail?id=${item.id}" class="btn btn-default btn-xs detail">READ MORE</a>
+                        <a href="/report/detail?id=${item.id}" class="btn btn-primary btn-xs detail">READ MORE</a>
                     </div>
                 </div>
                 <div class="panel-footer">
