@@ -1,13 +1,12 @@
 $(document).ready(function(){
 
-    // Allocation Events
-
-    // Rabbit
-    $("#frm_rabbit_list li").click(function(){
-        selectRabbit($(this).attr("data-value"), $(this).attr("data-label"));
+    // Rabbit Selection
+    $("#changeRabbitModal-bt>A").click(function(){
+        selectRabbit($(this).attr("data-id"),$(this).attr("data-id"));
+        $("#changeRabbitModal").modal('hide');
     });
 
-    //Group by
+    // Group by
     $("#groupby_available li").click(function(){
         $checkBox = $(this).find("INPUT");
         selectGroupByAvailable($checkBox.val(), $checkBox.attr("data-label"));

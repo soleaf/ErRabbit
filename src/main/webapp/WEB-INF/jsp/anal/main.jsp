@@ -16,7 +16,6 @@
         <form action="/anal/aggregation" method="post" id="frm_anal">
             <input type="hidden" name="rabbit" value=""/>
             <input type="hidden" name="groupBy" value="" id="groupBy"/>
-
             <div class="page-side-element-head"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
                 FILTER
             </div>
@@ -26,14 +25,9 @@
                     <div class="page-side-sub-element">
                         <div class="btn-group btn-block btn-sm no-padding">
                             <button type="button" class="btn btn-default dropdown-toggle btn-block btn-sm"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    aria-haspopup="true" aria-expanded="false" data-toggle="modal" data-target="#changeRabbitModal" id=rabbit_button">
                                 <span id="frm_rabbit_button">ALL</span> <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu" style="width:100%;" id="frm_rabbit_list">
-                                <c:forEach var="row" items="${rabbitList}">
-                                    <li data-value="${row.id}" data-label="${row.id}"><a>${row.id}</a></li>
-                                </c:forEach>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -148,6 +142,32 @@
 
     </div>
 
+    <!-- Rabbit Select Modal -->
+    <div class="modal fade" id="changeRabbitModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">SELECT RABBIT</h4>
+                </div>
+                <div class="modal-body">
+                    <c:if test="${not empty rabbitGroups}">
+                        <c:forEach var="group" items="${rabbitGroups}" varStatus="status">
+                            <div class="rabbit-group">
+                                <div class="rabbit-group-name">${group.name}</div>
+                                <div class="row" id="changeRabbitModal-bt">
+                                    <c:forEach items="${group.rabbits}" var="rabbitItem">
+                                        <a href="#" data-id="${rabbitItem.id}"><div class="col-md-4 rabbit-item">${rabbitItem.id}</div></a>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:if>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <jsp:include page="../common/footer.jsp"/>
 </body>

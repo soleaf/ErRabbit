@@ -5,6 +5,7 @@ import org.mintcode.errabbit.core.analysis.AggregationAnalyzer;
 import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
 import org.mintcode.errabbit.core.analysis.result.AnalysisResultSet;
 import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;
+import org.mintcode.errabbit.core.rabbit.name.RabbitCache;
 import org.mintcode.errabbit.model.Rabbit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,13 +39,16 @@ public class AnalysisController {
     @Autowired
     private AggregationAnalyzer analyzer;
 
+    @Autowired
+    private RabbitCache rabbitCache;
+
     // Main UI
     @RequestMapping(value = "main")
     public ModelAndView list(Model model) {
         try {
             // Get Rabbit List
-            List<Rabbit> rabbitList = rabbitManagingService.getRabbits();
-            model.addAttribute(rabbitList);
+            model.addAttribute("rabbitGroups", rabbitManagingService.
+                    getRabbitGroupWithRabbitSorted(rabbitManagingService.getRabbitsByGroup(rabbitCache.getRabbits())));
             return new ModelAndView("/anal/main");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -116,10 +120,6 @@ public class AnalysisController {
             if (result != null){
                 model.addAttribute("result", result);
             }
-
-            // Get Rabbit List
-            List<Rabbit> rabbitList = rabbitManagingService.getRabbits();
-            model.addAttribute(rabbitList);
 
             return new ModelAndView("/anal/result");
 
