@@ -86,24 +86,26 @@ function filterButtonToggle(active){
 
 function initlogModalButton(){
     $("#popover_log_btn_graph").click(function(){
-        $("#popover_log_body .graph").show();
-        $("#popover_log_body .text").hide();
+        $("#popover_log_body .text").fadeOut(function(){
+            $("#popover_log_body .graph").fadeIn();
+        });
         $("#popover_log_btn_text").show();
         $(this).hide();
     });
     $("#popover_log_btn_text").click(function(){
-        $("#popover_log_body .graph").hide();
-        $("#popover_log_body .text").show();
+        $("#popover_log_body .graph").fadeOut(function(){
+            $("#popover_log_body .text").fadeIn();
+        });
         $("#popover_log_btn_graph").show();
         $(this).hide();
     });
     $("#popover_log_btn_hideothers").click(function(){
-        $("#popover_log_body .another-package-set").hide();
+        $("#popover_log_body .another-package-set").slideUp();;
         $("#popover_log_btn_showeothers").show();
         $(this).hide();
     });
     $("#popover_log_btn_showeothers").click(function(){
-        $("#popover_log_body .another-package-set").show();
+        $("#popover_log_body .another-package-set").slideDown();
         $("#popover_log_btn_hideothers").show();
         $(this).hide();
     });
