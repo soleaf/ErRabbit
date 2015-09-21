@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 import java.util.Properties;
 
 /**
+ * AbstractMailSenderSetting
+ * General settings
  * Created by soleaf on 8/23/15.
  */
 public class AbstractMailSenderSetting implements MailSenderSetting{

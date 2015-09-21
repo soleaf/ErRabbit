@@ -70,15 +70,18 @@ public class AnalysisController {
     {
         try {
 
+            // Make request model
             LogAnalysisRequest req = new LogAnalysisRequest();
             model.addAttribute("req", req);
 
+            // fiilter rabbit
             if (rabbit != null && rabbit.length() > 0){
                 Set<String> filterRabbits = new HashSet<>();
                 filterRabbits.add(rabbit);
                 req.setFilterRabbits(filterRabbits);
             }
 
+            // filter by level
             if (trace)
                 req.getFilterLevels().add(Level.TRACE.name());
             if (debug)
@@ -92,6 +95,7 @@ public class AnalysisController {
             if (fatal)
                 req.getFilterLevels().add(Level.FATAL.name());
 
+            // filter date
             if (StringUtils.hasLength(date_begin)){
                 logger.trace("date_begin " + date_begin);
                 req.setFilterBeginDate(Integer.parseInt(date_begin.replaceAll("-","")));
@@ -101,6 +105,7 @@ public class AnalysisController {
                 req.setFilterEndDate(Integer.parseInt(date_end.replaceAll("-","")));
             }
 
+            // group by
             if (StringUtils.hasLength(groupBy)){
                 String[] groupByItems = groupBy.split(",");
                 if (groupByItems != null && groupByItems.length > 0){

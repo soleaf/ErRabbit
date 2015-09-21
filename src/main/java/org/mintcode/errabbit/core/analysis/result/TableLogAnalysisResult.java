@@ -5,6 +5,8 @@ import org.mintcode.errabbit.core.analysis.request.AnalysisRequest;
 import java.util.*;
 
 /**
+ * Result type Table.
+ * Just table view
  * Created by soleaf on 7/12/15.
  */
 public class TableLogAnalysisResult implements AnalysisResult {

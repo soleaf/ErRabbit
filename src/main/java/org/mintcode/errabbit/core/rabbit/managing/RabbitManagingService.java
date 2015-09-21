@@ -10,6 +10,7 @@ import java.util.Set;
 
 /**
  * RabbitManagingService
+ * Managing service related rabbit
  * Created by soleaf on 2015. 1. 8..
  */
 public interface RabbitManagingService {
@@ -57,11 +58,11 @@ public interface RabbitManagingService {
      */
     public List<RabbitGroup> getRabbitGroupWithRabbitSorted(Map<RabbitGroup, Set<Rabbit>> rabbitGroupSetMap);
 
-        /**
-         * Delete a Rabbit and related Objects
-         * @param id
-         * @return
-         */
+    /**
+     * Delete a Rabbit and related Objects
+     * @param id
+     * @return
+     */
     public boolean deleteRabbit(String id);
 
     /**

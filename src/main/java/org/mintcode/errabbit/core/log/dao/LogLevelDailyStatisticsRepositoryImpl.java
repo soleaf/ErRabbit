@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * LogLevelDailyStatisticsRepositoryImpl
  * Created by soleaf on 15. 4. 5..
  */
 public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStatisticsRepositoryCustom {

@@ -252,6 +252,12 @@ function retrievelogs(rabbitId, page, size, y, m, d) {
                     }
                 });
             });
+
+            $("#log-list .categoryName").click(function(){
+                $("#filter_class").val($(this).text());
+                $("#filter_apply").trigger("click");
+            });
+
             hideLoading();
         }
     });

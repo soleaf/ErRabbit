@@ -4,6 +4,7 @@ import com.mongodb.WriteResult;
 import org.mintcode.errabbit.model.Log;
 
 /**
+ * LogRepositoryCustom
  * Created by soleaf on 2015. 2. 19..
  */
 public interface LogRepositoryCustom {

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * One or more results types for one result.
  * Created by soleaf on 15. 8. 2..
  */
 public class AnalysisResultSet implements Serializable {
@@ -28,16 +29,30 @@ public class AnalysisResultSet implements Serializable {
 
     }
 
+    /**
+     * Set result
+     * @param results
+     */
     public void setResults(Map<String, AnalysisResult> results) {
         this.results = results;
     }
 
+    /**
+     * initation with result
+     * @param req
+     * @param result
+     */
     public AnalysisResultSet(AnalysisRequest req, List<Map<String, Object>> result){
         logger.trace("result > " + result);
         results.put(TABLE, new TableLogAnalysisResult(req, result));
         results.put(GRAPHIC, new GraphicLogAnalysisResult(req, result));
     }
 
+    /**
+     * Get result by type
+     * @param type
+     * @return
+     */
     public AnalysisResult get(String type){
         return results.get(type);
     }

@@ -7,6 +7,7 @@ import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 import java.util.List;
 
 /**
+ * LogLevelHourlyStatisticsRepositoryCustom
  * Created by soleaf on 15. 9. 8..
  */
 public interface LogLevelHourlyStatisticsRepositoryCustom {

@@ -12,6 +12,7 @@ public class IndexController {
     @Autowired
     LogRepository logRepository;
 
+    //  Index page
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showIndex() {
         return "redirect:/rabbit/list";

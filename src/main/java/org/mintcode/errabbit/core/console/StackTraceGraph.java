@@ -21,6 +21,10 @@ public class StackTraceGraph {
         this.basePackage = basePackage;
     }
 
+    /**
+     * Add stack tracne element
+     * @param element
+     */
     public void addElement(ErStackTraceElement element){
 
         if (className == null){
@@ -38,24 +42,31 @@ public class StackTraceGraph {
         stackTraceElements.add(element);
     }
 
+    /**
+     * Is it base packages
+     * @param className
+     * @return
+     */
     private boolean checkBasePackages(String className){
 
         if (basePackage == null){
             return false;
         }
-        else{
+        else {
             return className.startsWith(basePackage);
         }
-//        if(className.startsWith("sun")){
-//            return true;
-//        }
-//        else if (className.startsWith("java"))
-//        {
-//            return true;
-//        }
-//        else{
-//            return false;
-//        }
+        // This block is function support major framework identity.
+        // Not support UI now.
+        //        if(className.startsWith("sun")){
+        //            return true;
+        //        }
+        //        else if (className.startsWith("java"))
+        //        {
+        //            return true;
+        //        }
+        //        else{
+        //            return false;
+        //        }
     }
 
     public List<ErStackTraceElement> getStackTraceElements() {

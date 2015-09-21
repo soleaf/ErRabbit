@@ -141,10 +141,8 @@ public class LogAnalysisRequest implements AnalysisRequest {
             }
 
             Fields files = Fields.fields(fieldsStr);
-//            Fields files = Fields.fields((String[]) group.toArray());
             op.add(new GroupOperation(files).count().as("count"));
             op.add(new SortOperation(new Sort(Sort.Direction.ASC, fieldsStr)));
-//            op.add(new SortOperation(new Sort(Sort.Direction.ASC, (String[]) group.toArray())));
         }
 
         return op;

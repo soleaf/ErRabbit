@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
+ * LogLevelHourlyStatisticsRepositoryImpl
  * Created by soleaf on 15. 9. 8..
  */
 public class LogLevelHourlyStatisticsRepositoryImpl implements LogLevelHourlyStatisticsRepositoryCustom {
@@ -31,8 +32,6 @@ public class LogLevelHourlyStatisticsRepositoryImpl implements LogLevelHourlySta
     public void insertStatistic(Log log) {
 
         try {
-
-
             //COLLECTION_PREFIX + ".statistic"
         /*
             log.statstic

@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * ReportScheduler
  * Created by soleaf on 8/23/15.
  */
 @Component
@@ -30,22 +31,27 @@ public class ReportScheduler {
     @Autowired
     CoreService coreService;
 
-
+    /**
+     * Check schedule
+     */
     @Scheduled(cron = "0 0 * * * *")
     public void check(){
         try{
+            // get descriptions
             List<ReportDescription> descriptionList = repository.findAll();
             if (descriptionList == null && descriptionList.isEmpty()){
                 logger.trace("have no report description");
                 return;
             }
 
+            // Now, just support one description
             ReportDescription description = descriptionList.get(0);
             if (!description.getActive()){
                 logger.trace("description is not active");
                 return;
             }
 
+            // Check is time to run report generator
             Calendar cal = Calendar.getInstance();
             cal.setTime(new Date());
             Integer nowHour = cal.get(Calendar.HOUR_OF_DAY);

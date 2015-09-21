@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Analysis result type Graphics Item
+ * Tree structure
  * Created by soleaf on 7/5/15.
  */
 public class GraphicLogAnalysisResultItem implements Serializable {

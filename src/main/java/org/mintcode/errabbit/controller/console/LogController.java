@@ -71,6 +71,7 @@ public class LogController {
                 rabbitManagingService.saveRabbit(rabbit);
             }
 
+            // Rabbit list
             model.addAttribute("groups", rabbitManagingService.
                     getRabbitGroupWithRabbitSorted(rabbitManagingService.getRabbitsByGroup(rabbitCache.getRabbits())));
 
@@ -132,6 +133,7 @@ public class LogController {
                 cellList.add(new DayCell(i+1));
             }
 
+            // LogLevel daily statistics
             List<LogLevelDailyStatistics> logLevelDailyStatisticses =
                     logLevelDailyStatisticsRepository.findByRabbitIdAndYearAndMonth(id, year, month);
 
@@ -159,7 +161,7 @@ public class LogController {
     }
 
     /**
-     * DayCell
+     * DayCell for UI
      * Calendar day cell class has LogLevelStatistics
      * It' using to show each day's log counts on UI
      */
@@ -201,12 +203,14 @@ public class LogController {
     ) {
         try{
 
+            // target rabbit
             Rabbit rabbit = rabbitCache.getRabbit(id);
             if (rabbit == null){
                 model.addAttribute("e",new Exception("Can't find rabbit"));
                 return new ModelAndView("/log/list");
             }
 
+            // paging and query params
             if (page == null){
                 page = 0;
             }
@@ -220,11 +224,10 @@ public class LogController {
                 day = "0" + day;
             }
 
-            logger.trace(String.format("Request of retrieve reportPage page:%d size:%d",page, size));
-
             Integer loggingEventDateInt = Integer.parseInt(year + month + day);
             Sort sort = new Sort(Sort.Direction.DESC, "_id");
 
+            // Filter options
             Page<Log> reportPage = null;
             if (level == null && className == null){
                 reportPage = logRepository.findByRabbitIdAndLoggingEventDateInt(id
@@ -250,10 +253,11 @@ public class LogController {
                         , className
                         , new PageRequest(page, size, sort));
             }
+
             logger.trace("level="+level + ", className="+className);
             logger.trace("Result of retrieve reportPage > " + reportPage.getContent().size());
             model.addAttribute("reports", reportPage);
-            model.addAttribute("format", new SimpleDateFormat("HH:mm:ss:SSS"));
+            model.addAttribute("format", new SimpleDateFormat("HH:mm:ss:SSS")); // format for UI
         }
         catch (Exception e){
             logger.error(e.getMessage(),e);

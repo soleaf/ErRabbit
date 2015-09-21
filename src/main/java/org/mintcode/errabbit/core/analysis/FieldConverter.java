@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Convert Data scheme to UI field name
  * Created by soleaf on 15. 8. 2..
  */
 public class FieldConverter {
@@ -18,6 +19,11 @@ public class FieldConverter {
         dict.put("loggingEvent.categoryName", "categoryName");
     }
 
+    /**
+     * collectionField(dataScheme) to UI field Name
+     * @param collectionField
+     * @return
+     */
     public static String toFieldName(String collectionField){
         return dict.get(collectionField);
     }

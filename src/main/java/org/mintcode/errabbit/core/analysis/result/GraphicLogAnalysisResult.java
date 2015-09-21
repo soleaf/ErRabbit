@@ -9,7 +9,9 @@ import org.springframework.data.annotation.Transient;
 import java.util.*;
 
 /**
- * Graphical analytic result set
+ * Analysis result type Graphics
+ * Tree structure
+ * Rank model by level and count
  * Created by soleaf on 15. 8. 1..
  */
 public class GraphicLogAnalysisResult implements AnalysisResult {
