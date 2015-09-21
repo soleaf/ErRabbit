@@ -1,3 +1,11 @@
+/**
+ * ErRabbit Web Console
+ * soleaf, mintcode.org
+ * https://github.com/soleaf/ErRabbit
+ * analysis.js
+ */
+
+// Init events
 $(document).ready(function(){
 
     // Rabbit Selection
@@ -12,10 +20,11 @@ $(document).ready(function(){
         selectGroupByAvailable($checkBox.val(), $checkBox.attr("data-label"));
     });
 
+    // Click run analysis
     $("#run").click(function(){
 
         // Validations
-        if ($("#groupBy").val().length < 1){
+        if ($("#groupBy").val().length < 1) {
             alert("Choose least one 'GROUP BY' element");
             return;
         }
@@ -30,7 +39,7 @@ $(document).ready(function(){
             return;
         }
 
-        // Req
+        // request
         showLoading();
         var formData = $("#frm_anal").serialize();
         var action = $("#frm_anal").attr("action")
@@ -44,7 +53,6 @@ $(document).ready(function(){
                 hideLoading();
             }
             ,fail: function(){
-                // todo : fail
                 alert("fail");
                 hideLoading();
             }
@@ -52,11 +60,21 @@ $(document).ready(function(){
     });
 });
 
+/**
+ * select target rabbit
+ * @param value
+ * @param label
+ */
 function selectRabbit(value, label){
     $("#frm_rabbit_button").text(label);
     $("#frm_anal INPUT[name='rabbit']").val(value);
 }
 
+/**
+ * select group by avaliable element
+ * @param value
+ * @param label
+ */
 function selectGroupByAvailable(value, label){
     var html= "<li><input checked type='checkbox' data-label='" + label + "' value='" + value + "'> " + label
         //+ "<span class='glyphicon glyphicon-menu-down' aria-hidden='true'></span>"
@@ -71,6 +89,11 @@ function selectGroupByAvailable(value, label){
     addGroupByItemVal(value);
 }
 
+/**
+ * select group by selected element
+ * @param value
+ * @param label
+ */
 function selectGroupBySelected(value, label){
     var html= "<li><input type='checkbox' data-label='" + label + "' value='" + value + "'> " + label + "</li>";
     $("#groupby_available").append(html);
@@ -82,6 +105,10 @@ function selectGroupBySelected(value, label){
     removeGroupByItemVal(value);
 }
 
+/**
+ * Add group by item to input
+ * @param val
+ */
 function addGroupByItemVal(val){
     var array = $("#groupBy").val();
     if (array.length < 1){
@@ -93,6 +120,10 @@ function addGroupByItemVal(val){
     $("#groupBy").val(array);
 }
 
+/**
+ * Remove group by item from input
+ * @param val
+ */
 function removeGroupByItemVal(val){
     var array = $("#groupBy").val();
     array = array.replace(val+",","");

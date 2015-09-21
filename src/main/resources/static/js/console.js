@@ -1,12 +1,25 @@
+/**
+ * ErRabbit Web Console
+ * soleaf, mintcode.org
+ * https://github.com/soleaf/ErRabbit
+ * console.js
+ */
+
 var stompClient = null;
 var socket = null;
-var retry = 0;
+var retry = 0; // connect retry count
 
+/**
+ * Init
+ */
 $(document).ready(function () {
+
     disconnect();
     connect();
-    initlogModalButton();
-    reportEvent();
+    initLogModalButton();
+    logEvent();
+
+    // Extend session long polling
     setInterval(
         function(){
             extendSession();
@@ -14,6 +27,10 @@ $(document).ready(function () {
         , 1000 * 60 * 10);
 });
 
+/***
+ * Connection status UI
+ * @param connected
+ */
 function setConnected(connected) {
     if (connected) {
         $("#con_success").css("display", "inline-block");
@@ -29,6 +46,9 @@ function setConnected(connected) {
     }
 }
 
+/**
+ * Connect
+ */
 function connect() {
     socket = new SockJS('/console');
     stompClient = Stomp.over(socket);
@@ -66,6 +86,9 @@ function connect() {
     };
 }
 
+/**
+ * Disconnect socket
+ */
 function disconnect() {
     if (stompClient != null) {
         stompClient.disconnect();
@@ -74,6 +97,10 @@ function disconnect() {
     console.log("Disconnected");
 }
 
+/**
+ * Append received log to UI
+ * @param message
+ */
 function appendReports(message) {
     $("#waiting").fadeOut();
     // Remove Over line
@@ -81,10 +108,13 @@ function appendReports(message) {
         $("#log-list .log").last().remove();
     }
     $("#log-list").prepend(message);
-    reportEvent();
+    logEvent();
 }
 
-function reportEvent(){
+/**
+ * Init log event
+ */
+function logEvent(){
     $("#log-list .log[data-e='true']").click(function () {
         // Report Detail Information Layer Toggle
         var row = $(this);
@@ -109,7 +139,10 @@ function reportEvent(){
     });
 }
 
-function initlogModalButton(){
+/**
+ * Init log modal buttons
+ */
+function initLogModalButton(){
     $("#popover_log_btn_graph").click(function(){
         $("#popover_log_body .text").fadeOut(function(){
             $("#popover_log_body .graph").fadeIn();
@@ -136,6 +169,9 @@ function initlogModalButton(){
     });
 }
 
+/**
+ * Extend session log polling
+ */
 function extendSession(){
     $.ajax({
         type : "GET",

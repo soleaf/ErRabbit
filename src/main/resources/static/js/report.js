@@ -1,16 +1,33 @@
+/**
+ * ErRabbit Web Console
+ * soleaf, mintcode.org
+ * https://github.com/soleaf/ErRabbit
+ * report.js
+ */
+
+/**
+ * Init
+ */
 $(document).ready(function(){
     $("#empty").hide();
     feedReport(0, 50);
     initReportFeedButton();
 });
 
-
+/**
+ * Init report feed button
+ */
 function initReportFeedButton(){
     $("#log-feed").click(function(){
         feedReport($(this).attr("data-page"), 50);
     });
 }
 
+/**
+ * Feed report
+ * @param page
+ * @param size
+ */
 function feedReport(page, size) {
 
     showLoading();

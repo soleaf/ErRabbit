@@ -1,9 +1,21 @@
+/**
+ * ErRabbit Web Console
+ * soleaf, mintcode.org
+ * https://github.com/soleaf/ErRabbit
+ * group.js
+ */
 
+/**
+ * Init
+ */
 $(document).ready(function () {
     initButtons();
     initFormModal();
 });
 
+/**
+ * Init Group list buttons
+ */
 function initButtons() {
     $("#new_group").click(function () {
         var modal = $("#formModal");
@@ -31,9 +43,13 @@ function initButtons() {
     });
 }
 
+/**
+ * Init new group form modal
+ */
 function initFormModal() {
     var modal = $("#formModal");
     modal.find("form").submit(function () {
+        // validation
         if ($(this).find("INPUT[name=name]").val().length < 1) {
             alert("Insufficient name.");
             return false;

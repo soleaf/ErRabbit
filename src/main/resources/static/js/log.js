@@ -1,19 +1,25 @@
 /**
- * Created by soleaf on 2/21/15.
+ * ErRabbit Web Console
+ * soleaf, mintcode.org
+ * https://github.com/soleaf/ErRabbit
+ * log.js
  */
 
 var rabbitId;
-var isFilter;
+var isFilter = false; // filter applied status
 
+/**
+ * Init
+ */
 $(document).ready(function(){
 
     // Get information
     rabbitId = $("#log-area").attr("data-rabbitId");
 
-    initlogFeedButton();
+    initLogFeedButton();
 
     // init logModal button event
-    initlogModalButton();
+    initLogModalButton();
 
     // Init calendarEvent
     initCalendarYear();
@@ -32,12 +38,14 @@ $(document).ready(function(){
             retrievelogs(rabbitId, 0, 100, $("#cal_y").val(), $("#cal_m").val(), dd);
         });
     }
-
-    //initCalendarValueChanged();
-
 });
 
+/**
+ * Init Filter UI
+ */
 function initFilterButtons(){
+
+    // Apply
     $("#filter_apply").click(function(){
         if($("#filter_level").val() == "ALL" && $("#filter_class").val().length < 1){
             alert("Input class");
@@ -48,6 +56,8 @@ function initFilterButtons(){
         retrievelogs(rabbitId, 0, 100, $("#cal_y").val(), $("#cal_m").val(), $("#cal_d").val());
         $('#filterModal').modal('hide');
     });
+
+    // Clear
     $("#filter_clear").click(function(){
         filterButtonToggle(false);
         $("#log-list").html("");
@@ -56,8 +66,14 @@ function initFilterButtons(){
     });
 }
 
+/**
+ * Change ui after changing filter
+ * @param active
+ */
 function filterButtonToggle(active){
+
     isFilter = active;
+
     if (active){
         $("#filter_button").addClass("filter-apply");
 
@@ -84,7 +100,10 @@ function filterButtonToggle(active){
     }
 }
 
-function initlogModalButton(){
+/**
+ * Init log modal buttons
+ */
+function initLogModalButton(){
     $("#popover_log_btn_graph").click(function(){
         $("#popover_log_body .text").fadeOut(function(){
             $("#popover_log_body .graph").fadeIn();
@@ -111,6 +130,14 @@ function initlogModalButton(){
     });
 }
 
+/**
+ * Retrieve calendar data
+ * @param rabbitId
+ * @param year
+ * @param month
+ * @param selectedDay
+ * @param callback
+ */
 function retrieveCalendar(rabbitId, year, month, selectedDay, callback) {
     showLoading();
     $.ajax({
@@ -128,11 +155,12 @@ function retrieveCalendar(rabbitId, year, month, selectedDay, callback) {
                     $("#cal_d").val(selectedDay);
                 }
 
+                // day cell click
                 $("#log-calendar .day").click(function(){
                     filterButtonToggle(false);
                     $("#cal_d").val($(this).attr("data-value"));
                     $("#log-list").html("");
-                    retrievelogsFromSelected();
+                    retrieveLogsFromSelected();
                     $("#log-calendar .active").removeClass("active");
                     $(this).addClass("active");
                 });
@@ -155,7 +183,7 @@ function retrieveCalendar(rabbitId, year, month, selectedDay, callback) {
  */
 function initCalendarYear(){
     $("#dropdownMenu_year_dropdown LI A").click(function(){
-        value = $(this).attr("data-value");
+        var value = $(this).attr("data-value");
         $("#cal_y").val(value);
         $("#dropdownMenu_year_dropdown .value").text(value);
         reloadCalendarFromSelected();
@@ -176,23 +204,36 @@ function initCalendarMonth(){
     });
 }
 
+/**
+ * Reload calendar
+ */
 function reloadCalendarFromSelected(){
     filterButtonToggle(false);
     $("#log-list").html("");
     retrieveCalendar(rabbitId, $("#cal_y").val(), $("#cal_m").val(), -1, null);
 }
 
-function retrievelogsFromSelected(){
-    retrievelogsFromSelectedByPage(0);
+/**
+ * Reload logs with current selected parameters
+ */
+function retrieveLogsFromSelected(){
+    retrieveLogsFromSelectedByPage(0);
 }
 
-function retrievelogsFromSelectedByPage(page){
+/**
+ * Reload logs from selected page
+ * @param page
+ */
+function retrieveLogsFromSelectedByPage(page){
     retrievelogs(rabbitId, page, 100, $("#cal_y").val(), $("#cal_m").val(), $("#cal_d").val());
 }
 
-function initlogFeedButton(){
+/**
+ * init log feed button event
+ */
+function initLogFeedButton(){
     $("#log-feed").click(function(){
-        retrievelogsFromSelectedByPage($(this).attr("data-page"));
+        retrieveLogsFromSelectedByPage($(this).attr("data-page"));
     });
 }
 
@@ -232,6 +273,7 @@ function retrievelogs(rabbitId, page, size, y, m, d) {
                 $("#log-feed").hide();
             }
 
+            // Log list item event
             $("#log-list .log[data-e=true]").click(function(){
                 // log Detail Information Layer Toggle
                 var row = $(this);
@@ -255,6 +297,7 @@ function retrievelogs(rabbitId, page, size, y, m, d) {
                 });
             });
 
+            // log list item's category event
             $("#log-list .categoryName").click(function(){
                 $("#filter_class").val($(this).text());
                 $("#filter_apply").trigger("click");
