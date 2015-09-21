@@ -1,4 +1,4 @@
-![ErRabbit](graphics/logo.png "logo")
+![ErRabbit](src/main/resources/static/img/rabbit_handcuffs.png "logo")
 
 # Introduction
 
