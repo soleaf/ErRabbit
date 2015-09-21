@@ -21,6 +21,11 @@ public class ErThrowable implements Serializable{
 
     }
 
+    /**
+     * Make from java.lang.Throwable (Log4j 1.x)
+     * @param tw
+     * @return
+     */
     public static ErThrowable formThrowable(Throwable tw){
 
         if (tw == null){
@@ -38,6 +43,11 @@ public class ErThrowable implements Serializable{
         return ert;
     }
 
+    /**
+     * Make from org.apache.logging.log4j.core.impl.ThrowableProxy (Log4j 2.x)
+     * @param tp
+     * @return
+     */
     public static ErThrowable fromThrowableProxy(ThrowableProxy tp){
 
         if (tp == null){

@@ -1,6 +1,5 @@
 package org.mintcode.errabbit.model;
 
-import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.apache.log4j.spi.LoggingEvent;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 
@@ -8,6 +7,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * ErrLoggingEvent
+ * It is equivalent to org.apache.log4j.spi.LoggingEvent
+ * (convert to save repository)
  * Created by soleaf on 2/21/15.
  */
 public class ErrLoggingEvent implements Serializable{
@@ -18,6 +20,11 @@ public class ErrLoggingEvent implements Serializable{
 
     }
 
+    /**
+     * Make from org.apache.log4j.spi.LoggingEvent (Log4j 1.x)
+     * @param loggingEvent
+     * @return
+     */
     public static ErrLoggingEvent fromLoggingEvent(LoggingEvent loggingEvent){
 
         ErrLoggingEvent erLoggingEvent = new ErrLoggingEvent();
@@ -30,13 +37,21 @@ public class ErrLoggingEvent implements Serializable{
         erLoggingEvent.setLocationInfo(ErLocationInfo.fromLocationInfo(loggingEvent.getLocationInformation()));
         erLoggingEvent.setTimeStamp(loggingEvent.getTimeStamp());
         erLoggingEvent.setTimeStampDate(new Date(loggingEvent.getTimeStamp()));
+
+        // Optional trhowable information
         if (loggingEvent.getThrowableInformation() != null){
             erLoggingEvent.setThrowableInfo(ErThrowableInformation.fromThrowableInformation(loggingEvent.getThrowableInformation()));
         }
+
         return erLoggingEvent;
 
     }
 
+    /**
+     * Make from org.apache.logging.log4j.core.impl.Log4jLogEvent (Log4j 2.x)
+     * @param log4jLogEvent
+     * @return
+     */
     public static ErrLoggingEvent fromLog4jLogEvent(Log4jLogEvent log4jLogEvent){
         ErrLoggingEvent erLoggingEvent = new ErrLoggingEvent();
 
@@ -45,7 +60,6 @@ public class ErrLoggingEvent implements Serializable{
         erLoggingEvent.setMessage(log4jLogEvent.getMessage());
         erLoggingEvent.setRenderedMessage(log4jLogEvent.getMessage().getFormattedMessage());
         erLoggingEvent.setThreadName(log4jLogEvent.getThreadName());
-//        erLoggingEvent.setLocationInfo(ErLocationInfo.fromLocationInfo(log4jLogEvent.));
         erLoggingEvent.setTimeStamp(log4jLogEvent.getTimeMillis());
         erLoggingEvent.setTimeStampDate(new Date(log4jLogEvent.getTimeMillis()));
         if (log4jLogEvent.getThrownProxy() != null){

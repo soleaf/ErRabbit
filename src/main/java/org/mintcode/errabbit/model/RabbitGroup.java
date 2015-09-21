@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * RabbitGroup
  * Created by soleaf on 15. 9. 4..
  */
 @Document(collection = "rabbits.group")
@@ -18,8 +19,10 @@ public class RabbitGroup implements Serializable {
     @Id
     private ObjectId id;
 
+    // Name
     private String name;
 
+    // Used on UI
     @Transient
     private List<Rabbit> rabbitSet;
 
@@ -27,10 +30,12 @@ public class RabbitGroup implements Serializable {
 
     }
 
+    // Get NoneGroup
     public static RabbitGroup noneGroup(){
         return new NoneRabbitGroup();
     }
 
+    // RabbitGroup with name
     public RabbitGroup(String name) {
         this.name = name;
     }

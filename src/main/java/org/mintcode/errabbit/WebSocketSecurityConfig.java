@@ -4,6 +4,7 @@ import org.springframework.security.config.annotation.web.messaging.MessageSecur
 import org.springframework.security.config.annotation.web.socket.AbstractSecurityWebSocketMessageBrokerConfigurer;
 
 /**
+ * Web socket security configuration
  * Created by soleaf on 8/1/15.
  */
 

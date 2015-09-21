@@ -5,6 +5,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
+ * Static web resource Configuration
  * Created by soleaf on 4/26/15.
  */
 @Configuration

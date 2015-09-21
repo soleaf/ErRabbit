@@ -9,6 +9,9 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 
 /**
+ * ErThrowableInformation
+ * It is equivalent to org.apache.log4j.spi.ThrowableInformation
+ * (convert to save repository)
  * Created by soleaf on 2/21/15.
  */
 public class ErThrowableInformation implements Serializable{
@@ -21,6 +24,11 @@ public class ErThrowableInformation implements Serializable{
 
     public ErThrowableInformation(){}
 
+    /***
+     * Make from org.apache.log4j.spi.ThrowableInformation (Log4j 1.x)
+     * @param tw
+     * @return
+     */
     public static ErThrowableInformation fromThrowableInformation(ThrowableInformation tw){
 
         ErThrowableInformation ert = new ErThrowableInformation();
@@ -40,6 +48,11 @@ public class ErThrowableInformation implements Serializable{
         return ert;
     }
 
+    /***
+     * Make from org.apache.logging.log4j.core.impl.ThrowableProxy (Log4j 2.x)
+     * @param tp
+     * @return
+     */
     public static ErThrowableInformation fromThrowableProxy(ThrowableProxy tp){
         ErThrowableInformation ert = new ErThrowableInformation();
         ert.setThrowable(ErThrowable.fromThrowableProxy(tp));

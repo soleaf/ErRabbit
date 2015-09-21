@@ -20,6 +20,7 @@ import java.util.Arrays;
 import javax.servlet.Filter;
 
 /**
+ * ActiveMQ Listener Configuration
  * Created by soleaf on 2015. 4. 20..
  */
 @SpringBootApplication

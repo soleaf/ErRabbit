@@ -1,6 +1,5 @@
 package org.mintcode.errabbit.model;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -53,6 +52,11 @@ public class Rabbit implements Serializable {
         this.id = id;
     }
 
+    /**
+     * Label
+     * Now, label is not settable on UI, use id instead label.(support at next time)
+     * @return
+     */
     public String getLabel() {
         if (label == null){
             return id;
@@ -66,6 +70,10 @@ public class Rabbit implements Serializable {
         this.label = label;
     }
 
+    /**
+     * Register date
+     * @return
+     */
     public Date getRegDate() {
         return regDate;
     }
@@ -74,6 +82,10 @@ public class Rabbit implements Serializable {
         this.regDate = regDate;
     }
 
+    /**
+     * Read all logs
+     * @return
+     */
     public Boolean getRead() {
         return read;
     }
@@ -82,6 +94,11 @@ public class Rabbit implements Serializable {
         this.read = read;
     }
 
+    /**
+     * Base package
+     * ex) org.mintcode.errabbit
+     * @return
+     */
     public String getBasePackage() {
         return basePackage;
     }
@@ -90,6 +107,10 @@ public class Rabbit implements Serializable {
         this.basePackage = basePackage;
     }
 
+    /**
+     * Collect only exception on queue listener
+     * @return
+     */
     public Boolean getCollectionOnlyException() {
         return collectionOnlyException;
     }
@@ -98,6 +119,10 @@ public class Rabbit implements Serializable {
         this.collectionOnlyException = collectionOnlyException;
     }
 
+    /**
+     * This rabbit's group
+     * @return
+     */
     public RabbitGroup getGroup() {
         if (group == null){
             return RabbitGroup.noneGroup();
@@ -107,6 +132,10 @@ public class Rabbit implements Serializable {
         }
     }
 
+    /**
+     * Hide logs related this rabbit on console
+     * @return
+     */
     public Boolean getHideOnConsole() {
         return hideOnConsole == null ? false : hideOnConsole;
     }

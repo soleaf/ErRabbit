@@ -5,6 +5,9 @@ import org.apache.logging.log4j.core.impl.ExtendedStackTraceElement;
 import java.io.Serializable;
 
 /**
+ * ErStackTraceElement
+ * It is equivalent to java.lang.StackTraceElement
+ * (convert to save repository)
  * Created by soleaf on 2/21/15.
  */
 public class ErStackTraceElement implements Serializable{
@@ -18,6 +21,11 @@ public class ErStackTraceElement implements Serializable{
 
     public ErStackTraceElement(){}
 
+    /**
+     * Make from java.lang.StackTraceElement (Log4j 1.x)
+     * @param element
+     * @return
+     */
     public static ErStackTraceElement fromStackTraceElement(StackTraceElement element){
         ErStackTraceElement erl = new ErStackTraceElement();
         erl.setDeclaringClass(element.getClassName());
@@ -28,6 +36,11 @@ public class ErStackTraceElement implements Serializable{
     }
 
 
+    /**
+     * Make from org.apache.logging.log4j.core.impl.ExtendedStackTraceElement (Log4j 2.x)
+     * @param element
+     * @return
+     */
     public static ErStackTraceElement fromExtendedStackTraceElement(ExtendedStackTraceElement element){
         ErStackTraceElement erl = new ErStackTraceElement();
         erl.setDeclaringClass(element.getClassName());

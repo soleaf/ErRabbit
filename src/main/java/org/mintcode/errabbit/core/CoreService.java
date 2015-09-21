@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Make Environment for rabbit core.
+ * Core Environment
+ * - Start up services
  * Created by soleaf on 2015. 2. 8..
  */
 
@@ -32,7 +33,8 @@ public class CoreService {
     @Autowired
     private ReportRepository reportRepository;
 
-    private Integer unreadReport = 0;
+    // Unread report count catche
+    private Integer unReadReports = 0;
 
     @PostConstruct
     private void startup(){
@@ -59,6 +61,6 @@ public class CoreService {
      * Used on navigation menu report's badge
      */
     public void syncUnreadReportCount(){
-        unreadReport = reportRepository.getUnreadCount();
+        unReadReports = reportRepository.getUnreadCount();
     }
 }

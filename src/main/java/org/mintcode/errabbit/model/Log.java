@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * Log
+ * has LoggingInformation
  * Created by soleaf on 2015. 2. 2..
  */
 @Document(collection = "logs")
@@ -21,9 +23,6 @@ public class Log implements Serializable {
     // RabbitID
     @Indexed(unique = false)
     protected String rabbitId;
-
-    // ErRabbitVersion
-    protected String version;
 
     // LoggingEvent
     ErrLoggingEvent loggingEvent;
@@ -40,11 +39,20 @@ public class Log implements Serializable {
 
     }
 
+    /**
+     * Make log from rabbitId, erLoggingEvent
+     * @param rabbitId
+     * @param loggingEvent
+     */
     public Log(String rabbitId, ErrLoggingEvent loggingEvent){
         this.rabbitId = rabbitId;
         this.loggingEvent = loggingEvent;
     }
 
+    /**
+     * Id
+     * @return
+     */
     public ObjectId getId() {
         return id;
     }
@@ -53,6 +61,10 @@ public class Log implements Serializable {
         this.id = id;
     }
 
+    /**
+     * RabbitId
+     * @return
+     */
     public String getRabbitId() {
         return rabbitId;
     }
@@ -61,14 +73,10 @@ public class Log implements Serializable {
         this.rabbitId = rabbitId;
     }
 
-    public String getVersion() {
-        return version;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
+    /**
+     * LoggingEvent
+     * @return
+     */
     public ErrLoggingEvent getLoggingEvent() {
         return loggingEvent;
     }
@@ -79,6 +87,10 @@ public class Log implements Serializable {
         loggingEventDateInt = Integer.parseInt(format.format(loggingEvent.getTimeStampDate()));
     }
 
+    /**
+     * Collected Date
+     * @return
+     */
     public Date getCollectedDate() {
         return collectedDate;
     }
@@ -96,13 +108,18 @@ public class Log implements Serializable {
         return "Log{" +
                 "id=" + id +
                 ", rabbitId='" + rabbitId + '\'' +
-                ", version='" + version + '\'' +
                 ", loggingEvent=" + loggingEvent +
                 ", loggingEventDateInt=" + loggingEventDateInt +
                 ", collectedDate=" + collectedDate +
                 '}';
     }
 
+    /**
+     * To Html
+     * Used on console (web socket)
+     * @param showRabbitID
+     * @return
+     */
     public String toHTML(Boolean showRabbitID){
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss:SSS");
         StringBuilder sb = new StringBuilder();

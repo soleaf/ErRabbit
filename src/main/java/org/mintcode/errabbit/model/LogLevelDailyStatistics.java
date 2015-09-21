@@ -10,6 +10,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 
 /**
+ * LogLevelDailyStatistics
+ * Logging Statistics Daily by rabbit
+ * Log level aggregation
  * Created by soleaf on 2015. 2. 2..
  */
 

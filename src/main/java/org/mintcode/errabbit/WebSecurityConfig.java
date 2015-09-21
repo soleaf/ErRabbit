@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
+ * Web security configuration
  * Created by soleaf on 2015. 4. 20..
  */
 @Configuration

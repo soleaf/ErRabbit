@@ -6,16 +6,27 @@ import org.apache.log4j.Level;
 import java.io.Serializable;
 
 /**
+ * ErLevel
+ * It is equivalent to org.apache.log4j.Level
+ * (convert to save repository)
  * Created by soleaf on 2/21/15.
  */
 public class ErLevel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    // LogLevel int
     private int level;
+    // LogLevel String value
     private String levelStr;
 
     public ErLevel(){}
+
+    /**
+     * Level from org.apache.log4j.Level
+     * @param level
+     * @return
+     */
     public static ErLevel fromLevel(Level level){
 
         if (level == null){
