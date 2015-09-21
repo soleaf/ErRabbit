@@ -10,12 +10,18 @@ Collecting by Log4j and ActiveMQ will make it easy compatible with other program
 ![Structure](graphics/structure.png)
 
 ## Web console screenshot
- 
+
 ![ScreenShot](graphics/screenshot1.png)
 
 ![ScreenShot](graphics/screenshot2.png)
 
-# Requirements 
+![ScreenShot](graphics/screenshot3.png)
+
+![ScreenShot](graphics/screenshot4.png)
+
+![ScreenShot](graphics/screenshot5.png)
+
+# Requirements
 
 * Java 1.7 upper
 * MongoDB 2
@@ -85,7 +91,7 @@ There is dependency for our custom appender.
 #### Setup log4j.xml
 
 1. Declare 'errabbit' appender to `log4j.xml` with your ActiveMQ URL, userName, password, rabbitID
- 
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
@@ -116,7 +122,7 @@ There is dependency for our custom appender.
         <priority value="INFO" />
         <appender-ref ref="console" />
     </root>
-    
+
 </log4j:configuration>
 ```
 
@@ -128,7 +134,7 @@ You can collect all kind of log(info, debug, trace .. etc). But, for your applic
 use only as exception error logging.
 
 1. Get Log4j Logger
- 
+
 ```java
 Logger logger = Logger.getLogger(getClass());
 ```
@@ -216,7 +222,7 @@ You can collect all kind of log(info, debug, trace .. etc). But, for your applic
 use only as exception error logging.
 
 1. Get Log4j Logger
- 
+
 ```java
 Logger logger = LogManager.getLogger(getClass());
 ```
