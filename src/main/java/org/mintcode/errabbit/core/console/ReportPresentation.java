@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Report presentation is graphic log presentation model.
+ * It make Log's stack trace info UI usable model.
  * Created by soleaf on 6/7/15.
  */
 @Service

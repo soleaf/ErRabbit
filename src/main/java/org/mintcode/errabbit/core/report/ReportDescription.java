@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * Report description
+ * To generate report
  * Created by soleaf on 15. 8. 9..
  */
 @Document(collection = "settings.report")
@@ -17,12 +19,22 @@ public class ReportDescription {
     @Id
     private ObjectId id;
 
+    // Targer RabbitId
     private Set<String> targets;
+
+    // Target batch time
     private ReportDescriptionTime time;
+
+    // Report subscription user mail to alert
     private Set<String> subscribers;
+
+    // Active or inactive
     private Boolean active = false;
+
+    // MailSender to alert
     private MailSenderSetting mailSenderSetting;
 
+    // Target RabbitId
     public Set<String> getTargets() {
         return targets;
     }
@@ -31,6 +43,10 @@ public class ReportDescription {
         this.targets = targets;
     }
 
+    /**
+     * Add target rabbitId
+     * @param target
+     */
     public void addTarget(String target) {
         if (targets == null) {
             targets = new HashSet<>();
@@ -38,6 +54,10 @@ public class ReportDescription {
         targets.add(target);
     }
 
+    /**
+     * target batch time
+     * @return
+     */
     public ReportDescriptionTime getTime() {
         return time;
     }
@@ -46,6 +66,10 @@ public class ReportDescription {
         this.time = time;
     }
 
+    /**
+     * Subscription user mails
+     * @return
+     */
     public Set<String> getSubscribers() {
         return subscribers;
     }
@@ -54,6 +78,10 @@ public class ReportDescription {
         this.subscribers = subscribers;
     }
 
+    /**
+     * Add subscription mail
+     * @param subscriber
+     */
     public void addSubscriber(String subscriber) {
         if (subscribers == null) {
             subscribers = new HashSet<>();
@@ -61,6 +89,10 @@ public class ReportDescription {
         subscribers.add(subscriber);
     }
 
+    /**
+     * Active status
+     * @return
+     */
     public Boolean getActive() {
         return active;
     }

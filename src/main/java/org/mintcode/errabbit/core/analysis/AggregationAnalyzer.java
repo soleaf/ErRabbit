@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 
 /**
+ * Aggregation Analysis
  * Created by soleaf on 8/30/15.
  */
 @Service
@@ -25,6 +26,11 @@ public class AggregationAnalyzer {
     private final HashMap<String,Object> mapType = new HashMap<String,Object>();
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * run aggregation
+     * @param req
+     * @return
+     */
     public AnalysisResultSet aggregation(AnalysisRequest req) {
         logger.trace("req > " + req.makeAggregationOp());
         AggregationResults result = mongoTemplate.aggregate(Aggregation.newAggregation(req.makeAggregationOp()),

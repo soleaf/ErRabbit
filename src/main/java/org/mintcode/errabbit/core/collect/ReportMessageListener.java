@@ -24,6 +24,7 @@ import java.util.Date;
 /**
  * ActiveMQ Message Listener.
  * It will receive reports from ErRabbit Appender.
+ * And forward to another messaging chains
  * Created by soleaf on 2015. 1. 31..
  */
 @Component(value = "reportMessageListener")
@@ -66,6 +67,7 @@ public class ReportMessageListener implements MessageListener {
                 return;
             }
 
+            // Parse
             ObjectMessage msg = (ObjectMessage) message;
             Object obj = msg.getObject();
             ErrLoggingEvent errLoggingEvent;
@@ -90,6 +92,7 @@ public class ReportMessageListener implements MessageListener {
                 return;
             }
 
+            // Make log
             Log log = new Log();
             log.setRabbitId(rabbitID);
             log.setLoggingEvent(errLoggingEvent);

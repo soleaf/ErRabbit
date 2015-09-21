@@ -10,6 +10,7 @@ import java.util.Map;
 /**
  * Rabbit Name Repository
  * Speed access rabbit names
+ * It use cache rabbit data for UI, because accessing frequently repository is very slow.
  * Created by soleaf on 2015. 2. 8..
  */
 public interface RabbitCache {

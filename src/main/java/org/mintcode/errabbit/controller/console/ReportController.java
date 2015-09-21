@@ -28,6 +28,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
+ * Set up batch report.
+ * and view generated report.
  * Created by soleaf on 15. 8. 9..
  */
 @Controller
@@ -51,11 +53,13 @@ public class ReportController {
     @Autowired
     CoreService coreService;
 
+    // List(Inbox) page
     @RequestMapping(value = {"list"})
     public ModelAndView list(Model model){
         return new ModelAndView("/report/list");
     }
 
+    // List data (ajax)
     @RequestMapping(value = "list_data")
     public ModelAndView listData(@RequestParam(defaultValue = "0", required = false) Integer page,
                                  @RequestParam(defaultValue = "50", required = false) Integer size,
@@ -71,6 +75,7 @@ public class ReportController {
         return new ModelAndView("/report/list_data");
     }
 
+    // Detail page
     @RequestMapping(value = {"detail"})
     public ModelAndView detail(@RequestParam String id,
                                Model model){
@@ -128,6 +133,8 @@ public class ReportController {
         }
         return new ModelAndView("/report/detail");
     }
+
+    // delete
     @RequestMapping(value = {"delete"})
     public ModelAndView delete(@RequestParam String id,
                                Model model){
@@ -143,6 +150,7 @@ public class ReportController {
         return new ModelAndView("/report/list");
     }
 
+    // settings UI
     @RequestMapping(value = {"settings"})
     public ModelAndView settings(Model model){
         model.addAttribute("groups", rabbitManagingService.
@@ -154,6 +162,7 @@ public class ReportController {
         return new ModelAndView("/report/form");
     }
 
+    // setting action
     @RequestMapping(value = {"settings_action"} , method = RequestMethod.POST)
     public String settingAction(Model model,
                                 @RequestParam Set<String> targets,
@@ -167,6 +176,8 @@ public class ReportController {
                                 @RequestParam(required = false) Integer smtpSSL,
                                 @RequestParam(required = false) Boolean smtpUserAuth
                                 ){
+
+        // Description to report batch
         List<ReportDescription> descriptions = descriptionRepository.findAll();
         ReportDescription description;
         if (descriptions != null && !descriptions.isEmpty()){
@@ -180,7 +191,7 @@ public class ReportController {
         description.setActive(active);
         description.setTime(new ReportDescriptionTime(timeHour));
 
-        logger.debug("save report description : " + description);
+        logger.trace("save report description : " + description);
 
         if (description.getId() != null)
             descriptionRepository.save(description);

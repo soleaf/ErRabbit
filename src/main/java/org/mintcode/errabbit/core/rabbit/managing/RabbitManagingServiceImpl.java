@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
+ * RabbitManagingServiceImpl
  * Created by soleaf on 2015. 1. 8..
  */
 @Service
@@ -42,6 +43,18 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
     private RabbitNameComparator rabbitNameComparator = new RabbitNameComparator();
     private RabbitGroupNameComparator rabbitGroupNameComparator = new RabbitGroupNameComparator();
 
+    /**
+     * Make new rabbit
+     * @param id id
+     * @param basePackage option for application base package (ex:org.mintcode.errabbit)
+     * @param collectOnlyException option for collection only exception log
+     * @param group rabbit group
+     * @param hideOnConsole hide on console page
+     * @return
+     * @throws AlreadyExistRabbitIDException
+     * @throws InvalidRabbitNameException
+     * @throws InvalidBasePackageException
+     */
     @Override
     public Rabbit makeNewRabbit(String id,
                                 String basePackage,
@@ -83,6 +96,11 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         return rabbit;
     }
 
+    /**
+     * Save to repository and sync with cache
+     * @param rabbit
+     * @return
+     */
     @Override
     public Rabbit saveRabbit(Rabbit rabbit) {
         Rabbit savedRabbit = rabbitRepository.save(rabbit);
@@ -90,6 +108,10 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         return savedRabbit;
     }
 
+    /**
+     * Get all rabbits
+     * @return
+     */
     @Override
     public List<Rabbit> getRabbits() {
         try {
@@ -101,6 +123,11 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
 
     }
 
+    /**
+     * Get rabbit with group
+     * @param rabbits
+     * @return
+     */
     @Override
     public Map<RabbitGroup, Set<Rabbit>> getRabbitsByGroup(List<Rabbit> rabbits) {
         Map<RabbitGroup, Set<Rabbit>> map = new HashMap<>();
@@ -122,6 +149,11 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         return map;
     }
 
+    /**
+     * Get rabbit with sorted group
+     * @param rabbitGroupSetMap
+     * @return
+     */
     public List<RabbitGroup> getRabbitGroupWithRabbitSorted(Map<RabbitGroup, Set<Rabbit>> rabbitGroupSetMap){
         if (rabbitGroupSetMap == null){
             rabbitGroupSetMap = getRabbitsByGroup();
@@ -136,11 +168,20 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         return list;
     }
 
+    /**
+     * Get rabbit with group
+     * @return
+     */
     @Override
     public Map<RabbitGroup, Set<Rabbit>> getRabbitsByGroup() {
         return getRabbitsByGroup(null);
     }
 
+    /**
+     * Delete rabbit by rabbitId
+     * @param id
+     * @return
+     */
     @Override
     public boolean deleteRabbit(String id) {
 
@@ -159,31 +200,62 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         return true;
     }
 
+    /**
+     * Get rabbit by rabbitId
+     * @param id
+     * @return
+     */
     @Override
     public Rabbit getRabbitById(String id) {
         return rabbitRepository.findById(id);
     }
 
+    /**
+     * Clean all logs related rabbitId
+     * @param id
+     * @param begin (ex:20150202)
+     * @param end (ex:20150203)
+     */
     @Override
     public void cleanLog(String id, Integer begin, Integer end) {
         logRepository.deleteReportRangeOfLoggingEventDateInt(id, begin, end);
     }
 
+    /**
+     * Make new rabbit group
+     * @param name
+     * @return
+     */
     @Override
     public RabbitGroup makeNewGroup(String name) {
         return groupRepository.insert(new RabbitGroup(name));
     }
 
+    /**
+     * Save rabbit group to repository
+     * @param group
+     * @return
+     */
     @Override
     public RabbitGroup saveGroup(RabbitGroup group) {
         return groupRepository.save(group);
     }
 
+    /**
+     * Get rabbit group by groupId
+     * @param id
+     * @return
+     */
     @Override
     public RabbitGroup getGroup(ObjectId id) {
         return groupRepository.findOne(id);
     }
 
+    /**
+     * Delete group by groupId
+     * @param group
+     * @throws TryToUsedRabbitGroupException
+     */
     @Override
     public void deleteGroup(RabbitGroup group) throws TryToUsedRabbitGroupException {
 
@@ -202,6 +274,10 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         groupRepository.delete(group);
     }
 
+    /**
+     * Get all rabbit groups
+     * @return
+     */
     @Override
     public List<RabbitGroup> getGroups() {
         return groupRepository.findAll();

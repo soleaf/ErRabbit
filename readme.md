@@ -78,19 +78,8 @@ There is dependency for our custom appender.
 <dependency>
     <groupId>org.mintcode.errabbit</groupId>
     <artifactId>log4j-apeender</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
-```
-
-And this dependency is on our server. So you make sure add errabit repository.
-```xml
-   <repositories>
-        <repository>
-            <id>mintcode</id>
-            <name>mintcode-errabbit</name>
-            <url>http://dev.mintcode.org/nexus/content/repositories/errabbit-snapshot/</url>
-        </repository>
-    </repositories>
 ```
 
 #### Setup log4j.xml

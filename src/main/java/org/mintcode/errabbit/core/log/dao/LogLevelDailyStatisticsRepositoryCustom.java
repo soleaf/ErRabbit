@@ -5,6 +5,7 @@ import org.mintcode.errabbit.model.Log;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 
 /**
+ * LogLevelDailyStatisticsRepositoryCustom
  * Created by soleaf on 4/6/15.
  */
 public interface LogLevelDailyStatisticsRepositoryCustom {

@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import java.util.*;
 
 /**
+ * LogRepositoryImpl
  * Created by soleaf on 2015. 2. 19..
  */
 

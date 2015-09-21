@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 
 /**
+ * Rabbit and Rabbit group InMemory Cache
+ * It use cache rabbit data for UI, because accessing frequently repository is very slow.
  * Created by soleaf on 2015. 2. 8..
  */
 @Repository

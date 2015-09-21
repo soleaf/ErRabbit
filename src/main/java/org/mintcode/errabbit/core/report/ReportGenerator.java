@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
+ * ReportGenerator
  * Created by soleaf on 15. 8. 27..
  */
 @Service
@@ -34,8 +35,16 @@ public class ReportGenerator {
     @Autowired
     ReportRepository reportRepository;
 
+    /**
+     * Generate report using description and target date
+     * @param description
+     * @param date target date
+     * @return
+     */
     public boolean generate(ReportDescription description, Date date){
         try{
+
+            // Get log aggregation analysis
             Integer targetDateInt = Integer.parseInt(format.format(date));
             AnalysisResultSet logAggregation = makeLogAnal(description, targetDateInt);
 
@@ -54,6 +63,12 @@ public class ReportGenerator {
         }
     }
 
+    /**
+     * Make aggregation by log
+     * @param description
+     * @param targetDateInt
+     * @return
+     */
     private AnalysisResultSet makeLogAnal(ReportDescription description, Integer targetDateInt){
         // Make logLevel count table group by rabbit.
         Set<String> levelSet = new HashSet<>();

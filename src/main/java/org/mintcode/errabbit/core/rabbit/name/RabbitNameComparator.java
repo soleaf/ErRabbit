@@ -5,6 +5,7 @@ import org.mintcode.errabbit.model.Rabbit;
 import java.util.Comparator;
 
 /**
+ * Rabbit list sort by rabbitId
  * Created by soleaf on 9/6/15.
  */
 public class RabbitNameComparator implements Comparator<Rabbit> {

@@ -10,6 +10,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 /**
+ * WebSocket MessagingService for console
  * Created by soleaf on 6/7/15.
  */
 @Service

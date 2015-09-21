@@ -3,6 +3,7 @@ package org.mintcode.errabbit.core.analysis.result;
 import java.io.Serializable;
 
 /**
+ * Rank item model for Analysis result type Graphics
  * Created by soleaf on 9/13/15.
  */
 public class GraphicLogAnalysisErrorRankItem implements Serializable, Comparable{
@@ -58,6 +59,11 @@ public class GraphicLogAnalysisErrorRankItem implements Serializable, Comparable
                 '}';
     }
 
+    /**
+     * Compare by level
+     * @param level
+     * @return
+     */
     private int comparableLevel(String level){
         if (level.equals("FATAL")){
             return 5;
@@ -81,6 +87,9 @@ public class GraphicLogAnalysisErrorRankItem implements Serializable, Comparable
 
     @Override
     public int compareTo(Object o) {
+
+        // Compare by level and count
+
         GraphicLogAnalysisErrorRankItem o2 = (GraphicLogAnalysisErrorRankItem) o;
         if (comparableLevel(getLevel()) != comparableLevel(o2.getLevel())){
             return comparableLevel(getLevel()) - comparableLevel(o2.getLevel());

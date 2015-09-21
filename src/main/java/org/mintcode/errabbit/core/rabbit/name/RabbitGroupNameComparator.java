@@ -5,6 +5,7 @@ import org.mintcode.errabbit.model.RabbitGroup;
 import java.util.Comparator;
 
 /**
+ * For rabbit group sorting
  * Created by soleaf on 9/6/15.
  */
 public class RabbitGroupNameComparator implements Comparator<RabbitGroup> {

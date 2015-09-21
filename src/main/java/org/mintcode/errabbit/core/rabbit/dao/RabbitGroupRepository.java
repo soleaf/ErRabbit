@@ -5,6 +5,7 @@ import org.mintcode.errabbit.model.RabbitGroup;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
+ * RabbitGroup repository
  * Created by soleaf on 15. 9. 4..
  */
 public interface RabbitGroupRepository extends MongoRepository<RabbitGroup, ObjectId>{
