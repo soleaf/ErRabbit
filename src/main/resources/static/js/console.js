@@ -21,7 +21,7 @@ $(document).ready(function () {
 
     // Extend session long polling
     setInterval(
-        function(){
+        function () {
             extendSession();
         }
         , 1000 * 60 * 10);
@@ -54,7 +54,8 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.heartbeat.outgoing = 20000; // client will send heartbeats every 20000ms
     stompClient.heartbeat.incoming = 0;     // client does not want to receive heartbeats
-    stompClient.debug = function(str) {};
+    stompClient.debug = function (str) {
+    };
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
@@ -104,7 +105,7 @@ function disconnect() {
 function appendReports(message) {
     $("#waiting").fadeOut();
     // Remove Over line
-    if ($("#log-list .log").length > 1000){
+    if ($("#log-list .log").length > 1000) {
         $("#log-list .log").last().remove();
     }
     $("#log-list").prepend(message);
@@ -114,55 +115,59 @@ function appendReports(message) {
 /**
  * Init log event
  */
-function logEvent(){
+function logEvent() {
     $("#log-list .log[data-e='true']").click(function () {
         // Report Detail Information Layer Toggle
         var row = $(this);
         $.get(row.data('poload'), function (d) {
-            if ($($.parseHTML(d)).filter("#login_page").length > 0) {
-                alert("Session is expired");
-                window.location.href = "/login.err";
-            }
-            else{
+            sessionExpireCheck(d);
 
-                // init filter button
-                $("#popover_log_btn_showeothers").hide();
-                $("#popover_log_btn_hideothers").show();
-                $("#popover_log_btn_text").show();
-                $("#popover_log_btn_graph").hide();
+            // init filter button
+            $("#popover_log_btn_showeothers").hide();
+            $("#popover_log_btn_hideothers").show();
+            $("#popover_log_btn_text").show();
+            $("#popover_log_btn_graph").hide();
 
-                $("#popover_log_title").html(row.find(".time").text() + " " + row.find(".level").text());
-                $("#popover_log_body").html(d);
-                $("#popover_log").modal();
-            }
+            $("#popover_log_title").html(row.find(".time").text() + " " + row.find(".level").text());
+            $("#popover_log_body").html(d);
+            $("#popover_log").modal();
+
         });
     });
+}
+
+function sessionExpireCheck(data) {
+    if (data.indexOf("id=\"login_page\"") > -1) {
+        alert("Session has expired");
+        window.location.href = "/login.err";
+    }
 }
 
 /**
  * Init log modal buttons
  */
-function initLogModalButton(){
-    $("#popover_log_btn_graph").click(function(){
-        $("#popover_log_body .text").fadeOut(function(){
+function initLogModalButton() {
+    $("#popover_log_btn_graph").click(function () {
+        $("#popover_log_body .text").fadeOut(function () {
             $("#popover_log_body .graph").fadeIn();
         });
         $("#popover_log_btn_text").show();
         $(this).hide();
     });
-    $("#popover_log_btn_text").click(function(){
-        $("#popover_log_body .graph").fadeOut(function(){
+    $("#popover_log_btn_text").click(function () {
+        $("#popover_log_body .graph").fadeOut(function () {
             $("#popover_log_body .text").fadeIn();
         });
         $("#popover_log_btn_graph").show();
         $(this).hide();
     });
-    $("#popover_log_btn_hideothers").click(function(){
-        $("#popover_log_body .another-package-set").slideUp();;
+    $("#popover_log_btn_hideothers").click(function () {
+        $("#popover_log_body .another-package-set").slideUp();
+        ;
         $("#popover_log_btn_showeothers").show();
         $(this).hide();
     });
-    $("#popover_log_btn_showeothers").click(function(){
+    $("#popover_log_btn_showeothers").click(function () {
         $("#popover_log_body .another-package-set").slideDown();
         $("#popover_log_btn_hideothers").show();
         $(this).hide();
@@ -172,14 +177,14 @@ function initLogModalButton(){
 /**
  * Extend session log polling
  */
-function extendSession(){
+function extendSession() {
     $.ajax({
-        type : "GET",
-        url : "/console/session.err",
+        type: "GET",
+        url: "/console/session.err",
         success: function (data) {
 
         }
-        ,fail: function(){
+        , fail: function () {
             // todo show erormessage
         }
     });

@@ -4,6 +4,7 @@
 <html>
 <head>
     <jsp:include page="../common/header_include.jsp"/>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="/js/log.js"></script>
 </head>
 <body class="log">
@@ -71,8 +72,9 @@
         </div>
         <div class="log-area" id="log-area" data-rabbitId="${rabbit.id}">
 
-            <div class="log-timeLine">
+            <div class="log-timeLine" id="timeline">
                 <!-- Log Time Line Area-->
+                <div class="chart" id="chart"></div>
             </div>
             <div class="log-list-box">
                     <%--<div class="log-head" id="log-head"></div>--%>
@@ -80,6 +82,7 @@
                     <!--  Log List Area -->
                 </ul>
                 <button id="log-feed" class="btn btn-default btn-xs" type="button" data-page="0">More Feed</button>
+                <p id="page-status" class="page-status">page : <span id="status_page">0</span>/<span id="status_totalpage">0</span> (<span id="status_elements">0</span> logs)</p>
             </div>
         </div>
     </c:if>

@@ -2,8 +2,10 @@ package org.mintcode.errabbit.controller.console;
 
 import org.bson.types.ObjectId;
 import org.mintcode.errabbit.core.console.ReportPresentation;
+import org.mintcode.errabbit.core.log.dao.LogLevelHourlyStatisticsRepository;
 import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;
 import org.mintcode.errabbit.core.rabbit.name.RabbitCache;
+import org.mintcode.errabbit.model.Graph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
@@ -46,6 +49,9 @@ public class LogController {
 
     @Autowired
     private LogLevelDailyStatisticsRepository logLevelDailyStatisticsRepository;
+
+    @Autowired
+    private LogLevelHourlyStatisticsRepository logLevelHourlyStatisticsRepository;
 
     @Autowired
     private ReportPresentation reportPresentation;
@@ -107,11 +113,35 @@ public class LogController {
             return new ModelAndView("/log/list");
         }
         catch (Exception e){
-            e.printStackTrace();
             logger.error(e.getMessage(),e);
             // todo: make ErrorPage
             model.addAttribute("e",e);
             return new ModelAndView("/log/list");
+        }
+    }
+
+    /**
+     * Graph data (ajax)
+     * @param id
+     * @param year
+     * @param month
+     * @param day
+     * @return
+     */
+    @RequestMapping(value = "day_graph")
+    @ResponseBody
+    public String dayGraph(@RequestParam(value = "id", required = true) String id,
+                           @RequestParam(value = "y", required = true) Integer year,
+                           @RequestParam(value = "m", required = true) Integer month, // warn : jan.=1){
+                           @RequestParam(value = "d", required = true) Integer day){
+        try{
+            Graph graph = new Graph();
+            graph.add(logLevelHourlyStatisticsRepository.findByRabbitIdAndYearAndMonthAndDay(id, year, month, day));
+            return graph.getGraph();
+        }
+        catch (Exception e){
+            logger.error(e.getMessage(),e);
+            return "[]";
         }
     }
 

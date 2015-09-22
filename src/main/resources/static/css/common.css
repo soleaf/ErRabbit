@@ -738,6 +738,24 @@ header .logout{
     margin-left:0px;
 }
 
+.log .log-timeLine{
+    height:106px;
+    border-bottom: 1px solid #ececec;
+    background: rgba(251,251,251,1);
+    background: -moz-linear-gradient(top, rgba(251,251,251,1) 0%, rgba(255,255,255,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(251,251,251,1)), color-stop(100%, rgba(255,255,255,1)));
+    background: -webkit-linear-gradient(top, rgba(251,251,251,1) 0%, rgba(255,255,255,1) 100%);
+    background: -o-linear-gradient(top, rgba(251,251,251,1) 0%, rgba(255,255,255,1) 100%);
+    background: -ms-linear-gradient(top, rgba(251,251,251,1) 0%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(to bottom, rgba(251,251,251,1) 0%, rgba(255,255,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#ffffff', GradientType=0 );
+}
+
+.log .log-timeLine .chart{
+    height:100%;
+    /*max-width:800px;*/
+}
+
 .log-area .log-head{
     height:32px;
     line-height: 32px;
@@ -757,6 +775,13 @@ header .logout{
     /*margin: 20px;*/
     /*border: 1px solid #efefef;*/
     padding: 20px;
+}
+
+.log-list-box .page-status{
+    margin-top:10px;
+    margin-bottom:20px;
+    font-size:10px;
+    font-color: #868686;
 }
 
 .log-list .log{
@@ -1123,7 +1148,7 @@ header .logout{
     border-bottom: 1px solid #ececec;
     position: relative;
     padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 5px;
     padding-top:2px;
     padding-bottom:2px;
     cursor: pointer;
@@ -1131,6 +1156,7 @@ header .logout{
 
 #log-calendar LI .badge{
     float:right;
+    border:none;
 }
 
 #log-calendar LI:HOVER{

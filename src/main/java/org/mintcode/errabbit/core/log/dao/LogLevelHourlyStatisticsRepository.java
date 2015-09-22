@@ -14,15 +14,17 @@ public interface LogLevelHourlyStatisticsRepository extends MongoRepository<LogL
         LogLevelHourlyStatisticsRepositoryCustom {
 
     /**
-     * Get by rabbitId, year, month
+     * Get by rabbitId, year, month, day
      * @param rabbitId
      * @param year
      * @param month
+     * @param day
      * @return
      */
-    public List<LogLevelHourStatistics> findByRabbitIdAndYearAndMonth(String rabbitId,
+    public List<LogLevelHourStatistics> findByRabbitIdAndYearAndMonthAndDay(String rabbitId,
                                                                        Integer year,
-                                                                       Integer month);
+                                                                       Integer month,
+                                                                       Integer day);
 
     /**
      * Get by rabbitId

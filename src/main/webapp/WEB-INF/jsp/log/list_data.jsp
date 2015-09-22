@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <input type="hidden" id="page_total" value="${reports.getTotalPages()}"/>
 <input type="hidden" id="page_call" value="${param.page}"/>
+<input type="hidden" id="logs_cnt" value="${reports.totalElements}"/>
 <c:if test="${empty reports.content}">
     <div class="empty">EMPTY</div>
 </c:if>

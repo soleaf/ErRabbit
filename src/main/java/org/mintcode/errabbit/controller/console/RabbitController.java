@@ -1,6 +1,7 @@
 package org.mintcode.errabbit.controller.console;
 
 import org.bson.types.ObjectId;
+import org.mintcode.errabbit.core.collect.TotalGrapheCache;
 import org.mintcode.errabbit.core.log.dao.LogLevelHourlyStatisticsRepository;
 import org.mintcode.errabbit.core.rabbit.managing.TryToUsedRabbitGroupException;
 import org.mintcode.errabbit.core.rabbit.name.RabbitCache;
@@ -45,6 +46,9 @@ public class RabbitController {
     @Autowired
     RabbitCache rabbitCache;
 
+    @Autowired
+    TotalGrapheCache totalGrapheCache;
+
     // List of all Rabbits
     @RequestMapping(value = "list")
     public ModelAndView list(Model model,
@@ -59,6 +63,7 @@ public class RabbitController {
             model.addAttribute("info", info);
             model.addAttribute("error", error);
             model.addAttribute("group", rabbitManagingService.getGroups());
+            model.addAttribute("totalGraph", totalGrapheCache);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             model.addAttribute("error", e.getMessage());

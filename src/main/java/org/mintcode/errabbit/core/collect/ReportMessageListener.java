@@ -50,6 +50,9 @@ public class ReportMessageListener implements MessageListener {
     @Autowired
     private WebSocketMessagingService webSocketMessagingService;
 
+    @Autowired
+    private TotalGrapheCache totalGrapheCache;
+
     @PostConstruct
     public void onStartup(){
         logger.info("ActiveMQ listener ready");
@@ -118,6 +121,9 @@ public class ReportMessageListener implements MessageListener {
 
             // Forward to console
             webSocketMessagingService.sendReportToConsole(log);
+
+            // Add graph
+            totalGrapheCache.add(log.getLoggingEvent().getTimeStampDate(), log.getLoggingEvent().getLevel());
 
         } catch (Exception e) {
             e.printStackTrace();
