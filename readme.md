@@ -244,7 +244,6 @@ Example Project : https://github.com/soleaf/ErRabbit-Example-log4j2
 # Next : ToDo
 
 * Alarm warning
-* Statistics
 * Integration with VCS
 * Mobile support
 
