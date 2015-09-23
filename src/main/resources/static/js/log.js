@@ -244,11 +244,11 @@ function drawChart(dataJson) {
         hAxis: {
             textPosition: 'in',
             min: 0,
-            baselineColor: '#ffffff',
+            baselineColor: '#transparent',
             textStyle: {color: '#878787', fontSize: 9},
-            gridlines: {count: 24, color: '#ffffff'}
+            gridlines: {count: 24, color: '#transparent'}
         },
-        vAxis: {textPosition: 'in', min: 0, baselineColor: '#ffffff', gridlines: {color: '#ffffff', count: 0}},
+        vAxis: {textPosition: 'in', min: 0, baselineColor: '#transparent', gridlines: {color: '#transparent', count: 0}},
         curveType: 'function',
         colors: dataJson.color,
         animation: {
