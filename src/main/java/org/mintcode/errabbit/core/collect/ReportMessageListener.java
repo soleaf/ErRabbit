@@ -1,19 +1,20 @@
 package org.mintcode.errabbit.core.collect;
 
+import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 import org.mintcode.errabbit.core.console.WebSocketMessagingService;
+import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
 import org.mintcode.errabbit.core.log.dao.LogLevelHourlyStatisticsRepository;
+import org.mintcode.errabbit.core.log.dao.LogRepository;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
+import org.mintcode.errabbit.core.rabbit.name.RabbitCache;
+import org.mintcode.errabbit.model.ErrLoggingEvent;
+import org.mintcode.errabbit.model.Log;
 import org.mintcode.errabbit.model.Rabbit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.logging.log4j.core.impl.Log4jLogEvent;
-import org.mintcode.errabbit.core.rabbit.name.RabbitCache;
-import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
-import org.mintcode.errabbit.core.log.dao.LogRepository;
-import org.mintcode.errabbit.model.ErrLoggingEvent;
-import org.mintcode.errabbit.model.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import javax.annotation.PostConstruct;
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -49,9 +50,6 @@ public class ReportMessageListener implements MessageListener {
 
     @Autowired
     private WebSocketMessagingService webSocketMessagingService;
-
-    @Autowired
-    private TotalGrapheCache totalGrapheCache;
 
     @PostConstruct
     public void onStartup(){
@@ -121,9 +119,6 @@ public class ReportMessageListener implements MessageListener {
 
             // Forward to console
             webSocketMessagingService.sendReportToConsole(log);
-
-            // Add graph
-            totalGrapheCache.add(log.getLoggingEvent().getTimeStampDate(), log.getLoggingEvent().getLevel());
 
         } catch (Exception e) {
             e.printStackTrace();

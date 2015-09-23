@@ -9,7 +9,6 @@ import java.util.*;
 /**
  * Created by soleaf on 9/22/15.
  */
-@Component
 public class TotalGrapheCache {
 
     // All levels
