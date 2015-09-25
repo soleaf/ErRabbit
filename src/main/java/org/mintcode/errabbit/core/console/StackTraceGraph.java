@@ -15,6 +15,7 @@ public class StackTraceGraph {
     private String className;
     private String packageName;
     private String fileName;
+    private String declaringClass;
     private boolean isDefaultHidden = false;
 
     public StackTraceGraph(String basePackage) {
@@ -22,19 +23,19 @@ public class StackTraceGraph {
     }
 
     /**
-     * Add stack tracne element
+     * Add stack trace element
      * @param element
      */
     public void addElement(ErStackTraceElement element){
 
         if (className == null){
 
-            String packageAndClassName = element.getDeclaringClass();
-            className = packageAndClassName.substring(packageAndClassName.lastIndexOf(".")+1);
-            packageName = packageAndClassName.substring(0,packageAndClassName.lastIndexOf("."));
+            declaringClass = element.getDeclaringClass();
+            className = declaringClass.substring(declaringClass.lastIndexOf(".")+1);
+            packageName = declaringClass.substring(0,declaringClass.lastIndexOf("."));
             fileName = element.getFileName();
 
-            if (checkBasePackages(packageAndClassName)){
+            if (checkBasePackages(declaringClass)){
                 isDefaultHidden = true;
             }
         }
@@ -91,6 +92,10 @@ public class StackTraceGraph {
 
     public void setDefaultHidden(boolean isDefaultHidden) {
         this.isDefaultHidden = isDefaultHidden;
+    }
+
+    public String getDeclaringClass() {
+        return declaringClass;
     }
 
     @Override

@@ -57,7 +57,7 @@ public class ReportPresentation {
 
                 // Make Class
                 if (lastGraph.getClassName() != null
-                        && !lastGraph.getClassName().equals(element.getDeclaringClass())){
+                        && !lastGraph.getDeclaringClass().equals(element.getDeclaringClass())){
                     lastGraph = new StackTraceGraph(basePackage);
                     graphs.add(lastGraph);
                 }
