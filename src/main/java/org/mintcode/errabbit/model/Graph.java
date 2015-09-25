@@ -1,7 +1,9 @@
 package org.mintcode.errabbit.model;
 
+import com.google.gson.Gson;
 import org.apache.logging.log4j.Level;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,8 @@ import java.util.Map;
  * Created by soleaf on 15. 9. 22..
  */
 public class Graph {
+
+    Gson gson = new Gson();
 
     // Level :
     //  - Hour :
@@ -105,100 +109,50 @@ public class Graph {
      * @return
      */
     public String getGraph(){
-        StringBuffer sb = new StringBuffer();
 
-        sb.append("{\"color\":" + getColorSet());
-        sb.append(",\"data\" :");
+        Map<String,Object> dataSet = new HashMap<>();
+        dataSet.put("color", getColorSet());
 
-        sb.append("[");
+        List<List<Object>> dataList = new ArrayList<>();
+        dataSet.put("data", dataList);
 
         // header
-        sb.append("[");
-        sb.append("\"Time\"");
+        List<Object> columns = new ArrayList<>();
+        dataList.add(columns);
+        columns.add("Time");
         for (String level : levels){
             if (data.containsKey(level)){
-                sb.append(",\"" + level + "\"");
+                columns.add(level);
             }
         }
-        sb.append("]");
 
         // counts
         for (Integer h = 0 ; h < 24; h ++){
-
-           sb.append(",");
-
-            sb.append("[");
-            sb.append(h);
+            List<Object> conts = new ArrayList<>();
+            conts.add(h);
             for (String level : levels){
                 if (data.containsKey(level)){
-                    sb.append(",");
-                    sb.append(getTimeLine(level).get(h));
+                    conts.add(getTimeLine(level).get(h));
                 }
             }
-            sb.append("]");
+            dataList.add(conts);
         }
 
-        sb.append("]}");
-        return sb.toString();
+        return gson.toJson(dataSet);
     }
 
     /**
-     * Get specific data
-     * @param level
+     * Get graph color set
      * @return
      */
-    public String getGraph(String level){
-        StringBuffer sb = new StringBuffer();
-        Boolean firstLine = true;
-
-        sb.append("{\"color\":" + getColorSet());
-        sb.append(",\"data\" :");
-
-        sb.append("[");
-
-        // header
-        sb.append("['Time','");
-        sb.append(level);
-        sb.append("']");
-
-        // counts
-        for (Integer h = 0 ; h < 24; h ++){
-
-            if (firstLine){
-                firstLine = false;
-            }
-            else{
-                sb.append(",");
-            }
-
-            sb.append("[");
-            sb.append(h);
-            sb.append(",");
-            sb.append(getTimeLine(level).get(h));
-            sb.append("]");
-        }
-
-        sb.append("]}");
-        return sb.toString();
-    }
-
-    public String getColorSet(){
-        StringBuffer sb = new StringBuffer();
-        sb.append("[");
-        boolean isFirst = true;
+    public List<String>getColorSet(){
+        List<String> selectedColors = new ArrayList<>();
         for (String level : levels) {
             if (data.containsKey(level)) {
-                if (isFirst){
-                    isFirst = false;
-                }
-                else{
-                    sb.append(",");
-                }
-                sb.append("\"" + colorSet.get(level) +"\"");
+                selectedColors.add(colorSet.get(level));
             }
         }
-        sb.append("]");
-        return sb.toString();
+        return selectedColors;
     }
 
 }
