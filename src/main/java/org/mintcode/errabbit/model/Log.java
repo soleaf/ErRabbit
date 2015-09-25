@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -133,7 +134,17 @@ public class Log implements Serializable {
                 if (showRabbitID){
                     sb.append(String.format("<span class='rabbit_id'>%s</span>", rabbitId));
                 }
-                sb.append(String.format("<span class='categoryName'>%s</span>", loggingEvent.categoryName));
+
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(getCollectedDate());
+                Integer y = cal.get(Calendar.YEAR);
+                Integer m = cal.get(Calendar.MONTH) + 1;
+                Integer d = cal.get(Calendar.DAY_OF_MONTH);
+
+                String filterClassURL = String.format("/log/list.err?id=%s&y=%d&m=%d&d=%d&filter=true&filter_level=%s&filter_class=%s",
+                        rabbitId, y, m, d, loggingEvent.level, loggingEvent.getCategoryName());
+
+                sb.append(String.format("<span class='categoryName' data-url='%s'>%s</span>", filterClassURL ,loggingEvent.categoryName));
                 sb.append(String.format("<span class='message'>%s</span>", loggingEvent.getRenderedMessage()));
             sb.append("</div>");
         sb.append("</li>");

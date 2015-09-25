@@ -134,6 +134,16 @@ function logEvent() {
 
         });
     });
+
+    // log list item's category event
+    $("#log-list .log .categoryName").click(function () {
+        location.href=$(this).attr("data-url");
+    });
+
+    // log list item's category event
+    $("#log-list .log .rabbit_id").click(function () {
+        location.href="/log/list.err?id="+$(this).text();
+    });
 }
 
 function sessionExpireCheck(data) {

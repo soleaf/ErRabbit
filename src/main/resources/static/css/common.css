@@ -862,6 +862,11 @@ header .logout{
     text-overflow: ellipsis;
     color:#5CD0D6;
     font-weight: bold;
+    cursor: pointer;
+}
+
+.log-list .log .rabbit_id:HOVER{
+    text-decoration: underline;
 }
 
 .log-list .log .categoryName{
@@ -872,7 +877,7 @@ header .logout{
     text-decoration: underline;
 }
 
-.log .log-list .log .categoryName{
+.log-list .log .categoryName{
     margin-left: 2px;
     padding-left:2px;
     padding-right:2px;
@@ -881,7 +886,7 @@ header .logout{
     cursor: pointer;
 }
 
-.log .log-list .log .categoryName:HOVER{
+.log-list .log .categoryName:HOVER{
     color:#fff;
     background-color:#5d5d5d;
     text-decoration: none;
