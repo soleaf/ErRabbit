@@ -260,6 +260,11 @@ function drawChart(dataJson) {
 
     if (chart == null) {
         chart = new google.visualization.LineChart(document.getElementById('chart'));
+        // When the table is selected, update the orgchart.
+        google.visualization.events.addListener(chart, 'error', function(err) {
+            $("#chart").hide();
+        });
+
     }
     chart.draw(data, options);
     hideLoading();
@@ -267,6 +272,7 @@ function drawChart(dataJson) {
 
 function showChart(show, callBack) {
     if (show) {
+        $("#chart").show();
         $("#timeline").slideDown(300, callBack);
     }
     else {
