@@ -34,12 +34,14 @@ public class CoreService {
     @Autowired
     private ReportRepository reportRepository;
 
-    // Unread report count catche
+    // Unread report count cache
     private Integer unReadReports = 0;
 
     @PostConstruct
     private void startup(){
-        logger.debug("ErRabbit Service initiating...");
+        logger.warn("ErRabbit Service initiating...");
+        logger.warn("Version " + getClass().getPackage().getImplementationVersion());
+
         syncRabbitNameCache();
     }
 
