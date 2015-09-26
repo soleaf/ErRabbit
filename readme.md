@@ -11,15 +11,39 @@ Collecting by Log4j and ActiveMQ will make it easy compatible with other program
 
 ## Web console screenshot
 
+### Main
 ![ScreenShot](graphics/screenshot1.png)
+- Managing rabbits(your applications)
+- Grouping
+- Glean logs
+- View logs
 
+### Log view
 ![ScreenShot](graphics/screenshot2.png)
+- Explorer logs selected day
+- Log level chart by time
+- Filtering logs by level or calss name
 
+### Graphic Exception trace View (Log detail view) 
+![ScreenShot](graphics/graphic_trace_view.png)
+- View Exception trace with graphical flow chart
+- Show or hide library packages
+- View original text log
+- Search library package info with google search
+
+### Console
 ![ScreenShot](graphics/screenshot3.png)
+- Live feed all logs with Websocket
+- Same log view functions like log view page
 
+### Analysis(Aggregation query)
 ![ScreenShot](graphics/screenshot4.png)
+- Easy ggregating logs counts with custom grouping and filtering
 
+### Batch Reprot
 ![ScreenShot](graphics/screenshot5.png)
+- Daily report batch
+- View all yesterday event logs on one page.
 
 # Requirements
 
