@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640">
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Errabbit by soleaf</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/soleaf/ErRabbit">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Errabbit</h1>
+            <h2>Remote logging console server using Log4j. Visual Exception log view.</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/soleaf/ErRabbit/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/soleaf/ErRabbit/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <p><img src="src/main/resources/static/img/rabbit_handcuffs.png" alt="ErRabbit" title="logo"></p>
+
+<h1>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h1>
+
+<p>ErRabbit(Error Rabbit) is useful error remote tracking service with Visual View.
+Collecting by Log4j and ActiveMQ will make it easy compatible with other programs.</p>
+
+<h2>
+<a id="structure" class="anchor" href="#structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Structure</h2>
+
+<p><img src="graphics/structure.png" alt="Structure"></p>
+
+<h2>
+<a id="web-console-screenshot" class="anchor" href="#web-console-screenshot" aria-hidden="true"><span class="octicon octicon-link"></span></a>Web console screenshot</h2>
+
+<p><img src="graphics/screenshot1.png" alt="ScreenShot"></p>
+
+<p><img src="graphics/screenshot2.png" alt="ScreenShot"></p>
+
+<p><img src="graphics/screenshot3.png" alt="ScreenShot"></p>
+
+<p><img src="graphics/screenshot4.png" alt="ScreenShot"></p>
+
+<p><img src="graphics/screenshot5.png" alt="ScreenShot"></p>
+
+<h1>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h1>
+
+<ul>
+<li>Java 1.7 upper</li>
+<li>MongoDB 2</li>
+<li>ActiveMQ</li>
+<li>Log4j1.2 or log4j 2 in your application(log tracking target).</li>
+</ul>
+
+<h1>
+<a id="install-and-using" class="anchor" href="#install-and-using" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install and Using</h1>
+
+<ol>
+<li>Run MongoDB, ActiveMQ</li>
+<li>Run ErRabbit</li>
+<li>Make a Rabbit</li>
+<li>Add JMS Appender to your application log4j2.xml</li>
+</ol>
+
+<h2>
+<a id="download-release" class="anchor" href="#download-release" aria-hidden="true"><span class="octicon octicon-link"></span></a>Download release</h2>
+
+<p><a href="https://github.com/soleaf/ErRabbit/releases">https://github.com/soleaf/ErRabbit/releases</a></p>
+
+<h2>
+<a id="run-dependencies" class="anchor" href="#run-dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run Dependencies</h2>
+
+<p>ErRabbit uses MongoDB and ActiveMQ.</p>
+
+<ol>
+<li>Run MongoDB</li>
+<li>ActiveMQ server</li>
+</ol>
+
+<h2>
+<a id="run-errabbit" class="anchor" href="#run-errabbit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run ErRabbit</h2>
+
+<h3>
+<a id="setup-settingsproperties" class="anchor" href="#setup-settingsproperties" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup settings.properties</h3>
+
+<ul>
+<li>Edit <code>settings.properties</code>
+</li>
+<li>For MongoDB and ActiveMQ.. etc Set with your sever settings.</li>
+</ul>
+
+<h3>
+<a id="run" class="anchor" href="#run" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run</h3>
+
+<p>Run with command <code>sh run.sh</code> <br>
+Or directly command <code>java -jar [war filename] --spring.config.location=file:settings.properties</code></p>
+
+<h2>
+<a id="login-console-and-add-new-rabbit" class="anchor" href="#login-console-and-add-new-rabbit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Login Console and add new Rabbit.</h2>
+
+<ol>
+<li>Connect Console with WebBrowser
+<code>http://localhost:[port]</code>
+</li>
+<li>Your server port is 'server.port' on 'settings.properties' and login account is also on properties ('errabbit.security.admin.username, errabbit.security.admin.password').</li>
+<li>Click 'add' menu on left side.</li>
+<li>Make your new rabbit. (Rabbit is a namespace for tracking log like application artifact id).</li>
+</ol>
+
+<h2>
+<a id="make-your-application-connect-jms" class="anchor" href="#make-your-application-connect-jms" aria-hidden="true"><span class="octicon octicon-link"></span></a>Make your application connect JMS</h2>
+
+<p>Choose method by your application log4j version.</p>
+
+<ul>
+<li>Log4j 1.2</li>
+<li>Log4j 2.x</li>
+</ul>
+
+<h3>
+<a id="setup-for-log4j-12" class="anchor" href="#setup-for-log4j-12" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup for Log4j 1.2</h3>
+
+<p>Because Default JMS Appender on Log4j1 did not support queue, ErRabbit made a custom appender.
+There is dependency for our custom appender.</p>
+
+<h4>
+<a id="add-dependencies-to-maven-pomxml" class="anchor" href="#add-dependencies-to-maven-pomxml" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add Dependencies to maven <code>pom.xml</code>
+</h4>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
+    &lt;<span class="pl-ent">groupId</span>&gt;org.mintcode.errabbit&lt;/<span class="pl-ent">groupId</span>&gt;
+    &lt;<span class="pl-ent">artifactId</span>&gt;log4j-apeender&lt;/<span class="pl-ent">artifactId</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;1.0.0&lt;/<span class="pl-ent">version</span>&gt;
+&lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
+
+<h4>
+<a id="setup-log4jxml" class="anchor" href="#setup-log4jxml" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup log4j.xml</h4>
+
+<ol>
+<li>Declare 'errabbit' appender to <code>log4j.xml</code> with your ActiveMQ URL, userName, password, rabbitID</li>
+</ol>
+
+<div class="highlight highlight-text-xml"><pre>&lt;?<span class="pl-ent">xml</span><span class="pl-e"> version</span>=<span class="pl-s"><span class="pl-pds">"</span>1.0<span class="pl-pds">"</span></span><span class="pl-e"> encoding</span>=<span class="pl-s"><span class="pl-pds">"</span>UTF-8<span class="pl-pds">"</span></span>?&gt;
+&lt;!<span class="pl-k">DOCTYPE</span> <span class="pl-v">log4j:configuration</span> SYSTEM "log4j.dtd"&gt;
+&lt;<span class="pl-ent">log4j</span><span class="pl-ent">:</span><span class="pl-ent">configuration</span> <span class="pl-e">xmlns</span><span class="pl-e">:</span><span class="pl-e">log4j</span>=<span class="pl-s"><span class="pl-pds">"</span>http://jakarta.apache.org/log4j/<span class="pl-pds">"</span></span>&gt;
+
+    <span class="pl-c">&lt;!-- Console view --&gt;</span>
+    &lt;<span class="pl-ent">appender</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>console<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>org.apache.log4j.ConsoleAppender<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">layout</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>org.apache.log4j.PatternLayout<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">param</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>ConversionPattern<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>%d [%t] %p - %C{1}.%M(%L) | %m%n<span class="pl-pds">"</span></span>/&gt;
+        &lt;/<span class="pl-ent">layout</span>&gt;
+    &lt;/<span class="pl-ent">appender</span>&gt;
+
+    &lt;<span class="pl-ent">appender</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>errabbit<span class="pl-pds">"</span></span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>org.mintcode.errabbit.log4j.Log4jAppender<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">param</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>host<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>tcp://localhost:61616<span class="pl-pds">"</span></span>/&gt;
+        &lt;<span class="pl-ent">param</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>rabbitID<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>example<span class="pl-pds">"</span></span>/&gt;
+        &lt;<span class="pl-ent">layout</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>org.apache.log4j.PatternLayout<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">param</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>ConversionPattern<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>%5p [%d{HH:mm:ss}] %m%n<span class="pl-pds">"</span></span>/&gt;
+        &lt;/<span class="pl-ent">layout</span>&gt;
+    &lt;/<span class="pl-ent">appender</span>&gt;
+
+    &lt;<span class="pl-ent">logger</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>org.mintcode.errabbit.example<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">level</span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>ERROR<span class="pl-pds">"</span></span>/&gt;
+        &lt;<span class="pl-ent">appender-ref</span> <span class="pl-e">ref</span>=<span class="pl-s"><span class="pl-pds">"</span>errabbit<span class="pl-pds">"</span></span>/&gt;
+    &lt;/<span class="pl-ent">logger</span>&gt;
+
+    <span class="pl-c">&lt;!-- Root Logger --&gt;</span>
+    &lt;<span class="pl-ent">root</span>&gt;
+        &lt;<span class="pl-ent">priority</span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>INFO<span class="pl-pds">"</span></span> /&gt;
+        &lt;<span class="pl-ent">appender-ref</span> <span class="pl-e">ref</span>=<span class="pl-s"><span class="pl-pds">"</span>console<span class="pl-pds">"</span></span> /&gt;
+    &lt;/<span class="pl-ent">root</span>&gt;
+
+&lt;/<span class="pl-ent">log4j</span><span class="pl-ent">:</span><span class="pl-ent">configuration</span>&gt;</pre></div>
+
+<p>CustomAppender's source : <a href="https://github.com/soleaf/ErRabbit-log4j-apeender">https://github.com/soleaf/ErRabbit-log4j-apeender</a></p>
+
+<h4>
+<a id="use-in-application-code" class="anchor" href="#use-in-application-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use In Application Code</h4>
+
+<p>You can collect all kind of log(info, debug, trace .. etc). But, for your application performance,
+use only as exception error logging.</p>
+
+<ol>
+<li>Get Log4j Logger</li>
+</ol>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">Logger</span> logger <span class="pl-k">=</span> <span class="pl-smi">Logger</span><span class="pl-k">.</span>getLogger(getClass());</pre></div>
+
+<ol>
+<li>Log error with exception, Just type <code>logger.error([message],e)</code>
+</li>
+</ol>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">try</span>{
+    <span class="pl-k">int</span> a[] <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">int</span>[<span class="pl-c1">2</span>];
+    <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>Access element three :<span class="pl-pds">"</span></span> <span class="pl-k">+</span> a[<span class="pl-c1">3</span>]);
+}
+<span class="pl-k">catch</span> (<span class="pl-smi">Exception</span> e){
+    logger<span class="pl-k">.</span>error(e<span class="pl-k">.</span>getMessage(),e);
+}</pre></div>
+
+<p>Example Project : <a href="https://github.com/soleaf/ErRabbit-Example-log4j1">https://github.com/soleaf/ErRabbit-Example-log4j1</a></p>
+
+<h3>
+<a id="setup-for-log4j-2x" class="anchor" href="#setup-for-log4j-2x" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup for Log4j 2.x</h3>
+
+<h4>
+<a id="add-dependencies-to-maven-pomxml-1" class="anchor" href="#add-dependencies-to-maven-pomxml-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add Dependencies to maven <code>pom.xml</code>
+</h4>
+
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">dependency</span>&gt;
+    &lt;<span class="pl-ent">groupId</span>&gt;javax.jms&lt;/<span class="pl-ent">groupId</span>&gt;
+    &lt;<span class="pl-ent">artifactId</span>&gt;jms&lt;/<span class="pl-ent">artifactId</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;1.1&lt;/<span class="pl-ent">version</span>&gt;
+&lt;/<span class="pl-ent">dependency</span>&gt;
+&lt;<span class="pl-ent">dependency</span>&gt;
+    &lt;<span class="pl-ent">groupId</span>&gt;org.apache.activemq&lt;/<span class="pl-ent">groupId</span>&gt;
+    &lt;<span class="pl-ent">artifactId</span>&gt;activemq-core&lt;/<span class="pl-ent">artifactId</span>&gt;
+    &lt;<span class="pl-ent">version</span>&gt;5.7.0&lt;/<span class="pl-ent">version</span>&gt;
+&lt;/<span class="pl-ent">dependency</span>&gt;</pre></div>
+
+<h4>
+<a id="setup-log4j2" class="anchor" href="#setup-log4j2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup Log4j2</h4>
+
+<ol>
+<li>Declare 'JMS Appender' to <code>log4j2.xml</code> with your ActiveMQ URL, userName, password.</li>
+<li>'queueBindingName' should be 'errabbit.report.[RabbitID]'.</li>
+<li>And add JMS Appender to Loggers.</li>
+</ol>
+
+<div class="highlight highlight-text-xml"><pre>&lt;?<span class="pl-ent">xml</span><span class="pl-e"> version</span>=<span class="pl-s"><span class="pl-pds">"</span>1.0<span class="pl-pds">"</span></span><span class="pl-e"> encoding</span>=<span class="pl-s"><span class="pl-pds">"</span>UTF-8<span class="pl-pds">"</span></span>?&gt;
+&lt;<span class="pl-ent">Configuration</span> <span class="pl-e">status</span>=<span class="pl-s"><span class="pl-pds">"</span>info<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>MyApp<span class="pl-pds">"</span></span> <span class="pl-e">packages</span>=<span class="pl-s"><span class="pl-pds">"</span>org.mintcode.errabbit.example<span class="pl-pds">"</span></span>&gt;
+&lt;<span class="pl-ent">Appenders</span>&gt;
+    &lt;<span class="pl-ent">JMS</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>errabbit<span class="pl-pds">"</span></span>
+         <span class="pl-e">queueBindingName</span>=<span class="pl-s"><span class="pl-pds">"</span>errabbit.report.example<span class="pl-pds">"</span></span>
+         <span class="pl-e">factoryBindingName</span>=<span class="pl-s"><span class="pl-pds">"</span>ConnectionFactory<span class="pl-pds">"</span></span>
+         providerURL = <span class="pl-s"><span class="pl-pds">"</span>tcp://localhost:61616<span class="pl-pds">"</span></span>
+         userName = <span class="pl-s"><span class="pl-pds">"</span>sender<span class="pl-pds">"</span></span>
+         password = <span class="pl-s"><span class="pl-pds">"</span>senderpassword!<span class="pl-pds">"</span></span>
+            /&gt;
+    &lt;<span class="pl-ent">Console</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>STDOUT<span class="pl-pds">"</span></span> <span class="pl-e">target</span>=<span class="pl-s"><span class="pl-pds">"</span>SYSTEM_OUT<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">PatternLayout</span> <span class="pl-e">pattern</span>=<span class="pl-s"><span class="pl-pds">"</span>%m%n<span class="pl-pds">"</span></span>/&gt;
+    &lt;/<span class="pl-ent">Console</span>&gt;
+&lt;/<span class="pl-ent">Appenders</span>&gt;
+&lt;<span class="pl-ent">Loggers</span>&gt;
+    &lt;<span class="pl-ent">Logger</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>org.mintcode.errabbit.example<span class="pl-pds">"</span></span> <span class="pl-e">level</span>=<span class="pl-s"><span class="pl-pds">"</span>error<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">AppenderRef</span> <span class="pl-e">ref</span>=<span class="pl-s"><span class="pl-pds">"</span>errabbit<span class="pl-pds">"</span></span>/&gt;
+    &lt;/<span class="pl-ent">Logger</span>&gt;
+    &lt;<span class="pl-ent">Root</span> <span class="pl-e">level</span>=<span class="pl-s"><span class="pl-pds">"</span>error<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">AppenderRef</span> <span class="pl-e">ref</span>=<span class="pl-s"><span class="pl-pds">"</span>STDOUT<span class="pl-pds">"</span></span>/&gt;
+    &lt;/<span class="pl-ent">Root</span>&gt;
+&lt;/<span class="pl-ent">Loggers</span>&gt;
+&lt;/<span class="pl-ent">Configuration</span>&gt;
+</pre></div>
+
+<h4>
+<a id="setup-jndiproperties" class="anchor" href="#setup-jndiproperties" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup jndi.properties</h4>
+
+<ol>
+<li>Make <code>java/main/resource/jndi.properties</code>, and put same ActiveMQ settings(username, password, rabbitID).</li>
+</ol>
+
+<pre><code>java.naming.factory.initial = org.apache.activemq.jndi.ActiveMQInitialContextFactory
+java.naming.provider.url = tcp://localhost:61616
+queue.errabbit.report.example = errabbit.report.example
+</code></pre>
+
+<h4>
+<a id="use-in-application-code-1" class="anchor" href="#use-in-application-code-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use In Application Code</h4>
+
+<p>ErRabbit uses Log4j2 JMS Appender, and collects exceptions with other information logs.
+You can collect all kind of log(info, debug, trace .. etc). But, for your application performance,
+use only as exception error logging.</p>
+
+<ol>
+<li>Get Log4j Logger</li>
+</ol>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-smi">Logger</span> logger <span class="pl-k">=</span> <span class="pl-smi">LogManager</span><span class="pl-k">.</span>getLogger(getClass());</pre></div>
+
+<ol>
+<li>Log error with exception, Just type <code>logger.error([message],e)</code>
+</li>
+</ol>
+
+<div class="highlight highlight-source-java"><pre><span class="pl-k">try</span>{
+    <span class="pl-k">int</span> a[] <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-smi">int</span>[<span class="pl-c1">2</span>];
+    <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>Access element three :<span class="pl-pds">"</span></span> <span class="pl-k">+</span> a[<span class="pl-c1">3</span>]);
+}
+<span class="pl-k">catch</span> (<span class="pl-smi">Exception</span> e){
+    logger<span class="pl-k">.</span>error(e<span class="pl-k">.</span>getMessage(),e);
+}</pre></div>
+
+<p>Example Project : <a href="https://github.com/soleaf/ErRabbit-Example-log4j2">https://github.com/soleaf/ErRabbit-Example-log4j2</a></p>
+
+<h1>
+<a id="next--todo" class="anchor" href="#next--todo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Next : ToDo</h1>
+
+<ul>
+<li>Alarm warning</li>
+<li>Integration with VCS</li>
+<li>Mobile support</li>
+</ul>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/soleaf">soleaf</a> can be found on <a href="https://github.com/soleaf/ErRabbit">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="https://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
