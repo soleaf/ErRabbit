@@ -6,10 +6,12 @@
  */
 .analysis #groupby_selected LI{
     padding-right:5px;
+    cursor: pointer;
 }
 
 .analysis #groupby_selected LI SPAN{
     float:right;
+    cursor: pointer;
 }
 
 .analysis .result{
