@@ -26,9 +26,9 @@
                             <div class='arrow <c:if test="${stack.isDefaultHidden()}">base-package-arrow</c:if>'>
                                 <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></div>
                             <div class='class <c:if test="${stack.isDefaultHidden()}">base-package</c:if>'>
-                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                                <%--<span class="glyphicon glyphicon-file" aria-hidden="true"></span>--%>
                                 <div class="class_name_set">
-                                    <span class="package_name"> ${stack.packageName}.</span><span class="class_name">${stack.className}</span>
+                                    <span class="class_name">${stack.className}</span>
                                 </div>
                                 <c:forEach var="element" items="${stack.stackTraceElements}" varStatus="status">
                                     <ul>
@@ -39,7 +39,14 @@
                                     </ul>
                                 </c:forEach>
                             </div>
-                            <span class="fileName <c:if test="${stack.isDefaultHidden()}">base-package-fileName</c:if>">${stack.fileName}</span>
+                            <c:choose>
+                                <c:when test="${stack.isDefaultHidden()}">
+                                    <span class="fileName base-package-fileName">${stack.packageName}.${stack.fileName}</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="fileName fileName-link" href="http://www.google.com/search?q=${stack.declaringClass}" target="_blank">${stack.packageName}.${stack.fileName} <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a>
+                                </c:otherwise>
+                            </c:choose>
                         </li>
                     </c:forEach>
                 </ul>

@@ -4,6 +4,7 @@
 <html>
 <head>
     <jsp:include page="../common/header_include.jsp"/>
+    <link rel="stylesheet" href="/css/log.css" type="text/css"/>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="/js/log.js"></script>
 </head>

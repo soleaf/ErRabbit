@@ -11,6 +11,7 @@
 <html>
 <head>
     <jsp:include page="../common/header_include.jsp"/>
+    <link rel="stylesheet" href="/css/report.css" type="text/css"/>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script src="/js/report.js"></script>
     <script type="text/javascript">

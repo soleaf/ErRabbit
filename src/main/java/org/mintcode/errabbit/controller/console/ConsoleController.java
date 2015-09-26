@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Receive all logs on one page through web socket.
@@ -44,8 +45,9 @@ public class ConsoleController {
 
     // Extend login session call (Ajax)
     @RequestMapping(value = "session")
-    public String extendSession(Model model) {
-        return  "/console/session";
+    @ResponseBody
+    public String extendSession() {
+        return  "ok";
     }
 
 }

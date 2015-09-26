@@ -1,0 +1,395 @@
+/**
+ * ErRabbit Web Console
+ * soleaf, mintcode.org
+ * https://github.com/soleaf/ErRabbit
+ * log.css
+ */
+.page-side .calendar{
+    background: #FBFBFB;
+}
+.page-side .calendar .dropdown BUTTON{
+    border-radius: 0px;
+    border:none;
+}
+.page-side .calendar .dropdown{
+    float:left;
+    width:50%;
+}
+.page-side .calendar .dropdown .dropdown-menu{
+    min-width: 10px;
+}
+.page-side .calendar .dropdown .dropdown-menu A{
+    padding:10px 10px;
+}
+.page-side .calendar .badge{
+    background-color: transparent;
+    border:1px solid #AAAAAA;
+    color:#AAAAAA;
+    font-size: 10px;
+}
+.log-area{
+    margin-left:140px;
+    height:100%;
+    overflow: scroll;
+}
+.log-area_nosidebar{
+    margin-left:0px;
+}
+.log .log-timeLine{
+    height:106px;
+    border-bottom: 1px solid #ececec;
+    background: rgba(251,251,251,1);
+    background: -moz-linear-gradient(top, rgba(251,251,251,1) 0%, rgba(255,255,255,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(251,251,251,1)), color-stop(100%, rgba(255,255,255,1)));
+    background: -webkit-linear-gradient(top, rgba(251,251,251,1) 0%, rgba(255,255,255,1) 100%);
+    background: -o-linear-gradient(top, rgba(251,251,251,1) 0%, rgba(255,255,255,1) 100%);
+    background: -ms-linear-gradient(top, rgba(251,251,251,1) 0%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(to bottom, rgba(251,251,251,1) 0%, rgba(255,255,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#ffffff', GradientType=0 );
+}
+.log .log-timeLine .chart{
+    height:100%;
+}
+.log-area .log-head{
+    height:32px;
+    line-height: 32px;
+    padding-left:10px;
+    padding-top:1px;
+    font-size:14px;
+    color:#333;
+}
+.log-area #log-feed{
+    width:100px;
+    margin-top:20px;
+    display: none;
+}
+.log-list-box {
+    /*margin: 20px;*/
+    /*border: 1px solid #efefef;*/
+    padding: 20px;
+}
+.log-list-box .page-status{
+    margin-top:10px;
+    margin-bottom:20px;
+    font-size:10px;
+    font-color: #868686;
+}
+.log-list .log{
+    font-size: 13px;
+    padding-top:4px;
+    padding-bottom:4px;
+    padding-left:10px;
+    border-bottom: 1px solid #f4f4f4;
+}
+#log-list .log[data-e=true]{
+    cursor: pointer;
+}
+.log-list .log:HOVER{
+    background-color: #f9f9f9;
+}
+.log-list .log:HOVER .message{
+    color:#000;
+}
+.log-list .log .level{
+    margin-left: 4px;
+    margin-top:1px;
+    border-width: 1px;
+    border-style: solid;
+    font-size:10px;
+    line-height: 12px;
+    width:50px;
+    text-align: center;
+    display:inline-block;
+    float:left;
+}
+.log-list .log .DEBUG{
+    border-color: #868686;
+    color: #868686;
+}
+.log-list .log .WARN{
+    border-color: #ffbf5e;
+    color: #ffbf5e;
+}
+.log-list .log .ERROR{
+    border-color: #FF8166;
+    color:#FF8166;
+}
+.log-list .log .has_exception{
+    background-color:#FF8166;
+    color:#FFF;
+}
+.log-list .log .FATAL{
+    border-color: #ff5572;
+    color: #ff5572;
+}
+.log-list .log .time{
+    font-style: italic;
+    color: #868686;
+    float:left;
+    width:90px;
+}
+.log-list .log .contgroup{
+    margin-left:150px;
+}
+.log-list .log .rabbit_id{
+    margin-left: 4px;
+    width: 100px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color:#5CD0D6;
+    font-weight: bold;
+    cursor: pointer;
+}
+.log-list .log .rabbit_id:HOVER{
+    text-decoration: underline;
+}
+.log-list .log .categoryName{
+    margin-left: 2px;
+    padding-left:2px;
+    padding-right:2px;
+    color: #5d5d5d;
+    text-decoration: underline;
+}
+.log-list .log .categoryName{
+    margin-left: 2px;
+    padding-left:2px;
+    padding-right:2px;
+    color: #5d5d5d;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.log-list .log .categoryName:HOVER{
+    color:#fff;
+    background-color:#5d5d5d;
+    text-decoration: none;
+    border-radius: 2px;
+}
+.log-list .log .message{
+    margin-top:1px;
+    margin-left: 4px;
+    color: #737373;
+    display:block;
+}
+.log-list .log_active{
+    background-color: #f0f0f0;
+}
+.log-list .log_active .message{
+    color: #010101;
+}
+.log-list .empty{
+    font-size:16px;
+    text-align: center;
+    magin-top:auto;
+    magin-left:auto;
+    magin-right:auto;
+    magin-bottomt:auto;
+    color: #dcdcdc;
+}
+.log-detail-popup .message{
+    background-color:#fff;
+    border-top: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
+    margin: -20px -20px 20px;
+    padding: 20px;
+    font-size:12px;
+    overflow: scroll;
+    background-color:#F1F1F1;
+    color: #2f2f2f;
+}
+.log-detail-popup .message:HOVER{
+    color:#000;
+}
+.log-detail-popup .log-tab{
+    border-bottom:1px solid #dfdfdf;
+    margin-bottom: 10px;
+    height:30px;
+}
+.log-detail-popup .log-tab li {
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+    line-height: 30px;
+    border-right: 1px solid #dcdcdc;
+    width: 110px;
+    text-align: center;
+    color: #9f9f9f;
+    cursor: pointer;
+    font-size: 12px;
+}
+.log-detail-popup .log-tab .active{
+    color: #222222;
+}
+.log-detail-popup #popover_log_btn_showeothers{
+    display: none;
+}
+.log-detail-popup .locationInfo>TABLE{
+    width:400px;
+    font-size:12px;
+}
+.log-detail-popup .ThrowableInfo{
+    position: relative;
+}
+.log-detail-popup .ThrowableInfo .graph .threadName{
+    color: #aeaeae;
+}
+.log-detail-popup .ThrowableInfo .graph .threadName .value{
+    color: #828282;
+}
+.log-detail-popup .ThrowableInfo .graph .arrow{
+    /*margin-bottom:2px;*/
+    padding-left:10px;
+    color: #f1f1f1;
+    margin-top:6px;
+}
+.log-detail-popup .ThrowableInfo .graph .exception{
+    background-color: #EF8A6F;
+    padding:8px;
+    color: #fafafa;
+    margin-top:2px;
+    /*margin-bottom:2px;*/
+    margin-left:0px;
+    display: inline-block;
+    clear:both;
+    border-radius: 5px;
+}
+.log-detail-popup .ThrowableInfo .graph .class{
+    background-color: #f1f1f1;
+    color:#979797;
+    /*margin-top:2px;*/
+    margin-bottom:2px;
+    padding:8px;
+    display: inline-block;
+    border-radius: 5px;
+    max-width: 100%;
+}
+.log-detail-popup .ThrowableInfo .glyphicon-file{
+    float:left;
+}
+.log-detail-popup .ThrowableInfo .graph .class_name_set{
+    display:block;
+    word-wrap: break-word;
+    /*margin-left:18px;*/
+}
+.log-detail-popup .ThrowableInfo .graph .package_name{
+    color: #bababa;
+}
+.log-detail-popup .ThrowableInfo .graph .class_name {
+    /*text-decoration: underline;*/
+}
+.log-detail-popup .ThrowableInfo .graph .method .lineNumber{
+    font-size:10px;
+}
+
+.log-detail-popup .ThrowableInfo .graph .base-package{
+    background-color: #7BCCD4;
+    border-color:#7BCCD4;
+    color:#fff;
+    display: inline-block;
+}
+.log-detail-popup .ThrowableInfo .graph .base-package .package_name{
+    color: #dafaff;
+}
+.log-detail-popup .ThrowableInfo .graph .base-package-arrow{
+    padding-left:10px;
+    display: block;
+    color: #7BCCD4;
+}
+.log-detail-popup .ThrowableInfo .graph .method .methodName{
+    background-color: #ffffff;
+    color: #616161;
+    border: 1px solid #dbdbdb;
+    margin-top:4px;
+    margin-bottom:2px;
+    /*margin-left:18px;*/
+    padding: 2px 6px;
+    display: inline-block;
+    border-radius: 5px;
+    clear:both;
+}
+.log-detail-popup .ThrowableInfo .graph .base-package .method .methodName{
+    background-color: #C8FFF8;
+    border: 1px solid #C8FFF8;
+    color: #3d676a;
+}
+.log-detail-popup .ThrowableInfo .graph .fileName{
+    padding-left:5px;
+    font-size:11px;
+    color: #c8c8c8;
+    display: block;
+}
+.log-detail-popup .ThrowableInfo .graph .fileName-link:HOVER{
+    color: #7BCCD4;
+}
+.log-detail-popup .ThrowableInfo .graph .fileName-link>SPAN{
+    display: none;
+}
+.log-detail-popup .ThrowableInfo .graph .fileName-link:HOVER>SPAN{
+    display: inline-block;
+}
+.log-detail-popup .ThrowableInfo .graph .base-package-toggle{
+    margin-top:10px;
+    margin-bottom:10px;
+    background-color: #f9f9f9;
+    color:#adadad;
+}
+.log-detail-popup .ThrowableInfo .text{
+    display: none;
+    max-width:100%;
+    overflow: scroll;
+}
+.log-detail-popup .ThrowableInfo .text li{
+    font-size:12px;
+}
+.log-detail-popup .close{
+    position: absolute;
+    font-size:12px;
+    top:0px;
+    height:30px;
+    line-height:30px;
+    right:0px;
+}
+.log-detail-popup .close SPAN{
+    line-height: 30px;
+}
+#log-calendar{
+    list-style: none;
+    padding-left: 0px;
+}
+#log-calendar LI{
+    /*height:24px;*/
+    font-size:13px;
+    border-bottom: 1px solid #ececec;
+    position: relative;
+    padding-left: 10px;
+    padding-right: 5px;
+    padding-top:2px;
+    padding-bottom:2px;
+    cursor: pointer;
+}
+#log-calendar LI .badge{
+    float:right;
+    border:none;
+}
+#log-calendar LI:HOVER{
+    background-color: #ececec;
+}
+#log-calendar LI:ACTIVE{
+    background-color: #7BCCD4;
+    color:#FFF;
+}
+#log-calendar .active{
+    color:#7BCCD4;
+    background-color: #ececec;
+}
+.calendar .empty{
+    font-size:16px;
+    text-align: center;
+    padding-top: 20px;
+    color: #dcdcdc;
+}
+#report-feed{
+    margin: 10px;
+    display: none;
+}

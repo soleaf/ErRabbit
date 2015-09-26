@@ -4,6 +4,8 @@
 <html>
 <head>
     <jsp:include page="../common/header_include.jsp"/>
+    <link rel="stylesheet" href="/css/log.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/console.css" type="text/css"/>
     <script src="/js/sockjs-0.3.4.js"></script>
     <script src="/js/stomp.js"></script>
     <script src="/js/console.js"></script>

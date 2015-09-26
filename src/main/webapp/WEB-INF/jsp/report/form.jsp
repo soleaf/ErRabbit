@@ -11,6 +11,7 @@
 <html>
 <head>
     <jsp:include page="../common/header_include.jsp"/>
+    <link rel="stylesheet" href="/css/report.css" type="text/css"/>
 </head>
 <body class="report">
 <jsp:include page="../common/nav.jsp">

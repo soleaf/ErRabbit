@@ -1,0 +1,24 @@
+/**
+ * ErRabbit Web Console
+ * soleaf, mintcode.org
+ * https://github.com/soleaf/ErRabbit
+ * login.css
+ */
+.login>*{
+    width:300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.login-jumbotron{
+    background: url("/img/login_top.png") no-repeat bottom right;
+    background-color: #F4F4F4;
+    padding-top:120px;
+}
+.login-jumbotron P{
+    font-size:16px;
+}
+.login-jumbotron H1{
+    color:#70CDD5;
+    font-size:45px;
+    marign-bottom:20px;
+}

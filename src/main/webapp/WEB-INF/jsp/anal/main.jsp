@@ -4,6 +4,7 @@
 <html>
 <head>
     <jsp:include page="../common/header_include.jsp"/>
+    <link rel="stylesheet" href="/css/analysis.css" type="text/css"/>
     <script src="/js/analysis.js"></script>
 </head>
 <body class="analysis">

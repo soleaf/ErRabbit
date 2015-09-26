@@ -1,0 +1,124 @@
+/**
+ * ErRabbit Web Console
+ * soleaf, mintcode.org
+ * https://github.com/soleaf/ErRabbit
+ * rabbit.css
+ */
+.rabbit .page .rabbit-group{
+    font-size:12px;
+    margin-top:10px;
+    color: #7BCCD4;
+    font-weight: bold;
+}
+.page .list_rabbit{
+    margin:0px;
+    padding:0px;
+    list-style: none;
+    margin-bottom:50px;
+}
+.page .list_rabbit li{
+    margin-top:10px;
+    padding:0px;
+    display: block;
+}
+.page .list_rabbit li .icon{
+    background: #f3f3f3;
+    width:46px;
+    height:46px;
+    /*border-radius: 23px;*/
+    text-align: center;
+    line-height: 46px;
+    color: #FFF;
+    font-size:20px;
+    float:left;
+    /*border:1px solid #7BCCD4;*/
+}
+.page .list_rabbit li:HOVER .icon{
+    background: #7BCCD4;
+    -o-transition:.3s;
+    -ms-transition:.3s;
+    -moz-transition:.3s;
+    -webkit-transition:.3s;
+    /* ...and now for the proper property */
+    transition:.3s;
+}
+.page .list_rabbit li>SPAN{
+    color: #515151;
+}
+.page .list_rabbit li>.conts{
+    margin-top: 4px;
+    margin-left: 60px;
+}
+.page .list_rabbit li>.recent{
+    color: #737373;
+    font-weight: normal;
+}
+
+.page .list_rabbit li>.recent>.new{
+    color:#7BCCD4;
+    font-weight: bold;
+}
+.page .list_rabbit li>.action{
+    border-bottom: 1px solid #f6f6f6;
+    height:30px;
+    line-height: 30px;
+}
+.page .list_rabbit li>.action A{
+    color: #CCCCCC;
+    cursor: pointer;
+}
+.page .list_rabbit li:HOVER .action A {
+    color:#595959;
+    -o-transition:.3s;
+    -ms-transition:.3s;
+    -moz-transition:.3s;
+    -webkit-transition:.3s;
+    /* ...and now for the proper property */
+    transition:.3s;
+}
+.page .list_rabbit li>.action A:HOVER{
+    text-decoration: none;
+    color:#7BCCD4;
+    -o-transition:.3s;
+    -ms-transition:.3s;
+    -moz-transition:.3s;
+    -webkit-transition:.3s;
+    /* ...and now for the proper property */
+    transition:.3s;
+}
+.page .list_rabbit li>.name{
+    font-size:18px;
+    color: #202020;
+}
+.page .how_to_integration_banner{
+    padding-top:20px;
+    padding-bottom:0px;
+    background-color: #F4F4F4;
+    /*margin-bottom: 50px;*/
+}
+.page .how_to_integration_banner .img{
+    float:left;
+}
+.page .how_to_integration_banner .title{
+    float:left;
+    margin-left:50px;
+    margin-top:100px;
+}
+.page .how_to_integration_banner .title .head{
+    color:#7BCCD4;
+    margin-bottom:5px;
+}
+.page .how_to_integration_banner .title .description{
+    color: #4b4b4b;
+    font-size:12px;
+    margin-top:0px;
+}
+.page .how_to_integration_banner .btn{
+    background-color: #F4F4F4;
+}
+.rabbit-form{
+    width:400px;
+}
+.rabbit .page-side-margin{
+    height:auto;
+}

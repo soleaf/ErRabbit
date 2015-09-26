@@ -4,6 +4,7 @@
 <html>
 <head>
     <jsp:include page="../common/header_include.jsp"/>
+    <link rel="stylesheet" href="/css/rabbit.css" type="text/css"/>
     <script src="/js/group.js"></script>
 </head>
 <body class="rabbit rabbit-group">

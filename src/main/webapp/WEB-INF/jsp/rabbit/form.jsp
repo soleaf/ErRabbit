@@ -3,6 +3,7 @@
 <html>
 <head>
     <jsp:include page="../common/header_include.jsp"/>
+    <link rel="stylesheet" href="/css/rabbit.css" type="text/css"/>
 </head>
 <body>
 <jsp:include page="../common/nav.jsp">

@@ -4,6 +4,7 @@
 <html>
 <head>
     <jsp:include page="../common/header_include.jsp"/>
+    <link rel="stylesheet" href="/css/rabbit.css" type="text/css"/>
     <script src="/js/rabbit.js"></script>
 </head>
 <body class="rabbit">
@@ -15,10 +16,8 @@
     <div class="jumbotron how_to_integration_banner">
         <div class="container">
             <p class="img"><img src="/img/rabbit_handcuffs.png"/></p>
-
             <div class="title">
                 <p class="head">How to integrate with your application</p>
-
                 <p class="description">Using Log4j 1.2 or 2.x</p>
                 <a href="https://github.com/soleaf/ErRabbit#make-your-application-connect-jms" role="button"
                    class="btn btn-default" target="_blank">SEE HOW TO</a>

@@ -1,0 +1,24 @@
+/**
+ * ErRabbit Web Console
+ * soleaf, mintcode.org
+ * https://github.com/soleaf/ErRabbit
+ * console.css
+ */
+.console #con_success,
+.console #con_fail{
+    display: none;
+}
+.console #waiting{
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    width:400px;
+}
+.console #retry{
+    display: none;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    width:400px;
+    height:100px;
+}
