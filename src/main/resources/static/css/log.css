@@ -101,6 +101,12 @@
     text-align: center;
     display:inline-block;
     float:left;
+    cursor: pointer;
+}
+.log-list .log .level:HOVER{
+    color:#fff;
+    background-color:#7BCCD4;
+    border-color: #7BCCD4;
 }
 .log-list .log .DEBUG{
     border-color: #868686;
@@ -156,15 +162,14 @@
     margin-left: 2px;
     padding-left:2px;
     padding-right:2px;
-    color: #5d5d5d;
+    color: #101010;
     text-decoration: underline;
     cursor: pointer;
 }
 .log-list .log .categoryName:HOVER{
     color:#fff;
-    background-color:#5d5d5d;
+    background-color:#7BCCD4;
     text-decoration: none;
-    border-radius: 2px;
 }
 .log-list .log .message{
     margin-top:1px;
@@ -196,7 +201,7 @@
     font-size:12px;
     overflow: scroll;
     background-color:#F1F1F1;
-    color: #2f2f2f;
+    color: #525252;
 }
 .log-detail-popup .message:HOVER{
     color:#000;

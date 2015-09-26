@@ -186,6 +186,10 @@ function retrieveCalendar(rabbitId, year, month, selectedDay, callback) {
     });
 }
 
+/**
+ * Check session status
+ * @param data
+ */
 function sessionExpireCheck(data) {
     if (data.indexOf("id=\"login_page\"") > -1) {
         alert("Session has expired");
@@ -193,6 +197,14 @@ function sessionExpireCheck(data) {
     }
 }
 
+/**
+ * Get graph
+ * @param rabbitId
+ * @param year
+ * @param month
+ * @param selectedDay
+ * @param callback
+ */
 function retrieveGraph(rabbitId, year, month, selectedDay, callback) {
     showLoading();
     $.ajax({
@@ -224,7 +236,12 @@ function retrieveGraph(rabbitId, year, month, selectedDay, callback) {
         }
     });
 }
+
 var chart
+/**
+ * Draw chart
+ * @param dataJson
+ */
 function drawChart(dataJson) {
 
     if (dataJson.data == null) {
@@ -270,6 +287,11 @@ function drawChart(dataJson) {
     hideLoading();
 }
 
+/**
+ * Show or hide chart
+ * @param show
+ * @param callBack
+ */
 function showChart(show, callBack) {
     if (show) {
         $("#chart").show();
@@ -418,6 +440,12 @@ function retrievelogs(rabbitId, page, size, y, m, d) {
             // log list item's category event
             $("#log-list .categoryName").click(function () {
                 $("#filter_class").val($(this).text());
+                $("#filter_apply").trigger("click");
+            });
+
+            // log list item's level event
+            $("#log-list .level").click(function () {
+                $("#filter_level").val($(this).text());
                 $("#filter_apply").trigger("click");
             });
 

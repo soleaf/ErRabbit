@@ -122,24 +122,29 @@ public class Log implements Serializable {
      * @return
      */
     public String toHTML(Boolean showRabbitID){
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getCollectedDate());
+        Integer y = cal.get(Calendar.YEAR);
+        Integer m = cal.get(Calendar.MONTH) + 1;
+        Integer d = cal.get(Calendar.DAY_OF_MONTH);
+
+        String filterlevelURL = String.format("/log/list.err?id=%s&y=%d&m=%d&d=%d&filter=true&filter_level=%s",
+                rabbitId, y, m, d, loggingEvent.level);
+
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss:SSS");
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("<li class='log' data-e='%s' data-poload='/log/popover_data?id=%s'>",
                 (loggingEvent.getThrowableInfo() != null ? "true" : "") ,id.toString()));
             sb.append(String.format("<span class='time'>%s</span>", format.format(loggingEvent.timeStampDate)));
-            sb.append(String.format("<span class='level %s %s'>%s</span>", loggingEvent.level,
+            sb.append(String.format("<span class='level %s %s' data-url='%s'>%s</span>", loggingEvent.level,
                                                                 (loggingEvent.getThrowableInfo() != null ? "has_exception" : ""),
+                                                                filterlevelURL,
                                                                 loggingEvent.level));
             sb.append("<div class='contgroup'>");
                 if (showRabbitID){
                     sb.append(String.format("<span class='rabbit_id'>%s</span>", rabbitId));
                 }
-
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(getCollectedDate());
-                Integer y = cal.get(Calendar.YEAR);
-                Integer m = cal.get(Calendar.MONTH) + 1;
-                Integer d = cal.get(Calendar.DAY_OF_MONTH);
 
                 String filterClassURL = String.format("/log/list.err?id=%s&y=%d&m=%d&d=%d&filter=true&filter_level=%s&filter_class=%s",
                         rabbitId, y, m, d, loggingEvent.level, loggingEvent.getCategoryName());
