@@ -11,14 +11,22 @@ Collecting by Log4j and ActiveMQ will make it easy compatible with other program
 
 ## Web console screenshot
 
+### Main
 ![ScreenShot](graphics/screenshot1.png)
 
+### Log view
 ![ScreenShot](graphics/screenshot2.png)
 
+### Graphic Exception trace View (Log detail view) 
+![ScreenShot](graphics/graphic_trace_view.png)
+
+# Console
 ![ScreenShot](graphics/screenshot3.png)
 
+# Analysis(Aggregation query)
 ![ScreenShot](graphics/screenshot4.png)
 
+# Batch Reprot
 ![ScreenShot](graphics/screenshot5.png)
 
 # Requirements
