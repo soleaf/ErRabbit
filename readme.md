@@ -271,3 +271,6 @@ Example Project : https://github.com/soleaf/ErRabbit-Example-log4j2
 * Integration with VCS
 * Mobile support
 
+# Special thanks
+
+* 신현묵
