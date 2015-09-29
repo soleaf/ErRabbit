@@ -1,5 +1,7 @@
 ![ErRabbit](src/main/resources/static/img/rabbit_handcuffs.png "logo")
 
+한국어 설명은 [이곳](readme_kr.md)에 있습니다.
+
 # Introduction
 
 ErRabbit(Error Rabbit) is useful error remote tracking service with Visual View.
