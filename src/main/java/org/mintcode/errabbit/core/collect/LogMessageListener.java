@@ -29,7 +29,7 @@ import java.util.Date;
  * Created by soleaf on 2015. 1. 31..
  */
 @Component(value = "reportMessageListener")
-public class ReportMessageListener implements MessageListener {
+public class LogMessageListener implements MessageListener {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

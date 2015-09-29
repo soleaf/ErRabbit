@@ -25,7 +25,6 @@ import javax.servlet.Filter;
  */
 @SpringBootApplication
 @EnableScheduling
-@ImportResource( {"classpath:mq-listener.xml" } )
 public class Server {
 
     public static void main(String[] args) {
