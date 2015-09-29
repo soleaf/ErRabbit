@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * StackTraceGraph
+ * Make graph stack trace view model set
+ * Organizing stack traces to group as same class
  * Created by soleaf on 2/21/15.
  */
 public class StackTraceGraph {
@@ -16,8 +19,12 @@ public class StackTraceGraph {
     private String packageName;
     private String fileName;
     private String declaringClass;
-    private boolean isDefaultHidden = false;
+    private boolean isBasePackage = false;
 
+    /**
+     * Make with basePackage
+     * @param basePackage
+     */
     public StackTraceGraph(String basePackage) {
         this.basePackage = basePackage;
     }
@@ -36,7 +43,7 @@ public class StackTraceGraph {
             fileName = element.getFileName();
 
             if (checkBasePackages(declaringClass)){
-                isDefaultHidden = true;
+                isBasePackage = true;
             }
         }
 
@@ -86,12 +93,12 @@ public class StackTraceGraph {
         return fileName;
     }
 
-    public boolean isDefaultHidden() {
-        return isDefaultHidden;
+    public boolean isBasePackage() {
+        return isBasePackage;
     }
 
-    public void setDefaultHidden(boolean isDefaultHidden) {
-        this.isDefaultHidden = isDefaultHidden;
+    public void setBasePackage(boolean isDefaultHidden) {
+        this.isBasePackage = isDefaultHidden;
     }
 
     public String getDeclaringClass() {
@@ -106,7 +113,7 @@ public class StackTraceGraph {
                 ", className='" + className + '\'' +
                 ", packageName='" + packageName + '\'' +
                 ", fileName='" + fileName + '\'' +
-                ", isDefaultHidden=" + isDefaultHidden +
+                ", isBasePackage=" + isBasePackage +
                 '}';
     }
 }

@@ -1,6 +1,5 @@
 package org.mintcode.errabbit.core;
 
-import org.mintcode.errabbit.core.collect.TotalGrapheCache;
 import org.mintcode.errabbit.core.report.dao.ReportRepository;
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.rabbit.name.RabbitCache;
@@ -40,8 +39,6 @@ public class CoreService {
     @PostConstruct
     private void startup(){
         logger.warn("ErRabbit Service initiating...");
-        logger.warn("Version " + getClass().getPackage().getImplementationVersion());
-
         syncRabbitNameCache();
     }
 

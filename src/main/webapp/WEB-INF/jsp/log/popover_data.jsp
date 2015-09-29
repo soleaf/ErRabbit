@@ -22,10 +22,10 @@
                         </div>
                     </li>
                     <c:forEach var="stack" items="${graphs}" varStatus="status">
-                        <li class="<c:if test="${not stack.isDefaultHidden()}">another-package-set</c:if>">
-                            <div class='arrow <c:if test="${stack.isDefaultHidden()}">base-package-arrow</c:if>'>
+                        <li class="<c:if test="${not stack.isBasePackage()}">another-package-set</c:if>">
+                            <div class='arrow <c:if test="${stack.isBasePackage()}">base-package-arrow</c:if>'>
                                 <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></div>
-                            <div class='class <c:if test="${stack.isDefaultHidden()}">base-package</c:if>'>
+                            <div class='class <c:if test="${stack.isBasePackage()}">base-package</c:if>'>
                                 <%--<span class="glyphicon glyphicon-file" aria-hidden="true"></span>--%>
                                 <div class="class_name_set">
                                     <span class="class_name">${stack.className}</span>
@@ -40,7 +40,7 @@
                                 </c:forEach>
                             </div>
                             <c:choose>
-                                <c:when test="${stack.isDefaultHidden()}">
+                                <c:when test="${stack.isBasePackage()}">
                                     <span class="fileName base-package-fileName">${stack.packageName}.${stack.fileName}</span>
                                 </c:when>
                                 <c:otherwise>

@@ -23,6 +23,7 @@ public class AggregationAnalyzer {
     @Autowired
     MongoTemplate mongoTemplate;
 
+    // TypeToken for aggregating result type
     private final HashMap<String,Object> mapType = new HashMap<String,Object>();
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

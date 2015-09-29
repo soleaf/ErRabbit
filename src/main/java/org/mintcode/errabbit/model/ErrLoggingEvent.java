@@ -38,7 +38,7 @@ public class ErrLoggingEvent implements Serializable{
         erLoggingEvent.setTimeStamp(loggingEvent.getTimeStamp());
         erLoggingEvent.setTimeStampDate(new Date(loggingEvent.getTimeStamp()));
 
-        // Optional trhowable information
+        // Optional throwable information
         if (loggingEvent.getThrowableInformation() != null){
             erLoggingEvent.setThrowableInfo(ErThrowableInformation.fromThrowableInformation(loggingEvent.getThrowableInformation()));
         }

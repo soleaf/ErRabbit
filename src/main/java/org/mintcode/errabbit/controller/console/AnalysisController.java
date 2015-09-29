@@ -44,7 +44,7 @@ public class AnalysisController {
 
     // Main UI
     @RequestMapping(value = "main")
-    public ModelAndView list(Model model) {
+    public ModelAndView main(Model model) {
         try {
             // Get Rabbit List
             model.addAttribute("rabbitGroups", rabbitManagingService.

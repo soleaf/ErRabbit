@@ -39,16 +39,6 @@ public class Graph {
      */
     public Graph(){
 
-
-
-//        for (String level : levels){
-//            Map<Integer, Integer> timeLine = new HashMap<Integer, Integer>();
-//            for (int h=0 ; h <24; h++){
-//                timeLine.put(h, 0); // set zero counts
-//            }
-//            data.put(level, timeLine);
-//        }
-
     }
 
     /**

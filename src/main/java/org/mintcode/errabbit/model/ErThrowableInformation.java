@@ -64,16 +64,6 @@ public class ErThrowableInformation implements Serializable{
             rep[i+1] = tp.getExtendedStackTrace()[i].toString();
         }
         ert.setRep(rep);
-        try {
-            Field field = tp.getClass().getDeclaredField("category");
-            field.setAccessible(true);
-            ert.setCategory(ErCategory.fromCategory((Category) field.get(tp)));
-        } catch (NoSuchFieldException e) {
-            // Nothing
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
         return ert;
     }
 
