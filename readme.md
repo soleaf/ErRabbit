@@ -15,14 +15,14 @@ Collecting by Log4j and ActiveMQ will make it easy compatible with other program
 ![ScreenShot](graphics/screenshot1.png)
 - Managing rabbits(your applications)
 - Grouping
-- Glean logs
+- Clean logs
 - View logs
 
 ### Log view
 ![ScreenShot](graphics/screenshot2.png)
 - Explorer logs selected day
 - Log level chart by time
-- Filtering logs by level or calss name
+- Filtering logs by level or class name
 
 ### Graphic Exception trace View (Log detail view) 
 ![ScreenShot](graphics/graphic_trace_view.png)
@@ -33,7 +33,7 @@ Collecting by Log4j and ActiveMQ will make it easy compatible with other program
 
 ### Console
 ![ScreenShot](graphics/screenshot3.png)
-- Live feed all logs with Websocket
+- Live feed all logs with WebSocket
 - Same log view functions like log view page
 
 ### Analysis(Aggregation query)
@@ -50,7 +50,7 @@ Collecting by Log4j and ActiveMQ will make it easy compatible with other program
 * Java 1.7 upper
 * MongoDB 2
 * ActiveMQ
-* Log4j1.2 or log4j 2 in your application(log tracking target).
+* Configure Log4j
 
 # Install and Using
 
@@ -163,7 +163,8 @@ use only as exception error logging.
 Logger logger = Logger.getLogger(getClass());
 ```
 
-1. Log error with exception, Just type `logger.error([message],e)`
+1. Log error with exception, Just type `logger.error([message],e)`. 
+Another log level is same as your before code(like logger.info("hello");).
 
 ```java
 try{
@@ -198,7 +199,7 @@ Example Project : https://github.com/soleaf/ErRabbit-Example-log4j1
 #### Setup Log4j2
 
 1. Declare 'JMS Appender' to `log4j2.xml` with your ActiveMQ URL, userName, password.
-1. 'queueBindingName' should be 'errabbit.report.[RabbitID]'.
+1. 'queueBindingName' should be 'errabbit'.
 1. And add JMS Appender to Loggers.
 
 
@@ -232,11 +233,12 @@ Example Project : https://github.com/soleaf/ErRabbit-Example-log4j1
 #### Setup jndi.properties
 
 1. Make `java/main/resource/jndi.properties`, and put same ActiveMQ settings(username, password, rabbitID).
+1. queue.errabbit's value should be 'errabbit.report.[RabbitID]'.
 
 ```
 java.naming.factory.initial = org.apache.activemq.jndi.ActiveMQInitialContextFactory
 java.naming.provider.url = tcp://localhost:61616
-queue.errabbit.report.example = errabbit.report.example
+queue.errabbit = errabbit.report.example
 ```
 
 #### Use In Application Code
