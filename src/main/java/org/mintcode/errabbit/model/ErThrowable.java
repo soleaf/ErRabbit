@@ -66,18 +66,24 @@ public class ErThrowable implements Serializable{
         return ert;
     }
 
+    /**
+     * Get ErStacktraceElements
+     * @return
+     */
     public ErStackTraceElement[] getStackTraceElements() {
         return stackTraceElements;
     }
-
     public void setStackTraceElements(ErStackTraceElement[] stackTraceElements) {
         this.stackTraceElements = stackTraceElements;
     }
 
+    /**
+     * Get detailMessage
+     * @return
+     */
     public String getDetailMessage() {
         return detailMessage;
     }
-
     public void setDetailMessage(String detailMessage) {
         this.detailMessage = detailMessage;
     }

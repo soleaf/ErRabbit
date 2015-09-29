@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * LogLevelAnalysisRequest
  * Created by soleaf on 8/30/15.
  */
 public class LogLevelAnalysisRequest implements AnalysisRequest {

@@ -57,98 +57,135 @@ public class LogLevelDailyStatistics implements Serializable {
 
     private Integer level_ERROR = 0;
 
+    /**
+     * Get Id
+     * @return
+     */
     public ObjectId getId() {
         return id;
     }
-
     public void setId(ObjectId id) {
         this.id = id;
     }
 
+    /**
+     * Get rabbitId
+     * @return
+     */
     public String getRabbitId() {
         return rabbitId;
     }
-
     public void setRabbitId(String rabbitId) {
         this.rabbitId = rabbitId;
     }
 
+    /**
+     * Get year
+     * @return
+     */
     public Integer getYear() {
         return year;
     }
-
     public void setYear(Integer year) {
         this.year = year;
     }
 
+    /**
+     * Get day
+     * @return
+     */
     public Integer getDay() {
         return day;
     }
-
-    public Integer getMonth() {
-        return month;
-    }
-
-    public void setMonth(Integer month) {
-        this.month = month;
-    }
-
     public void setDay(Integer day) {
         this.day = day;
     }
 
+    /**
+     * Get month
+     * @return
+     */
+    public Integer getMonth() {
+        return month;
+    }
+    public void setMonth(Integer month) {
+        this.month = month;
+    }
+
+    /**
+     * Get level debug's counts
+     * @return
+     */
     public Integer getLevel_DEBUG() {
         return level_DEBUG;
     }
-
     public void setLevel_DEBUG(Integer level_DEBUG) {
         this.level_DEBUG = level_DEBUG;
     }
 
+    /**
+     * Get level info's counts
+     * @return
+     */
     public Integer getLevel_INFO() {
         return level_INFO;
     }
-
     public void setLevel_INFO(Integer level_INFO) {
         this.level_INFO = level_INFO;
     }
 
+    /**
+     * Get level trace's counts
+     * @return
+     */
     public Integer getLevel_TRACE() {
         return level_TRACE;
     }
-
     public void setLevel_TRACE(Integer level_TRACE) {
         this.level_TRACE = level_TRACE;
     }
 
+    /**
+     * Get level warn's counts
+     * @return
+     */
     public Integer getLevel_WARN() {
         return level_WARN;
     }
-
     public void setLevel_WARN(Integer level_WARN) {
         this.level_WARN = level_WARN;
     }
 
+    /**
+     * Get level fatal's counts
+     * @return
+     */
     public Integer getLevel_FATAL() {
         return level_FATAL;
     }
-
     public void setLevel_FATAL(Integer level_FATAL) {
         this.level_FATAL = level_FATAL;
     }
 
+    /**
+     * Get level error's counts
+     * @return
+     */
     public Integer getLevel_ERROR() {
         return level_ERROR;
     }
-
     public void setLevel_ERROR(Integer level_ERROR) {
         this.level_ERROR = level_ERROR;
     }
 
+    /**
+     * Get date as int
+     * example 20150205
+     * @return
+     */
     public Integer getDateInt() {
         return dateInt;
     }
-
     public void setDateInt(Integer dateInt) {
         this.dateInt = dateInt;
     }

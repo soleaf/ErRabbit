@@ -55,7 +55,6 @@ public class ActiveMQConfig {
     }
 
     @Bean
-
     public DefaultMessageListenerContainer defaultMessageListenerContainer()
             throws UnknownHostException {
         logger.info("Registering a defaultMessageListener.");

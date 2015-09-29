@@ -50,34 +50,46 @@ public class ErStackTraceElement implements Serializable{
         return erl;
     }
 
+    /**
+     * Get declaringCLass
+     * @return
+     */
     public String getDeclaringClass() {
         return declaringClass;
     }
-
     public void setDeclaringClass(String declaringClass) {
         this.declaringClass = declaringClass;
     }
 
+    /**
+     * Get methodName
+     * @return
+     */
     public String getMethodName() {
         return methodName;
     }
-
     public void setMethodName(String methodName) {
         this.methodName = methodName;
     }
 
+    /**
+     * Get fileName
+     * @return
+     */
     public String getFileName() {
         return fileName;
     }
-
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
+    /**
+     * Get fileNumber
+     * @return
+     */
     public int getLineNumber() {
         return lineNumber;
     }
-
     public void setLineNumber(int lineNumber) {
         this.lineNumber = lineNumber;
     }

@@ -42,18 +42,24 @@ public class ErCategory implements Serializable{
         return erCategory;
     }
 
+    /**
+     * Get category name
+     * @return
+     */
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Get category level
+     * @return
+     */
     public ErLevel getLevel() {
         return level;
     }
-
     public void setLevel(ErLevel level) {
         this.level = level;
     }

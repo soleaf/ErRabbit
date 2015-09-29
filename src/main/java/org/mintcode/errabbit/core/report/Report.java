@@ -56,7 +56,6 @@ public class Report implements Serializable{
     public AnalysisResultSet getLogReport() {
         return logReport;
     }
-
     public void setLogReport(AnalysisResultSet logReport) {
         this.logReport = logReport;
     }
@@ -68,7 +67,6 @@ public class Report implements Serializable{
     public Boolean getRead() {
         return read == null ? false : read;
     }
-
     public void setRead(Boolean read) {
         this.read = read;
     }
@@ -80,7 +78,6 @@ public class Report implements Serializable{
     public Set<String> getTargets() {
         return targets;
     }
-
     public void setTargets(Set<String> targets) {
         this.targets = targets;
     }
@@ -92,7 +89,6 @@ public class Report implements Serializable{
     public Date getTargetDate() {
         return targetDate;
     }
-
     public void setTargetDate(Date targetDate) {
         this.targetDate = targetDate;
     }
@@ -106,18 +102,36 @@ public class Report implements Serializable{
         return format.format(targetDate);
     }
 
+    /**
+     * Get calendar with target date
+     * @return
+     */
     private Calendar targetDateCal(){
         Calendar cal = Calendar.getInstance();
         cal.setTime(targetDate);
         return cal;
     }
 
+    /**
+     * Get targetYear
+     * @return
+     */
     public Integer getTargetYear(){
         return targetDateCal().get(Calendar.YEAR);
     }
+
+    /**
+     * Get targetMonth
+     * @return
+     */
     public Integer getTargetMonth(){
         return targetDateCal().get(Calendar.MONTH);
     }
+
+    /**
+     * Get targetDay
+     * @return
+     */
     public Integer getTargetDay(){
         return targetDateCal().get(Calendar.DAY_OF_MONTH);
     }

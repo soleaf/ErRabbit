@@ -61,29 +61,12 @@ public class LogMessageListener implements MessageListener {
         try {
             // Extract message
             String rabbitID = extractRabbitIDFromMessage(message);
-
             Rabbit rabbit = rabbitCache.getRabbit(rabbitID);
             if (rabbit == null) {
                 logger.error(String.format("Rabbit ID %s is invalid", rabbitID));
                 return;
             }
-
-            // Parse
-            ObjectMessage msg = (ObjectMessage) message;
-            Object obj = msg.getObject();
-            ErrLoggingEvent errLoggingEvent;
-
-            // From log4j2 JMS appender
-            if (obj instanceof Log4jLogEvent){
-                errLoggingEvent = ErrLoggingEvent.fromLog4jLogEvent((Log4jLogEvent) obj);
-            }
-            // From log4j1 custom ErRabbit JMS appender
-            else if (obj instanceof ErrLoggingEvent){
-                errLoggingEvent = (ErrLoggingEvent) obj;
-            }
-            else{
-                throw new NotLoggingEventException(obj);
-            }
+            ErrLoggingEvent errLoggingEvent = parseToLoggingEvent((ObjectMessage) message);
 
             // Check option : accept only
             if (rabbit.getCollectionOnlyException() != null &&
@@ -119,12 +102,37 @@ public class LogMessageListener implements MessageListener {
 
             // Forward to console
             webSocketMessagingService.sendReportToConsole(log);
-
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage(), e);
         }
 
+    }
+
+    /**
+     * Parse ObjectMessage to ErLoggingEvent
+     * @param msg
+     * @return
+     * @throws JMSException
+     * @throws NotLoggingEventException
+     */
+    protected ErrLoggingEvent parseToLoggingEvent(ObjectMessage msg) throws JMSException, NotLoggingEventException {
+        // Parse
+        Object obj = msg.getObject();
+        ErrLoggingEvent errLoggingEvent;
+
+        // From log4j2 JMS appender
+        if (obj instanceof Log4jLogEvent){
+            errLoggingEvent = ErrLoggingEvent.fromLog4jLogEvent((Log4jLogEvent) obj);
+        }
+        // From log4j1 custom ErRabbit JMS appender
+        else if (obj instanceof ErrLoggingEvent){
+            errLoggingEvent = (ErrLoggingEvent) obj;
+        }
+        else{
+            throw new NotLoggingEventException(obj);
+        }
+        return errLoggingEvent;
     }
 
     /**

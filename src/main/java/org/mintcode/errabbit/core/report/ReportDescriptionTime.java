@@ -19,10 +19,18 @@ public class ReportDescriptionTime implements Serializable {
         return hour;
     }
 
+    /**
+     * Set Batch time hour
+     * @param hour
+     */
     public void setHour(Integer hour) {
         this.hour = hour;
     }
 
+    /**
+     * Construct with batch time hour
+     * @param hour
+     */
     public ReportDescriptionTime(Integer hour) {
         this.hour = hour;
     }

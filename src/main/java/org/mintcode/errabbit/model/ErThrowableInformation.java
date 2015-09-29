@@ -67,27 +67,35 @@ public class ErThrowableInformation implements Serializable{
         return ert;
     }
 
-
+    /**
+     * Get ErThrowable
+     * @return
+     */
     public ErThrowable getThrowable() {
         return throwable;
     }
-
     public void setThrowable(ErThrowable throwable) {
         this.throwable = throwable;
     }
 
+    /**
+     * Get ErCategory
+     * @return
+     */
     public ErCategory getCategory() {
         return category;
     }
-
     public void setCategory(ErCategory category) {
         this.category = category;
     }
 
+    /**
+     * Get text
+     * @return
+     */
     public String[] getRep() {
         return rep;
     }
-
     public void setRep(String[] rep) {
         this.rep = rep;
     }

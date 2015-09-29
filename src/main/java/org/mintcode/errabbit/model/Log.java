@@ -57,7 +57,6 @@ public class Log implements Serializable {
     public ObjectId getId() {
         return id;
     }
-
     public void setId(ObjectId id) {
         this.id = id;
     }
@@ -69,7 +68,6 @@ public class Log implements Serializable {
     public String getRabbitId() {
         return rabbitId;
     }
-
     public void setRabbitId(String rabbitId) {
         this.rabbitId = rabbitId;
     }
@@ -95,11 +93,9 @@ public class Log implements Serializable {
     public Date getCollectedDate() {
         return collectedDate;
     }
-
     public void setCollectedDate(Date collectedDate) {
         this.collectedDate = collectedDate;
     }
-
     public Integer getLoggingEventDateInt() {
         return loggingEventDateInt;
     }

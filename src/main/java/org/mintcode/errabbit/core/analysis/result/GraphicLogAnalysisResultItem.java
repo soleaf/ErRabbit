@@ -30,46 +30,92 @@ public class GraphicLogAnalysisResultItem implements Serializable {
 
     }
 
+    /**
+     * Set target field
+     * @param field
+     */
     public GraphicLogAnalysisResultItem(String field) {
         this.field = field;
     }
 
+    /**
+     * Get target field
+     * @param field
+     */
     public void setField(String field) {
         this.field = field;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
-    }
 
-    public void setPercent(Double percent) {
-        this.percent = percent;
-    }
-
-    public void setSubItems(List<GraphicLogAnalysisResultItem> subItems) {
-        this.subItems = subItems;
-    }
-
+    /**
+     * Get target field
+     * @return
+     */
     public String getField() {
         return field;
     }
 
+    /**
+     * Set count
+     * @param count
+     */
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    /**
+     * Set percent
+     * @param percent
+     */
+    public void setPercent(Double percent) {
+        this.percent = percent;
+    }
+
+    /**
+     * Get percent of siblings
+     * @return
+     */
     public double getPercent() {
         return percent;
     }
 
+    /**
+     * Set percent of siblings
+     * @param percent
+     */
     public void setPercent(double percent) {
         this.percent = percent;
     }
 
+    /**
+     * Set subItems
+     * like tree type
+     * @param subItems
+     */
+    public void setSubItems(List<GraphicLogAnalysisResultItem> subItems) {
+        this.subItems = subItems;
+    }
+
+    /**
+     * Get subItems
+     * @return
+     */
     public List<GraphicLogAnalysisResultItem> getSubItems() {
         return subItems;
     }
 
+    /**
+     * Get Parents
+     * @return
+     */
     public GraphicLogAnalysisResultItem getSuperItem() {
         return superItem;
     }
 
+    /**
+     * Add subItem
+     * @param subItem
+     */
     public void addSub(GraphicLogAnalysisResultItem subItem) {
         if (subItems == null){
             subItems = new ArrayList<>();
@@ -78,10 +124,18 @@ public class GraphicLogAnalysisResultItem implements Serializable {
         subItem.setSuperItem(this);
     }
 
+    /**
+     * Set parents
+     * @param superItem
+     */
     public void setSuperItem(GraphicLogAnalysisResultItem superItem) {
         this.superItem = superItem;
     }
 
+    /**
+     * Get counts
+     * @return
+     */
     public Integer getCount() {
         return count;
     }
@@ -114,6 +168,11 @@ public class GraphicLogAnalysisResultItem implements Serializable {
         }
     }
 
+    /**
+     * Print debug informations
+     * @param prefix
+     * @return
+     */
     public String debug(String prefix) {
         String thisDesc = "\n" + prefix + "- " + field + " (" + count + ", %" + percent + ")";
         if (subItems != null && !subItems.isEmpty()) {

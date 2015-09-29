@@ -77,30 +77,58 @@ public class StackTraceGraph {
         //        }
     }
 
+    /**
+     * Get stackTraceElements
+     * @return
+     */
     public List<ErStackTraceElement> getStackTraceElements() {
         return stackTraceElements;
     }
 
+    /**
+     * Get className
+     * @return
+     */
     public String getClassName() {
         return className;
     }
 
+    /**
+     * Get packageName
+     * @return
+     */
     public String getPackageName() {
         return packageName;
     }
 
+    /**
+     * Get fileName
+     * @return
+     */
     public String getFileName() {
         return fileName;
     }
 
+    /**
+     * Is it basePackage?
+     * @return
+     */
     public boolean isBasePackage() {
         return isBasePackage;
     }
 
+    /**
+     * Set whether It's basePackage
+     * @param isDefaultHidden
+     */
     public void setBasePackage(boolean isDefaultHidden) {
         this.isBasePackage = isDefaultHidden;
     }
 
+    /**
+     * Get declaringClass
+     * @return
+     */
     public String getDeclaringClass() {
         return declaringClass;
     }

@@ -40,26 +40,40 @@ public class RabbitGroup implements Serializable {
         this.name = name;
     }
 
+    /**
+     * Get name
+     * @return
+     */
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Get Id
+     * @return
+     */
     public ObjectId getId() {
         return id;
     }
-
     public void setId(ObjectId id) {
         this.id = id;
     }
 
+    /**
+     * Get rabbits on group
+     * @return
+     */
     public List<Rabbit> getRabbits() {
         return rabbitSet;
     }
 
+    /**
+     * Set rabbits on group
+     * @param rabbitSet
+     */
     public void setRabbits(List<Rabbit> rabbitSet) {
         this.rabbitSet = rabbitSet;
     }

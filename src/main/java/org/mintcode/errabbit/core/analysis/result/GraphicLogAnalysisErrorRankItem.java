@@ -13,38 +13,74 @@ public class GraphicLogAnalysisErrorRankItem implements Serializable, Comparable
     private String level;
     private Integer count;
 
+    /**
+     * Get target rabbit ID
+     * @return
+     */
     public String getRabbitId() {
         return rabbitId;
     }
 
+    /**
+     * Set targetRabbit ID
+     * @param rabbitId
+     */
     public void setRabbitId(String rabbitId) {
         this.rabbitId = rabbitId;
     }
 
+    /**
+     * Get className with package
+     * @return
+     */
     public String getClassName() {
         return className;
     }
 
+    /**
+     * Set className with package
+     * @param className
+     */
     public void setClassName(String className) {
         this.className = className;
     }
 
+    /**
+     * Get only className
+     * @return
+     */
     public String getClassNameOnly(){
         return className.substring(className.lastIndexOf(".")+1, className.length());
     }
 
+    /**
+     * Get log level
+     * @return
+     */
     public String getLevel() {
         return level;
     }
 
+    /**
+     * Set log level
+     * @param level
+     */
     public void setLevel(String level) {
         this.level = level;
     }
 
+    /**
+     * Get count
+     * @return
+     */
     public Integer getCount() {
         return count;
     }
 
+    /**
+     * Set count
+     * @param count
+     */
     public void setCount(Integer count) {
         this.count = count;
     }

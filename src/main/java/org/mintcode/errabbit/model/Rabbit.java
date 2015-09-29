@@ -65,7 +65,6 @@ public class Rabbit implements Serializable {
             return label;
         }
     }
-
     public void setLabel(String label) {
         this.label = label;
     }
@@ -77,7 +76,6 @@ public class Rabbit implements Serializable {
     public Date getRegDate() {
         return regDate;
     }
-
     public void setRegDate(Date regDate) {
         this.regDate = regDate;
     }
@@ -89,7 +87,6 @@ public class Rabbit implements Serializable {
     public Boolean getRead() {
         return read;
     }
-
     public void setRead(Boolean read) {
         this.read = read;
     }
@@ -102,7 +99,6 @@ public class Rabbit implements Serializable {
     public String getBasePackage() {
         return basePackage;
     }
-
     public void setBasePackage(String basePackage) {
         this.basePackage = basePackage;
     }
@@ -114,7 +110,6 @@ public class Rabbit implements Serializable {
     public Boolean getCollectionOnlyException() {
         return collectionOnlyException;
     }
-
     public void setCollectionOnlyException(Boolean collectionOnlyException) {
         this.collectionOnlyException = collectionOnlyException;
     }
@@ -131,6 +126,9 @@ public class Rabbit implements Serializable {
             return group;
         }
     }
+    public void setGroup(RabbitGroup group) {
+        this.group = group;
+    }
 
     /**
      * Hide logs related this rabbit on console
@@ -139,14 +137,10 @@ public class Rabbit implements Serializable {
     public Boolean getHideOnConsole() {
         return hideOnConsole == null ? false : hideOnConsole;
     }
-
     public void setHideOnConsole(Boolean hideOnConsole) {
         this.hideOnConsole = hideOnConsole;
     }
 
-    public void setGroup(RabbitGroup group) {
-        this.group = group;
-    }
 
     @Override
     public String toString() {

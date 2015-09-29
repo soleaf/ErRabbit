@@ -50,34 +50,46 @@ public class ErLocationInfo implements Serializable {
      */
     String methodName;
 
+    /**
+     * Get lineNumber
+     * @return
+     */
     public String getLineNumber() {
         return lineNumber;
     }
-
     public void setLineNumber(String lineNumber) {
         this.lineNumber = lineNumber;
     }
 
+    /**
+     * Get fileName
+     * @return
+     */
     public String getFileName() {
         return fileName;
     }
-
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
+    /**
+     * Get className
+     * @return
+     */
     public String getClassName() {
         return className;
     }
-
     public void setClassName(String className) {
         this.className = className;
     }
 
+    /**
+     * Get methodName
+     * @return
+     */
     public String getMethodName() {
         return methodName;
     }
-
     public void setMethodName(String methodName) {
         this.methodName = methodName;
     }

@@ -57,6 +57,10 @@ public class AnalysisResultSet implements Serializable {
         return results.get(type);
     }
 
+    /**
+     * Check is empty result
+     * @return
+     */
     public boolean isEmpty(){
         return results.isEmpty();
     }
