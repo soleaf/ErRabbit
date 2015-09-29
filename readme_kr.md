@@ -1,5 +1,7 @@
 ![ErRabbit](src/main/resources/static/img/rabbit_handcuffs.png "logo")
 
+[Here](readme.md)is Enlgish document.
+
 # 소개
 
 ErRabbit(Error Rabbit)은 알아보기 어려운 java의 stack trace를 보기 쉽게 표현하고,
