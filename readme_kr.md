@@ -1,6 +1,6 @@
 ![ErRabbit](src/main/resources/static/img/rabbit_handcuffs.png "logo")
 
-[Here](readme.md)is Enlgish document.
+[Here](readme.md) is Enlgish document.
 
 # 소개
 
