@@ -278,3 +278,7 @@ catch (Exception e){
 # 감사한분
 
 * :D 신현묵(Twitter @zetlos, supims@gmail.com)
+
+# 라이센스
+
+Apache 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
