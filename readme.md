@@ -277,4 +277,4 @@ Example Project : https://github.com/soleaf/ErRabbit-Example-log4j2
 
 # Special thanks
 
-* 신현묵
+* 신현묵(Twitter @zetlos)
