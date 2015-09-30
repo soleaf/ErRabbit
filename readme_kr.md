@@ -277,4 +277,4 @@ catch (Exception e){
 
 # 감사한분
 
-* 신현묵(Twitter @zetlos)
+* :D 신현묵(Twitter @zetlos, supims@gmail.com)
