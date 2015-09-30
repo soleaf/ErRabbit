@@ -1,6 +1,4 @@
-![ErRabbit](src/main/resources/static/img/rabbit_handcuffs.png "logo")
-
-[Here](readme.md) is Enlgish document.
+![ErRabbit](graphics/logo.png "logo")
 
 # 소개
 
@@ -8,6 +6,8 @@ ErRabbit(Error Rabbit)은 알아보기 어려운 java의 stack trace를 보기 �
 많은 서버들의 로그를 웹으로 쉽게 탐색할 수 있게 해줍니다.
 많이 쓰는 로그 프로그램인 Log4j를 사용하여 ActiveMQ로 로그를 수집하기 때문에 이미 개발해놓은 프로그램에
 적용하기도 쉽습니다.
+
+> [Here](readme.md) is Enlgish document.
 
 ## 구조
 
