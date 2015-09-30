@@ -278,3 +278,8 @@ Example Project : https://github.com/soleaf/ErRabbit-Example-log4j2
 # Special thanks
 
 * :D 신현묵(Twitter @zetlos, supims@gmail.com)
+* 
+
+# Lisence
+
+Apache 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
