@@ -255,7 +255,7 @@ queue.errabbit = errabbit.report.example
 Logger logger = LogManager.getLogger(getClass());
 ```
 
-1. Exception을 캐시하고 `logger.error([message],e)`로 처리합니다. 이게 끝입니다 일반 로그는 평소에 쓰시던대로 써주시면됩니다.
+1. Exception을 캐치하고 `logger.error([message],e)`로 처리합니다. 이게 끝입니다 일반 로그는 평소에 쓰시던대로 써주시면됩니다.
 
 ```java
 try{
