@@ -8,6 +8,10 @@
 // Init events
 $(document).ready(function(){
 
+    // date picker
+    $("#date_end").datepicker({ dateFormat: "yy-mm-dd" });
+    $("#date_begin").datepicker({ dateFormat: "yy-mm-dd" });
+
     // Rabbit Selection
     $("#changeRabbitModal-bt>A").click(function(){
         selectRabbit($(this).attr("data-id"),$(this).attr("data-id"));

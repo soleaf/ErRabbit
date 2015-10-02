@@ -5,6 +5,8 @@
 <head>
     <jsp:include page="../common/header_include.jsp"/>
     <link rel="stylesheet" href="/css/rabbit.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/jquery-ui.min.css">
+    <script src="/js/jquery-ui.min.js"></script>
     <script src="/js/rabbit.js"></script>
 </head>
 <body class="rabbit">
@@ -131,7 +133,7 @@
                     <div class="input-group input-sm no-padding">
                         <span class="input-group-addon" style="width:100px;text-align:left;"><span
                                 class="glyphicon glyphicon-calendar" aria-hidden="true"></span> BEGIN</span>
-                        <input name="begin" type="text" class="form-control input-sm"
+                        <input id="clean-begin" name="begin" type="text" class="form-control input-sm"
                                aria-describedby="inputGroupSuccess1Status" placeholder="2015-01-01">
                     </div>
                     </p>
@@ -140,7 +142,7 @@
                     <div class="input-group input-sm no-padding">
                         <span class="input-group-addon" style="width:100px;text-align:left;"><span
                                 class="glyphicon glyphicon-calendar" aria-hidden="true"></span> END </span>
-                        <input name="end" type="text" class="form-control input-sm"
+                        <input id="clean-end" name="end" type="text" class="form-control input-sm"
                                aria-describedby="inputGroupSuccess1Status" placeholder="2015-01-01">
                     </div>
                     </p>
