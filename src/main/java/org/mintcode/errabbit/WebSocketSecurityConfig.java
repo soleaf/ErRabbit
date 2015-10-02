@@ -14,7 +14,12 @@ public class WebSocketSecurityConfig extends
         AbstractSecurityWebSocketMessageBrokerConfigurer {
     protected void configureInbound(MessageSecurityMetadataSourceRegistry messages) {
         messages
-                .simpDestMatchers("/topic/console").authenticated();
+                .simpDestMatchers("/topic/console").denyAll()
+                .anyMessage().authenticated();
+    }
 
+    @Override
+    protected boolean sameOriginDisabled() {
+        return true;
     }
 }
