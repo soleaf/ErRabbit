@@ -41,7 +41,7 @@
             <ul class="log-list" id="log-list">
                 <!--  Log List Area -->
                 <c:if test="${not empty preload}">
-                    <c:forEach items="${preload.content}" var="row">
+                    <c:forEach items="${preload}" var="row">
                         ${row.toHTML(true)}
                     </c:forEach>
                 </c:if>

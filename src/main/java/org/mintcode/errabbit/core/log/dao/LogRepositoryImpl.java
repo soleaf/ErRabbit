@@ -5,6 +5,7 @@ import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.model.LogLevelHourStatistics;
 import org.mintcode.errabbit.model.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -25,7 +26,7 @@ public class LogRepositoryImpl implements LogRepositoryCustom {
     private MongoOperations mongoOperations;
 
 
-    public WriteResult deleteReportRangeOfLoggingEventDateInt(String rabbitId, Integer begin, Integer end){
+    public WriteResult deleteRangeOfLoggingEventDateInt(String rabbitId, Integer begin, Integer end){
         Query query = new Query();
         query.addCriteria(Criteria.where("rabbitId").is(rabbitId)
                         .andOperator(Criteria.where("loggingEventDateInt").gte(begin),
@@ -33,6 +34,14 @@ public class LogRepositoryImpl implements LogRepositoryCustom {
                         )
         );
         return mongoOperations.remove(query, Log.class);
+    }
+
+    public List<Log> findInRabbitId(Set<String> rabbitIdSet, Integer limit){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("rabbitId").in(rabbitIdSet))
+                .limit(limit);
+        query.with(new Sort(new Sort.Order(Sort.Direction.DESC, "_id")));
+        return mongoOperations.find(query, Log.class);
     }
 
     @Override

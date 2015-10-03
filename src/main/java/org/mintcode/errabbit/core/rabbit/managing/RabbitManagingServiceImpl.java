@@ -218,7 +218,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
      */
     @Override
     public void cleanLog(String id, Integer begin, Integer end) {
-        logRepository.deleteReportRangeOfLoggingEventDateInt(id, begin, end);
+        logRepository.deleteRangeOfLoggingEventDateInt(id, begin, end);
     }
 
     /**

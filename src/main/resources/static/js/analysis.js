@@ -50,6 +50,15 @@ $(document).ready(function(){
             alert("Invalid end date format");
             return;
         }
+        if ($("#date-begin").val().length > 0 && $("#date-end").val().length > 0){
+            var begin = new Date($("#date-begin").val());
+            var end = new Date($("#date-end").val());
+            var timeDiff = end.getTime() - begin.getTime();
+            if (timeDiff < 0){
+                alert("End date should be after before date");
+                return;
+            }
+        }
 
         // request
         showLoading();

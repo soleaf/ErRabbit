@@ -43,6 +43,13 @@ $().ready(function(){
             alert("Invalid end date format");
             return false;
         }
+        var begin = new Date($("#clean-begin").val());
+        var end = new Date($("#clean-end").val());
+        var timeDiff = end.getTime() - begin.getTime();
+        if (timeDiff < 0){
+            alert("End date should be after before date");
+            return false;
+        }
     });
 
     /**
