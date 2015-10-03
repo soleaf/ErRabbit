@@ -9,8 +9,8 @@
 $(document).ready(function(){
 
     // date picker
-    $("#date_end").datepicker({ dateFormat: "yy-mm-dd" });
-    $("#date_begin").datepicker({ dateFormat: "yy-mm-dd" });
+    $("#date-end").datepicker({ dateFormat: "yy-mm-dd" });
+    $("#date-begin").datepicker({ dateFormat: "yy-mm-dd" });
 
     // Rabbit Selection
     $("#changeRabbitModal-bt>A").click(function(){
@@ -42,6 +42,14 @@ $(document).ready(function(){
             alert("Choose least one 'LEVEL' element");
             return;
         }
+        if ($("#date-begin").val().length > 0 && !dateValidation($("#date-begin").val())){
+            alert("Invalid begin date format");
+            return;
+        }
+        if ($("#date-end").val().length > 0 &&!dateValidation($("#date-end").val())){
+            alert("Invalid end date format");
+            return;
+        }
 
         // request
         showLoading();
@@ -63,6 +71,38 @@ $(document).ready(function(){
         });
     });
 });
+
+/**
+ * Is validated date format sting?
+ * @param str
+ * @returns {boolean}
+ */
+function dateValidation(str){
+    // STRING FORMAT yyyy-mm-dd
+    if(str=="" || str==null){return false;}
+
+    // m[1] is year 'YYYY' * m[2] is month 'MM' * m[3] is day 'DD'
+    var m = str.match(/(\d{4})-(\d{2})-(\d{2})/);
+
+    // STR IS NOT FIT m IS NOT OBJECT
+    if( m === null || typeof m !== 'object'){return false;}
+
+    // CHECK m TYPE
+    if (typeof m !== 'object' && m !== null && m.size!==3){return false;}
+
+    var ret = true; //RETURN VALUE
+    var thisYear = new Date().getFullYear(); //YEAR NOW
+    var minYear = 1999; //MIN YEAR
+
+    // YEAR CHECK
+    if( (m[1].length < 4) || m[1] < minYear || m[1] > thisYear){ret = false;}
+    // MONTH CHECK
+    if( (m[1].length < 2) || m[2] < 1 || m[2] > 12){ret = false;}
+    // DAY CHECK
+    if( (m[1].length < 2) || m[3] < 1 || m[3] > 31){ret = false;}
+
+    return ret;
+}
 
 /**
  * select target rabbit

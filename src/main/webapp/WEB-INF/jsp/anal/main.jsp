@@ -6,6 +6,7 @@
     <jsp:include page="../common/header_include.jsp"/>
     <link rel="stylesheet" href="/css/analysis.css" type="text/css"/>
     <link rel="stylesheet" href="/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="/css/jquery-ui.structure.min.css">
     <script src="/js/jquery-ui.min.js"></script>
     <script src="/js/analysis.js"></script>
 </head>
@@ -84,8 +85,8 @@
                             <div class="input-group input-sm no-padding">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"
                                                                       aria-hidden="true"></span></span>
-                                <input id="date_begin" name="date_begin" type="text" class="form-control input-sm"
-                                       aria-describedby="inputGroupSuccess1Status" placeholder="2015-01-01">
+                                <input id="date-begin" name="date_begin" type="text" class="form-control input-sm"
+                                       aria-describedby="inputGroupSuccess1Status">
                             </div>
                         </div>
                         <div style="text-align: center;color:#CCCCCC;">~</div>
@@ -94,8 +95,8 @@
                                 <span class="input-group-addon"><span
                                         class="glyphicon glyphicon-calendar"
                                         aria-hidden="true"></span></span>
-                                <input id="date_end" name="date_end" type="text" class="form-control input-sm"
-                                       aria-describedby="inputGroupSuccess1Status" placeholder="2015-01-01">
+                                <input id="date-end" name="date_end" type="text" class="form-control input-sm"
+                                       aria-describedby="inputGroupSuccess1Status">
                             </div>
                         </div>
                     </div>

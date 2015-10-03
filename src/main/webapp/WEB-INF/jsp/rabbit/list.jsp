@@ -5,6 +5,7 @@
 <head>
     <jsp:include page="../common/header_include.jsp"/>
     <link rel="stylesheet" href="/css/rabbit.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/jquery-ui.structure.min.css">
     <link rel="stylesheet" href="/css/jquery-ui.min.css">
     <script src="/js/jquery-ui.min.js"></script>
     <script src="/js/rabbit.js"></script>
@@ -134,7 +135,7 @@
                         <span class="input-group-addon" style="width:100px;text-align:left;"><span
                                 class="glyphicon glyphicon-calendar" aria-hidden="true"></span> BEGIN</span>
                         <input id="clean-begin" name="begin" type="text" class="form-control input-sm"
-                               aria-describedby="inputGroupSuccess1Status" placeholder="2015-01-01">
+                               aria-describedby="inputGroupSuccess1Status" style="z-index: 10510">
                     </div>
                     </p>
                     <p>
@@ -143,14 +144,14 @@
                         <span class="input-group-addon" style="width:100px;text-align:left;"><span
                                 class="glyphicon glyphicon-calendar" aria-hidden="true"></span> END </span>
                         <input id="clean-end" name="end" type="text" class="form-control input-sm"
-                               aria-describedby="inputGroupSuccess1Status" placeholder="2015-01-01">
+                               aria-describedby="inputGroupSuccess1Status" style="z-index: 10510">
                     </div>
                     </p>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="id" id="clean_id" value=""/>
                     <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
-                    <button type="submit" class="btn btn-danger">CLEAN</button>
+                    <button id="clean-submit" type="submit" class="btn btn-danger">CLEAN</button>
                 </div>
             </div>
         </form>
