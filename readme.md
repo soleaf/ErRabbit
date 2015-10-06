@@ -275,6 +275,7 @@ Example Project : https://github.com/soleaf/ErRabbit-Example-log4j2
 * Alarm warning
 * Integration with VCS
 * Mobile support
+* Python support
 
 # Special thanks
 
