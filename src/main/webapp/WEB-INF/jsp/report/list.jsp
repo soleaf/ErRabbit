@@ -23,14 +23,14 @@
         <jsp:param name="list" value="active"/>
     </jsp:include>
     <div class="page-side-margin">
-        <div class="panel panel-default" id="empty" >
+        <div class="panel panel-default empty-alert" id="empty" >
             <div class="panel-heading">HELP</div>
             <div class="panel-body">
                 <p>Click to setup report.</p>
                 <p>Make daily report and check at every morning before work.</p>
             </div>
             <div class="panel-footer">
-                <a href="/report/settings.err" class="btn btn-primary btn-xs" role="butt on">SETUP REPORT</a>
+                <a href="/report/settings.err" class="btn btn-default btn-xs" role="butt on">SETUP REPORT</a>
             </div>
         </div>
         <ul id="report-list" class="report-list">

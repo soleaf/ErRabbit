@@ -11,7 +11,6 @@
 .report .page .time .input-group-addon{
     width: auto;
 }
-
 .report .rabbit-selection .rabbit-item{
     padding-left:40px;
     border-top:1px solid #eaeaea;
@@ -20,7 +19,6 @@
     background-color: #7BCCD4;
     color:#FFF;
 }
-
 .report .rabbit-selection .rabbit-group{
     padding:10px;
     color: #2b2b2b;
@@ -32,11 +30,9 @@
     font-weight: bold;
     background-color: #fff;
 }
-
 .report .rabbit-selection .li .checkbox>INPUT{
     padding-left:10px;
 }
-
 .rabbit-group .table{
     max-width:500px;
 }
@@ -45,12 +41,10 @@
     display: inline-block;
     margin-top:20px;
 }
-
 .report .report-list{
     margin-top:10px;
     max-width:500px;
 }
-
 .report .report-list .delete{
     float:right;
 }
@@ -62,8 +56,6 @@
     color: #878787;
     font-size:12px;
 }
-
-
 .report .rank .level{
     padding-left:15px;
 }
@@ -112,4 +104,7 @@
 
 .form .list-group{
     width:400px;
+}
+.report .empty-alert{
+    max-width:500px;
 }
