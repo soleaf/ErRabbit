@@ -31,7 +31,6 @@ public class ErrLoggingEvent implements Serializable{
 
         erLoggingEvent.setCategoryName(loggingEvent.getLoggerName());
         erLoggingEvent.setLevel(loggingEvent.getLevel().toString());
-        erLoggingEvent.setMessage(loggingEvent.getMessage());
         erLoggingEvent.setRenderedMessage(loggingEvent.getRenderedMessage());
         erLoggingEvent.setThreadName(loggingEvent.getThreadName());
         erLoggingEvent.setLocationInfo(ErLocationInfo.fromLocationInfo(loggingEvent.getLocationInformation()));
@@ -42,7 +41,6 @@ public class ErrLoggingEvent implements Serializable{
         if (loggingEvent.getThrowableInformation() != null){
             erLoggingEvent.setThrowableInfo(ErThrowableInformation.fromThrowableInformation(loggingEvent.getThrowableInformation()));
         }
-
         return erLoggingEvent;
 
     }
@@ -57,7 +55,6 @@ public class ErrLoggingEvent implements Serializable{
 
         erLoggingEvent.setCategoryName(log4jLogEvent.getLoggerName());
         erLoggingEvent.setLevel(log4jLogEvent.getLevel().toString());
-        erLoggingEvent.setMessage(log4jLogEvent.getMessage());
         erLoggingEvent.setRenderedMessage(log4jLogEvent.getMessage().getFormattedMessage());
         erLoggingEvent.setThreadName(log4jLogEvent.getThreadName());
         erLoggingEvent.setTimeStamp(log4jLogEvent.getTimeMillis());
@@ -72,8 +69,6 @@ public class ErrLoggingEvent implements Serializable{
     public String categoryName;
 
     public String level;
-
-    private Object message;
 
     private String renderedMessage;
 
@@ -101,14 +96,6 @@ public class ErrLoggingEvent implements Serializable{
 
     public void setLevel(String level) {
         this.level = level;
-    }
-
-    public Object getMessage() {
-        return message;
-    }
-
-    public void setMessage(Object message) {
-        this.message = message;
     }
 
     public String getRenderedMessage() {
@@ -164,7 +151,6 @@ public class ErrLoggingEvent implements Serializable{
         return "ErrLoggingEvent{" +
                 "categoryName='" + categoryName + '\'' +
                 ", level='" + level + '\'' +
-                ", message=" + message +
                 ", renderedMessage='" + renderedMessage + '\'' +
                 ", threadName='" + threadName + '\'' +
                 ", locationInfo=" + locationInfo +
