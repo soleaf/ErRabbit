@@ -34,7 +34,7 @@
                     class="glyphicon glyphicon-plus"></span> NEW
             </button>
         </p>
-        <table class="table table-striped">
+        <table class="table table-striped group-table">
             <thead>
             <th>Name</th>
             <th width="170">Action</th>
