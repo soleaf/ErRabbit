@@ -33,13 +33,21 @@ public class CoreService {
     @Autowired
     private ReportRepository reportRepository;
 
+    private String systemVersion = "";
+
     // Unread report count cache
     private Integer unReadReports = 0;
 
     @PostConstruct
     private void startup(){
-        logger.warn("ErRabbit Service initiating...");
+        systemVersion = getClass().getPackage().getImplementationVersion();
+        logger.info("ErRabbit Service initiating...");
+        logger.info("ErRabbit Version {}", systemVersion);
         syncRabbitNameCache();
+    }
+
+    public String getSystemVersion() {
+        return systemVersion;
     }
 
     /**
