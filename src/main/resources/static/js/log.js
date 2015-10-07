@@ -206,7 +206,6 @@ function sessionExpireCheck(data) {
  * @param callback
  */
 function retrieveGraph(rabbitId, year, month, selectedDay, callback) {
-    showLoading();
     $.ajax({
         url: '/log/day_graph.err?id=' + rabbitId + '&y=' + year + '&m=' + month + '&d=' + selectedDay,
         success: function (data) {
@@ -220,7 +219,6 @@ function retrieveGraph(rabbitId, year, month, selectedDay, callback) {
                 while (loadedGChart == false && retryCount < 500) {
                     retryCount++;
                 }
-                hideLoading();
 
                 if (callback != null) {
                     callback();
@@ -231,7 +229,6 @@ function retrieveGraph(rabbitId, year, month, selectedDay, callback) {
         }
         , fail: function () {
             alert("fail");
-            hideLoading();
             showChart(false, null);
         }
     });
@@ -281,10 +278,8 @@ function drawChart(dataJson) {
         google.visualization.events.addListener(chart, 'error', function(err) {
             $("#chart").hide();
         });
-
     }
     chart.draw(data, options);
-    hideLoading();
 }
 
 /**
@@ -371,6 +366,9 @@ function initLogFeedButton() {
  */
 function retrievelogs(rabbitId, page, size, y, m, d) {
 
+    $("#page-status").hide();
+    showLoading();
+
     var url = '/log/list_data.err?id=' + rabbitId + '&page=' + page + '&size=' + size;
     if (isFilter && $("#filter_level").val() != "ALL") {
         url = url + "&level=" + $("#filter_level").val();
@@ -384,7 +382,6 @@ function retrievelogs(rabbitId, page, size, y, m, d) {
         retrieveGraph(rabbitId, $("#cal_y").val(), $("#cal_m").val(), $("#cal_d").val(), null);
     }
 
-    showLoading();
     $("#log-feed").hide();
     $.ajax({
         url: encodeURI(url)
@@ -407,7 +404,7 @@ function retrievelogs(rabbitId, page, size, y, m, d) {
                 $("#log-feed").hide();
             }
 
-            $("#status_page").text(page + 1);
+            $("#status_page").text(parseInt(page) + 1);
             $("#status_totalpage").text(totalPages);
             $("#status_elements").text(totalElements);
             $("#page-status").show();
