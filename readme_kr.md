@@ -269,11 +269,10 @@ catch (Exception e){
 
 예제 프로젝트 : https://github.com/soleaf/ErRabbit-Example-log4j2
 
-# 다음계획
+# 다음계획 및 문제해결
 
-* 알림
-* VCS 연계
-* 모바일 지원
+다음 위키를 확인해주세요.
+https://github.com/soleaf/ErRabbit/wiki
 
 # 감사한분
 
