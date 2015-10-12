@@ -270,12 +270,11 @@ catch (Exception e){
 
 Example Project : https://github.com/soleaf/ErRabbit-Example-log4j2
 
-# Next : ToDo
+# Plan and Troubleshooting
 
-* Alarm warning
-* Integration with VCS
-* Mobile support
-* Python support
+Please read this wiki
+
+https://github.com/soleaf/ErRabbit/wiki
 
 # Special thanks
 
