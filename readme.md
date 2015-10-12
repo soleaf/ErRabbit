@@ -6,6 +6,12 @@
 ErRabbit(Error Rabbit) is useful error remote tracking service with Visual View.
 Collecting by Log4j and ActiveMQ will make it easy compatible with other programs.
 
+## What's a difference.
+
+- RrRabbit aim to visualize Error logs
+- Easy to integrate on exisiting java application.
+
+
 > 한국어 설명은 [이곳](readme_kr.md)에 있습니다.
 
 ## Structure
