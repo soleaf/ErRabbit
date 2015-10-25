@@ -113,7 +113,7 @@ function appendReports(message) {
 }
 
 /**
- * Init log event
+ * Init log eventstream
  */
 function logEvent() {
     $("#log-list .log[data-e='true']").click(function () {
@@ -135,17 +135,17 @@ function logEvent() {
         });
     });
 
-    // log list item's category event
+    // log list item's category eventstream
     $("#log-list .log .categoryName").click(function () {
         location.href=$(this).attr("data-url");
     });
 
-    // log list item's level event
+    // log list item's level eventstream
     $("#log-list .log .level").click(function () {
         location.href=$(this).attr("data-url");
     });
 
-    // log list item's rabbitId event
+    // log list item's rabbitId eventstream
     $("#log-list .log .rabbit_id").click(function () {
         location.href="/log/list.err?id="+$(this).text();
     });

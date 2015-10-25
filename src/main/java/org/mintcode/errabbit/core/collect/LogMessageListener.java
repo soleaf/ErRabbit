@@ -150,7 +150,7 @@ public class LogMessageListener implements MessageListener {
      */
     public class NotLoggingEventException extends Exception{
         public NotLoggingEventException(Object obj){
-            super(String.format("Couldn't get logging event from '%s'", obj.toString()));
+            super(String.format("Couldn't get logging eventstream from '%s'", obj.toString()));
         }
     }
 }

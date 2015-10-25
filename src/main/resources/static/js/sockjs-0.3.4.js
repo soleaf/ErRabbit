@@ -620,7 +620,7 @@ utils.createIframe = function (iframe_url, error_callback) {
     var cleanup = function() {
         if (iframe) {
             unattach();
-            // This timeout makes chrome fire onbeforeunload event
+            // This timeout makes chrome fire onbeforeunload eventstream
             // within iframe. Without the timeout it goes straight to
             // onunload.
             setTimeout(function() {
@@ -1432,7 +1432,7 @@ var jsonPGenericReceiver = function(url, callback) {
         }
     };
 
-    // IE9 fires 'error' event after orsc or before, in random order.
+    // IE9 fires 'error' eventstream after orsc or before, in random order.
     var loaded_okay = false;
     var error_timer = null;
 
@@ -1470,12 +1470,12 @@ var jsonPGenericReceiver = function(url, callback) {
             }
         }
     };
-    // IE: event/htmlFor/onclick trick.
+    // IE: eventstream/htmlFor/onclick trick.
     // One can't rely on proper order for onreadystatechange. In order to
-    // make sure, set a 'htmlFor' and 'event' properties, so that
+    // make sure, set a 'htmlFor' and 'eventstream' properties, so that
     // script code will be installed as 'onclick' handler for the
     // script object. Later, onreadystatechange, manually execute this
-    // code. FF and Chrome doesn't work with 'event' and 'htmlFor'
+    // code. FF and Chrome doesn't work with 'eventstream' and 'htmlFor'
     // set. For reference see:
     //   http://jaubourg.net/2010/07/loading-script-as-onclick-handler-of.html
     // Also, read on that about script ordering:

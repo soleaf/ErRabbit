@@ -23,7 +23,7 @@ $(document).ready(function () {
 
     initLogFeedButton();
 
-    // init logModal button event
+    // init logModal button eventstream
     initLogModalButton();
 
     // Init calendarEvent
@@ -350,7 +350,7 @@ function retrieveLogsFromSelectedByPage(page) {
 }
 
 /**
- * init log feed button event
+ * init log feed button eventstream
  */
 function initLogFeedButton() {
     $("#log-feed").click(function () {
@@ -410,7 +410,7 @@ function retrievelogs(rabbitId, page, size, y, m, d) {
             $("#page-status").show();
 
 
-            // Log list item event
+            // Log list item eventstream
             $("#log-list .log[data-e=true]").click(function () {
                 // log Detail Information Layer Toggle
                 var row = $(this);
@@ -434,13 +434,13 @@ function retrievelogs(rabbitId, page, size, y, m, d) {
                 });
             });
 
-            // log list item's category event
+            // log list item's category eventstream
             $("#log-list .categoryName").click(function () {
                 $("#filter_class").val($(this).text());
                 $("#filter_apply").trigger("click");
             });
 
-            // log list item's level event
+            // log list item's level eventstream
             $("#log-list .level").click(function () {
                 $("#filter_level").val($(this).text());
                 $("#filter_apply").trigger("click");
