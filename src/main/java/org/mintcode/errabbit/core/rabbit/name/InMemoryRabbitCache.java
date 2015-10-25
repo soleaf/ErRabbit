@@ -62,6 +62,11 @@ public class InMemoryRabbitCache implements RabbitCache {
     public void updateDailyStatistics(String rabbitId, String level){
         LogLevelDailyStatistics statistics = dailyStatisticsMap.get(rabbitId);
 
+        if (statistics == null){
+            syncDailyStatistics();
+            statistics = dailyStatisticsMap.get(rabbitId);
+        }
+
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         if (cal.get(Calendar.YEAR) != statistics.getYear() ||
