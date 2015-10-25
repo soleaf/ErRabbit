@@ -120,13 +120,13 @@
     border-color: #FF8166;
     color:#FF8166;
 }
-.log-list .log .has_exception{
-    background-color:#FF8166;
-    color:#FFF;
-}
 .log-list .log .FATAL{
     border-color: #ff5572;
     color: #ff5572;
+}
+.log-list .log .has_exception{
+    background-color:#FF8166;
+    color:#FFF;
 }
 .log-list .log .time{
     font-style: italic;
