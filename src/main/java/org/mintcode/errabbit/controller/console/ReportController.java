@@ -86,7 +86,7 @@ public class ReportController {
             model.addAttribute("report", report);
 
             // Sum logHourlySet
-            Map<Integer, LogLevelHourStatistics> logLevelhourlySet = new HashMap<>();
+            Map<Integer, LogLevelHourStatistics> logLevelhourlySet = new TreeMap<>();
             for (int i=0; i < 24; i++){
                 LogLevelHourStatistics hour = new LogLevelHourStatistics();
                 hour.setHour(i);
@@ -101,7 +101,7 @@ public class ReportController {
             for (String rabbit : report.getTargets()){
 
                 // add statistics
-                Map<Integer, LogLevelHourStatistics> levelHourlySet = new HashMap<>();
+                Map<Integer, LogLevelHourStatistics> levelHourlySet = new TreeMap<>();
                 List<LogLevelHourStatistics> source = logLevelHourlyStatisticsRepository.findByRabbitIdAndDateInt(rabbit, dateInt);
                 if (source != null && !source.isEmpty()){
                     for (LogLevelHourStatistics statics : source){
@@ -118,6 +118,7 @@ public class ReportController {
                     }
                 }
                 rabbitLevelHourlySet.put(rabbit, levelHourlySet);
+                logger.trace("rabbitLevelHourlySet > " + rabbitLevelHourlySet);
             }
             model.addAttribute("rabbitLevelHourlySet", rabbitLevelHourlySet);
 

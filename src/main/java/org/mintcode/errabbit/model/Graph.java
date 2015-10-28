@@ -3,10 +3,7 @@ package org.mintcode.errabbit.model;
 import com.google.gson.Gson;
 import org.apache.logging.log4j.Level;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by soleaf on 15. 9. 22..
@@ -18,7 +15,7 @@ public class Graph {
     // Level :
     //  - Hour :
     //    - counts
-    private Map<String,Map<Integer, Integer>> data = new HashMap<>();
+    private Map<String,Map<Integer, Integer>> data = new TreeMap<>();
 
     // All levels
     String[] levels = new  String[]{Level.TRACE.name(), Level.DEBUG.name(), Level.INFO.name(),
