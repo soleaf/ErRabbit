@@ -219,6 +219,8 @@ public class RabbitController {
             logLevelHourlyStatisticsRepository.deleteDailyStatisticRangeOfLoggingEventDateInt(id,
                     beginDateInteger, endDateInteger);
 
+            rabbitCache.syncDailyStatistics();
+
             model.addAttribute("info", String.format("Success to clean Rabbit '%s'", id));
             return "redirect:list.err?";
         } catch (Exception e) {

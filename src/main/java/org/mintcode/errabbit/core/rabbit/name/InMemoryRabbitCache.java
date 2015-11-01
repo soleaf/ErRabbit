@@ -52,10 +52,17 @@ public class InMemoryRabbitCache implements RabbitCache {
     public void syncDailyStatistics(){
         dailyStatisticsMap = new HashMap<>();
         for (Rabbit rabbit : rabbits.values()) {
-            LogLevelDailyStatistics statistics = logLevelDailyStatisticsRepository.findByRabbitIdOnLast(rabbit.getId());
-            if (statistics != null) {
-                dailyStatisticsMap.put(rabbit.getId(), statistics);
-            }
+            syncDailyStatistics(rabbit.getId());
+        }
+    }
+
+    public void syncDailyStatistics(String id){
+        LogLevelDailyStatistics statistics = logLevelDailyStatisticsRepository.findByRabbitIdOnLast(id);
+        if (statistics != null) {
+            dailyStatisticsMap.put(id, statistics);
+        }
+        else{
+            dailyStatisticsMap.remove(id);
         }
     }
 

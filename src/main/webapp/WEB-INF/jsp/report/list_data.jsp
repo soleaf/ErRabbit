@@ -41,7 +41,7 @@
                 </div>
                 <div class="panel-footer">
                     <span class="date">Created at ${item.sendTime}</span>
-                    <a class="delete" href="/report/delete?id=${item.id}">DELETE</a>
+                    <a class="delete" data-toggle="modal" data-target="#deleteModal" data-deleting-id="${item.id}" data-deleting-date="${item.targetDateWithFormat}">DELETE</a>
                 </div>
             </div>
         </li>

@@ -23,12 +23,12 @@ public class Graph {
 
 
     HashMap<String, String > colorSet = new HashMap<String, String>(){{
-        put(Level.TRACE.name(),"#A3A3A3");
-        put(Level.DEBUG.name(),"#868686");
-        put(Level.INFO.name(),"#828282");
+        put(Level.TRACE.name(),"#868686");
+        put(Level.DEBUG.name(),"#69a577");
+        put(Level.INFO.name(),"#000000");
         put(Level.ERROR.name(),"#FF8166");
         put(Level.WARN.name(),"#ffbf5e");
-        put(Level.FATAL.name(),"#ff5572");
+        put(Level.FATAL.name(),"#c42d2e");
     }};
 
     /**

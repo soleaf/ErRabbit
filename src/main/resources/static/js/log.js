@@ -255,6 +255,7 @@ function drawChart(dataJson) {
         chartArea: {left: 0, top: 0, width: '100%', height: '100%'},
         //titlePosition: 'in', axisTitlesPosition: 'in',
         backgroundColor: 'transparent',
+        lineWidth: 0.5,
         hAxis: {
             textPosition: 'in',
             min: 0,
@@ -270,10 +271,11 @@ function drawChart(dataJson) {
             easing: 'inAndOut',
             duration: 300
         }
+        ,isStacked: 'true'
     };
 
     if (chart == null) {
-        chart = new google.visualization.LineChart(document.getElementById('chart'));
+        chart = new google.visualization.AreaChart(document.getElementById('chart'));
         // When the table is selected, update the orgchart.
         google.visualization.events.addListener(chart, 'error', function(err) {
             $("#chart").hide();

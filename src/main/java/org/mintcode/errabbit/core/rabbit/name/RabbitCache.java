@@ -42,9 +42,15 @@ public interface RabbitCache {
     public List<Rabbit> getRabbits();
 
     /**
-     * Sync DailyStatistics;
+     * Sync DailyStatistics
      */
     public void syncDailyStatistics();
+
+    /**
+     * Sync DailyStatistics only target rabbit
+     * @param id
+     */
+    public void syncDailyStatistics(String id);
 
     /**
      * Update dailyStatistics

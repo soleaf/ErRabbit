@@ -40,5 +40,28 @@
     </div>
 </section>
 <jsp:include page="../common/footer.jsp"/>
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Delete Modal</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure delete this report?
+                <div class="well well-sm" id="deleting-date"></div>
+            </div>
+            <div class="modal-footer">
+                <form action="/report/delete.err">
+                    <input type="hidden" name="id" id="deleting-id" value=""/>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+                    <button type="submit" class="btn btn-danger">DELETE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

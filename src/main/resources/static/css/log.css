@@ -108,9 +108,17 @@
     background-color:#7BCCD4;
     border-color: #7BCCD4;
 }
-.log-list .log .DEBUG{
+.log-list .log .TRACE{
     border-color: #868686;
     color: #868686;
+}
+.log-list .log .DEBUG{
+    border-color: #69a577;
+    color: #69a577;
+}
+.log-list .log .INFO{
+    border-color: #000000;
+    color: #000000;
 }
 .log-list .log .WARN{
     border-color: #ffbf5e;
@@ -121,8 +129,8 @@
     color:#FF8166;
 }
 .log-list .log .FATAL{
-    border-color: #ff5572;
-    color: #ff5572;
+    border-color: #c42d2e;
+    color: #c42d2e;
 }
 .log-list .log .has_exception{
     background-color:#FF8166;
