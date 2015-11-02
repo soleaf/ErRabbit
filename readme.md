@@ -21,7 +21,7 @@ Collecting by Log4j and ActiveMQ will make it easy compatible with other program
 ## Web console screenshot
 
 ### Main
-![ScreenShot](graphics/screenshot1.png)
+![ScreenShot](https://raw.githubusercontent.com/soleaf/ErRabbit/master/graphics/screenshot1.png)
 (+ Click to zoom)
 
 - Managing rabbits(your applications)
@@ -30,7 +30,7 @@ Collecting by Log4j and ActiveMQ will make it easy compatible with other program
 - View logs
 
 ### Log view
-![ScreenShot](graphics/screenshot2.png)
+![ScreenShot](https://raw.githubusercontent.com/soleaf/ErRabbit/master/graphics/screenshot2.png)
 (+ Click to zoom)
 
 - Explorer logs selected day
@@ -47,20 +47,20 @@ Collecting by Log4j and ActiveMQ will make it easy compatible with other program
 - Search library package info with google search
 
 ### Console
-![ScreenShot](graphics/screenshot3.png)
+![ScreenShot](https://raw.githubusercontent.com/soleaf/ErRabbit/master/graphics/screenshot3.png)
 (+ Click to zoom)
 
 - Live feed all logs with WebSocket
 - Same log view functions like log view page
 
 ### Analysis(Aggregation query)
-![ScreenShot](graphics/screenshot4.png)
+![ScreenShot](https://raw.githubusercontent.com/soleaf/ErRabbit/master/graphics/screenshot4.png)
 (+ Click to zoom)
 
 - Easy ggregating logs counts with custom grouping and filtering
 
 ### Batch Reprot
-![ScreenShot](graphics/screenshot5.png)(+ Click to zoom)
+![ScreenShot](https://raw.githubusercontent.com/soleaf/ErRabbit/master/graphics/screenshot5.png)(+ Click to zoom)
 
 - Daily report batch
 - View all yesterday event logs on one page.
