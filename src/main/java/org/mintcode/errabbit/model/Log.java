@@ -2,6 +2,8 @@ package org.mintcode.errabbit.model;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,6 +18,9 @@ import java.util.Date;
  * Created by soleaf on 2015. 2. 2..
  */
 @Document(collection = "logs")
+@CompoundIndexes({
+        @CompoundIndex(name = "id_date", def = "{'rabbitId': 1, 'loggingEventDateInt': 1}")
+})
 public class Log implements Serializable {
 
     @Id
