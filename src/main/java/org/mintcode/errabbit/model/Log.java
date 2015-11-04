@@ -19,7 +19,10 @@ import java.util.Date;
  */
 @Document(collection = "logs")
 @CompoundIndexes({
-        @CompoundIndex(name = "id_date", def = "{'rabbitId': 1, 'loggingEventDateInt': 1}")
+        @CompoundIndex(name = "date_id", def = "{'loggingEventDateInt': 1, 'rabbitId': 1, '_id':-1}"),
+        @CompoundIndex(name = "date_id_level", def = "{'loggingEventDateInt': 1, 'rabbitId': 1, 'loggingEvent.level':1, '_id':-1}"),
+        @CompoundIndex(name = "date_id_cate", def = "{'loggingEventDateInt': 1, 'rabbitId': 1, 'loggingEvent.categoryName':1, '_id':-1}"),
+        @CompoundIndex(name = "date_id_cate_level", def = "{'loggingEventDateInt': 1, 'rabbitId': 1, 'loggingEvent.level':1, 'loggingEvent.categoryName':1, '_id':-1}")
 })
 public class Log implements Serializable {
 

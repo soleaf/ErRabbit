@@ -260,25 +260,29 @@ public class LogController {
             // Filter options
             Page<Log> reportPage = null;
             if (level == null && className == null){
-                reportPage = logRepository.findByRabbitIdAndLoggingEventDateInt(id
-                        , loggingEventDateInt
+                reportPage = logRepository.findByLoggingEventDateIntAndRabbitId(
+                        loggingEventDateInt
+                        , id
                         , new PageRequest(page, size, sort));
             }
             else if (level !=null && className == null){
-                reportPage = logRepository.findByRabbitIdAndLoggingEventDateIntAndLevel(id
-                        , loggingEventDateInt
+                reportPage = logRepository.findByLoggingEventDateIntAndRabbitIdAndLevel(
+                        loggingEventDateInt
+                        , id
                         , level
                         , new PageRequest(page, size, sort));
             }
             else if (level ==null && className != null){
-                reportPage = logRepository.findByRabbitIdAndLoggingEventDateIntAndClassName(id
-                        , loggingEventDateInt
+                reportPage = logRepository.findByLoggingEventDateIntAndRabbitIdAndClassName(
+                        loggingEventDateInt
+                        , id
                         , className
                         , new PageRequest(page, size, sort));
             }
             else if (level !=null && className != null){
-                reportPage = logRepository.findByRabbitIdAndLoggingEventDateIntAndLevelAndClassName(id
-                        , loggingEventDateInt
+                reportPage = logRepository.findByLoggingEventDateIntAndRabbitIdAndLevelAndClassName(
+                        loggingEventDateInt
+                        , id
                         , level
                         , className
                         , new PageRequest(page, size, sort));

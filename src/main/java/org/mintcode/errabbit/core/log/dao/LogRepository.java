@@ -26,34 +26,34 @@ public interface LogRepository extends MongoRepository<Log,ObjectId>, LogReposit
 
     /**
      * Get by rabbitId, dateInt(ex:20150202) using page
-     * @param rabbitId
      * @param loggingEventDateInt
+     * @param rabbitId
      * @param pageable
      * @return
      */
-    public Page<Log> findByRabbitIdAndLoggingEventDateInt(String rabbitId, Integer loggingEventDateInt ,Pageable pageable);
+    public Page<Log> findByLoggingEventDateIntAndRabbitId(Integer loggingEventDateInt, String rabbitId ,Pageable pageable);
 
     /**
      * Get by rabbitId, dateInt(ex:20150202), level using page
-     * @param rabbitId
      * @param loggingEventDateInt
+     * @param rabbitId
      * @param level
      * @param pageable
      * @return
      */
-    @Query(value = "{ 'rabbitId' : ?0, 'loggingEventDateInt' : ?1, 'loggingEvent.level' : ?2 }")
-    public Page<Log> findByRabbitIdAndLoggingEventDateIntAndLevel(String rabbitId, Integer loggingEventDateInt, String level ,Pageable pageable);
+    @Query(value = "{ 'loggingEventDateInt' : ?0, 'rabbitId' : ?1, 'loggingEvent.level' : ?2 }")
+    public Page<Log> findByLoggingEventDateIntAndRabbitIdAndLevel(Integer loggingEventDateInt, String rabbitId, String level ,Pageable pageable);
 
     /**
      * Get by rabbitId, dateInt(ex:20150202), className using page
-     * @param rabbitId
      * @param loggingEventDateInt
+     * @param rabbitId
      * @param className
      * @param pageable
      * @return
      */
-    @Query(value = "{ 'rabbitId' : ?0, 'loggingEventDateInt' : ?1, 'loggingEvent.categoryName' : ?2 }")
-    public Page<Log> findByRabbitIdAndLoggingEventDateIntAndClassName(String rabbitId, Integer loggingEventDateInt, String className ,Pageable pageable);
+    @Query(value = "{ 'loggingEventDateInt' : ?0, 'rabbitId' : ?1, 'loggingEvent.categoryName' : ?2 }")
+    public Page<Log> findByLoggingEventDateIntAndRabbitIdAndClassName(Integer loggingEventDateInt, String rabbitId,  String className ,Pageable pageable);
 
     /**
      * Get by rabbitId, dateInt(ex:20150202), level, classname using page
@@ -64,9 +64,9 @@ public interface LogRepository extends MongoRepository<Log,ObjectId>, LogReposit
      * @param pageable
      * @return
      */
-    @Query(value = "{ 'rabbitId' : ?0, 'loggingEventDateInt' : ?1, 'loggingEvent.level' : ?2, 'loggingEvent.categoryName' : ?3 }")
-    public Page<Log> findByRabbitIdAndLoggingEventDateIntAndLevelAndClassName(String rabbitId,
-                                                                              Integer loggingEventDateInt,
+    @Query(value = "{ 'loggingEventDateInt' : ?0, 'rabbitId' : ?1, 'loggingEvent.level' : ?2, 'loggingEvent.categoryName' : ?3 }")
+    public Page<Log> findByLoggingEventDateIntAndRabbitIdAndLevelAndClassName(Integer loggingEventDateInt,
+                                                                               String rabbitId,
                                                                               String level,
                                                                               String className,
                                                                               Pageable pageable);

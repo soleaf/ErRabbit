@@ -156,28 +156,27 @@ function retrieveCalendar(rabbitId, year, month, selectedDay, callback) {
             sessionExpireCheck(data);
 
             $("#log-calendar").html("");
-            $("#log-calendar").append(data);
+            $.when($("#log-calendar").append(data)).then(function(){
+                if (selectedDay > 0) {
+                    $("#cal_d").val(selectedDay);
+                }
 
-            if (selectedDay > 0) {
-                $("#cal_d").val(selectedDay);
-            }
+                // day cell click
+                $("#log-calendar .day").click(function () {
+                    $("#page-status").hide();
+                    filterButtonToggle(false);
+                    $("#cal_d").val($(this).attr("data-value"));
+                    $("#log-list").html("");
+                    retrieveLogsFromSelected();
+                    $("#log-calendar .active").removeClass("active");
+                    $(this).addClass("active");
+                });
+                hideLoading();
 
-            // day cell click
-            $("#log-calendar .day").click(function () {
-                $("#page-status").hide();
-                filterButtonToggle(false);
-                $("#cal_d").val($(this).attr("data-value"));
-                $("#log-list").html("");
-                retrieveLogsFromSelected();
-                $("#log-calendar .active").removeClass("active");
-                $(this).addClass("active");
+                if (callback != null) {
+                    callback();
+                }
             });
-            hideLoading();
-
-            if (callback != null) {
-                callback();
-            }
-
         }
         , fail: function () {
             alert("fail");
@@ -367,6 +366,11 @@ function initLogFeedButton() {
  * @param size
  */
 function retrievelogs(rabbitId, page, size, y, m, d) {
+
+    var dayCount = $("#day-"+d).attr("data-count");
+    if (dayCount == ""){
+        return;
+    }
 
     $("#page-status").hide();
     showLoading();
