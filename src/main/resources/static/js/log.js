@@ -369,6 +369,9 @@ function retrievelogs(rabbitId, page, size, y, m, d) {
 
     var dayCount = $("#day-"+d).attr("data-count");
     if (dayCount == ""){
+        $("#log-feed").hide();
+        $("#page-status").hide();
+        showChart(false);
         return;
     }
 
