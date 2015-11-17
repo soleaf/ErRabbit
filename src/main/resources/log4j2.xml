@@ -4,9 +4,6 @@
         <Console name="STDOUT">
             <PatternLayout pattern="%d %-5p: %c - %m%n"/>
         </Console>
-        <File name="file" fileName="errabbit.log" append="true">
-            <PatternLayout pattern="%d %5p [%c] %m%n"/>
-        </File>
     </Appenders>
     <Loggers>
         <Root level="trace">
