@@ -82,7 +82,7 @@ ErRabbit은 ActiveMQ와 MongoDB를 필요로 합니다
 
 ### 실행
 
-command `sh run.sh` 으로 실행 <br/>
+command `sh errabbit.sh start` 으로 실행  (start | stop | status 사용가능)<br/>
 아니면 직접 command `java -jar [war filename] --spring.config.location=file:settings.properties` 으로 실행하면 됩니다.
 
 ## 웬 콘솔에 로그인 하고 레빗을 추가

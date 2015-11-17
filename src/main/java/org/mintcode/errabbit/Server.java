@@ -1,25 +1,16 @@
 package org.mintcode.errabbit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.actuate.system.ApplicationPidFileWriter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import java.nio.charset.Charset;
-import java.util.Arrays;
 import javax.servlet.Filter;
+import java.nio.charset.Charset;
 
 /**
  * ActiveMQ Listener Configuration
@@ -30,7 +21,9 @@ import javax.servlet.Filter;
 public class Server {
 
     public static void main(String[] args) {
-        SpringApplication.run(Server.class, args);
+        SpringApplication app = new SpringApplication(Server.class);
+        app.addListeners(new ApplicationPidFileWriter("errabbit.pid"));
+        app.run(args);
     }
 
     @Bean
