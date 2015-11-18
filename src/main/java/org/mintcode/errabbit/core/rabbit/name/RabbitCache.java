@@ -1,6 +1,7 @@
 package org.mintcode.errabbit.core.rabbit.name;
 
 import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
+import org.mintcode.errabbit.model.Log;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 import org.mintcode.errabbit.model.Rabbit;
 
@@ -54,10 +55,9 @@ public interface RabbitCache {
 
     /**
      * Update dailyStatistics
-     * @param rabbitId
-     * @param level
+     * @param log
      */
-    public void updateDailyStatistics(String rabbitId, String level);
+    public void updateDailyStatistics(Log log);
 
     /**
      * Get DailyStatistics

@@ -81,7 +81,6 @@ public class LogMessageListener implements MessageListener {
             log.setRabbitId(rabbitID);
             log.setLoggingEvent(errLoggingEvent);
             log.setCollectedDate(new Date());
-            logger.trace("Received new log " + log);
 
             // Add to dao
             logRepository.save(log);
@@ -91,7 +90,7 @@ public class LogMessageListener implements MessageListener {
             logLevelHourlyStatisticsRepository.insertStatistic(log);
 
             // Update cache
-            rabbitCache.updateDailyStatistics(rabbitID, log.getLoggingEvent().getLevel());
+            rabbitCache.updateDailyStatistics(log);
 
             // Mark unread
             if (rabbit.getRead()){
@@ -102,6 +101,7 @@ public class LogMessageListener implements MessageListener {
 
             // Forward to console
             webSocketMessagingService.sendReportToConsole(log);
+
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage(), e);

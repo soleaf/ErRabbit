@@ -50,7 +50,6 @@ public class ActiveMQConfig {
         if (!password.isEmpty()){
             activeMQConnetionFactory.setPassword(password);
         }
-        activeMQConnetionFactory.setUseAsyncSend(true);
         return activeMQConnetionFactory;
     }
 

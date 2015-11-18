@@ -1,9 +1,11 @@
 package org.mintcode.errabbit.core.rabbit.name;
 
 import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
+import org.mintcode.errabbit.model.Log;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 import org.mintcode.errabbit.model.Rabbit;
-import org.slf4j.Logger; import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,69 +20,73 @@ import java.util.*;
 public class InMemoryRabbitCache implements RabbitCache {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private Map<String,Rabbit> rabbits;
-    private Map<String,LogLevelDailyStatistics> dailyStatisticsMap;
+    private Map<String, Rabbit> rabbits;
+    private Map<String, LogLevelDailyStatistics> dailyStatisticsMap;
 
     @Autowired
     LogLevelDailyStatisticsRepository logLevelDailyStatisticsRepository;
 
-    public void updateRabbitIdList(Map<String,Rabbit> rabbits) {
+    public void updateRabbitIdList(Map<String, Rabbit> rabbits) {
         this.rabbits = rabbits;
         logger.trace("Rabbit Id List updated. size=" + rabbits.size());
     }
 
     public boolean isRabbitId(String id) {
-        if (rabbits == null){
+        if (rabbits == null) {
             logger.error("Rabbit Id List null.");
             return false;
         }
         return rabbits.keySet().contains(id);
     }
 
-    public Rabbit getRabbit(String id){
-        if (rabbits == null){
+    public Rabbit getRabbit(String id) {
+        if (rabbits == null) {
             logger.error("Rabbit Id List null.");
             return null;
         }
         return rabbits.get(id);
     }
 
-    public List<Rabbit> getRabbits(){
+    public List<Rabbit> getRabbits() {
         return new ArrayList<Rabbit>(rabbits.values());
     }
 
-    public void syncDailyStatistics(){
+    public void syncDailyStatistics() {
+        logger.info("syncDailyStatistics");
         dailyStatisticsMap = new HashMap<>();
         for (Rabbit rabbit : rabbits.values()) {
             syncDailyStatistics(rabbit.getId());
         }
     }
 
-    public void syncDailyStatistics(String id){
+    public void syncDailyStatistics(String id) {
         LogLevelDailyStatistics statistics = logLevelDailyStatisticsRepository.findByRabbitIdOnLast(id);
         if (statistics != null) {
             dailyStatisticsMap.put(id, statistics);
-        }
-        else{
+        } else {
             dailyStatisticsMap.remove(id);
         }
     }
 
-    public void updateDailyStatistics(String rabbitId, String level){
+    public void updateDailyStatistics(Log log) {
+        String rabbitId = log.getRabbitId();
+        String level = log.getLoggingEvent().getLevel();
         LogLevelDailyStatistics statistics = dailyStatisticsMap.get(rabbitId);
 
-        if (statistics == null){
+        if (statistics == null) {
+            logger.info("statistics is null");
             syncDailyStatistics();
             statistics = dailyStatisticsMap.get(rabbitId);
         }
 
         Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        if (cal.get(Calendar.YEAR) != statistics.getYear() ||
-                cal.get(Calendar.MONTH) != statistics.getMonth() ||
-                cal.get(Calendar.DAY_OF_MONTH) != statistics.getDateInt()){
+        cal.setTime(new Date(log.getLoggingEvent().getTimeStamp()));
+        if (!statistics.getDay().equals(cal.get(Calendar.DAY_OF_MONTH)) ||
+                !statistics.getYear().equals(cal.get(Calendar.YEAR)) ||
+                !statistics.getMonth().equals(cal.get(Calendar.MONTH)+1)) {
+            logger.warn("s" + statistics);
             syncDailyStatistics();
-            return ;
+            return;
         }
 
         if (level.equals("TRACE"))
