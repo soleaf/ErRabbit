@@ -1,6 +1,10 @@
 package org.mintcode.errabbit.core.log.dao;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 import com.mongodb.WriteResult;
+import org.mintcode.errabbit.model.LogLevelHourStatistics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
@@ -8,6 +12,7 @@ import org.mintcode.errabbit.model.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -58,20 +63,29 @@ public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStati
             DateFormat format = new SimpleDateFormat("yyyyMMdd");
             Integer dateInt = Integer.parseInt(format.format(date));
 
-            // Upsert + $inc
+            //Update
             Query query = new Query();
             query.addCriteria(Criteria.where("dateInt").is(dateInt)
                             .andOperator(
-                                    Criteria.where("rabbitId").is(log.getRabbitId()),
-                                    Criteria.where("year").is(year),
-                                    Criteria.where("month").is(month),
-                                    Criteria.where("day").is(day)
+                                    Criteria.where("rabbitId").is(log.getRabbitId())
                             )
             );
-
             Update update = new Update().inc("level_" + log.getLoggingEvent().getLevel(), 1);
-            mongoOperations.upsert(query, update, LogLevelDailyStatistics.class);
+            WriteResult result = mongoOperations.updateFirst(query, update, LogLevelDailyStatistics.class);
 
+            // Insert
+            if (!result.isUpdateOfExisting()) {
+                query = new Query();
+                query.addCriteria(Criteria.where("dateInt").is(dateInt)
+                                .andOperator(
+                                        Criteria.where("rabbitId").is(log.getRabbitId()),
+                                        Criteria.where("year").is(year),
+                                        Criteria.where("month").is(month),
+                                        Criteria.where("day").is(day)
+                                )
+                );
+                mongoOperations.upsert(query, update, LogLevelDailyStatistics.class);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
