@@ -84,8 +84,6 @@ public class InMemoryRabbitCache implements RabbitCache {
         if (!statistics.getDay().equals(cal.get(Calendar.DAY_OF_MONTH)) ||
                 !statistics.getYear().equals(cal.get(Calendar.YEAR)) ||
                 !statistics.getMonth().equals(cal.get(Calendar.MONTH)+1)) {
-            logger.warn("s" + statistics);
-            syncDailyStatistics();
             return;
         }
 

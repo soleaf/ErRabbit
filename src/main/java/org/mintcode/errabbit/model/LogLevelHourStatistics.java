@@ -17,8 +17,7 @@ import java.io.Serializable;
  */
 
 @Document(collection = "logs.statistic.hour")
-@CompoundIndexes({@CompoundIndex(name = "by_id_date",def = "{rabbitId:1,year:1,month:1,day:1,hour:1}"),
-        @CompoundIndex(name = "by_id_dateInt",def = "{'rabbitId':1,'dateInt':1}")})
+@CompoundIndexes({@CompoundIndex(name = "by_id_dateInt",def = "{'rabbitId':1,'dateInt':1}")})
 public class LogLevelHourStatistics implements Serializable {
 
     /*

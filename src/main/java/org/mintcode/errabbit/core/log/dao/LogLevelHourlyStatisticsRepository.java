@@ -12,20 +12,6 @@ import java.util.List;
  */
 public interface LogLevelHourlyStatisticsRepository extends MongoRepository<LogLevelHourStatistics,ObjectId>,
         LogLevelHourlyStatisticsRepositoryCustom {
-
-    /**
-     * Get by rabbitId, year, month, day
-     * @param rabbitId
-     * @param year
-     * @param month
-     * @param day
-     * @return
-     */
-    public List<LogLevelHourStatistics> findByRabbitIdAndYearAndMonthAndDay(String rabbitId,
-                                                                       Integer year,
-                                                                       Integer month,
-                                                                       Integer day);
-
     /**
      * Get by rabbitId
      * @param rabbitId
