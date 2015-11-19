@@ -8,7 +8,6 @@
     <Loggers>
         <Root level="trace">
             <AppenderRef ref="STDOUT"/>
-            <AppenderRef ref="file"/>
         </Root>
     </Loggers>
 </Configuration>
