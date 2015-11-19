@@ -68,33 +68,37 @@ public class InMemoryRabbitCache implements RabbitCache {
         }
     }
 
-    public void updateDailyStatistics(Log log) {
-        String rabbitId = log.getRabbitId();
-        String level = log.getLoggingEvent().getLevel();
+    public void updateDailyStatistics(String rabbitId, String level, Integer loggingDateInt, Integer count){
         LogLevelDailyStatistics statistics = dailyStatisticsMap.get(rabbitId);
 
-        if (statistics == null) {
-            logger.info("statistics is null");
+        if (statistics == null || !statistics.getDateInt().equals(loggingDateInt)) {
+            logger.info("statistics is null or mismatch date. sync daily statistics");
             syncDailyStatistics();
             statistics = dailyStatisticsMap.get(rabbitId);
         }
-        if (!statistics.getDateInt().equals(log.getLoggingEventDateInt())) {
-            logger.warn("Not found LogLevelDailyStatistics for " + log);
+        if (!statistics.getDateInt().equals(loggingDateInt)) {
+            logger.warn("Not found LogLevelDailyStatistics for " + rabbitId + " , " +loggingDateInt);
             return;
         }
 
         if (level.equals("TRACE"))
-            statistics.setLevel_TRACE(statistics.getLevel_TRACE() + 1);
+            statistics.setLevel_TRACE(statistics.getLevel_TRACE() + count);
         else if (level.equals("DEBUG"))
-            statistics.setLevel_DEBUG(statistics.getLevel_DEBUG() + 1);
+            statistics.setLevel_DEBUG(statistics.getLevel_DEBUG() + count);
         else if (level.equals("INFO"))
-            statistics.setLevel_INFO(statistics.getLevel_INFO() + 1);
+            statistics.setLevel_INFO(statistics.getLevel_INFO() + count);
         else if (level.equals("WARN"))
-            statistics.setLevel_WARN(statistics.getLevel_WARN() + 1);
+            statistics.setLevel_WARN(statistics.getLevel_WARN() + count);
         else if (level.equals("ERROR"))
-            statistics.setLevel_ERROR(statistics.getLevel_ERROR() + 1);
+            statistics.setLevel_ERROR(statistics.getLevel_ERROR() + count);
         else if (level.equals("FATAL"))
-            statistics.setLevel_FATAL(statistics.getLevel_FATAL() + 1);
+            statistics.setLevel_FATAL(statistics.getLevel_FATAL() + count);
+    }
+
+    public void updateDailyStatistics(Log log) {
+        String rabbitId = log.getRabbitId();
+        String level = log.getLoggingEvent().getLevel();
+        updateDailyStatistics(rabbitId, level, log.getLoggingEventDateInt(), 1);
     }
 
     public Map<String, LogLevelDailyStatistics> getDailyStatisticsMap() {

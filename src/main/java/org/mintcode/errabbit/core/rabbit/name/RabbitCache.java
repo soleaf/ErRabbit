@@ -58,6 +58,7 @@ public interface RabbitCache {
      * @param log
      */
     public void updateDailyStatistics(Log log);
+    public void updateDailyStatistics(String rabbitId, String level, Integer loggingDateInt, Integer count);
 
     /**
      * Get DailyStatistics

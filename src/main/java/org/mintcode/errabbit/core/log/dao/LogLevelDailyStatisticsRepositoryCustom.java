@@ -4,6 +4,8 @@ import com.mongodb.WriteResult;
 import org.mintcode.errabbit.model.Log;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 
+import java.util.Map;
+
 /**
  * LogLevelDailyStatisticsRepositoryCustom
  * Created by soleaf on 4/6/15.
@@ -15,6 +17,7 @@ public interface LogLevelDailyStatisticsRepositoryCustom {
      * @param log
      */
     public void insertStatistic(Log log);
+    public void insertStatistic(Map<String,Object> staticSet);
 
     /**
      * Find First Statistic
