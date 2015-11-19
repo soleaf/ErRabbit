@@ -5,3 +5,4 @@ target/*
 *.log
 *.log.*
 application.properties
+errabbit.pid
