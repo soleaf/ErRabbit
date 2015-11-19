@@ -99,7 +99,7 @@ ErRabbit uses MongoDB and ActiveMQ.
 
 ### Run
 
-Run with command `sh errabbit.sh start` (available: start | stop | status)<br/>
+Run with command `sh run.sh` <br/>
 Or directly command `java -jar [war filename] --spring.config.location=file:settings.properties`
 
 ## Login Console and add new Rabbit.

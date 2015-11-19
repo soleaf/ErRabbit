@@ -184,7 +184,7 @@
                         <configuration>
                             <tasks>
                                 <echo>Using env.test.properties</echo>
-                                <copy file="src/scripts/service.sh" tofile="${basedir}/target/errabbit.sh"/>
+                                <copy file="src/scripts/run.sh" tofile="${basedir}/target/run.sh"/>
                                 <copy file="src/main/resources/application.properties" tofile="${basedir}/target/settings.properties"/>
                             </tasks>
                         </configuration>
