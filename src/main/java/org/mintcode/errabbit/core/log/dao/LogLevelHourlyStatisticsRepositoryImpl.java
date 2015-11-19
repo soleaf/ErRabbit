@@ -1,5 +1,6 @@
 package org.mintcode.errabbit.core.log.dao;
 
+import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
 import org.mintcode.errabbit.model.Log;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
@@ -49,15 +50,23 @@ public class LogLevelHourlyStatisticsRepositoryImpl implements LogLevelHourlySta
             Date date = new Date(log.getLoggingEvent().getTimeStamp());
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
+            Integer year = cal.get(Calendar.YEAR);
+            Integer month = cal.get(Calendar.MONTH) + 1; // normal day
+            Integer day = cal.get(Calendar.DAY_OF_MONTH);
+            Integer hour = cal.get(Calendar.HOUR_OF_DAY);
 
             DateFormat format = new SimpleDateFormat("yyyyMMdd");
             Integer dateInt = Integer.parseInt(format.format(date));
 
             // Upsert + $inc
             Query query = new Query();
-            query.addCriteria(Criteria.where("rabbitId").is(log.getRabbitId())
+            query.addCriteria(Criteria.where("dateInt").is(dateInt)
                             .andOperator(
-                                    Criteria.where("dateInt").is(dateInt)
+                                    Criteria.where("year").is(year),
+                                    Criteria.where("month").is(month),
+                                    Criteria.where("day").is(day),
+                                    Criteria.where("hour").is(hour),
+                                    Criteria.where("rabbitId").is(log.getRabbitId())
                             )
             );
 

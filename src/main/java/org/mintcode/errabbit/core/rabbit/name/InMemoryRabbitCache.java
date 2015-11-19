@@ -78,12 +78,8 @@ public class InMemoryRabbitCache implements RabbitCache {
             syncDailyStatistics();
             statistics = dailyStatisticsMap.get(rabbitId);
         }
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date(log.getLoggingEvent().getTimeStamp()));
-        if (!statistics.getDay().equals(cal.get(Calendar.DAY_OF_MONTH)) ||
-                !statistics.getYear().equals(cal.get(Calendar.YEAR)) ||
-                !statistics.getMonth().equals(cal.get(Calendar.MONTH)+1)) {
+        if (!statistics.getDateInt().equals(log.getLoggingEventDateInt())) {
+            logger.warn("Not found LogLevelDailyStatistics for " + log);
             return;
         }
 

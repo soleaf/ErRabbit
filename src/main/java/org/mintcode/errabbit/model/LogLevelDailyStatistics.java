@@ -17,8 +17,9 @@ import java.io.Serializable;
  */
 
 @Document(collection = "logs.statistic.day")
-@CompoundIndexes({@CompoundIndex(name = "by_id_ym",def = "{'rabbitId':1,'year':1,'month':1}"),
-        @CompoundIndex(name = "by_id_dateInt",def = "{'rabbitId':1,'dateInt':1}")})
+@CompoundIndexes({@CompoundIndex(name = "by_id_ymd",def = "{'rabbitId':1,'year':1,'month':1,'day':1}"),
+        @CompoundIndex(name = "by_id_dateInt",def = "{'rabbitId':1,'dateInt':1}"),
+        @CompoundIndex(name = "by_id_dateInt_id_ymd",def = "{'dateInt':1, 'rabbitId':1,'year':1,'month':1,'day':1}")})
 public class LogLevelDailyStatistics implements Serializable {
 
     /*

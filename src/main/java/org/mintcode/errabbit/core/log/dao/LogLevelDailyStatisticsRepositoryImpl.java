@@ -51,15 +51,21 @@ public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStati
             Date date = new Date(log.getLoggingEvent().getTimeStamp());
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
+            Integer year = cal.get(Calendar.YEAR);
+            Integer month = cal.get(Calendar.MONTH) + 1; // normal day
+            Integer day = cal.get(Calendar.DAY_OF_MONTH);
 
             DateFormat format = new SimpleDateFormat("yyyyMMdd");
             Integer dateInt = Integer.parseInt(format.format(date));
 
             // Upsert + $inc
             Query query = new Query();
-            query.addCriteria(Criteria.where("rabbitId").is(log.getRabbitId())
+            query.addCriteria(Criteria.where("dateInt").is(dateInt)
                             .andOperator(
-                                    Criteria.where("dateInt").is(dateInt)
+                                    Criteria.where("rabbitId").is(log.getRabbitId()),
+                                    Criteria.where("year").is(year),
+                                    Criteria.where("month").is(month),
+                                    Criteria.where("day").is(day)
                             )
             );
 
