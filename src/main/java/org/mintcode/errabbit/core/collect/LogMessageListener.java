@@ -18,6 +18,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -101,6 +102,10 @@ public class LogMessageListener implements MessageListener {
 
     }
 
+    /**
+     * Check cache's time
+     * If cache's time is old, call flushCache()
+     */
     @Scheduled(fixedDelay = 1000)
     private void checkCache(){
         if (lastCacheTime == null){
@@ -111,11 +116,15 @@ public class LogMessageListener implements MessageListener {
         long tDelta = tEnd - lastCacheTime;
         double elapsedSeconds = tDelta / 1000.0;
         if (elapsedSeconds > 1.0 && !caching.isEmpty()){
-            logger.info("flush log chache by timeout " + elapsedSeconds);
+            logger.info("flush log cache by timeout " + elapsedSeconds);
             flushCache();
         }
     }
 
+    /**
+     * Save all caching logs and related objects to DB
+     */
+    @PreDestroy
     synchronized protected void flushCache() {
 
         if (caching == null || caching.isEmpty()){
