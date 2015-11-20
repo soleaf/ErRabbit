@@ -7,6 +7,8 @@ ErRabbit(Error Rabbit)은 알아보기 어려운 java의 stack trace를 보기 �
 많이 쓰는 로그 프로그램인 Log4j를 사용하여 ActiveMQ로 로그를 수집하기 때문에 이미 개발해놓은 프로그램에
 적용하기도 쉽습니다.
 
+> 소개 슬라이드 http://www.slideshare.net/ilhoahn50/errabbit
+
 > [Here](readme.md) is Enlgish document.
 
 ## 구조
