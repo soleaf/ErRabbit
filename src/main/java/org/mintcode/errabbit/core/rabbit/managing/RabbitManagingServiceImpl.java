@@ -1,5 +1,7 @@
 package org.mintcode.errabbit.core.rabbit.managing;
 
+import org.apache.activemq.ActiveMQConnection;
+import org.apache.activemq.command.ActiveMQQueue;
 import org.bson.types.ObjectId;
 import org.mintcode.errabbit.core.CoreService;
 import org.mintcode.errabbit.core.log.dao.LogRepository;
@@ -14,6 +16,8 @@ import org.mintcode.errabbit.model.Rabbit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSException;
 import java.util.*;
 
 /**
@@ -37,6 +41,9 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
 
     @Autowired
     private RabbitGroupRepository groupRepository;
+
+    @Autowired
+    private ConnectionFactory connectionFactory;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -197,6 +204,9 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         // Refresh rabbit name cache
         coreService.syncRabbitNameCache();
 
+        // Delete queue from activeMQ
+        removeQueue("errabbit.report." +id);
+
         return true;
     }
 
@@ -283,4 +293,24 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         return groupRepository.findAll();
     }
 
+    protected boolean removeQueue(String queueName){
+        ActiveMQConnection conn = null;
+        Boolean result = false;
+        try {
+            conn = (ActiveMQConnection) connectionFactory.createConnection();
+            conn.destroyDestination(new ActiveMQQueue(queueName));
+            result = true;
+        } catch (JMSException e) {
+            logger.error(e.getMessage(), e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (JMSException e) {
+                    logger.error(e.getMessage(), e);
+                }
+            }
+            return result;
+        }
+    }
 }
