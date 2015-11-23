@@ -116,7 +116,7 @@ public class LogMessageListener implements MessageListener {
         long tDelta = tEnd - lastCacheTime;
         double elapsedSeconds = tDelta / 1000.0;
         if (elapsedSeconds > 1.0 && !caching.isEmpty()){
-            logger.info("flush log cache by timeout " + elapsedSeconds);
+            logger.debug("flush log cache by timeout " + elapsedSeconds);
             flushCache();
         }
     }
