@@ -38,8 +38,15 @@ public class StackTraceGraph {
         if (className == null){
 
             declaringClass = element.getDeclaringClass();
-            className = declaringClass.substring(declaringClass.lastIndexOf(".")+1);
-            packageName = declaringClass.substring(0,declaringClass.lastIndexOf("."));
+            if (declaringClass.contains(".")){
+                className = declaringClass.substring(declaringClass.lastIndexOf(".")+1);
+                packageName = declaringClass.substring(0,declaringClass.lastIndexOf("."));
+            }
+            else{
+                className = declaringClass;
+                packageName = "";
+            }
+
             fileName = element.getFileName();
 
             if (checkBasePackages(declaringClass)){
