@@ -200,6 +200,18 @@ log4j가 이미 추가 되어있다는 것을 가정합니다.
 </dependency>
 ```
 
+javax.jms를 메이븐에서 찾지 못한다고 나타나면 아래처럼 레포지토리를 추가해주세요.
+```xml
+ <repositories>
+        <repository>
+            <id>repository.jboss.org-public</id>
+            <name>JBoss.org Maven repository</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+```
+
+
 #### Log4j2 설정
 
 1. 'JMS Appender'를 `log4j2.xml`에 ActiveMQ URL, userName, password를 설정합니다
