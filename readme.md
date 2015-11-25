@@ -217,6 +217,16 @@ Example Project : https://github.com/soleaf/ErRabbit-Example-log4j1
     <version>5.7.0</version>
 </dependency>
 ```
+and add repository for javax.jms (if maven can't find javax.jms)
+```xml
+ <repositories>
+        <repository>
+            <id>repository.jboss.org-public</id>
+            <name>JBoss.org Maven repository</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+```
 
 #### Setup Log4j2
 
