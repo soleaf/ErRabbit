@@ -309,6 +309,10 @@ https://github.com/soleaf/ErRabbit/wiki
 
 * :D 신현묵(Twitter @zetlos, supims@gmail.com)
 
+# Awards
+
+* Golden prize at 2015 OSS world challenge
+
 # Lisence
 
 Apache 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
