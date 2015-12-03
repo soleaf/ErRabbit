@@ -288,9 +288,13 @@ catch (Exception e){
 다음 위키를 확인해주세요.
 https://github.com/soleaf/ErRabbit/wiki
 
-# 감사한분
+# 멘토 & 스페셜 떙스!
 
 * :D 신현묵(Twitter @zetlos, supims@gmail.com)
+
+# 수상내역
+
+* 2015 공개소프트웨어 개발자 대회, 금상
 
 # 라이센스
 
