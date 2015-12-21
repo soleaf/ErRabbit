@@ -66,7 +66,7 @@ public interface LogRepository extends MongoRepository<Log,ObjectId>, LogReposit
      */
     @Query(value = "{ 'loggingEventDateInt' : ?0, 'rabbitId' : ?1, 'loggingEvent.level' : ?2, 'loggingEvent.categoryName' : ?3 }")
     public Page<Log> findByLoggingEventDateIntAndRabbitIdAndLevelAndClassName(Integer loggingEventDateInt,
-                                                                               String rabbitId,
+                                                                              String rabbitId,
                                                                               String level,
                                                                               String className,
                                                                               Pageable pageable);
