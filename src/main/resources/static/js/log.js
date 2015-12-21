@@ -271,6 +271,7 @@ function drawChart(dataJson) {
             duration: 300
         }
         ,isStacked: 'true'
+        ,focusTarget: 'category'
     };
 
     if (chart == null) {
@@ -454,6 +455,8 @@ function retrievelogs(rabbitId, page, size, y, m, d) {
                 $("#filter_level").val($(this).text());
                 $("#filter_apply").trigger("click");
             });
+
+            $('[data-toggle="popover"]').popover();
 
             hideLoading();
         }
