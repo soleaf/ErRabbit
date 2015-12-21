@@ -149,6 +149,9 @@ function logEvent() {
     $("#log-list .log .rabbit_id").click(function () {
         location.href="/log/list.err?id="+$(this).text();
     });
+
+    $('[data-toggle="popover"]').popover();
+    $('[data-toggle="tooltip"]').tooltip();
 }
 
 function sessionExpireCheck(data) {

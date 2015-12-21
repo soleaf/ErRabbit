@@ -140,14 +140,14 @@ public class Log implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("<li class='log' data-e='%s' data-poload='/log/popover_data?id=%s'>",
                 (loggingEvent.getThrowableInfo() != null ? "true" : "") ,id.toString()));
-            sb.append(String.format("<span class='time'>%s</span>", format.format(loggingEvent.timeStampDate)));
+            sb.append(String.format("<span class='time' data-toggle='popover' data-placement='right' data-trigger='hover' title='Server collecting time' data-content='%s'>%s</span>", format.format(collectedDate), format.format(loggingEvent.timeStampDate)));
             sb.append(String.format("<span class='level %s %s' data-url='%s'>%s</span>", loggingEvent.level,
                                                                 (loggingEvent.getThrowableInfo() != null ? "has_exception" : ""),
                                                                 filterlevelURL,
                                                                 loggingEvent.level));
             sb.append("<div class='contgroup'>");
                 if (showRabbitID){
-                    sb.append(String.format("<span class='rabbit_id'>%s</span>", rabbitId));
+                    sb.append(String.format("<span class='rabbit_id' data-toggle='tooltip' data-placement='right' title='%s'>%s</span>", rabbitId, rabbitId));
                 }
 
                 String filterClassURL = String.format("/log/list.err?id=%s&y=%d&m=%d&d=%d&filter=true&filter_level=%s&filter_class=%s",
