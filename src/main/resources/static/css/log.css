@@ -147,7 +147,7 @@
 }
 .log-list .log .rabbit_id{
     margin-left: 4px;
-    width: 100px;
+    width: 130px;
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
@@ -266,6 +266,8 @@
     display: inline-block;
     clear:both;
     border-radius: 5px;
+    max-width: 100%;
+    word-break: break-all;
 }
 .log-detail-popup .ThrowableInfo .graph .class{
     background-color: #f1f1f1;
