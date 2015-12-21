@@ -107,12 +107,9 @@ public class Graph {
         List<Object> columns = new ArrayList<>();
         dataList.add(columns);
         columns.add("Time");
-        Map<String,String> annotation = new HashMap<>();
-        annotation.put("role", "tooltip");
         for (String level : levels){
             if (data.containsKey(level)){
                 columns.add(level);
-                columns.add(annotation);
             }
         }
 
@@ -120,19 +117,9 @@ public class Graph {
         for (Integer h = 0 ; h < 24; h ++){
             List<Object> conts = new ArrayList<>();
             conts.add(h);
-            StringBuffer annot = new StringBuffer();
-            for (String level : levels){
-                if (data.containsKey(level)){
-                    if (annot.toString().length() > 0){
-                        annot.append("\n");
-                    }
-                    annot.append(level + " : " + getTimeLine(level).get(h));
-                }
-            }
             for (String level : levels){
                 if (data.containsKey(level)){
                     conts.add(getTimeLine(level).get(h));
-                    conts.add(annot);
                 }
             }
             dataList.add(conts);

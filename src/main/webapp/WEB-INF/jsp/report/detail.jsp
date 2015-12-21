@@ -36,7 +36,8 @@
                 curveType: 'function',
                 lineWidth: 0.5,
                 colors: ['#ff5572', '#FF8166', '#ffbf5e'],
-                isStacked: 'true'
+                isStacked: 'true',
+                focusTarget: 'category'
             };
 
             var chart = new google.visualization.AreaChart(document.getElementById('total_timeline_chart'));
