@@ -1,7 +1,6 @@
 package org.mintcode.errabbit.core.log.dao;
 
 import com.mongodb.*;
-import org.mintcode.errabbit.model.LogLevelHourStatistics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
@@ -9,10 +8,8 @@ import org.mintcode.errabbit.model.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

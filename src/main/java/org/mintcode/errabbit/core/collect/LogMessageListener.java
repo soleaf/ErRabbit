@@ -1,6 +1,5 @@
 package org.mintcode.errabbit.core.collect;
 
-import com.mongodb.DBObject;
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
 import org.mintcode.errabbit.core.console.WebSocketMessagingService;
 import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;

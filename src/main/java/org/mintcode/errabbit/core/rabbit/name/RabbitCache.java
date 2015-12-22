@@ -1,6 +1,5 @@
 package org.mintcode.errabbit.core.rabbit.name;
 
-import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
 import org.mintcode.errabbit.model.Log;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 import org.mintcode.errabbit.model.Rabbit;
