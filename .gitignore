@@ -6,3 +6,8 @@ target/*
 *.log.*
 application.properties
 errabbit.pid
+
+# eclipse
+.project
+.classpath
+.settings/
