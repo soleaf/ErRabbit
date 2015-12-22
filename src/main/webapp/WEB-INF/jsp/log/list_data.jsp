@@ -10,7 +10,7 @@
 <c:if test="${not empty reports.content}">
     <c:forEach var="item" items="${reports.content}" varStatus="status">
         <li class="log" data-id="${item.id}" data-e="<c:if test="${not empty item.loggingEvent.throwableInfo}">true</c:if>"  data-poload="/log/popover_data?id=${item.id}">
-            <span role=button class="time" data-toggle="popover" data-placement="right" data-trigger="hover" title="Server collecting time" data-content="${format.format(item.loggingEvent.timeStampDate)}">${format.format(item.collectedDate)}</span>
+            <span role=button class="time" data-toggle="popover" data-placement="right" data-trigger="hover" title="Application time" data-content="Server collecting time : ${format.format(item.loggingEvent.timeStampDate)}">${format.format(item.collectedDate)}</span>
             <span class="level ${item.loggingEvent.level} <c:if test="${not empty item.loggingEvent.throwableInfo}"> has_exception</c:if>" data-toggle="popover" data-placement="right" data-trigger="hover" title="Apply filter" data-content="by loggingEvent level">${item.loggingEvent.level}</span>
             <div class="contgroup">
                 <span class="categoryName" data-toggle="popover" data-placement="right" data-trigger="hover" title="Apply filter" data-content="by class name">${item.loggingEvent.categoryName}</span>
