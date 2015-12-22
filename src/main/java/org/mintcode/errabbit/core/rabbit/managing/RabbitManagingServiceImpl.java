@@ -310,7 +310,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
                     logger.error(e.getMessage(), e);
                 }
             }
-            return result;
-        }
+        }  
+        return result;
     }
 }

@@ -6,7 +6,6 @@ import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
 import org.mintcode.errabbit.core.analysis.result.AnalysisResultSet;
 import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;
 import org.mintcode.errabbit.core.rabbit.name.RabbitCache;
-import org.mintcode.errabbit.model.Rabbit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**

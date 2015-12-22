@@ -2,9 +2,7 @@ package org.mintcode.errabbit.core.log.dao;
 
 import com.mongodb.WriteResult;
 import org.mintcode.errabbit.model.Log;
-import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 
-import java.util.List;
 import java.util.Map;
 
 /**

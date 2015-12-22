@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Transient;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 /**
  * RabbitGroup

@@ -1,7 +1,6 @@
 package org.mintcode.errabbit.util;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * DateUtil

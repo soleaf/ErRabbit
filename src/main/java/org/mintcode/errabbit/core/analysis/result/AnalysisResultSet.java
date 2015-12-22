@@ -1,7 +1,6 @@
 package org.mintcode.errabbit.core.analysis.result;
 
 import org.mintcode.errabbit.core.analysis.request.AnalysisRequest;
-import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Transient;

@@ -3,18 +3,13 @@ package org.mintcode.errabbit.core.report;
 import org.apache.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.mintcode.errabbit.core.CoreService;
 import org.mintcode.errabbit.core.analysis.AggregationAnalyzer;
 import org.mintcode.errabbit.core.analysis.request.LogAnalysisRequest;
-import org.mintcode.errabbit.core.analysis.request.LogLevelAnalysisRequest;
 import org.mintcode.errabbit.core.analysis.result.AnalysisResultSet;
 import org.mintcode.errabbit.core.report.dao.ReportRepository;
-import org.mintcode.errabbit.model.LogLevelHourStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
