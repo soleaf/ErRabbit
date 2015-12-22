@@ -14,7 +14,7 @@
             <span class="level ${item.loggingEvent.level} <c:if test="${not empty item.loggingEvent.throwableInfo}"> has_exception</c:if>" data-toggle="popover" data-placement="right" data-trigger="hover" title="Apply filter" data-content="by loggingEvent level">${item.loggingEvent.level}</span>
             <div class="contgroup">
                 <span class="categoryName" data-toggle="popover" data-placement="right" data-trigger="hover" title="Apply filter" data-content="by class name">${item.loggingEvent.categoryName}</span>
-                <span class="message">${item.loggingEvent.renderedMessage}</span>
+                <span class="message" <c:if test="${not empty item.loggingEvent.throwableInfo}">data-toggle="popover" data-placement="top" data-trigger="hover" title="Avaliable Visual exception view" data-content="Click to trace exception" </c:if>>${item.loggingEvent.renderedMessage}</span>
             </div>
         </li>
     </c:forEach>
