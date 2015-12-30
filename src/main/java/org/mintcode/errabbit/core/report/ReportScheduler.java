@@ -38,7 +38,7 @@ public class ReportScheduler {
         try{
             // get descriptions
             List<ReportDescription> descriptionList = repository.findAll();
-            if (descriptionList == null && descriptionList.isEmpty()){
+            if (descriptionList == null || descriptionList.isEmpty()){
                 logger.trace("have no report description");
                 return;
             }
