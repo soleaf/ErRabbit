@@ -177,7 +177,7 @@
                 <version>1.1</version>
                 <executions>
                     <execution>
-                        <phase>compile</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
