@@ -299,6 +299,14 @@ catch (Exception e){
 
 Example Project : https://github.com/soleaf/ErRabbit-Example-log4j2
 
+# Contribute
+
+We welcome anyone want to improve ErRabbit.
+
+- You can just fix and send pull request to me.
+- Or talk about new feature through email(soleaf@gmail.com).
+- Please comment as English at commit.
+
 # Plan and Troubleshooting
 
 Please read this wiki
@@ -313,6 +321,6 @@ https://github.com/soleaf/ErRabbit/wiki
 
 * Golden prize at 2015 OSS world challenge
 
-# Lisence
+# License
 
 Apache 2.0 (http://www.apache.org/licenses/LICENSE-2.0)

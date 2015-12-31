@@ -283,6 +283,13 @@ catch (Exception e){
 
 예제 프로젝트 : https://github.com/soleaf/ErRabbit-Example-log4j2
 
+# 기여하기
+
+언제나 ErRabbit에 기여하시고자 하는 분들을 환영합니다.
+- 간단한 버그 픽스는 자유롭게 Pull Request를 보내주세요.
+- 필요한기능이나 로그맵에 대한 점들은 email로 같이 대화를 먼저 해주세요(soleaf@gmail.com).
+- 커밋 코멘트는 영어로 부탁드릴께요!
+
 # 다음계획 및 문제해결
 
 다음 위키를 확인해주세요.
