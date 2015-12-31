@@ -321,6 +321,10 @@ https://github.com/soleaf/ErRabbit/wiki
 
 * Golden prize at 2015 OSS world challenge
 
+# Talk with me
+
+* Always ok! soleaf@gmail.com
+
 # License
 
 Apache 2.0 (http://www.apache.org/licenses/LICENSE-2.0)

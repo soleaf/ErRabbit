@@ -303,6 +303,11 @@ https://github.com/soleaf/ErRabbit/wiki
 
 * 2015 공개소프트웨어 개발자 대회, 금상
 
+# 도움이나 기타 이야기를 나누고 싶으시다면
+
+* 언제나 환영합니다! soleaf@gmail.com
+
+
 # 라이센스
 
 Apache 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
