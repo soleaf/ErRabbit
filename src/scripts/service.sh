@@ -6,7 +6,7 @@ COMMAND=$1
 PROGRAM_NAME=ErRabbit
 PROGRAM_OUTPUT_FILE=/dev/null
 
-JAR_PATH=ErRabbitServer-1.0.0-RELEASE.war
+JAR_PATH=ErRabbitServer-1.1.0-SNAPSHOT.war
 JAVA_OPTS="-Dfile.encoding=UTF8"
 SPRING_PROPERTIES=settings.properties
 PID_FILE=errabbit.pid

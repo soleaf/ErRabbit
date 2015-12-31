@@ -2,4 +2,4 @@
 # ErRabit Run Script
 
 settingLocation="settings.properties";
-java -jar ErRabbitServer-1.0.0-RELEASE.war --spring.config.location=file:$settingLocation
+java -jar ErRabbitServer-1.1.0-SNAPSHOT.war --spring.config.location=file:$settingLocation
