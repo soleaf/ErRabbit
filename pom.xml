@@ -4,7 +4,7 @@
 
     <groupId>org.mintcode.errabbit</groupId>
     <artifactId>ErRabbitServer</artifactId>
-    <version>1.0.0-SNAPSHOT7</version>
+    <version>1.0.0-RELEASE</version>
     <packaging>war</packaging>
     <name>ErRabbit Server</name>
     <url>http://www.mintcode.org</url>
@@ -177,7 +177,7 @@
                 <version>1.1</version>
                 <executions>
                     <execution>
-                        <phase>test</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
@@ -185,6 +185,7 @@
                             <tasks>
                                 <echo>Using env.test.properties</echo>
                                 <copy file="src/scripts/run.sh" tofile="${basedir}/target/run.sh"/>
+                                <copy file="src/scripts/service.sh" tofile="${basedir}/target/service.sh"/>
                                 <copy file="src/main/resources/application.properties" tofile="${basedir}/target/settings.properties"/>
                             </tasks>
                         </configuration>
