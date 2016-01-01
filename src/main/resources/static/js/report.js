@@ -60,8 +60,8 @@ function deletingAction(){
     $('#deleteModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var deletingId = button.data('deleting-id');
-        var modal = $(this)
+        var modal = $(this);
         modal.find('#deleting-id').val(deletingId);
-        modal.find('#deleting-date').text(button.data('deleting-date'))
-    })
+        modal.find('#deleting-date').text(button.data('deleting-date'));
+    });
 }

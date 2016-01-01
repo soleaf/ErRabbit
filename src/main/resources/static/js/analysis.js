@@ -63,7 +63,7 @@ $(document).ready(function(){
         // request
         showLoading();
         var formData = $("#frm_anal").serialize();
-        var action = $("#frm_anal").attr("action")
+        var action = $("#frm_anal").attr("action");
         $.ajax({
             type : "POST",
             data : formData,

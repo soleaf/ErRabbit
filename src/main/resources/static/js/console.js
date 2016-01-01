@@ -37,7 +37,7 @@ function setConnected(connected) {
         $("#con_fail").hide();
         $("#con_connecting").hide();
         $("#waiting").fadeIn();
-        retry = 0
+        retry = 0;
     }
     else {
         $("#con_success").hide();
@@ -82,7 +82,7 @@ function connect() {
             }, 10000);
         }
         else {
-            setConnected(false)
+            setConnected(false);
         }
     };
 }
