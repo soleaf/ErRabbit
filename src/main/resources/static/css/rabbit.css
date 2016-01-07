@@ -149,3 +149,25 @@
     -moz-box-shadow: none !important;
     box-shadow: none !important;
 }
+.page .filter_box .filter-item-list{
+    max-height:300px;
+    overflow: scroll;
+    margin-bottom: 10px;
+    border-top:1px solid #dddddd;
+    border-bottom:1px solid #dddddd;
+    display: none;
+}
+.page .filter_box .filter-item-list>LI{
+    font-size:14px;
+    padding-left:6px;
+    padding-right:6px;
+    padding-bottom:8px;
+    padding-top:8px;
+    border-bottom:1px solid #f4f4f4;
+    cursor: pointer;
+}
+
+.page .filter_box .filter-item-list>LI:HOVER{
+    background-color:#90CAD2;
+    color:#FFFFFF;
+}

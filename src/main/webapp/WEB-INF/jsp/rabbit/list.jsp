@@ -43,9 +43,12 @@
         </c:if>
 
         <div class="filter_box form-inline">
+            <ul class="filter-item-list" id="filter-item-list">
+
+            </ul>
             <div class="input-group">
                 <div class="input-group-addon filter-icon"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span></div>
-                <input type="text" class="form-control" id="filter_rabbitid" placeholder="Input keyword">
+                <input type="search" class="form-control" id="filter_rabbitid" placeholder="Input keyword" autocomplete="off">
             </div>
         </div>
 
