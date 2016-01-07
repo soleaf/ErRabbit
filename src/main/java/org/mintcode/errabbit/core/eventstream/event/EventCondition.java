@@ -9,8 +9,8 @@ import java.util.Date;
 /**
  * Created by soleaf on 10/12/15.
  */
-@Document(collection = "settings.notification")
-public class EventSetting {
+@Document(collection = "settings.event.condition")
+public class EventCondition {
 
     @Id
     private ObjectId id;
@@ -21,24 +21,26 @@ public class EventSetting {
 
     private String name;
 
-    private Boolean active;
+    private Boolean active = false;
 
 
     /**
      * Checking conditions
      */
 
-    private Integer thresholdCount;
+    private Integer thresholdCount = 0;
 
-    private Integer rangeMinutes;
+    private Integer rangeMinutes = 0;
 
-    private Integer sleepMinutesAfterNotice;
+    private Integer sleepMinutesAfterNotice = 0;
 
-    private String matchLevel;
+    private String matchLevel = null;
 
-    private String matchClass;
+    private String matchClass = null;
 
-    private String matchMessage;
+    private String includeMessage = null;
+
+    private Boolean hasException = null;
 
 
     public ObjectId getId() {
@@ -121,11 +123,19 @@ public class EventSetting {
         this.matchClass = matchClass;
     }
 
-    public String getMatchMessage() {
-        return matchMessage;
+    public String getIncludeMessage() {
+        return includeMessage;
     }
 
-    public void setMatchMessage(String matchMessage) {
-        this.matchMessage = matchMessage;
+    public void setIncludeMessage(String includeMessage) {
+        this.includeMessage = includeMessage;
+    }
+
+    public Boolean getHasException() {
+        return hasException;
+    }
+
+    public void setHasException(Boolean hasException) {
+        this.hasException = hasException;
     }
 }

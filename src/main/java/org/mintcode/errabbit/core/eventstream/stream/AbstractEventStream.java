@@ -14,12 +14,6 @@ public abstract class AbstractEventStream implements EventStream {
     protected Set<EventChecker> eventCheckers = new HashSet<>();
 
     @Override
-    public int compareTo(Object o) {
-        EventStream oStream = (EventStream) o;
-        return getPriority().getValue() - oStream.getPriority().getValue();
-    }
-
-    @Override
     public void registerEventChecker(EventChecker eventChecker) {
         eventCheckers.add(eventChecker);
     }
@@ -29,7 +23,7 @@ public abstract class AbstractEventStream implements EventStream {
         eventCheckers.remove(eventChecker);
     }
 
-    public void check(Log log) {
+    public void input(Log log) {
         for (EventChecker checker : eventCheckers) {
             checker.check(log);
         }

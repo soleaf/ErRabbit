@@ -1,41 +1,90 @@
 package org.mintcode.errabbit.core.eventstream.event;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.mintcode.errabbit.core.eventstream.event.action.EventAction;
 import org.mintcode.errabbit.model.Log;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * EventChecker
+ * Check log is acceptable to mapped condition,
+ * and run, remember status
  * Created by soleaf on 10/12/15.
  */
 public class EventChecker {
 
     private Set<Date> eventTimes = new TreeSet<>();
 
-    private EventSetting setting;
+    private EventMapping mapping;
 
     private Date sleepTime;
 
     private Logger logger = LogManager.getLogger();
 
-    public EventChecker(EventSetting setting){
-        this.setting = setting;
+    // Count for matched
+    private Long metricMatched = 0l;
+    // Count for matched but ignored by sleeping status
+    private Long metricIgnoreFromSleep = 0l;
+
+    public EventChecker(){
+
     }
 
-    public void check(Log log){
-        
+    public EventChecker(EventMapping mapping){
+        this.mapping = mapping;
+    }
+
+    public boolean check(Log log){
+        // Check log is acceptable with event condition
+        EventCondition ec = mapping.getCondition();
+        if (!ec.getRabbitId().equals(log.getRabbitId())){
+            return false;
+        }
+        if (null != ec.getMatchLevel()
+                &&!levelCheck(ec.getMatchLevel(), log.getLoggingEvent().getLevel())){
+            return false;
+        }
+        if (null != ec.getMatchClass()
+                && !ec.getMatchClass().equals(log.getLoggingEvent().getCategoryName())){
+            return false;
+        }
+        if (null != ec.getIncludeMessage()
+                && !log.getLoggingEvent().getRenderedMessage().contains(ec.getIncludeMessage())){
+            return false;
+        }
+        if (null != ec.getHasException()
+                && null ==log.getLoggingEvent().getThrowableInfo()){
+            return false;
+        }
+        metricMatched++;
+        return addPoint(new Date(), log);
+    }
+
+    /**
+     * Level check
+     * If l1 is warn, l2 should be equal or upper then warn
+     * @param l1 l1 is standard level
+     * @param l2 l2 is comparing level
+     * @return
+     */
+    protected Boolean levelCheck(String l1, String l2){
+        Level level1 = Level.getLevel(l1);
+        Level level2 = Level.getLevel(l2);
+        return level1.isLessSpecificThan(level2);
     }
 
     /**
      * add occurred eventstream time
      * @param date
      */
-    private void addPoint(Date date){
+    private boolean addPoint(Date date, Log log){
         clearExpiredPoints();
         eventTimes.add(date);
-        checkStatus();
+        return checkStatus(log);
     }
 
     /**
@@ -47,7 +96,7 @@ public class EventChecker {
         for(Date date : eventTimes){
             long diff = now.getTime() - date.getTime();
             long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
-            if (minutes > setting.getRangeMinutes()){
+            if (minutes > mapping.getCondition().getRangeMinutes()){
                 // expired
                 expiredSet.add(date);
             }
@@ -61,22 +110,32 @@ public class EventChecker {
     /**
      * Check current status
      */
-    protected void checkStatus() {
+    protected boolean checkStatus(Log log) {
         // check is now cool down
         if (sleepTime != null){
             Date now = new Date();
             long diff = now.getTime() - sleepTime.getTime();
             if (diff <= 0){
                 // sleep time
-                return;
+                metricIgnoreFromSleep++;
+                return false;
             }
         }
 
         // check eventstream counts
-        if (eventTimes.size() >= setting.getThresholdCount()) {
-            fireEvent();
+        if (eventTimes.size() >= mapping.getCondition().getThresholdCount()) {
+            callAction(log);
             // check cool down
-            sleepTime = calcSleepTime(setting.getSleepMinutesAfterNotice());
+            if (mapping.getCondition().getSleepMinutesAfterNotice() > 0){
+                sleepTime = calcSleepTime(mapping.getCondition().getSleepMinutesAfterNotice());
+                logger.trace("set sleep time : " + sleepTime);
+            }
+            return true;
+        }
+        else{
+            logger.trace("not reached to threshold " + eventTimes.size() +
+                    "/" + mapping.getCondition().getThresholdCount());
+            return false;
         }
 
     }
@@ -86,7 +145,7 @@ public class EventChecker {
      * @return
      */
     protected Date calcSleepTime(Integer SleepMinutesAfterNotice){
-        if (setting.getSleepMinutesAfterNotice() != null){
+        if (mapping.getCondition().getSleepMinutesAfterNotice() != null){
             Calendar cal = Calendar.getInstance();
             cal.setTime(new Date());
             cal.add(Calendar.MINUTE, SleepMinutesAfterNotice);
@@ -100,8 +159,46 @@ public class EventChecker {
     /**
      * Fire eventstream
      */
-    protected void fireEvent(){
-        // Event
+    protected void callAction(Log log){
+        logger.trace("call action");
+        for (EventAction action : mapping.getActions()){
+            action.run(mapping.getCondition(), log);
+        }
     }
 
+    public void setMetricIgnoreFromSleep(Long metricIgnoreFromSleep) {
+        this.metricIgnoreFromSleep = metricIgnoreFromSleep;
+    }
+
+    public void setMetricMatched(Long metricMatched) {
+        this.metricMatched = metricMatched;
+    }
+
+    public void setMapping(EventMapping mapping) {
+        this.mapping = mapping;
+    }
+
+    public void setSleepTime(Date sleepTime) {
+        this.sleepTime = sleepTime;
+    }
+
+    public Set<Date> getEventTimes() {
+        return eventTimes;
+    }
+
+    public EventMapping getMapping() {
+        return mapping;
+    }
+
+    public Date getSleepTime() {
+        return sleepTime;
+    }
+
+    public Long getMetricMatched() {
+        return metricMatched;
+    }
+
+    public Long getMetricIgnoreFromSleep() {
+        return metricIgnoreFromSleep;
+    }
 }

@@ -3,15 +3,16 @@ package org.mintcode.errabbit.core.eventstream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mintcode.errabbit.core.eventstream.stream.EventStream;
+import org.mintcode.errabbit.model.Log;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * EventStreamCentral
- * Central has multi event streams.
+ * Central has layers of event streams.
  * Take control event streams
  * Created by soleaf on 10/17/15.
  */
@@ -20,14 +21,20 @@ public class EventStreamCentral {
 
     private Logger logger = LogManager.getLogger();
 
-    Set<EventStream> streams = new TreeSet<>();
+    Set<EventStream> streamSet = new HashSet<EventStream>();
 
     /**
-     * Rebuild event stream
+     * Build event stream
      */
     @PostConstruct
-    public void rebuild(){
+    public void build(){
 
+    }
+
+    public void input(Log log){
+        for (EventStream stream : streamSet){
+            stream.input(log);
+        }
     }
 
 }

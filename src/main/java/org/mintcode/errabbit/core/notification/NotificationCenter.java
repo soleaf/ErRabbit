@@ -2,7 +2,7 @@ package org.mintcode.errabbit.core.notification;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.mintcode.errabbit.core.eventstream.event.EventSetting;
+import org.mintcode.errabbit.core.eventstream.event.EventCondition;
 import org.mintcode.errabbit.model.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class NotificationCenter {
 
     private Logger logger = LogManager.getLogger();
 
-    private Map<String, EventSetting> settingsByStage = new HashMap<>();
+    private Map<String, EventCondition> settingsByStage = new HashMap<>();
 
     // Under stage : not detected any matched status
     public static final String NC_STAGE_UNDER = "UD";
@@ -40,9 +40,9 @@ public class NotificationCenter {
     @PostConstruct
     public void getReady(){
         settingsByStage.clear();
-        List<EventSetting> all = settingRepository.findByActive(true);
+        List<EventCondition> all = settingRepository.findByActive(true);
         if (all != null && !all.isEmpty()){
-            for (EventSetting setting : all)
+            for (EventCondition setting : all)
             settingsByStage.put(NC_STAGE_UNDER, setting);
         }
     }
@@ -59,7 +59,7 @@ public class NotificationCenter {
      * @param setting
      * @param toStage
      */
-    protected void changeStage(EventSetting setting, String toStage){
+    protected void changeStage(EventCondition setting, String toStage){
 
     }
 

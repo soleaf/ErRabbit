@@ -8,13 +8,7 @@ import org.mintcode.errabbit.model.Log;
  * Input log, check event and fire
  * Created by soleaf on 10/18/15.
  */
-public interface EventStream extends Comparable{
-
-    /**
-     * Get priority
-     * @return
-     */
-    public EventStreamPriority getPriority();
+public interface EventStream {
 
     /**
      * Register event to stream
@@ -32,5 +26,5 @@ public interface EventStream extends Comparable{
      * Run all checker
      * @param log
      */
-    public void check(Log log);
+    public void input(Log log);
 }
