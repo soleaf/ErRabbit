@@ -14,7 +14,7 @@
     margin:0px;
     padding:0px;
     list-style: none;
-    margin-bottom:50px;
+    margin-bottom:100px;
 }
 .page .list_rabbit li{
     margin-top:10px;
@@ -124,4 +124,28 @@
 }
 .page .group-table{
     width:500px;
+}
+.page .filter_box{
+    background-color: #FFFFFF;
+    padding:2px;
+    position: absolute;
+    bottom: 15px;
+    z-index: 2;
+    top: auto;
+    right: 15px;
+    -webkit-box-shadow: 0px 0px 49px 37px rgba(255,255,255,1);
+    -moz-box-shadow: 0px 0px 49px 37px rgba(255,255,255,1);
+    box-shadow: 0px 0px 49px 37px rgba(255,255,255,1);
+}
+.page .filter_box .filter-icon{
+    color:#90CAD2;
+    background-color:#FFFFFF;
+    border-right:none;
+}
+.page .filter_box INPUT{
+    border-left: none;
+    padding-left:0px;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
 }

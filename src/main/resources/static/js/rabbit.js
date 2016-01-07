@@ -52,6 +52,17 @@ $().ready(function(){
         }
     });
 
+    $("#filter_rabbitid").keyup(function(){
+        $("#list_rabbit>LI").each(function(){
+            if ($(this).attr("data-id").indexOf($("#filter_rabbitid").val()) > -1 ) {
+                $(this).show();
+            }
+            else{
+                $(this).hide();
+            }
+        });
+    });
+
     /**
      * Is validated date format sting?
      * @param str
@@ -83,6 +94,5 @@ $().ready(function(){
 
         return ret;
     }
-
 
 });

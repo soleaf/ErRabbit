@@ -42,12 +42,19 @@
             <div class="alert alert-danger" role="alert">${error}</div>
         </c:if>
 
+        <div class="filter_box form-inline">
+            <div class="input-group">
+                <div class="input-group-addon filter-icon"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span></div>
+                <input type="text" class="form-control" id="filter_rabbitid" placeholder="Input keyword">
+            </div>
+        </div>
+
         <c:if test="${not empty groups}">
         <c:forEach var="group" items="${groups}" varStatus="status">
         <h3 class="rabbit-group">${group.name}</h3>
-        <ul class="list_rabbit row">
+        <ul class="list_rabbit row" id="list_rabbit">
             <c:forEach var="item" items="${group.rabbits}" varStatus="status">
-                <li class="col-md-4">
+                <li class="col-md-4" data-id="${item.id}">
                     <div class="icon">
                             ${fn:toUpperCase(fn:substring(item.id, 0, 1))}
                     </div>
