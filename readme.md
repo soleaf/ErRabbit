@@ -1,5 +1,6 @@
-![ErRabbit](graphics/logo.png "logo")
+[![Build Status](https://travis-ci.org/soleaf/ErRabbit.svg?branch=master)](https://travis-ci.org/soleaf/ErRabbit)
 
+![ErRabbit](graphics/logo.png "logo")
 
 # Introduction
 
