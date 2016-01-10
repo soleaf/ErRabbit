@@ -3,8 +3,6 @@ package org.mintcode.errabbit.core.rabbit.name;
 import org.junit.Test;
 import org.mintcode.errabbit.model.Rabbit;
 
-import java.util.List;
-
 import static org.junit.Assert.*;
 
 /**

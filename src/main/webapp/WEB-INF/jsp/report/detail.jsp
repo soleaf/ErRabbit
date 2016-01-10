@@ -34,10 +34,13 @@
                 hAxis: {min: 0, textStyle: {color: '#878787', fontSize: 10}},
                 vAxis: {textPosition: 'in', min: 0, gridlines: {color: '#ffffff'}},
                 curveType: 'function',
-                colors: ['#ff5572', '#FF8166', '#ffbf5e']
+                lineWidth: 0.5,
+                colors: ['#ff5572', '#FF8166', '#ffbf5e'],
+                isStacked: 'true',
+                focusTarget: 'category'
             };
 
-            var chart = new google.visualization.LineChart(document.getElementById('total_timeline_chart'));
+            var chart = new google.visualization.AreaChart(document.getElementById('total_timeline_chart'));
             chart.draw(data, options);
 
             <c:forEach var="rabbit" items="${report.targets}" varStatus="step">
@@ -47,7 +50,7 @@
                 , ['${item.key}h', ${item.value.level_FATAL}, ${item.value.level_ERROR}, ${item.value.level_WARN}]
                 </c:forEach>
             ]);
-            var chart_${step.index} = new google.visualization.LineChart(document.getElementById('${step.index}_timeline_chart'));
+            var chart_${step.index} = new google.visualization.AreaChart(document.getElementById('${step.index}_timeline_chart'));
             chart_${step.index}.draw(data_${step.index}, options);
             </c:forEach>
         }

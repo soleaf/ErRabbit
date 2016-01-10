@@ -3,8 +3,6 @@ package org.mintcode.errabbit.model;
 import org.apache.log4j.Category;
 import org.apache.log4j.Level;
 import org.apache.log4j.spi.ThrowableInformation;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.impl.ThrowableProxy;
 import org.junit.Test;
 

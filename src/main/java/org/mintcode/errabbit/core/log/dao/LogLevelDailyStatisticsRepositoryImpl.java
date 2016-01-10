@@ -1,6 +1,6 @@
 package org.mintcode.errabbit.core.log.dao;
 
-import com.mongodb.WriteResult;
+import com.mongodb.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
@@ -10,13 +10,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * LogLevelDailyStatisticsRepositoryImpl
@@ -28,6 +28,55 @@ public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStati
 
     @Autowired
     private MongoOperations mongoOperations;
+
+    @Autowired
+    MongoClient mongoClient;
+
+    public void insertStatistic(Map<String,Object> staticSet) {
+        try {
+
+
+            //COLLECTION_PREFIX + ".statistic"
+        /*
+            log.statstic
+                {rabbit : 'rabbitID'
+                ,year : year
+                ,month : month
+                ,day : day
+                ,level_error : n
+                ,level_info : n
+                ...}
+         */
+
+            // Extracting collectedDate
+            Integer year = (Integer) staticSet.get("year");
+            Integer month = (Integer) staticSet.get("month");
+            Integer day = (Integer) staticSet.get("day");
+            Integer dateInt = (Integer) staticSet.get("dateInt");
+            String rabbitId = (String) staticSet.get("rabbitId");
+
+            DB db = mongoClient.getDB("errabbit");
+            DBCollection coll = db.getCollection("logs.statistic.day");
+
+            DBObject q = new BasicDBObject();
+            q.put("dateInt", dateInt);
+            q.put("rabbitId", rabbitId);
+            q.put("year", year);
+            q.put("month", month);
+            q.put("day", day);
+
+            DBObject u = new BasicDBObject();
+            for (String key : staticSet.keySet()){
+                if (key.startsWith("level_")){
+                    u.put("$inc", new BasicDBObject(key, staticSet.get(key)));
+                }
+            }
+            coll.update(q, u, true, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
+    }
 
     public void insertStatistic(Log log) {
 
@@ -58,20 +107,19 @@ public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStati
             DateFormat format = new SimpleDateFormat("yyyyMMdd");
             Integer dateInt = Integer.parseInt(format.format(date));
 
-            // Upsert + $inc
-            Query query = new Query();
-            query.addCriteria(Criteria.where("rabbitId").is(log.getRabbitId())
-                            .andOperator(
-                                    Criteria.where("dateInt").is(dateInt),
-                                    Criteria.where("year").is(year),
-                                    Criteria.where("month").is(month),
-                                    Criteria.where("day").is(day)
-                            )
-            );
+            DB db = mongoClient.getDB("errabbit");
+            DBCollection coll = db.getCollection("logs.statistic.day");
 
-            Update update = new Update().inc("level_" + log.getLoggingEvent().getLevel(), 1);
-            mongoOperations.upsert(query, update, LogLevelDailyStatistics.class);
+            DBObject q = new BasicDBObject();
+            q.put("dateInt", dateInt);
+            q.put("rabbitId", log.getRabbitId());
+            q.put("year", year);
+            q.put("month", month);
+            q.put("day", day);
 
+            DBObject u = new BasicDBObject();
+            u.put("$inc", new BasicDBObject("level_" + log.getLoggingEvent().getLevel(), 1));
+            coll.update(q, u, true, false);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());

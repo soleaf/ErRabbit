@@ -4,7 +4,7 @@
     <div>
         <ul>
             <c:forEach var="item" items="${dayCellList}" varStatus="status">
-                <li class="day <c:if test='${selectedDay == item.dayOfMonth}'>active</c:if>" data-value="${item.dayOfMonth}">
+                <li id="day-${item.dayOfMonth}" class="day <c:if test='${selectedDay == item.dayOfMonth}'>active</c:if>" data-value="${item.dayOfMonth}" data-count="${item.statistics.calcTotal()}">
                     ${item.dayOfMonth}
                     <c:if test="${not empty item.statistics}"><span class="badge">${item.statistics.calcTotal()}</span></c:if>
                 </li>

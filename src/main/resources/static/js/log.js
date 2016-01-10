@@ -156,28 +156,27 @@ function retrieveCalendar(rabbitId, year, month, selectedDay, callback) {
             sessionExpireCheck(data);
 
             $("#log-calendar").html("");
-            $("#log-calendar").append(data);
+            $.when($("#log-calendar").append(data)).then(function(){
+                if (selectedDay > 0) {
+                    $("#cal_d").val(selectedDay);
+                }
 
-            if (selectedDay > 0) {
-                $("#cal_d").val(selectedDay);
-            }
+                // day cell click
+                $("#log-calendar .day").click(function () {
+                    $("#page-status").hide();
+                    filterButtonToggle(false);
+                    $("#cal_d").val($(this).attr("data-value"));
+                    $("#log-list").html("");
+                    retrieveLogsFromSelected();
+                    $("#log-calendar .active").removeClass("active");
+                    $(this).addClass("active");
+                });
+                hideLoading();
 
-            // day cell click
-            $("#log-calendar .day").click(function () {
-                $("#page-status").hide();
-                filterButtonToggle(false);
-                $("#cal_d").val($(this).attr("data-value"));
-                $("#log-list").html("");
-                retrieveLogsFromSelected();
-                $("#log-calendar .active").removeClass("active");
-                $(this).addClass("active");
+                if (callback != null) {
+                    callback();
+                }
             });
-            hideLoading();
-
-            if (callback != null) {
-                callback();
-            }
-
         }
         , fail: function () {
             alert("fail");
@@ -255,6 +254,7 @@ function drawChart(dataJson) {
         chartArea: {left: 0, top: 0, width: '100%', height: '100%'},
         //titlePosition: 'in', axisTitlesPosition: 'in',
         backgroundColor: 'transparent',
+        lineWidth: 0.5,
         hAxis: {
             textPosition: 'in',
             min: 0,
@@ -270,10 +270,12 @@ function drawChart(dataJson) {
             easing: 'inAndOut',
             duration: 300
         }
+        ,isStacked: 'true'
+        ,focusTarget: 'category'
     };
 
     if (chart == null) {
-        chart = new google.visualization.LineChart(document.getElementById('chart'));
+        chart = new google.visualization.AreaChart(document.getElementById('chart'));
         // When the table is selected, update the orgchart.
         google.visualization.events.addListener(chart, 'error', function(err) {
             $("#chart").hide();
@@ -366,6 +368,14 @@ function initLogFeedButton() {
  */
 function retrievelogs(rabbitId, page, size, y, m, d) {
 
+    var dayCount = $("#day-"+d).attr("data-count");
+    if (dayCount == ""){
+        $("#log-feed").hide();
+        $("#page-status").hide();
+        showChart(false);
+        return;
+    }
+
     $("#page-status").hide();
     showLoading();
 
@@ -445,6 +455,8 @@ function retrievelogs(rabbitId, page, size, y, m, d) {
                 $("#filter_level").val($(this).text());
                 $("#filter_apply").trigger("click");
             });
+
+            $('[data-toggle="popover"]').popover();
 
             hideLoading();
         }

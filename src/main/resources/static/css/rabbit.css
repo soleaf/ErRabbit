@@ -14,7 +14,7 @@
     margin:0px;
     padding:0px;
     list-style: none;
-    margin-bottom:50px;
+    margin-bottom:100px;
 }
 .page .list_rabbit li{
     margin-top:10px;
@@ -124,4 +124,50 @@
 }
 .page .group-table{
     width:500px;
+}
+.page .filter_box{
+    background-color: #FFFFFF;
+    padding:2px;
+    position: absolute;
+    bottom: 15px;
+    z-index: 2;
+    top: auto;
+    right: 15px;
+    -webkit-box-shadow: 0px 0px 49px 37px rgba(255,255,255,1);
+    -moz-box-shadow: 0px 0px 49px 37px rgba(255,255,255,1);
+    box-shadow: 0px 0px 49px 37px rgba(255,255,255,1);
+}
+.page .filter_box .filter-icon{
+    color:#90CAD2;
+    background-color:#FFFFFF;
+    border-right:none;
+}
+.page .filter_box INPUT{
+    border-left: none;
+    padding-left:0px;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+.page .filter_box .filter-item-list{
+    max-height:300px;
+    overflow: scroll;
+    margin-bottom: 10px;
+    border-top:1px solid #dddddd;
+    border-bottom:1px solid #dddddd;
+    display: none;
+}
+.page .filter_box .filter-item-list>LI{
+    font-size:14px;
+    padding-left:6px;
+    padding-right:6px;
+    padding-bottom:8px;
+    padding-top:8px;
+    border-bottom:1px solid #f4f4f4;
+    cursor: pointer;
+}
+
+.page .filter_box .filter-item-list>LI:HOVER{
+    background-color:#90CAD2;
+    color:#FFFFFF;
 }

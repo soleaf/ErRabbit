@@ -45,6 +45,9 @@ public class EventStreamCentral {
         eventStream = new DefaultEventStream();
         eventStream.setJobExecutor(jobExecutor);
         for (EventMapping mapping : mappingList){
+            if (!mapping.getActive() || mapping.getActions().isEmpty()){
+                continue;
+            }
             eventStream.registerEventChecker(new EventChecker(mapping, eventStream));
         }
     }

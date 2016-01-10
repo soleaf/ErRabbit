@@ -12,6 +12,7 @@ $(document).ready(function(){
     $("#empty").hide();
     feedReport(0, 50);
     initReportFeedButton();
+    deletingAction();
 });
 
 /**
@@ -52,5 +53,15 @@ function feedReport(page, size) {
             }
             hideLoading();
         }
+    });
+}
+
+function deletingAction(){
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var deletingId = button.data('deleting-id');
+        var modal = $(this);
+        modal.find('#deleting-id').val(deletingId);
+        modal.find('#deleting-date').text(button.data('deleting-date'));
     });
 }

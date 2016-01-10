@@ -1,6 +1,7 @@
 package org.mintcode.errabbit;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.system.ApplicationPidFileWriter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -21,7 +22,9 @@ import java.nio.charset.Charset;
 public class Server {
 
     public static void main(String[] args) {
-        SpringApplication.run(Server.class, args);
+        SpringApplication app = new SpringApplication(Server.class);
+        app.addListeners(new ApplicationPidFileWriter("errabbit.pid"));
+        app.run(args);
     }
 
     @Bean

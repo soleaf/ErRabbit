@@ -228,4 +228,15 @@ public class EventChecker {
     public Long getMetricIgnoreFromSleepSec() {
         return metricIgnoreFromSleepSec;
     }
+
+    @Override
+    public String toString() {
+        return "EventChecker{" +
+                "mapping=" + mapping +
+                ", metricMatched=" + metricMatched +
+                ", metricIgnoreFromSleepSec=" + metricIgnoreFromSleepSec +
+                ", sleepTime=" + sleepTime +
+                ", eventTimes=" + eventTimes +
+                '}';
+    }
 }

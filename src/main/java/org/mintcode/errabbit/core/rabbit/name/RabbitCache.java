@@ -1,6 +1,6 @@
 package org.mintcode.errabbit.core.rabbit.name;
 
-import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
+import org.mintcode.errabbit.model.Log;
 import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 import org.mintcode.errabbit.model.Rabbit;
 
@@ -42,16 +42,22 @@ public interface RabbitCache {
     public List<Rabbit> getRabbits();
 
     /**
-     * Sync DailyStatistics;
+     * Sync DailyStatistics
      */
     public void syncDailyStatistics();
 
     /**
-     * Update dailyStatistics
-     * @param rabbitId
-     * @param level
+     * Sync DailyStatistics only target rabbit
+     * @param id
      */
-    public void updateDailyStatistics(String rabbitId, String level);
+    public void syncDailyStatistics(String id);
+
+    /**
+     * Update dailyStatistics
+     * @param log
+     */
+    public void updateDailyStatistics(Log log);
+    public void updateDailyStatistics(String rabbitId, String level, Integer loggingDateInt, Integer count);
 
     /**
      * Get DailyStatistics

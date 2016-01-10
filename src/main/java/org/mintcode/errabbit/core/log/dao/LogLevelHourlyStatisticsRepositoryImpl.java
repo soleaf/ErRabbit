@@ -1,8 +1,7 @@
 package org.mintcode.errabbit.core.log.dao;
 
-import com.mongodb.WriteResult;
+import com.mongodb.*;
 import org.mintcode.errabbit.model.Log;
-import org.mintcode.errabbit.model.LogLevelDailyStatistics;
 import org.mintcode.errabbit.model.LogLevelHourStatistics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * LogLevelHourlyStatisticsRepositoryImpl
@@ -27,6 +26,58 @@ public class LogLevelHourlyStatisticsRepositoryImpl implements LogLevelHourlySta
 
     @Autowired
     private MongoOperations mongoOperations;
+
+    @Autowired
+    private MongoClient mongoClient;
+
+    public void insertStatistic(Map<String,Object> staticSet) {
+        try {
+
+
+            //COLLECTION_PREFIX + ".statistic"
+        /*
+            log.statstic
+                {rabbit : 'rabbitID'
+                ,year : year
+                ,month : month
+                ,day : day
+                ,level_error : n
+                ,level_info : n
+                ...}
+         */
+
+            // Extracting collectedDate
+            Integer year = (Integer) staticSet.get("year");
+            Integer month = (Integer) staticSet.get("month");
+            Integer day = (Integer) staticSet.get("day");
+            Integer hour = (Integer) staticSet.get("hour");
+            Integer dateInt = (Integer) staticSet.get("dateInt");
+            String rabbitId = (String) staticSet.get("rabbitId");
+
+            DB db = mongoClient.getDB("errabbit");
+            DBCollection coll = db.getCollection("logs.statistic.hour");
+
+            DBObject q = new BasicDBObject();
+            q.put("dateInt", dateInt);
+            q.put("rabbitId", rabbitId);
+            q.put("year", year);
+            q.put("month", month);
+            q.put("day", day);
+            q.put("hour", hour);
+
+            DBObject u = new BasicDBObject();
+            for (String key : staticSet.keySet()){
+                if (key.startsWith("level_")){
+                    u.put("$inc", new BasicDBObject(key, staticSet.get(key)));
+                }
+            }
+            coll.update(q, u, true, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
+        }
+    }
+
 
     @Override
     public void insertStatistic(Log log) {
@@ -57,21 +108,20 @@ public class LogLevelHourlyStatisticsRepositoryImpl implements LogLevelHourlySta
             DateFormat format = new SimpleDateFormat("yyyyMMdd");
             Integer dateInt = Integer.parseInt(format.format(date));
 
-            // Upsert + $inc
-            Query query = new Query();
-            query.addCriteria(Criteria.where("rabbitId").is(log.getRabbitId())
-                            .andOperator(
-                                    Criteria.where("dateInt").is(dateInt),
-                                    Criteria.where("year").is(year),
-                                    Criteria.where("month").is(month),
-                                    Criteria.where("day").is(day),
-                                    Criteria.where("hour").is(hour)
-                            )
-            );
+            DB db = mongoClient.getDB("errabbit");
+            DBCollection coll = db.getCollection("logs.statistic.hour");
 
-            Update update = new Update().inc("level_" + log.getLoggingEvent().getLevel(), 1);
-            mongoOperations.upsert(query, update, LogLevelHourStatistics.class);
+            DBObject q = new BasicDBObject();
+            q.put("dateInt", dateInt);
+            q.put("year", year);
+            q.put("month", month);
+            q.put("day", day);
+            q.put("hour", hour);
+            q.put("rabbitId", log.getRabbitId());
 
+            DBObject u = new BasicDBObject();
+            u.put("$inc", new BasicDBObject("level_" + log.getLoggingEvent().getLevel(), 1));
+            coll.update(q, u, true, false);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());

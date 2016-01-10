@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" name="errabbit" packages="org.mintcode.errabbit">
+    <Appenders>
+        <Console name="STDOUT">
+            <PatternLayout pattern="%d %-5p: %c - %m%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>

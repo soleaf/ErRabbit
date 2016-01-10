@@ -2,6 +2,8 @@ package org.mintcode.errabbit.model;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,6 +18,12 @@ import java.util.Date;
  * Created by soleaf on 2015. 2. 2..
  */
 @Document(collection = "logs")
+@CompoundIndexes({
+        @CompoundIndex(name = "date_id", def = "{'loggingEventDateInt': 1, 'rabbitId': 1, '_id':-1}"),
+        @CompoundIndex(name = "date_id_level", def = "{'loggingEventDateInt': 1, 'rabbitId': 1, 'loggingEvent.level':1, '_id':-1}"),
+        @CompoundIndex(name = "date_id_cate", def = "{'loggingEventDateInt': 1, 'rabbitId': 1, 'loggingEvent.categoryName':1, '_id':-1}"),
+        @CompoundIndex(name = "date_id_cate_level", def = "{'loggingEventDateInt': 1, 'rabbitId': 1, 'loggingEvent.level':1, 'loggingEvent.categoryName':1, '_id':-1}")
+})
 public class Log implements Serializable {
 
     @Id
@@ -132,14 +140,14 @@ public class Log implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("<li class='log' data-e='%s' data-poload='/log/popover_data?id=%s'>",
                 (loggingEvent.getThrowableInfo() != null ? "true" : "") ,id.toString()));
-            sb.append(String.format("<span class='time'>%s</span>", format.format(loggingEvent.timeStampDate)));
+            sb.append(String.format("<span class='time' data-toggle='popover' data-placement='right' data-trigger='hover' title='Application time' data-content='Server collecting time : %s'>%s</span>", format.format(collectedDate), format.format(loggingEvent.timeStampDate)));
             sb.append(String.format("<span class='level %s %s' data-url='%s'>%s</span>", loggingEvent.level,
                                                                 (loggingEvent.getThrowableInfo() != null ? "has_exception" : ""),
                                                                 filterlevelURL,
                                                                 loggingEvent.level));
             sb.append("<div class='contgroup'>");
                 if (showRabbitID){
-                    sb.append(String.format("<span class='rabbit_id'>%s</span>", rabbitId));
+                    sb.append(String.format("<span class='rabbit_id' data-toggle='tooltip' data-placement='right' title='%s'>%s</span>", rabbitId, rabbitId));
                 }
 
                 String filterClassURL = String.format("/log/list.err?id=%s&y=%d&m=%d&d=%d&filter=true&filter_level=%s&filter_class=%s",

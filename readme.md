@@ -1,10 +1,13 @@
-![ErRabbit](graphics/logo.png "logo")
+[![Build Status](https://travis-ci.org/soleaf/ErRabbit.svg?branch=master)](https://travis-ci.org/soleaf/ErRabbit)
 
+![ErRabbit](graphics/logo.png "logo")
 
 # Introduction
 
 ErRabbit(Error Rabbit) is useful error remote tracking service with Visual View.
 Collecting by Log4j and ActiveMQ will make it easy compatible with other programs.
+
+> Introduction Slide http://www.slideshare.net/ilhoahn50/errabbit
 
 ## What's a difference.
 
@@ -21,7 +24,7 @@ Collecting by Log4j and ActiveMQ will make it easy compatible with other program
 ## Web console screenshot
 
 ### Main
-![ScreenShot](graphics/screenshot1.png)
+![ScreenShot](https://raw.githubusercontent.com/soleaf/ErRabbit/master/graphics/screenshot1.png)
 (+ Click to zoom)
 
 - Managing rabbits(your applications)
@@ -30,7 +33,7 @@ Collecting by Log4j and ActiveMQ will make it easy compatible with other program
 - View logs
 
 ### Log view
-![ScreenShot](graphics/screenshot2.png)
+![ScreenShot](https://raw.githubusercontent.com/soleaf/ErRabbit/master/graphics/screenshot2.png)
 (+ Click to zoom)
 
 - Explorer logs selected day
@@ -47,20 +50,20 @@ Collecting by Log4j and ActiveMQ will make it easy compatible with other program
 - Search library package info with google search
 
 ### Console
-![ScreenShot](graphics/screenshot3.png)
+![ScreenShot](https://raw.githubusercontent.com/soleaf/ErRabbit/master/graphics/screenshot3.png)
 (+ Click to zoom)
 
 - Live feed all logs with WebSocket
 - Same log view functions like log view page
 
 ### Analysis(Aggregation query)
-![ScreenShot](graphics/screenshot4.png)
+![ScreenShot](https://raw.githubusercontent.com/soleaf/ErRabbit/master/graphics/screenshot4.png)
 (+ Click to zoom)
 
 - Easy ggregating logs counts with custom grouping and filtering
 
 ### Batch Reprot
-![ScreenShot](graphics/screenshot5.png)(+ Click to zoom)
+![ScreenShot](https://raw.githubusercontent.com/soleaf/ErRabbit/master/graphics/screenshot5.png)(+ Click to zoom)
 
 - Daily report batch
 - View all yesterday event logs on one page.
@@ -215,6 +218,16 @@ Example Project : https://github.com/soleaf/ErRabbit-Example-log4j1
     <version>5.7.0</version>
 </dependency>
 ```
+and add repository for javax.jms (if maven can't find javax.jms)
+```xml
+ <repositories>
+        <repository>
+            <id>repository.jboss.org-public</id>
+            <name>JBoss.org Maven repository</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+```
 
 #### Setup Log4j2
 
@@ -287,6 +300,14 @@ catch (Exception e){
 
 Example Project : https://github.com/soleaf/ErRabbit-Example-log4j2
 
+# Contribute
+
+We welcome anyone want to improve ErRabbit.
+
+- You can just fix and send pull request to me.
+- Or talk about new feature through email(soleaf@gmail.com).
+- Please comment as English at commit.
+
 # Plan and Troubleshooting
 
 Please read this wiki
@@ -297,6 +318,14 @@ https://github.com/soleaf/ErRabbit/wiki
 
 * :D 신현묵(Twitter @zetlos, supims@gmail.com)
 
-# Lisence
+# Awards
+
+* Golden prize at 2015 OSS world challenge
+
+# Talk with me
+
+* Always ok! soleaf@gmail.com
+
+# License
 
 Apache 2.0 (http://www.apache.org/licenses/LICENSE-2.0)

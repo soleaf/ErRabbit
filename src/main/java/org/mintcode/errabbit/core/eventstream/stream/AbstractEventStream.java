@@ -1,5 +1,7 @@
 package org.mintcode.errabbit.core.eventstream.stream;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mintcode.errabbit.core.eventstream.event.EventChecker;
 import org.mintcode.errabbit.core.eventstream.event.EventMapping;
 import org.mintcode.errabbit.core.eventstream.event.action.EventAction;
@@ -18,8 +20,11 @@ public abstract class AbstractEventStream implements EventStream {
     protected Boolean active = false;
     protected ThreadPoolTaskExecutor jobExecutor;
 
+    private Logger logger = LogManager.getLogger(getClass());
+
     @Override
     public void registerEventChecker(EventChecker eventChecker) {
+        logger.trace("Register eventChecker : " + eventChecker);
         eventCheckers.add(eventChecker);
     }
 

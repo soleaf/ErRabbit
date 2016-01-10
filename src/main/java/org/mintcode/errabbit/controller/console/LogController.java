@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -135,8 +136,16 @@ public class LogController {
                            @RequestParam(value = "m", required = true) Integer month, // warn : jan.=1){
                            @RequestParam(value = "d", required = true) Integer day){
         try{
+
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.YEAR , year);
+            cal.set(Calendar.MONTH, month-1);
+            cal.set(Calendar.DAY_OF_MONTH, day);
+            DateFormat format = new SimpleDateFormat("yyyyMMdd");
+            Integer dateInt = Integer.parseInt(format.format(cal.getTime()));
+
             Graph graph = new Graph();
-            graph.add(logLevelHourlyStatisticsRepository.findByRabbitIdAndYearAndMonthAndDay(id, year, month, day));
+            graph.add(logLevelHourlyStatisticsRepository.findByRabbitIdAndDateInt(id, dateInt));
             return graph.getGraph();
         }
         catch (Exception e){
@@ -260,25 +269,29 @@ public class LogController {
             // Filter options
             Page<Log> reportPage = null;
             if (level == null && className == null){
-                reportPage = logRepository.findByRabbitIdAndLoggingEventDateInt(id
-                        , loggingEventDateInt
+                reportPage = logRepository.findByLoggingEventDateIntAndRabbitId(
+                        loggingEventDateInt
+                        , id
                         , new PageRequest(page, size, sort));
             }
             else if (level !=null && className == null){
-                reportPage = logRepository.findByRabbitIdAndLoggingEventDateIntAndLevel(id
-                        , loggingEventDateInt
+                reportPage = logRepository.findByLoggingEventDateIntAndRabbitIdAndLevel(
+                        loggingEventDateInt
+                        , id
                         , level
                         , new PageRequest(page, size, sort));
             }
             else if (level ==null && className != null){
-                reportPage = logRepository.findByRabbitIdAndLoggingEventDateIntAndClassName(id
-                        , loggingEventDateInt
+                reportPage = logRepository.findByLoggingEventDateIntAndRabbitIdAndClassName(
+                        loggingEventDateInt
+                        , id
                         , className
                         , new PageRequest(page, size, sort));
             }
             else if (level !=null && className != null){
-                reportPage = logRepository.findByRabbitIdAndLoggingEventDateIntAndLevelAndClassName(id
-                        , loggingEventDateInt
+                reportPage = logRepository.findByLoggingEventDateIntAndRabbitIdAndLevelAndClassName(
+                        loggingEventDateInt
+                        , id
                         , level
                         , className
                         , new PageRequest(page, size, sort));

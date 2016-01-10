@@ -22,7 +22,7 @@ $().ready(function(){
         modal.find('.modal-title').text('Delete "' + rabbitId +'"');
         modal.find('.well').text('target id : "' + rabbitId +'"');
         modal.find('#deleting_id').val(rabbitId);
-    })
+    });
 
     // Clean logs modal
     $('#cleanModal').on('show.bs.modal', function (event) {
@@ -32,7 +32,7 @@ $().ready(function(){
         modal.find('.modal-title').text('Clean "' + rabbitId +'"');
         modal.find('.well').text('target id : "' + rabbitId +'"');
         modal.find('#clean_id').val(rabbitId);
-    })
+    });
 
     $("#clean-submit").click(function(){
         if (!dateValidation($("#clean-begin").val())){
@@ -50,6 +50,34 @@ $().ready(function(){
             alert("End date should be after before date");
             return false;
         }
+    });
+
+    $("#filter_rabbitid").keyup(function(){
+        if($("#filter_rabbitid").val().length < 1){
+            $("#filter-item-list").fadeOut();
+        }
+        else{
+            $("#filter-item-list").empty();
+            $("#list_rabbit>LI").each(function(){
+                if ($(this).attr("data-id").indexOf($("#filter_rabbitid").val()) > -1 ) {
+                    $("#filter-item-list").append("<li>" + $(this).attr("data-id") + "</li>");
+                }
+            });
+            $("#filter-item-list li").click(function(){
+                location.href="/log/list.err?id=" + $(this).text();
+            });
+            if ($("#filter-item-list LI").size() > 0){
+                $("#filter-item-list").fadeIn();
+            }
+            else{
+                $("#filter-item-list").fadeOut();
+            }
+        }
+    });
+
+    $("#filter_rabbitid").focusout(function(){
+        $("#filter_rabbitid").val("");
+        $("#filter-item-list").fadeOut();
     });
 
     /**
@@ -83,6 +111,5 @@ $().ready(function(){
 
         return ret;
     }
-
 
 });

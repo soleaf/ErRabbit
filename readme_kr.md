@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/soleaf/ErRabbit.svg?branch=master)](https://travis-ci.org/soleaf/ErRabbit)
+
 ![ErRabbit](graphics/logo.png "logo")
 
 # 소개
@@ -6,6 +8,8 @@ ErRabbit(Error Rabbit)은 알아보기 어려운 java의 stack trace를 보기 �
 많은 서버들의 로그를 웹으로 쉽게 탐색할 수 있게 해줍니다.
 많이 쓰는 로그 프로그램인 Log4j를 사용하여 ActiveMQ로 로그를 수집하기 때문에 이미 개발해놓은 프로그램에
 적용하기도 쉽습니다.
+
+> 소개 슬라이드 http://www.slideshare.net/ilhoahn50/errabbit
 
 > [Here](readme.md) is Enlgish document.
 
@@ -82,7 +86,7 @@ ErRabbit은 ActiveMQ와 MongoDB를 필요로 합니다
 
 ### 실행
 
-command `sh run.sh` 으로 실행 <br/>
+command `sh run.sh` 으로 실행<br/>
 아니면 직접 command `java -jar [war filename] --spring.config.location=file:settings.properties` 으로 실행하면 됩니다.
 
 ## 웬 콘솔에 로그인 하고 레빗을 추가
@@ -198,6 +202,18 @@ log4j가 이미 추가 되어있다는 것을 가정합니다.
 </dependency>
 ```
 
+javax.jms를 메이븐에서 찾지 못한다고 나타나면 아래처럼 레포지토리를 추가해주세요.
+```xml
+ <repositories>
+        <repository>
+            <id>repository.jboss.org-public</id>
+            <name>JBoss.org Maven repository</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+```
+
+
 #### Log4j2 설정
 
 1. 'JMS Appender'를 `log4j2.xml`에 ActiveMQ URL, userName, password를 설정합니다
@@ -269,14 +285,30 @@ catch (Exception e){
 
 예제 프로젝트 : https://github.com/soleaf/ErRabbit-Example-log4j2
 
+# 기여하기
+
+언제나 ErRabbit에 기여하시고자 하는 분들을 환영합니다.
+- 간단한 버그 픽스는 자유롭게 Pull Request를 보내주세요.
+- 필요한기능이나 로그맵에 대한 점들은 email로 같이 대화를 먼저 해주세요(soleaf@gmail.com).
+- 커밋 코멘트는 영어로 부탁드릴께요!
+
 # 다음계획 및 문제해결
 
 다음 위키를 확인해주세요.
 https://github.com/soleaf/ErRabbit/wiki
 
-# 감사한분
+# 멘토 & 스페셜 떙스!
 
 * :D 신현묵(Twitter @zetlos, supims@gmail.com)
+
+# 수상내역
+
+* 2015 공개소프트웨어 개발자 대회, 금상
+
+# 도움이나 기타 이야기를 나누고 싶으시다면
+
+* 언제나 환영합니다! soleaf@gmail.com
+
 
 # 라이센스
 
