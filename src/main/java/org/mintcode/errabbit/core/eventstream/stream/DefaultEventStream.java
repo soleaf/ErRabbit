@@ -5,5 +5,4 @@ package org.mintcode.errabbit.core.eventstream.stream;
  */
 public class DefaultEventStream extends AbstractEventStream {
 
-
 }

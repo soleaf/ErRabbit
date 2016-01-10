@@ -12,17 +12,28 @@ import java.util.List;
  * Mapping condition with actions
  * Created by soleaf on 1/1/16.
  */
-@Document(collection = "settings.event.mapping")
+@Document(collection = "event.mapping")
 public class EventMapping {
 
-    @DBRef
     private EventCondition condition;
 
     @DBRef
     private List<EventAction> actions = new ArrayList<>();
 
+    private Boolean active = false;
+
+    private String name;
+
     public EventMapping(){
 
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public EventMapping(EventCondition condition) {
@@ -51,5 +62,23 @@ public class EventMapping {
 
     public void setActions(List<EventAction> actions) {
         this.actions = actions;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    @Override
+    public String toString() {
+        return "EventMapping{" +
+                "condition=" + condition +
+                ", actions=" + actions +
+                ", active=" + active +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

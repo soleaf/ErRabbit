@@ -1,7 +1,10 @@
 package org.mintcode.errabbit.core.eventstream.stream;
 
 import org.mintcode.errabbit.core.eventstream.event.EventChecker;
+import org.mintcode.errabbit.core.eventstream.event.EventMapping;
+import org.mintcode.errabbit.core.eventstream.event.action.EventAction;
 import org.mintcode.errabbit.model.Log;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
  * EventSteam is set of event checkers
@@ -27,4 +30,12 @@ public interface EventStream {
      * @param log
      */
     public void input(Log log);
+
+    public void setActive(Boolean active);
+
+    public Boolean isActive();
+
+    public void setJobExecutor(ThreadPoolTaskExecutor executor);
+
+    public void runAction(EventMapping eventMapping, EventAction action, Log log);
 }

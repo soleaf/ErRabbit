@@ -1,25 +1,16 @@
 package org.mintcode.errabbit;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import java.nio.charset.Charset;
-import java.util.Arrays;
 import javax.servlet.Filter;
+import java.nio.charset.Charset;
 
 /**
  * ActiveMQ Listener Configuration
@@ -44,5 +35,15 @@ public class Server {
         characterEncodingFilter.setEncoding("UTF-8");
         characterEncodingFilter.setForceEncoding(true);
         return characterEncodingFilter;
+    }
+
+    @Bean
+    public ThreadPoolTaskExecutor jobExecutor() {
+        ThreadPoolTaskExecutor pool = new ThreadPoolTaskExecutor();
+        pool.setCorePoolSize(5);
+        pool.setMaxPoolSize(10);
+        pool.setKeepAliveSeconds(5);
+        pool.setWaitForTasksToCompleteOnShutdown(true);
+        return pool;
     }
 }

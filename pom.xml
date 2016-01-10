@@ -146,13 +146,16 @@
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-broker</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.3.1</version>
         </dependency>
-        
+        <dependency>
+            <groupId>net.gpedro.integrations.slack</groupId>
+            <artifactId>slack-webhook</artifactId>
+            <version>1.1.1</version>
+        </dependency>
     </dependencies>
 
 
@@ -177,7 +180,8 @@
                             <tasks>
                                 <echo>Using env.test.properties</echo>
                                 <copy file="src/scripts/run.sh" tofile="${basedir}/target/run.sh"/>
-                                <copy file="src/main/resources/application.properties" tofile="${basedir}/target/settings.properties"/>
+                                <copy file="src/main/resources/application.properties"
+                                      tofile="${basedir}/target/settings.properties"/>
                             </tasks>
                         </configuration>
                     </execution>

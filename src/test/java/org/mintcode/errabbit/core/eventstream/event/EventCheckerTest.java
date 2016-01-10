@@ -37,10 +37,9 @@ public class EventCheckerTest {
         log.setCollectedDate(new Date());
 
         EventCondition eventCondition = new EventCondition();
-        eventCondition.setActive(true);
-        eventCondition.setRabbitId("junit");
-        eventCondition.setSleepMinutesAfterNotice(1);
-        eventCondition.setRangeMinutes(1);
+        eventCondition.addRabbitId("junit");
+        eventCondition.setSleepSecAfterAction(1);
+        eventCondition.setPeriodSec(1);
 
         EventMapping eventMapping = new EventMapping(eventCondition);
         eventMapping.addEventAction(new NotificationEventAction());
@@ -61,10 +60,9 @@ public class EventCheckerTest {
         log.setCollectedDate(new Date());
 
         EventCondition eventCondition = new EventCondition();
-        eventCondition.setActive(true);
-        eventCondition.setRabbitId("junit");
-        eventCondition.setSleepMinutesAfterNotice(1);
-        eventCondition.setRangeMinutes(1);
+        eventCondition.addRabbitId("junit");
+        eventCondition.setSleepSecAfterAction(1);
+        eventCondition.setPeriodSec(1);
 
         EventMapping eventMapping = new EventMapping(eventCondition);
         eventMapping.addEventAction(new NotificationEventAction());
@@ -89,11 +87,10 @@ public class EventCheckerTest {
         log.setLoggingEvent(errLoggingEvent);
 
         EventCondition eventCondition = new EventCondition();
-        eventCondition.setActive(true);
-        eventCondition.setRabbitId("junit");
+        eventCondition.addRabbitId("junit");
         eventCondition.setMatchLevel("WARN");
-        eventCondition.setSleepMinutesAfterNotice(1);
-        eventCondition.setRangeMinutes(1);
+        eventCondition.setSleepSecAfterAction(1);
+        eventCondition.setPeriodSec(1);
 
         EventMapping eventMapping = new EventMapping(eventCondition);
         eventMapping.addEventAction(new NotificationEventAction());
@@ -118,11 +115,10 @@ public class EventCheckerTest {
         log.setLoggingEvent(errLoggingEvent);
 
         EventCondition eventCondition = new EventCondition();
-        eventCondition.setActive(true);
-        eventCondition.setRabbitId("junit");
+        eventCondition.addRabbitId("junit");
         eventCondition.setMatchLevel("FATAL");
-        eventCondition.setSleepMinutesAfterNotice(1);
-        eventCondition.setRangeMinutes(1);
+        eventCondition.setSleepSecAfterAction(1);
+        eventCondition.setPeriodSec(1);
 
         EventMapping eventMapping = new EventMapping(eventCondition);
         eventMapping.addEventAction(new NotificationEventAction());
@@ -148,12 +144,11 @@ public class EventCheckerTest {
         log.setLoggingEvent(errLoggingEvent);
 
         EventCondition eventCondition = new EventCondition();
-        eventCondition.setActive(true);
-        eventCondition.setRabbitId("junit");
+        eventCondition.addRabbitId("junit");
         eventCondition.setMatchLevel("WARN");
         eventCondition.setMatchClass("org.mintcode.errabit");
-        eventCondition.setSleepMinutesAfterNotice(1);
-        eventCondition.setRangeMinutes(1);
+        eventCondition.setSleepSecAfterAction(1);
+        eventCondition.setPeriodSec(1);
 
         EventMapping eventMapping = new EventMapping(eventCondition);
         eventMapping.addEventAction(new NotificationEventAction());
@@ -179,12 +174,11 @@ public class EventCheckerTest {
         log.setLoggingEvent(errLoggingEvent);
 
         EventCondition eventCondition = new EventCondition();
-        eventCondition.setActive(true);
-        eventCondition.setRabbitId("junit");
+        eventCondition.addRabbitId("junit");
         eventCondition.setMatchLevel("ERROR");
         eventCondition.setMatchClass("org.mintcode.errabit");
-        eventCondition.setSleepMinutesAfterNotice(1);
-        eventCondition.setRangeMinutes(1);
+        eventCondition.setSleepSecAfterAction(1);
+        eventCondition.setPeriodSec(1);
 
         EventMapping eventMapping = new EventMapping(eventCondition);
         eventMapping.addEventAction(new NotificationEventAction());
@@ -194,4 +188,179 @@ public class EventCheckerTest {
 
     }
 
+    @Test
+    public void testCheckMatched4(){
+
+        // Matched : rabbit_id, level, class, message
+        // Not Matched :
+
+        Log log = new Log();
+        log.setRabbitId("junit");
+        log.setCollectedDate(new Date());
+        ErrLoggingEvent errLoggingEvent = new ErrLoggingEvent();
+        errLoggingEvent.setLevel("ERROR");
+        errLoggingEvent.setTimeStampDate(new Date());
+        errLoggingEvent.setCategoryName("org.mintcode.errabit");
+        errLoggingEvent.setRenderedMessage("This is error message");
+        log.setLoggingEvent(errLoggingEvent);
+
+        EventCondition eventCondition = new EventCondition();
+        eventCondition.addRabbitId("junit");
+        eventCondition.setMatchLevel("WARN");
+        eventCondition.setMatchClass("org.mintcode.errabit");
+        eventCondition.setIncludeMessage("error");
+        eventCondition.setSleepSecAfterAction(1);
+        eventCondition.setPeriodSec(1);
+
+        EventMapping eventMapping = new EventMapping(eventCondition);
+        eventMapping.addEventAction(new NotificationEventAction());
+
+        EventChecker ec = new EventChecker(eventMapping);
+        assertTrue(ec.check(log));
+
+    }
+
+    @Test
+    public void testCheckNotMatched4(){
+
+        // Matched : rabbit_id, level, class
+        // Not Matched : message
+
+        Log log = new Log();
+        log.setRabbitId("junit");
+        log.setCollectedDate(new Date());
+        ErrLoggingEvent errLoggingEvent = new ErrLoggingEvent();
+        errLoggingEvent.setLevel("ERROR");
+        errLoggingEvent.setTimeStampDate(new Date());
+        errLoggingEvent.setCategoryName("org.mintcode.errabit");
+        errLoggingEvent.setRenderedMessage("This is error message");
+        log.setLoggingEvent(errLoggingEvent);
+
+        EventCondition eventCondition = new EventCondition();
+        eventCondition.addRabbitId("junit");
+        eventCondition.setMatchLevel("WARN");
+        eventCondition.setMatchClass("org.mintcode.errabit");
+        eventCondition.setIncludeMessage("warning");
+        eventCondition.setSleepSecAfterAction(1);
+        eventCondition.setPeriodSec(1);
+
+        EventMapping eventMapping = new EventMapping(eventCondition);
+        eventMapping.addEventAction(new NotificationEventAction());
+
+        EventChecker ec = new EventChecker(eventMapping);
+        assertFalse(ec.check(log));
+
+    }
+
+    @Test
+    public void testCheckTreshold(){
+
+        // Matched : rabbit_id, level, class
+        // Not Matched : message
+
+        Log log = new Log();
+        log.setRabbitId("junit");
+        log.setCollectedDate(new Date());
+        ErrLoggingEvent errLoggingEvent = new ErrLoggingEvent();
+        errLoggingEvent.setLevel("ERROR");
+        errLoggingEvent.setTimeStampDate(new Date());
+        errLoggingEvent.setCategoryName("org.mintcode.errabit");
+        errLoggingEvent.setRenderedMessage("This is error message");
+        log.setLoggingEvent(errLoggingEvent);
+
+        EventCondition eventCondition = new EventCondition();
+        eventCondition.addRabbitId("junit");
+        eventCondition.setMatchLevel("WARN");
+        eventCondition.setMatchClass("org.mintcode.errabit");
+        eventCondition.setIncludeMessage("error");
+        eventCondition.setSleepSecAfterAction(1);
+        eventCondition.setThresholdCount(5);
+        eventCondition.setPeriodSec(5);
+
+        EventMapping eventMapping = new EventMapping(eventCondition);
+        eventMapping.addEventAction(new NotificationEventAction());
+
+        EventChecker ec = new EventChecker(eventMapping);
+        assertFalse(ec.check(log));
+        assertFalse(ec.check(log));
+        assertFalse(ec.check(log));
+        assertFalse(ec.check(log));
+        assertTrue(ec.check(log));
+
+    }
+
+    @Test
+    public void testCheckTresholdNotReached(){
+
+        // Matched : rabbit_id, level, class
+        // Not Matched : message
+
+        Log log = new Log();
+        log.setRabbitId("junit");
+        log.setCollectedDate(new Date());
+        ErrLoggingEvent errLoggingEvent = new ErrLoggingEvent();
+        errLoggingEvent.setLevel("ERROR");
+        errLoggingEvent.setTimeStampDate(new Date());
+        errLoggingEvent.setCategoryName("org.mintcode.errabit");
+        errLoggingEvent.setRenderedMessage("This is error message");
+        log.setLoggingEvent(errLoggingEvent);
+
+        EventCondition eventCondition = new EventCondition();
+        eventCondition.addRabbitId("junit");
+        eventCondition.setMatchLevel("WARN");
+        eventCondition.setMatchClass("org.mintcode.errabit");
+        eventCondition.setIncludeMessage("error");
+        eventCondition.setSleepSecAfterAction(1);
+        eventCondition.setThresholdCount(6);
+        eventCondition.setPeriodSec(5);
+
+        EventMapping eventMapping = new EventMapping(eventCondition);
+        eventMapping.addEventAction(new NotificationEventAction());
+
+        EventChecker ec = new EventChecker(eventMapping);
+        assertFalse(ec.check(log));
+        assertFalse(ec.check(log));
+        assertFalse(ec.check(log));
+        assertFalse(ec.check(log));
+        assertFalse(ec.check(log));
+
+    }
+
+    @Test
+    public void testCheckSleep() throws InterruptedException {
+
+        // Matched : rabbit_id, level, class
+        // Not Matched : message
+
+        Log log = new Log();
+        log.setRabbitId("junit");
+        log.setCollectedDate(new Date());
+        ErrLoggingEvent errLoggingEvent = new ErrLoggingEvent();
+        errLoggingEvent.setLevel("ERROR");
+        errLoggingEvent.setTimeStampDate(new Date());
+        errLoggingEvent.setCategoryName("org.mintcode.errabit");
+        errLoggingEvent.setRenderedMessage("This is error message");
+        log.setLoggingEvent(errLoggingEvent);
+
+        EventCondition eventCondition = new EventCondition();
+        eventCondition.addRabbitId("junit");
+        eventCondition.setMatchLevel("WARN");
+        eventCondition.setMatchClass("org.mintcode.errabit");
+        eventCondition.setIncludeMessage("error");
+        eventCondition.setSleepSecAfterAction(1);
+        eventCondition.setThresholdCount(1);
+        eventCondition.setPeriodSec(5);
+
+        EventMapping eventMapping = new EventMapping(eventCondition);
+        eventMapping.addEventAction(new NotificationEventAction());
+
+        EventChecker ec = new EventChecker(eventMapping);
+        assertTrue(ec.check(log));
+        assertFalse(ec.check(log));
+        assertTrue(ec.isSleep());
+
+        Thread.sleep(2000);
+        assertFalse(ec.isSleep());
+        assertTrue(ec.check(log));
+    }
 }

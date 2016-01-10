@@ -4,25 +4,15 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by soleaf on 10/12/15.
  */
-@Document(collection = "settings.event.condition")
 public class EventCondition {
 
-    @Id
-    private ObjectId id;
-
-    private String rabbitId;
-
-    private Date regDate;
-
-    private String name;
-
-    private Boolean active = false;
-
+    private Set<String> rabbitIdSet = new HashSet<>();
 
     /**
      * Checking conditions
@@ -30,9 +20,9 @@ public class EventCondition {
 
     private Integer thresholdCount = 0;
 
-    private Integer rangeMinutes = 0;
+    private Integer periodSec = 0;
 
-    private Integer sleepMinutesAfterNotice = 0;
+    private Integer sleepSecAfterAction = 0;
 
     private String matchLevel = null;
 
@@ -42,45 +32,26 @@ public class EventCondition {
 
     private Boolean hasException = null;
 
+    private Boolean includeMessageRegex = false;
 
-    public ObjectId getId() {
-        return id;
+    public Set<String> getRabbitIdSet() {
+        return rabbitIdSet;
     }
 
-    public void setId(ObjectId id) {
-        this.id = id;
+    public void setRabbitIdSet(Set<String> rabbitIdSet) {
+        this.rabbitIdSet = rabbitIdSet;
     }
 
-    public String getRabbitId() {
-        return rabbitId;
+    public boolean containsRabbitId(String rabbitId){
+        return this.rabbitIdSet.contains(rabbitId);
     }
 
-    public void setRabbitId(String rabbitId) {
-        this.rabbitId = rabbitId;
+    public void addRabbitId(String rabbitId){
+        this.rabbitIdSet.add(rabbitId);
     }
 
-    public Date getRegDate() {
-        return regDate;
-    }
-
-    public void setRegDate(Date regDate) {
-        this.regDate = regDate;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void removeRabbitId(String rabbitId){
+        this.rabbitIdSet.remove(rabbitId);
     }
 
     public Integer getThresholdCount() {
@@ -91,20 +62,20 @@ public class EventCondition {
         this.thresholdCount = thresholdCount;
     }
 
-    public Integer getRangeMinutes() {
-        return rangeMinutes;
+    public Integer getPeriodSec() {
+        return periodSec;
     }
 
-    public void setRangeMinutes(Integer rangeMinutes) {
-        this.rangeMinutes = rangeMinutes;
+    public void setPeriodSec(Integer periodSec) {
+        this.periodSec = periodSec;
     }
 
-    public Integer getSleepMinutesAfterNotice() {
-        return sleepMinutesAfterNotice;
+    public Integer getSleepSecAfterAction() {
+        return sleepSecAfterAction;
     }
 
-    public void setSleepMinutesAfterNotice(Integer sleepMinutesAfterNotice) {
-        this.sleepMinutesAfterNotice = sleepMinutesAfterNotice;
+    public void setSleepSecAfterAction(Integer sleepSecAfterAction) {
+        this.sleepSecAfterAction = sleepSecAfterAction;
     }
 
     public String getMatchLevel() {
@@ -137,5 +108,20 @@ public class EventCondition {
 
     public void setHasException(Boolean hasException) {
         this.hasException = hasException;
+    }
+
+    @Override
+    public String toString() {
+        return "EventCondition{" +
+                "rabbitIdSet=" + rabbitIdSet +
+                ", thresholdCount=" + thresholdCount +
+                ", periodSec=" + periodSec +
+                ", sleepSecAfterAction=" + sleepSecAfterAction +
+                ", matchLevel='" + matchLevel + '\'' +
+                ", matchClass='" + matchClass + '\'' +
+                ", includeMessage='" + includeMessage + '\'' +
+                ", hasException=" + hasException +
+                ", includeMessageRegex=" + includeMessageRegex +
+                '}';
     }
 }
