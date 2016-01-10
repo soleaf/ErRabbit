@@ -126,7 +126,7 @@
 
                 <div class="page-side-sub-element">
                     <ul id="groupby_available">
-                        <li><input type="checkbox" value="rabbitId" data-label="rabbit"> rabbit</li>
+                        <li><input type="checkbox" value="rabbitIdSet" data-label="rabbit"> rabbit</li>
                         <li><input type="checkbox" value="loggingEventDateInt" data-label="date"> date</li>
                         <li><input type="checkbox" value="loggingEvent.level" data-label="level"> level</li>
                         <li><input type="checkbox" value="loggingEvent.categoryName" data-label="className"> className

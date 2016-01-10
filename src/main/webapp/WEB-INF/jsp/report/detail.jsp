@@ -82,8 +82,8 @@
                 <c:forEach var="rank" items="${report.logReport.get('graphic').ranks}">
                     <tr>
                         <td class="level ${rank.level}">${rank.level}</td>
-                        <td class="name">${rank.rabbitId}</td>
-                        <td class="className"><a href="/log/list.err?id=${rank.rabbitId}&y=${report.targetYear}&m=${report.targetMonth+1}&d=${report.targetDay}&filter=true&filter_class=${rank.className}&filter_level=${rank.level}"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> ${rank.classNameOnly}</a>
+                        <td class="name">${rank.rabbitIdSet}</td>
+                        <td class="className"><a href="/log/list.err?id=${rank.rabbitIdSet}&y=${report.targetYear}&m=${report.targetMonth+1}&d=${report.targetDay}&filter=true&filter_class=${rank.className}&filter_level=${rank.level}"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> ${rank.classNameOnly}</a>
                         </td>
                         <td class="count">${rank.count}</td>
                     </tr>
@@ -106,11 +106,11 @@
                     <th class="count">count</th>
                     </thead>
                     <c:forEach var="rank" items="${report.logReport.get('graphic').ranks}">
-                        <c:if test="${rank.rabbitId == rabbit}">
+                        <c:if test="${rank.rabbitIdSet == rabbit}">
                             <tr>
                                 <td class="level ${rank.level}">${rank.level}</td>
-                                <td class="name">${rank.rabbitId}</td>
-                                <td class="className"><a href="/log/list.err?id=${rank.rabbitId}&y=${report.targetYear}&m=${report.targetMonth+1}&d=${report.targetDay}&filter=true&filter_class=${rank.className}&filter_level=${rank.level}"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> ${rank.classNameOnly}</a>
+                                <td class="name">${rank.rabbitIdSet}</td>
+                                <td class="className"><a href="/log/list.err?id=${rank.rabbitIdSet}&y=${report.targetYear}&m=${report.targetMonth+1}&d=${report.targetDay}&filter=true&filter_class=${rank.className}&filter_level=${rank.level}"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> ${rank.classNameOnly}</a>
                                 <td class="count">${rank.count}</td>
                             </tr>
                         </c:if>

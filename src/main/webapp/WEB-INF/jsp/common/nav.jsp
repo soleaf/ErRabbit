@@ -6,11 +6,12 @@
     <nav>
         <ul>
             <li class="${param.rabbit}"><a href="/rabbit/list.err">Rabbits</a></li>
+            <li class="${param.event}"><a href="/event/mapping/list.err">EventStream</a></li>
             <li class="${param.console}"><a href="/console/main.err">Console</a></li>
             <li class="${param.anal}"><a href="/anal/main.err">Analysis</a></li>
             <li class="${param.report}"><a href="/report/list.err">Reports</a></li>
         </ul>
-        <a class="logout" href="/logout">LogOut</a>
+        <a class="logout" href="/logout">SingnOut</a>
     </nav>
     </c:if>
 </header>

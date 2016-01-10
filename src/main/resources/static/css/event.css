@@ -1,0 +1,17 @@
+.event .page .page-information{
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 20px;
+}
+.event .page .page-information .btn-group{
+    margin-bottom: 20px;
+}
+.event .page .page-information .desc{
+    color: #5b5b5b;
+}
+.event-form{
+    width:400px;
+}
+.event .page .mapping-table{
+    max-width:900px;
+    margin-right:40px;
+}

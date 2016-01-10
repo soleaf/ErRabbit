@@ -21,7 +21,7 @@
                     <c:forEach var="rank" items="${item.logReport.get('graphic').getRanksLimit(3)}">
                         <tr>
                             <td class="level ${rank.level}">${rank.level}</td>
-                            <td class="name">${rank.rabbitId}</td>
+                            <td class="name">${rank.rabbitIdSet}</td>
                             <td class="className">${rank.classNameOnly}</td>
                             <td class="count">${rank.count}</td>
                         </tr>

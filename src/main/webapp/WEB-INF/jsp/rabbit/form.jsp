@@ -33,7 +33,7 @@
         <div class="form-horizontal rabbit-form">
             <form class="form" action="${action}">
                 <c:if test="${not empty modifying}">
-                    <c:set var="rabbitId" value="${rabbit.id}"/>
+                    <c:set var="rabbitIdSet" value="${rabbit.id}"/>
                     <c:set var="basePackage" value="${rabbit.basePackage}"/>
                     <c:set var="groupId" value="${rabbit.group.id}"/>
                     <c:if test="${rabbit.collectionOnlyException}">
@@ -47,8 +47,8 @@
                     <label class="control-label">GENERAL</label>
                     <div class="sub-form">
                         <label for="id" class="control-label">ID</label>
-                        <input type="text" class="form-control" id="id" name="id" placeholder="Rabbit ID" value="${rabbitId}" ${idReadOnly}>
-                        <span class="help-block">It's used to identify a rabbitId on Log4j appender property.</span>
+                        <input type="text" class="form-control" id="id" name="id" placeholder="Rabbit ID" value="${rabbitIdSet}" ${idReadOnly}>
+                        <span class="help-block">It's used to identify a rabbitIdSet on Log4j appender property.</span>
                     </div>
                     <div class="sub-form">
                         <label for="basePackage" class="control-label">Base package</label>
