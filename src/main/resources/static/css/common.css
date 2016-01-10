@@ -120,7 +120,24 @@ a {
     padding-right:10px;
     background-color: transparent;
 }
-
+INPUT::-webkit-input-placeholder { /* Safari, Chrome and Opera */
+    color: #D5D5D5 !important;
+}
+INPUT:-moz-placeholder { /* Firefox 18- */
+    color: #D5D5D5 !important;
+}
+INPUT::-moz-placeholder { /* Firefox 19+ */
+    color: #D5D5D5 !important;
+}
+INPUT:-ms-input-placeholder { /* IE 10+ */
+    color: #D5D5D5 !important;
+}
+INPUT::-ms-input-placeholder { /* Edge */
+    color: #D5D5D5 !important;
+}
+INPUT:placeholder-shown { /* Standard one last! */
+    color: #D5D5D5 !important;
+}
 /*
     Util
 */
@@ -289,6 +306,8 @@ header .logout{
     line-height:39px;
     margin-right:10px;
     font-size:12px;
+    padding-left:10px;
+    border-left:1px solid #d3d3d3;
 }
 .page_header{
     height:150px;
@@ -327,14 +346,16 @@ header .logout{
     width:100%;
     height:55px;
     margin-top: 2px;
-    border-left: 1px solid #FFF;
+    border-left: 2px solid #FFF;
 }
 .side .active{
     color:#000;
+    border-left: 2px solid #7BCCD4;
 }
 .side A{
     color:#D5D5D5;
     text-decoration: none;
+    font-size:12px;
 }
 .side .active A{
     color:#000;
@@ -532,6 +553,7 @@ header .logout{
     padding-top:3px;
     padding-bottom: 3px;
     border-radius: 4px;
+    display: block;
 }
 #changeRabbitModal .rabbit-item:HOVER{
     background-color: #7BCCD4;
