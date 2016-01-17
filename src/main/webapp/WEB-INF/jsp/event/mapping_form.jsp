@@ -20,6 +20,7 @@
 </jsp:include>
 <section class="page">
     <jsp:include page="side.jsp">
+        <jsp:param name="mapping" value="active"/>
     </jsp:include>
     <div class="page-side-margin">
         <h3>${title}</h3>

@@ -20,14 +20,17 @@
 </jsp:include>
 <section class="page">
     <jsp:include page="side.jsp">
+        <jsp:param name="action" value="active"/>
     </jsp:include>
     <div class="page-side-margin">
         <h3>${title}</h3>
-        <p>EventMapping is defining event condition.<br/>and after creating can link actions</p>
+        <p>${desc}</p>
         <div class="form-horizontal event-form">
             <form class="form" action="${action}">
+                <input type="hidden" name="className" value="${param.actionClassName}"/>
                 <c:if test="${not empty modifying}">
-                    <c:set var="rabbitIdSet" value="${rabbit.id}"/>
+                    <
+                    c:set var="rabbitIdSet" value="${rabbit.id}"/>
                     <c:set var="basePackage" value="${rabbit.basePackage}"/>
                     <c:set var="groupId" value="${rabbit.group.id}"/>
                     <c:if test="${rabbit.collectionOnlyException}">
@@ -48,68 +51,15 @@
                 </div>
 
                 <div class="main-form">
-                    <label class="control-label">EVENT CONDITION</label>
-                    <div class="sub-form">
-                        <label for="rabbitSetButton" class="control-label">Target Rabbits</label>
-                        <button id="rabbitSetButton" type="button" class="btn btn-block btn-default" role="button" data-toggle="modal" data-target="#changeRabbitModal">Select</button>
-                        <input name="rabbitSet" type="hidden" id="rabbitSet"/>
-                    </div>
-                    <div class="sub-form">
-                        <label for="level" class="control-label">Threshold logging level</label>
-                        <select class="form-control" id="level" name="level">
-                            <option value="fatal">FATAL</option>
-                            <option value="error">ERROR</option>
-                            <option value="warn">WARN</option>
-                            <option value="info">INFO</option>
-                        </select>
-                        <span class="help-block">If you select 'INFO', logging level with INFO, WARN, ERROR, FATAL will be accepted.</span>
-                    </div>
-                    <div class="sub-form">
-                        <label for="class" class="control-label">Matching Class</label>
-                        <input type="text" class="form-control" id="class" name="matchClass"
-                               placeholder="org.mintcode.errabbit.Application" value="${matchClass}">
-                        <span class="help-block">Full class path. If you blank this form, any class logs will be accepted</span>
-                    </div>
-                    <div class="sub-form">
-                        <label for="message" class="control-label">Including Message</label>
-                        <input type="text" class="form-control" id="message" name="message" value="${message}">
-                        <span class="help-block">Check include this text with logging message. If you blank this form, any messages logs will be accepted</span>
-                    </div>
-                    <div class="sub-form">
-                        <label>
-                            <input type="checkbox" name="exception" value="true" ${exception}/>
-                            Has exception only
-                        </label>
-                    </div>
-                </div>
-
-                <div class="main-form">
-                    <label class="control-label">THRESHOLD</label>
-                    <div class="sub-form">
-                        <label for="thresholdCount" class="control-label">Threshold Count</label>
-                        <input id="thresholdCount" type="number" class="form-control" name="thresholdCount" value="1" min="1">
-                    </div>
-                    <div class="sub-form">
-                        <label for="period" class="control-label">Period (unit: seconds)</label>
-                        <input id="period" type="number" class="form-control" name="period" value="1" min="0">
-                    </div>
-                </div>
-
-                <div class="main-form">
                     <label class="control-label">OPTION</label>
-                    <div class="sub-form">
-                        <label for="sleep" class="control-label">Sleep after fire</label>
-                        <input id=sleep" type="number" class="form-control" name="sleep" value="1" min="0">
-                        <span class="help-block">ddd</span>
-                    </div>
-
-                    <div class="sub-form">
-                        <label>
-                            <input type="checkbox" name="active" value="true" ${active}/>
-                            Active
-                        </label>
-                        <span class="help-block">Active or inactive,But this status is applied after run rebuild eventstream or restart ErRabbit</span>
-                    </div>
+                    <c:forEach var="item" items="${uiElements}">
+                        <div class="sub-form">
+                            <label class="control-label">${item.label}</label>
+                            <input type="${item.valueType}" class="form-control" name="${item.name}"
+                                   placeholder="${item.defaultValue}" value="">
+                            <span class="help-block">${item.help}</span>
+                        </div>
+                    </c:forEach>
                 </div>
 
                 <c:if test="${not empty e}">

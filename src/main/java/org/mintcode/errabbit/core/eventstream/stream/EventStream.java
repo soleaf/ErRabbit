@@ -6,6 +6,8 @@ import org.mintcode.errabbit.core.eventstream.event.action.EventAction;
 import org.mintcode.errabbit.model.Log;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import java.util.Set;
+
 /**
  * EventSteam is set of event checkers
  * Input log, check event and fire
@@ -38,4 +40,8 @@ public interface EventStream {
     public void setJobExecutor(ThreadPoolTaskExecutor executor);
 
     public void runAction(EventMapping eventMapping, EventAction action, Log log);
+
+    public Set<EventChecker> getEventCheckers();
+
+    public String makeDescription();
 }

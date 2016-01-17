@@ -10,6 +10,8 @@
  */
 $(document).ready(function () {
 
+    $('[data-toggle="tooltip"]').tooltip()
+
     $('#changeRabbitModal').on('show.bs.modal', function (event) {
         var checked = $("#rabbitSet").val().split(",");
         $("INPUT[NAME='rabbit_ids']").each(function(){

@@ -71,7 +71,7 @@
                 </c:if>
             </div>
         </div>
-        <div class="log-area" id="log-area" data-rabbitIdSet="${rabbit.id}">
+        <div class="log-area" id="log-area" data-rabbitId="${rabbit.id}">
 
             <div class="log-timeLine" id="timeline">
                 <!-- Log Time Line Area-->

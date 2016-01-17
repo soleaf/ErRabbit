@@ -29,9 +29,14 @@
                 You can make event actions to link to event mapping.
             </p>
             <div class="btn-group">
-                <a type="button" role="button" class="btn btn-default btn-sm" href="add.err"><span
-                        class="glyphicon glyphicon-plus"></span> Add Action
-                </a>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        New Action <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="add.err?actionClassName=org.mintcode.errabbit.core.eventstream.event.action.SlackNotificationEventAction">Send Slack</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
         <c:if test="${not empty list}">

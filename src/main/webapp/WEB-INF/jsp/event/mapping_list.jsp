@@ -30,25 +30,34 @@
                 <br/>You can create event mapping and add action.
             </p>
             <div class="btn-group">
-                <a type="button" role="button" class="btn btn-default btn-sm" href="add.err"><span
-                        class="glyphicon glyphicon-plus"></span> Add Mapping
+                <a type="button" role="button" class="btn btn-default btn-sm" href="add.err">New Mapping
                 </a>
             </div>
         </div>
         <c:if test="${not empty list}">
         <table class="table table-striped mapping-table">
             <thead>
-                <th>Name</th>
-                <th>Condition</th>
-                <th>Actions</th>
-                <th>Active</th>
+                <th width="15%">Name</th>
+                <th width="40%">Condition</th>
+                <th width="25%">Actions</th>
+                <th width="10%">Mapping</th>
+                <th width="10%">Active</th>
             </thead>
             <tbody>
             <c:forEach items="${list}" var="item">
                 <tr>
                     <td>${item.name}</td>
-                    <td>${item.condition}</td>
-                    <td>${item.actions}</td>
+                    <td>
+                        ${item.condition}
+                    </td>
+                    <td>
+                        <ul class="list-group">
+                        <c:forEach items="${item.actions}" var="action">
+                            <li class="list-group-item" data-toggle="tooltip" title="${action.typeName}">${action.name}</li>
+                        </c:forEach>
+                        </ul>
+                    </td>
+                    <td><a href="action?id=${item.id}" role="button" class="btn btn-default btn-sm">mapping</a></td>
                     <td>${item.active}</td>
                 </tr>
             </c:forEach>

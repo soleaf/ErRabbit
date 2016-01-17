@@ -1,6 +1,7 @@
 package org.mintcode.errabbit.core.eventstream.event;
 
 import org.mintcode.errabbit.core.eventstream.event.action.EventAction;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,6 +16,10 @@ import java.util.List;
 @Document(collection = "event.mapping")
 public class EventMapping {
 
+
+    @Id
+    private String id;
+
     private EventCondition condition;
 
     @DBRef
@@ -23,6 +28,14 @@ public class EventMapping {
     private Boolean active = false;
 
     private String name;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public EventMapping(){
 

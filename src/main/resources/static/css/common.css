@@ -450,6 +450,9 @@ header .logout{
     height:100%;
     overflow: scroll;
 }
+.page-right-margin{
+    margin-right: 20px;
+}
 
 /*
     Navibar

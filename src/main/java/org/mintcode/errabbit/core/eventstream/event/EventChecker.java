@@ -1,11 +1,10 @@
 package org.mintcode.errabbit.core.eventstream.event;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.mintcode.errabbit.core.eventstream.event.action.EventAction;
 import org.mintcode.errabbit.core.eventstream.stream.EventStream;
 import org.mintcode.errabbit.model.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -24,7 +23,7 @@ public class EventChecker {
 
     private Date sleepTime;
 
-    private Logger logger = LogManager.getLogger();
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // Count for matched
     private Long metricMatched = 0l;
@@ -48,27 +47,34 @@ public class EventChecker {
 
     public boolean check(Log log){
         // Check log is acceptable with event condition
+        logger.debug("checking");
         EventCondition ec = mapping.getCondition();
         if (!ec.getRabbitIdSet().contains(log.getRabbitId())){
             return false;
         }
         if (null != ec.getMatchLevel()
                 &&!levelCheck(ec.getMatchLevel(), log.getLoggingEvent().getLevel())){
+            logger.debug("not match level");
             return false;
         }
         if (null != ec.getMatchClass()
                 && !ec.getMatchClass().equals(log.getLoggingEvent().getCategoryName())){
+            logger.debug("not match class");
             return false;
         }
         if (null != ec.getIncludeMessage()
                 && !log.getLoggingEvent().getRenderedMessage().contains(ec.getIncludeMessage())){
+            logger.debug("not match message");
             return false;
         }
         if (null != ec.getHasException()
+                && ec.getHasException()
                 && null ==log.getLoggingEvent().getThrowableInfo()){
+            logger.debug("not match exception");
             return false;
         }
         metricMatched++;
+        logger.debug("matched");
         return addPoint(new Date(), log);
     }
 
@@ -80,9 +86,33 @@ public class EventChecker {
      * @return
      */
     protected Boolean levelCheck(String l1, String l2){
-        Level level1 = Level.getLevel(l1);
-        Level level2 = Level.getLevel(l2);
-        return level1.isLessSpecificThan(level2);
+
+        int l1v = convertLevelValue(l1);
+        int l2v = convertLevelValue(l2);
+        return (l1v <= l2v);
+
+//        Level level1 = Level.getLevel(l1);
+//        Level level2 = Level.getLevel(l2);
+//        return level1.isLessSpecificThan(level2);
+    }
+
+    protected int convertLevelValue(String l){
+        switch (l.toUpperCase()){
+            case "TRACE" :
+                return 0;
+            case "DEBUG" :
+                return 1;
+            case "INFO" :
+                return 2;
+            case "WARN" :
+                return 3;
+            case "ERROR":
+                return 4;
+            case "FATAL":
+                return 5;
+            default:
+                return 0;
+        }
     }
 
     /**
@@ -182,7 +212,7 @@ public class EventChecker {
      * Fire eventstream
      */
     protected void callAction(Log log){
-        logger.trace("call action");
+        logger.debug("call action");
         // TODO : move run action to EventStream
         if (eventStream == null){
             logger.warn("Can't call action without event stream");

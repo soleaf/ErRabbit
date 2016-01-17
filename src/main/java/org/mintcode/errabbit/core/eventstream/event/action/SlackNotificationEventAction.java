@@ -2,13 +2,18 @@ package org.mintcode.errabbit.core.eventstream.event.action;
 
 import net.gpedro.integrations.slack.SlackApi;
 import net.gpedro.integrations.slack.SlackMessage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.mintcode.errabbit.core.eventstream.event.EventCondition;
 import org.mintcode.errabbit.model.ErrLoggingEvent;
 import org.mintcode.errabbit.model.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by soleaf on 1/8/16.
@@ -17,7 +22,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class SlackNotificationEventAction extends AbstractEventAction {
 
     @Transient
-    private Logger logger = LogManager.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // ErRabbit's host
     private String host;
@@ -34,6 +39,41 @@ public class SlackNotificationEventAction extends AbstractEventAction {
 
     public String getTypeName() {
         return getClass().getSimpleName();
+    }
+
+    @Override
+    public List<EventActionUIElement> getUIElements() {
+        List<EventActionUIElement> uiEelements = new ArrayList<>();
+        uiEelements.add(new EventActionUIElement("p_host", "Host", "text", "http://localhost:8080", "Reachable ErRabbit host", false));
+        uiEelements.add(new EventActionUIElement("p_webhookURL", "WebhookURL", "text", "https://hooks.slack.com/services/xxx/yyy/zzz", "App Integration > Enable Incoming WebHooks > get Webhook URL!", true));
+        uiEelements.add(new EventActionUIElement("p_channel", "Channel", "text", "#general", "Post to Channel", true));
+        return uiEelements;
+    }
+
+    @Override
+    public void validationUISetting(Map<String, String> dataSet) throws InvalidEventActionUISettingValueException {
+        super.validationUISetting(dataSet);
+        if (!dataSet.containsKey("p_host") || !StringUtils.hasLength(dataSet.get("p_host"))
+                || !dataSet.get("p_host").startsWith("http")){
+            throw new InvalidEventActionUISettingValueException("invalid value for host");
+        }
+        if (!dataSet.containsKey("p_webhookURL") || !StringUtils.hasLength(dataSet.get("p_webhookURL"))){
+            throw new InvalidEventActionUISettingValueException("invalid value for webhookURL");
+        }
+        if (!dataSet.containsKey("p_channel") || !StringUtils.hasLength(dataSet.get("p_channel"))
+                || !dataSet.get("p_channel").startsWith("#")){
+            throw new InvalidEventActionUISettingValueException("invalid value for channel");
+        }
+    }
+
+    @Override
+    public void settingFromUI(Map<String, String> dataSet) throws InvalidEventActionUISettingValueException {
+        validationUISetting(dataSet);
+        super.settingFromUI(dataSet);
+
+        host = dataSet.get("p_host");
+        webhookURL = dataSet.get("p_webhookURL");
+        channel = dataSet.get("p_channel");
     }
 
     @Override
@@ -66,6 +106,11 @@ public class SlackNotificationEventAction extends AbstractEventAction {
         return action;
     }
 
+    @Override
+    public String getDescription() {
+        return "This is send log to slack action.";
+    }
+
     /**
      * Generate message from log
      * ----- sample
@@ -78,22 +123,14 @@ public class SlackNotificationEventAction extends AbstractEventAction {
      */
     protected String generateMessage(Log log){
         ErrLoggingEvent ev = log.getLoggingEvent();
-        StringBuffer sb = new StringBuffer();
-        sb.append("[ ");
-        sb.append(ev.getLevel());
-        sb.append(" ] ");
-        sb.append(" ");
-        sb.append(log.getRabbitId());
-        sb.append("\n");;
-        sb.append(ev.getRenderedMessage());
-        if (host != null){
-            sb.append("\n");
-            sb.append(":mag: ");
-            sb.append(host);
-            sb.append("/log/list.err?id=");
-            sb.append(log.getRabbitId());
+        if (host != null) {
+            return String.format("[ %s ] %s\n%s\n:mag: %s/log/list.err?id=%s",
+                    ev.getLevel(), log.getRabbitId(), ev.getRenderedMessage(), host, log.getRabbitId());
         }
-        return sb.toString();
+        else{
+            return String.format("[ %s ] %s\n%s",
+                    ev.getLevel(), log.getRabbitId(), ev.getRenderedMessage());
+        }
     }
 
     protected String getLevelIcon(String level){
@@ -142,5 +179,15 @@ public class SlackNotificationEventAction extends AbstractEventAction {
 
     public void setChannel(String channel) {
         this.channel = channel;
+    }
+
+    @Override
+    public String toString() {
+        return "SlackNotificationEventAction{" +
+                "logger=" + logger +
+                ", host='" + host + '\'' +
+                ", webhookURL='" + webhookURL + '\'' +
+                ", channel='" + channel + '\'' +
+                "} " + super.toString();
     }
 }

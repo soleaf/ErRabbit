@@ -1,11 +1,12 @@
 package org.mintcode.errabbit.core.eventstream.stream;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.google.gson.Gson;
 import org.mintcode.errabbit.core.eventstream.event.EventChecker;
 import org.mintcode.errabbit.core.eventstream.event.EventMapping;
 import org.mintcode.errabbit.core.eventstream.event.action.EventAction;
 import org.mintcode.errabbit.model.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.HashSet;
@@ -20,7 +21,7 @@ public abstract class AbstractEventStream implements EventStream {
     protected Boolean active = false;
     protected ThreadPoolTaskExecutor jobExecutor;
 
-    private Logger logger = LogManager.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public void registerEventChecker(EventChecker eventChecker) {
@@ -37,6 +38,7 @@ public abstract class AbstractEventStream implements EventStream {
         if (!active){
             return;
         }
+        logger.debug("checking " + log);
         for (EventChecker checker : eventCheckers) {
             checker.check(log);
         }
@@ -68,5 +70,24 @@ public abstract class AbstractEventStream implements EventStream {
                 action.run(eventMapping.getCondition(), log);
             }
         });
+    }
+
+    public String makeDescription(){
+        Gson gson = new Gson();
+        String json = gson.toJson(eventCheckers);
+        return json;
+    }
+
+    public Set<EventChecker> getEventCheckers() {
+        return eventCheckers;
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractEventStream{" +
+                "eventCheckers=" + eventCheckers +
+                ", active=" + active +
+                ", jobExecutor=" + jobExecutor +
+                '}';
     }
 }
