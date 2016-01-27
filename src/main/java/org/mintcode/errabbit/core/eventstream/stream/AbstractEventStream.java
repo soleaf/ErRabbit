@@ -9,15 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by soleaf on 10/18/15.
  */
 public abstract class AbstractEventStream implements EventStream {
 
-    protected Set<EventChecker> eventCheckers = new HashSet<>();
+    protected Set<EventChecker> eventCheckers = new TreeSet<>();
     protected Boolean active = false;
     protected ThreadPoolTaskExecutor jobExecutor;
 

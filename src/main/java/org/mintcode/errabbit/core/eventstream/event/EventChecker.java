@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * and run, remember status
  * Created by soleaf on 10/12/15.
  */
-public class EventChecker {
+public class EventChecker implements Comparable{
 
     private List<Date> eventTimes = new ArrayList<>();
 
@@ -262,5 +262,28 @@ public class EventChecker {
                 ", sleepTime=" + sleepTime +
                 ", eventTimes=" + eventTimes +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        EventChecker that = (EventChecker) o;
+
+        return mapping != null ? mapping.equals(that.mapping) : that.mapping == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return mapping != null ? mapping.hashCode() : 0;
+    }
+
+
+    @Override
+    public int compareTo(Object o) {
+        EventChecker oo = (EventChecker) o;
+        return mapping.getId().compareTo(oo.mapping.getId());
     }
 }
