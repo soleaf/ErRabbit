@@ -44,9 +44,9 @@ public class SlackNotificationEventAction extends AbstractEventAction {
     @Override
     public List<EventActionUIElement> getUIElements() {
         List<EventActionUIElement> uiEelements = new ArrayList<>();
-        uiEelements.add(new EventActionUIElement("p_host", "Host", "text", "http://localhost:8080", "Reachable ErRabbit host", false));
-        uiEelements.add(new EventActionUIElement("p_webhookURL", "WebhookURL", "text", "https://hooks.slack.com/services/xxx/yyy/zzz", "App Integration > Enable Incoming WebHooks > get Webhook URL!", true));
-        uiEelements.add(new EventActionUIElement("p_channel", "Channel", "text", "#general", "Post to Channel", true));
+        uiEelements.add(new EventActionUIElement("p_host", "Host", "text", "http://localhost:8080", "Reachable ErRabbit host", false, host));
+        uiEelements.add(new EventActionUIElement("p_webhookURL", "WebhookURL", "text", "https://hooks.slack.com/services/xxx/yyy/zzz", "App Integration > Enable Incoming WebHooks > get Webhook URL!", true, webhookURL));
+        uiEelements.add(new EventActionUIElement("p_channel", "Channel", "text", "#general", "Post to Channel", true, channel));
         return uiEelements;
     }
 
@@ -108,7 +108,7 @@ public class SlackNotificationEventAction extends AbstractEventAction {
 
     @Override
     public String getDescription() {
-        return "This is send log to slack action.";
+        return "This is action sending log message to slack";
     }
 
     /**

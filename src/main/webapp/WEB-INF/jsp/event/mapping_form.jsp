@@ -27,23 +27,19 @@
         <p>EventMapping is defining event condition.<br/>and after creating can link actions</p>
         <div class="form-horizontal event-form">
             <form class="form" action="${action}">
-                <c:if test="${not empty modifying}">
-                    <c:set var="rabbitIdSet" value="${rabbit.id}"/>
-                    <c:set var="basePackage" value="${rabbit.basePackage}"/>
-                    <c:set var="groupId" value="${rabbit.group.id}"/>
-                    <c:if test="${rabbit.collectionOnlyException}">
-                        <c:set var="collectionOnlyException" value="checked"/>
-                    </c:if>
-                    <c:if test="${rabbit.hideOnConsole}">
-                        <c:set var="hideOnConsole" value="checked"/>
-                    </c:if>
+                <c:set value="SELECT" var="selectRabbitsLabel"/>
+                <c:if test="${not empty rabbitIdSet}">
+                    <c:set value="${rabbitIdSet}" var="selectRabbitsLabel"/>
+                </c:if>
+                <c:if test="${not empty mapping}">
+                    <input type="hidden" name="id" value="${mapping.id}"/>
                 </c:if>
                 <div class="main-form">
                     <label class="control-label">GENERAL</label>
                     <div class="sub-form">
                         <label for="name" class="control-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name"
-                                value="${name}">
+                                value="${mapping.name}">
                         <span class="help-block">Just name for identifying</span>
                     </div>
                 </div>
@@ -52,33 +48,33 @@
                     <label class="control-label">EVENT CONDITION</label>
                     <div class="sub-form">
                         <label for="rabbitSetButton" class="control-label">Target Rabbits</label>
-                        <button id="rabbitSetButton" type="button" class="btn btn-block btn-default" role="button" data-toggle="modal" data-target="#changeRabbitModal">Select</button>
-                        <input name="rabbitSet" type="hidden" id="rabbitSet"/>
+                        <button id="rabbitSetButton" type="button" class="btn btn-block btn-default" role="button" data-toggle="modal" data-target="#changeRabbitModal">${selectRabbitsLabel}</button>
+                        <input name="rabbitSet" type="hidden" id="rabbitSet" value="${rabbitIdSet}"/>
                     </div>
                     <div class="sub-form">
                         <label for="level" class="control-label">Threshold logging level</label>
                         <select class="form-control" id="level" name="level">
-                            <option value="fatal">FATAL</option>
-                            <option value="error">ERROR</option>
-                            <option value="warn">WARN</option>
-                            <option value="info">INFO</option>
+                            <option value="fatal" <c:if test="${mapping.condition.matchLevel=='fatal'}">selected</c:if>>FATAL</option>
+                            <option value="error" <c:if test="${mapping.condition.matchLevel=='error'}">selected</c:if>>ERROR</option>
+                            <option value="warn" <c:if test="${mapping.condition.matchLevel=='warn'}">selected</c:if>>WARN</option>
+                            <option value="info" <c:if test="${mapping.condition.matchLevel=='info'}">selected</c:if>>INFO</option>
                         </select>
                         <span class="help-block">If you select 'INFO', logging level with INFO, WARN, ERROR, FATAL will be accepted.</span>
                     </div>
                     <div class="sub-form">
                         <label for="class" class="control-label">Matching Class</label>
                         <input type="text" class="form-control" id="class" name="matchClass"
-                               placeholder="org.mintcode.errabbit.Application" value="${matchClass}">
+                               placeholder="org.mintcode.errabbit.Application" value="${mapping.condition.matchClass}">
                         <span class="help-block">Full class path. If you blank this form, any class logs will be accepted</span>
                     </div>
                     <div class="sub-form">
                         <label for="message" class="control-label">Including Message</label>
-                        <input type="text" class="form-control" id="message" name="message" value="${message}">
+                        <input type="text" class="form-control" id="message" name="message" value="${mapping.condition.includeMessage}">
                         <span class="help-block">Check include this text with logging message. If you blank this form, any messages logs will be accepted</span>
                     </div>
                     <div class="sub-form">
                         <label>
-                            <input type="checkbox" name="exception" value="true" ${exception}/>
+                            <input type="checkbox" name="exception" value="true" <c:if test="${mapping.condition.hasException}">checked</c:if>/>
                             Has exception only
                         </label>
                     </div>
@@ -88,11 +84,15 @@
                     <label class="control-label">THRESHOLD</label>
                     <div class="sub-form">
                         <label for="thresholdCount" class="control-label">Threshold Count</label>
-                        <input id="thresholdCount" type="number" class="form-control" name="thresholdCount" value="1" min="1">
+                        <input id="thresholdCount" type="number" class="form-control" name="thresholdCount"
+                               value="<c:choose><c:when test="${not empty mapping.condition.thresholdCount}">${mapping.condition.thresholdCount}</c:when><c:otherwise>1</c:otherwise></c:choose>"
+                               min="1" >
                     </div>
                     <div class="sub-form">
                         <label for="period" class="control-label">Period (unit: seconds)</label>
-                        <input id="period" type="number" class="form-control" name="period" value="1" min="0">
+                        <input id="period" type="number" class="form-control" name="period"
+                               value="<c:choose><c:when test="${not empty mapping.condition.periodSec}">${mapping.condition.periodSec}</c:when><c:otherwise>1</c:otherwise></c:choose>"
+                               min="0">
                     </div>
                 </div>
 
@@ -100,13 +100,15 @@
                     <label class="control-label">OPTION</label>
                     <div class="sub-form">
                         <label for="sleep" class="control-label">Sleep after fire</label>
-                        <input id=sleep" type="number" class="form-control" name="sleep" value="1" min="0">
+                        <input id=sleep" type="number" class="form-control" name="sleep"
+                               value="<c:choose><c:when test="${not empty mapping.condition.sleepSecAfterAction}">${mapping.condition.sleepSecAfterAction}</c:when><c:otherwise>1</c:otherwise></c:choose>"
+                               min="0">
                         <span class="help-block">ddd</span>
                     </div>
 
                     <div class="sub-form">
                         <label>
-                            <input type="checkbox" name="active" value="true" ${active}/>
+                            <input type="checkbox" name="active" value="true" <c:if test="${mapping.active}">checked</c:if>/>
                             Active
                         </label>
                         <span class="help-block">Active or inactive,But this status is applied after run rebuild eventstream or restart ErRabbit</span>

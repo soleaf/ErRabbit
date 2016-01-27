@@ -47,34 +47,28 @@ public class EventChecker {
 
     public boolean check(Log log){
         // Check log is acceptable with event condition
-        logger.debug("checking");
         EventCondition ec = mapping.getCondition();
         if (!ec.getRabbitIdSet().contains(log.getRabbitId())){
             return false;
         }
         if (null != ec.getMatchLevel()
                 &&!levelCheck(ec.getMatchLevel(), log.getLoggingEvent().getLevel())){
-            logger.debug("not match level");
             return false;
         }
         if (null != ec.getMatchClass()
                 && !ec.getMatchClass().equals(log.getLoggingEvent().getCategoryName())){
-            logger.debug("not match class");
             return false;
         }
         if (null != ec.getIncludeMessage()
                 && !log.getLoggingEvent().getRenderedMessage().contains(ec.getIncludeMessage())){
-            logger.debug("not match message");
             return false;
         }
         if (null != ec.getHasException()
                 && ec.getHasException()
                 && null ==log.getLoggingEvent().getThrowableInfo()){
-            logger.debug("not match exception");
             return false;
         }
         metricMatched++;
-        logger.debug("matched");
         return addPoint(new Date(), log);
     }
 

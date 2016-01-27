@@ -34,31 +34,54 @@
                 </a>
             </div>
         </div>
+        <div class="alertbox">
+            <c:if test="${not empty param.info}">
+                <div class="alert alert-success" role="alert">${param.info}</div>
+            </c:if>
+
+            <c:if test="${not empty param.error}">
+                <div class="alert alert-danger" role="alert">${param.error}</div>
+            </c:if>
+        </div>
         <c:if test="${not empty list}">
-        <table class="table table-striped mapping-table">
+        <table class="table mapping-table">
             <thead>
+                <th width="2%" align="center">ON</th>
                 <th width="15%">Name</th>
-                <th width="40%">Condition</th>
+                <th width="38%">Targets</th>
                 <th width="25%">Actions</th>
-                <th width="10%">Mapping</th>
-                <th width="10%">Active</th>
+                <th width="20%">Edit</th>
             </thead>
             <tbody>
             <c:forEach items="${list}" var="item">
                 <tr>
+                    <td align="center"><c:choose>
+                        <c:when test="${item.active}">
+                            <span class="glyphicon glyphicon-ok-circle mapping_on" aria-hidden="true"></span>
+                        </c:when>
+                        <c:otherwise>
+                            <span class="glyphicon glyphicon-ban-circle mapping_off" aria-hidden="true"></span>
+                        </c:otherwise>
+                    </c:choose></td>
                     <td>${item.name}</td>
                     <td>
-                        ${item.condition}
+                        ${item.condition.rabbitIdSet}
                     </td>
                     <td>
                         <ul class="list-group">
-                        <c:forEach items="${item.actions}" var="action">
-                            <li class="list-group-item" data-toggle="tooltip" title="${action.typeName}">${action.name}</li>
-                        </c:forEach>
+                            <c:forEach items="${item.actions}" var="action">
+                                <li class="list-group-item" data-toggle="tooltip" title="${action.typeName}"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> ${action.name}</li>
+                            </c:forEach>
+                            <a href="action?id=${item.id}" class="list-group-item">ADD/DEL</a>
                         </ul>
+
                     </td>
-                    <td><a href="action?id=${item.id}" role="button" class="btn btn-default btn-sm">mapping</a></td>
-                    <td>${item.active}</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a href="modify?id=${item.id}" role="button" class="btn btn-default btn-sm">modify</a>
+                            <a href="delete?id=${item.id}" role="button" class="btn btn-default btn-sm">delete</a>
+                        </div>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

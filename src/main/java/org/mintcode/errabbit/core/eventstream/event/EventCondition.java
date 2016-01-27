@@ -30,7 +30,7 @@ public class EventCondition {
 
     private String includeMessage = null;
 
-    private Boolean hasException = null;
+    private Boolean hasException = false;
 
     private Boolean includeMessageRegex = false;
 

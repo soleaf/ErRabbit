@@ -11,14 +11,16 @@ public class EventActionUIElement {
     public String valueType;
     public String help;
     public Boolean isRequired = false;
+    public Object value;
 
-    public EventActionUIElement(String name, String label, String valueType, String defaultValue, String help, Boolean isRequired) {
+    public EventActionUIElement(String name, String label, String valueType, String defaultValue, String help, Boolean isRequired, Object value) {
         this.name = name;
         this.label = label;
         this.defaultValue = defaultValue;
         this.valueType = valueType;
         this.help = help;
         this.isRequired = isRequired;
+        this.value = value;
     }
 
     public String getLabel() {
@@ -73,14 +75,24 @@ public class EventActionUIElement {
 
     }
 
+    public Object getValue() {
+        return value;
+    }
+
+    public void setValue(Object value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return "EventActionUIElement{" +
                 "name='" + name + '\'' +
+                ", label='" + label + '\'' +
                 ", defaultValue='" + defaultValue + '\'' +
                 ", valueType='" + valueType + '\'' +
                 ", help='" + help + '\'' +
                 ", isRequired=" + isRequired +
+                ", value=" + value +
                 '}';
     }
 }

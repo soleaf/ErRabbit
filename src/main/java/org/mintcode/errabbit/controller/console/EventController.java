@@ -1,5 +1,6 @@
 package org.mintcode.errabbit.controller.console;
 
+import org.apache.commons.lang3.StringUtils;
 import org.mintcode.errabbit.core.eventstream.EventStreamCentral;
 import org.mintcode.errabbit.core.eventstream.event.EventCondition;
 import org.mintcode.errabbit.core.eventstream.event.EventMapping;
@@ -16,8 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +63,33 @@ public class EventController {
         return new ModelAndView("event/mapping_form");
     }
 
+    @RequestMapping(value = "mapping/modify")
+    public String mappingModify(Model model, @RequestParam String id, RedirectAttributes redirectAttrs) {
+
+        try{
+            EventMapping mapping = eventMappingRepository.findOne(id);
+            if (mapping == null){
+                throw new NullPointerException("Not found mapping");
+            }
+
+            // Rabbit list
+            model.addAttribute("groups", rabbitManagingService.
+                    getRabbitGroupWithRabbitSorted(rabbitManagingService.getRabbitsByGroup(rabbitCache.getRabbits())));
+            model.addAttribute("title", "Modify mapping");
+            model.addAttribute("action", "/event/mapping/add_action.err");
+            model.addAttribute("mapping", mapping);
+
+            if (!mapping.getCondition().getRabbitIdSet().isEmpty()){
+                model.addAttribute("rabbitIdSet", StringUtils.join(mapping.getCondition().getRabbitIdSet(),","));
+            }
+            return "event/mapping_form";
+        }
+        catch (Exception e){
+            redirectAttrs.addAttribute("error", e.getMessage());
+            return "redirect:/event/mapping/list.err";
+        }
+    }
+
     @RequestMapping(value = "mapping/add_action")
     public String mappingAddAction(Model model,
                                    @RequestParam(required = true) String name,
@@ -73,40 +101,87 @@ public class EventController {
                                    @RequestParam(required = true) Integer period,
                                    @RequestParam(required = true) Integer sleep,
                                    @RequestParam(required = false, defaultValue = "False") Boolean active,
-                                   @RequestParam(required = false, defaultValue = "False") Boolean exception
+                                   @RequestParam(required = false, defaultValue = "False") Boolean exception,
+                                   @RequestParam(required = false) String id,
+                                   RedirectAttributes redirectAttrs
     ) {
 
-        EventCondition condition = new EventCondition();
-        String[] arr = rabbitSet.split(",");
-        for (String id : arr) {
-            condition.addRabbitId(id);
-        }
-        condition.setMatchLevel(level);
-        if (matchClass.length() > 0) {
-            condition.setMatchClass(matchClass);
-        }
-        if (message.length() > 0) {
-            condition.setIncludeMessage(message);
-        }
-        condition.setThresholdCount(thresholdCount);
-        condition.setPeriodSec(period);
-        if (sleep > 0) {
+        try{
+            EventMapping mapping = null;
+            EventCondition condition = null;
+            if (id == null){
+                mapping = new EventMapping();
+                condition = new EventCondition();
+            }
+            else{
+                mapping = eventMappingRepository.findOne(id);
+                if (id == null){
+                    throw new NullPointerException("Not found mapping");
+                }
+                condition = mapping.getCondition();
+            }
+
+            String[] arr = rabbitSet.split(",");
+            for (String rabbitId : arr) {
+                condition.addRabbitId(rabbitId);
+            }
+            condition.setMatchLevel(level);
+            if (matchClass.length() > 0) {
+                condition.setMatchClass(matchClass);
+            }
+            if (message.length() > 0) {
+                condition.setIncludeMessage(message);
+            }
+            condition.setThresholdCount(thresholdCount);
+            condition.setPeriodSec(period);
             condition.setSleepSecAfterAction(sleep);
+            condition.setHasException(exception);
+            mapping.setName(name);
+            mapping.setActive(active);
+            mapping.setCondition(condition);
+
+            if (id == null){
+                eventMappingRepository.insert(mapping);
+                redirectAttrs.addAttribute("info", "Success creating new mapping");
+            }
+            else{
+                eventMappingRepository.save(mapping);
+                redirectAttrs.addAttribute("info", "Success modifying mapping");
+            }
+
+            return "redirect:/event/mapping/list.err";
         }
-        condition.setHasException(exception);
+        catch (Exception e){
+            redirectAttrs.addAttribute("error", e.getMessage());
+            return "redirect:/event/mapping/list.err";
+        }
 
-        EventMapping mapping = new EventMapping();
-        mapping.setName(name);
-        mapping.setActive(active);
-        mapping.setCondition(condition);
+    }
 
-        eventMappingRepository.insert(mapping);
+    @RequestMapping(value = "mapping/delete")
+    public String mappingDelete(Model model,
+                                   @RequestParam(required = false) String id,
+                                RedirectAttributes redirectAttrs
+    ) {
 
-        return "redirect:/event/mapping/list.err";
+        try{
+            EventMapping mapping = eventMappingRepository.findOne(id);
+            if (id == null){
+                throw new NullPointerException("Not found mapping");
+            }
+            eventMappingRepository.delete(mapping);
+            redirectAttrs.addAttribute("info","success to delete mapping");
+            return "redirect:/event/mapping/list.err";
+        }
+        catch (Exception e){
+            redirectAttrs.addAttribute("error", e.getMessage());
+            return "redirect:/event/mapping/list.err";
+        }
+
     }
 
     @RequestMapping(value = "mapping/action")
-    public ModelAndView mappingAction(Model model, @RequestParam String id){
+    public String mappingAction(Model model, @RequestParam String id, RedirectAttributes redirectAttrs){
         try{
             EventMapping mapping = eventMappingRepository.findOne(id);
             if (mapping == null){
@@ -129,18 +204,19 @@ public class EventController {
             model.addAttribute("action", "action_action.err");
         }
         catch (Exception e){
-            // todo: error page
-            model.addAttribute("error",e);
+            redirectAttrs.addAttribute("error",e.getMessage());
+            return "redirect:/event/mapping/list.err";
         }
         finally {
-            return new ModelAndView("event/mapping_action");
+            return "event/mapping_action";
         }
     }
 
     @RequestMapping(value = "mapping/action_action")
     public String mappingActionAction(Model model,
                                             @RequestParam String id,
-                                            @RequestParam String actions){
+                                            @RequestParam String actions,
+                                      RedirectAttributes redirectAttrs){
         try{
             EventMapping mapping = eventMappingRepository.findOne(id);
             if (mapping == null){
@@ -164,10 +240,12 @@ public class EventController {
 
             // Save
             eventMappingRepository.save(mapping);
+            redirectAttrs.addAttribute("info", "Success modifying mapping action");
             return "redirect:/event/mapping/list.err";
         }
         catch (Exception e){
-            return "redirect:/event/mapping/list.err?error="+e.getMessage();
+            redirectAttrs.addAttribute("error", e.getMessage());
+            return "redirect:/event/mapping/list.err";
         }
     }
 
@@ -178,7 +256,7 @@ public class EventController {
     }
 
     @RequestMapping(value = "action/add")
-    public String actionAdd(Model model, @RequestParam() String actionClassName) {
+    public String actionAdd(Model model, @RequestParam() String actionClassName,RedirectAttributes redirectAttrs) {
 
         try {
             Class<?> clazz = Class.forName(actionClassName);
@@ -191,22 +269,97 @@ public class EventController {
             return "event/action_form";
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            return "redirect:/event/action/list.err?error=" + e.getMessage();
+            redirectAttrs.addAttribute("error", e.getMessage());
+            return "redirect:/event/action/list.err";
         }
     }
 
     @RequestMapping(value = "action/add_action")
-    public String actionAddAction(Model model, @RequestParam Map<String, String> param, HttpServletRequest request) {
+    public String actionAddAction(Model model,
+                                  @RequestParam Map<String, String> param,
+                                  RedirectAttributes redirectAttrs) {
         try {
             String actionClassName = param.get("className");
             Class<?> clazz = Class.forName(actionClassName);
             EventAction action = (EventAction) clazz.newInstance();
             action.settingFromUI(param);
             model.addAttribute("addedAction", eventActionRepository.insert(action));
+            redirectAttrs.addAttribute("info", "Success adding new action");
             return "redirect:/event/action/list.err";
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            return "redirect:" + request.getHeader("Referer") + "?error=" + e.getMessage();
+            redirectAttrs.addAttribute("error", e.getMessage());
+            return "redirect:/event/action/list.err";
+        }
+    }
+
+    @RequestMapping(value = "action/modify")
+    public String actionModify(Model model,
+                               @RequestParam String id,
+                               RedirectAttributes redirectAttrs) {
+        try {
+            EventAction action = eventActionRepository.findOne(id);
+            if (action == null){
+                throw new NullPointerException("Not found action");
+            }
+            model.addAttribute("title", "Modify " + action.getName());
+            model.addAttribute("action", "/event/action/modify_action.err");
+            model.addAttribute("desc", action.getDescription());
+            model.addAttribute("uiElements", action.getUIElements());
+            model.addAttribute("eaction",action);
+            return "event/action_form";
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            redirectAttrs.addAttribute("error", e.getMessage());
+            return "redirect:/event/action/list.err";
+        }
+    }
+
+    @RequestMapping(value = "action/modify_action")
+    public String actionModify(Model model,
+                               @RequestParam String id,
+                               @RequestParam Map<String, String> param,
+                               RedirectAttributes redirectAttrs) {
+        try {
+            EventAction action = eventActionRepository.findOne(id);
+            if (action == null){
+                throw new NullPointerException("Not found action");
+            }
+            action.settingFromUI(param);
+            model.addAttribute("addedAction", eventActionRepository.save(action));
+            redirectAttrs.addAttribute("info", "Success modifying action");
+            return "redirect:/event/action/list.err";
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            redirectAttrs.addAttribute("error", e.getMessage());
+            return "redirect:/event/action/list.err";
+        }
+    }
+
+    @RequestMapping(value = "action/delete")
+    public String actionDelete(Model model, @RequestParam String id, RedirectAttributes redirectAttrs) {
+        try {
+            EventAction action = eventActionRepository.findOne(id);
+            if (action == null){
+                throw new NullPointerException("Not found action");
+            }
+            // Check action is used now
+            List<EventMapping> mappings = eventMappingRepository.findAll();
+            if (mappings != null && !mappings.isEmpty()){
+                for (EventMapping mapping : mappings){
+                    if (mapping.getActions().contains(action)){
+                        throw new NullPointerException("Actions is used on mapping. You should remove this action from mapping");
+                    }
+                }
+            }
+            eventActionRepository.delete(action);
+            logger.info("delete action id:"+id);
+            redirectAttrs.addAttribute("info", "delete action id:"+id);
+            return "redirect:/event/action/list.err?info=" + "success deleting action";
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            redirectAttrs.addAttribute("error", e.getMessage());
+            return "redirect:/event/action/list.err";
         }
     }
 

@@ -39,17 +39,35 @@
                 </div>
             </div>
         </div>
+
+        <div class="alertbox">
+            <c:if test="${not empty param.info}">
+                <div class="alert alert-success" role="alert">${param.info}</div>
+            </c:if>
+
+            <c:if test="${not empty param.error}">
+                <div class="alert alert-danger" role="alert">${param.error}</div>
+            </c:if>
+        </div>
+
         <c:if test="${not empty list}">
         <table class="table table-striped action-table">
             <thead>
-                <th>Name</th>
+                <th width="200px">Name</th>
                 <th>Type</th>
+                <th width="130px">Managing</th>
             </thead>
             <tbody>
             <c:forEach items="${list}" var="item">
                 <tr>
                     <td>${item.name}</td>
                     <td>${item.typeName}</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                        <a href="modify.err?id=${item.id}" role="button" class="btn btn-default btn-xs">modify</a>
+                        <a href="delete.err?id=${item.id}" role="button" class="btn btn-default btn-xs">delete</a>
+                        </div>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

@@ -38,7 +38,7 @@ public abstract class AbstractEventStream implements EventStream {
         if (!active){
             return;
         }
-        logger.debug("checking " + log);
+        logger.trace("checking " + log);
         for (EventChecker checker : eventCheckers) {
             checker.check(log);
         }

@@ -77,6 +77,12 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         if (id.length() < 2){
             throw new InvalidRabbitNameException(String.format("Rabbit id's length must be greater than 2 characters."));
         }
+        if (id.contains(" ")){
+            throw new InvalidRabbitNameException(String.format("Rabbit id's should not include blank"));
+        }
+        if (id.contains(",")){
+            throw new InvalidRabbitNameException(String.format("Rabbit id's should comma"));
+        }
 
         // Check already exist id
         if (rabbitRepository.findById(id) != null) {

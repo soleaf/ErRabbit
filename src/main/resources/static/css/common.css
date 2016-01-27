@@ -565,3 +565,6 @@ header .logout{
 #changeRabbitModal .rabbit-item:HOVER a{
     color:#FFF;
 }
+.page .alertbox .alert{
+    display: inline-block;
+}

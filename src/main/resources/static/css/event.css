@@ -15,3 +15,13 @@
     max-width:900px;
     margin-right:40px;
 }
+.event .page .mapping-table .mapping_on{
+    color:#7BCCD4;
+}
+.event .page .mapping-table .mapping_off{
+    color: #b0b0b0;
+}
+.event .page .action-table{
+    max-width:900px;
+    margin-right:40px;
+}

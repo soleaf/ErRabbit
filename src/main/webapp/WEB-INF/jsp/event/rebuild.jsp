@@ -40,7 +40,7 @@
         </div>
         <div class="form_submit">
             <form action="rebuild_action.err">
-            <button type="submit" s class="btn btn-primary">CONFIRM</button>
+            <button type="submit" s class="btn btn-primary">REBUILD</button>
             <button class="btn btn-default">CANCEL</button>
             </form>
         </div>

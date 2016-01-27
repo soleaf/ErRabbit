@@ -39,22 +39,35 @@ public class EventStreamCentral {
      */
     @PostConstruct
     public void build(){
-        logger.info("Building event stream...");
-        eventStream = makeEventStream();
-        eventStream.setActive(true);
+        try{
+            if (eventStream == null){
+                logger.info("Building event stream...");
+            }
+            else{
+                logger.info("Rebuilding event stream..");
+                eventStream.setActive(false);
+            }
+            eventStream = makeEventStream();
+            eventStream.setActive(true);
+            logger.info("Success building event stream.");
+        }
+        catch (Exception e){
+            logger.error("Fail to build event stream reason : " + e.getMessage(),e);
+        }
+
     }
 
     /**
-     * Make eventSteram from repository
+     * Make eventStream from repository
      * @return
      */
     public EventStream makeEventStream(){
-        // Get all event
+        // Get all event mappings
         List<EventMapping> mappingList = eventMappingRepository.findAll();
-        EventStream es= new DefaultEventStream();
+        EventStream es = new DefaultEventStream();
         es.setJobExecutor(jobExecutor);
         for (EventMapping mapping : mappingList){
-            if (!mapping.getActive() || mapping.getActions().isEmpty()){
+            if (!mapping.getActive() || mapping.getActions() == null || mapping.getActions().isEmpty()){
                 continue;
             }
             es.registerEventChecker(new EventChecker(mapping, es));
@@ -75,7 +88,6 @@ public class EventStreamCentral {
      * @param log
      */
     public void input(Log log){
-        logger.debug("input " + log);
         eventStream.input(log);
     }
 
