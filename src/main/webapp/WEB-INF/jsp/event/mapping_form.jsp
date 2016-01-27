@@ -123,8 +123,11 @@
                     </div>
                 </c:if>
                 <div class="form_submit">
-                    <button type="submit"s class="btn btn-primary">CONFIRM</button>
+                    <button type="submit" class="btn btn-primary">CONFIRM</button>
                     <button class="btn btn-default">CANCEL</button>
+                    <c:if test="${not empty mapping}">
+                        <a href="#" role="button" class="btn btn-warning right" data-toggle="modal" data-target="#delete">DELETE</a>
+                    </c:if>
                 </div>
             </form>
         </div>
@@ -152,6 +155,24 @@
                         </div>
                     </c:forEach>
                 </c:if>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="delete">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Confirm</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure delete this event mapping?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+                <a href="delete.err?id=${mapping.id}" role="button" class="btn btn-danger">DELETE</a>
             </div>
         </div>
     </div>

@@ -246,7 +246,9 @@ INPUT:placeholder-shown { /* Standard one last! */
     border-top: 1px solid #f5f5f5;
     padding-top: 15px;
 }
-
+.form_submit .right{
+    float:right;
+}
 /*
     Header
 */

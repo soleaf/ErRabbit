@@ -22,27 +22,125 @@
     <jsp:include page="side.jsp">
         <jsp:param name="rebuild" value="active"/>
     </jsp:include>
-    <div class="page-side-margin page-right-margin">
-        <h3>Refresh EventStream</h3>
-        <p>desc</p>
+    <div class="page-side-margin">
+        <h3>Rebuild EventStream</h3>
+        <p>After modifying mapping or action, You should rebuild eventstream or restart server to apply changes.<br/>Check as-is and current mappings and click rebuild button bellow.</p>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">Running EventStream</div>
-            <div class="panel-body">
-                ${ec.eventStream.eventCheckers}
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#current">CURRENT</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tobe"> <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> REBUILD</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="current" tabindex="-1" role="dialog" aria-labelledby="current">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Current</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="checker-list">
+                            <c:forEach items="${ec.eventStream.eventCheckers}" var="checker">
+                                <c:if test="${checker.mapping.active}">
+                                    <li>
+                                        <b>${checker.mapping.name}</b>
+                                        <div class="padding">
+                                            condition<br/>
+                                            <div class="padding">
+                                                <div class="element">target
+                                                    : ${checker.mapping.condition.rabbitIdSet}</div>
+                                                <div class="element">matchLevel
+                                                    : ${checker.mapping.condition.matchLevel}</div>
+                                                <div class="element">matchClass
+                                                    : ${checker.mapping.condition.matchClass}</div>
+                                                <div class="element">includeMessage
+                                                    : ${checker.mapping.condition.includeMessage}</div>
+                                                <div class="element">hasException
+                                                    : ${checker.mapping.condition.hasException}</div>
+                                                <div class="element">thresholdCount
+                                                    : ${checker.mapping.condition.thresholdCount}</div>
+                                                <div class="element">periodSec
+                                                    : ${checker.mapping.condition.periodSec}s
+                                                </div>
+                                                <div class="element">sleepSecAfterAction
+                                                    : ${checker.mapping.condition.sleepSecAfterAction}s
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="padding">
+                                            action<br/>
+                                            <div class="padding">
+                                                <c:forEach items="${checker.mapping.actions}" var="action"
+                                                           varStatus="actionStat">
+                                                    <div class="element">${action.name}</div>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">Rebuild to</div>
-            <div class="panel-body">
-                ${es.eventCheckers}
+
+        <!-- Modal -->
+        <div class="modal fade" id="tobe" tabindex="-1" role="dialog" aria-labelledby="tobe">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">REBUILD TO ...</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="checker-list">
+                            <c:forEach items="${es.eventCheckers}" var="checker">
+                                <c:if test="${checker.mapping.active}">
+                                    <li>
+                                        <b>${checker.mapping.name}</b>
+                                        <div class="padding">
+                                            condition<br/>
+                                            <div class="padding">
+                                                <div class="element">target
+                                                    : ${checker.mapping.condition.rabbitIdSet}</div>
+                                                <div class="element">matchLevel
+                                                    : ${checker.mapping.condition.matchLevel}</div>
+                                                <div class="element">matchClass
+                                                    : ${checker.mapping.condition.matchClass}</div>
+                                                <div class="element">includeMessage
+                                                    : ${checker.mapping.condition.includeMessage}</div>
+                                                <div class="element">hasException
+                                                    : ${checker.mapping.condition.hasException}</div>
+                                                <div class="element">thresholdCount
+                                                    : ${checker.mapping.condition.thresholdCount}</div>
+                                                <div class="element">periodSec
+                                                    : ${checker.mapping.condition.periodSec}s
+                                                </div>
+                                                <div class="element">sleepSecAfterAction
+                                                    : ${checker.mapping.condition.sleepSecAfterAction}s
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="padding">
+                                            action<br/>
+                                            <div class="padding">
+                                                <c:forEach items="${checker.mapping.actions}" var="action"
+                                                           varStatus="actionStat">
+                                                    <div class="element">${action.name}</div>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">CANCEL</button>
+                        <a href="rebuild_action.err" role="button" class="btn btn-primary">REBUILD</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form_submit">
-            <form action="rebuild_action.err">
-            <button type="submit" s class="btn btn-primary">REBUILD</button>
-            <button class="btn btn-default">CANCEL</button>
-            </form>
         </div>
     </div>
 </section>
