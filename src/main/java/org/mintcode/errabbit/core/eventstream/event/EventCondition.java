@@ -1,18 +1,14 @@
 package org.mintcode.errabbit.core.eventstream.event;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by soleaf on 10/12/15.
  */
 public class EventCondition {
 
-    private Set<String> rabbitIdSet = new HashSet<>();
+    private Set<String> rabbitIdSet = new TreeSet<>();
 
     /**
      * Checking conditions
