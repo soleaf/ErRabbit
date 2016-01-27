@@ -348,7 +348,7 @@ public class EventController {
             if (mappings != null && !mappings.isEmpty()){
                 for (EventMapping mapping : mappings){
                     if (mapping.getActions().contains(action)){
-                        throw new NullPointerException("Actions is used on mapping. You should remove this action from mapping");
+                        throw new NullPointerException("Actions is used on mapping. You should remove this action from mapping : " + mapping.getName());
                     }
                 }
             }
