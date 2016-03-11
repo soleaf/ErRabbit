@@ -24,7 +24,7 @@ public class AggregationAnalyzer {
     MongoTemplate mongoTemplate;
 
     // TypeToken for aggregating result type
-    private final HashMap<String,Object> mapType = new HashMap<String,Object>();
+    private final HashMap<String,Object> mapType = new HashMap<>();
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**

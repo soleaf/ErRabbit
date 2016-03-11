@@ -28,7 +28,7 @@ public class ReportPresentation {
      * @return
      */
     public Map<Log,List<StackTraceGraph>> makeTraceGraph(String basePackage, Page<Log> reportPage){
-        Map<Log,List<StackTraceGraph>> graphs = new HashMap<Log, List<StackTraceGraph>>();
+        Map<Log,List<StackTraceGraph>> graphs = new HashMap<>();
         for (Log log : reportPage.getContent()){
             graphs.put(log, makeTraceGraph(basePackage, log));
         }
@@ -47,7 +47,7 @@ public class ReportPresentation {
                 return null;
             }
 
-            List<StackTraceGraph> graphs = new ArrayList<StackTraceGraph>();
+            List<StackTraceGraph> graphs = new ArrayList<>();
 
             StackTraceGraph lastGraph = new StackTraceGraph(basePackage);
             graphs.add(lastGraph);

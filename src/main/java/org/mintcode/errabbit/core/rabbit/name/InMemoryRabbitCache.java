@@ -48,7 +48,7 @@ public class InMemoryRabbitCache implements RabbitCache {
     }
 
     public List<Rabbit> getRabbits() {
-        return new ArrayList<Rabbit>(rabbits.values());
+        return new ArrayList<>(rabbits.values());
     }
 
     public void syncDailyStatistics() {

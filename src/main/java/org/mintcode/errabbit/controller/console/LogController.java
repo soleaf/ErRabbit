@@ -84,7 +84,7 @@ public class LogController {
 
             // Get first day of report
             LogLevelDailyStatistics firstDayStatistic = logLevelDailyStatisticsRepository.findByRabbitIdOnFirst(id);
-            List<Integer> yearList = new ArrayList<Integer>();
+            List<Integer> yearList = new ArrayList<>();
             if (firstDayStatistic != null){
 
                 // Today
@@ -167,7 +167,7 @@ public class LogController {
 
             // Make Calendar with blank cell
             int lastDayOfMonth = DateUtil.getLastDayOfMonth(year, month);
-            List<DayCell> cellList = new ArrayList<DayCell>();
+            List<DayCell> cellList = new ArrayList<>();
             for (int i=0 ; i < lastDayOfMonth; i++){
                 cellList.add(new DayCell(i+1));
             }
