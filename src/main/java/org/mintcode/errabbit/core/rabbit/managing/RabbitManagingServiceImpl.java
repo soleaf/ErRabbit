@@ -153,7 +153,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         }
         for (Rabbit r : rabbits){
             RabbitGroup group = r.getGroup();
-            Set<Rabbit> set = null;
+            Set<Rabbit> set;
             if (map.containsKey(group)){
                 set =  map.get(group);
             }

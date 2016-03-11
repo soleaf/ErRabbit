@@ -99,7 +99,7 @@ public class LogBuffer {
 
             // Hour
             String key = log.getRabbitId()  +"/"  + log.getLoggingEventDateInt() + "/" + cal.get(Calendar.HOUR_OF_DAY);
-            Map<String,Object> hour = null;
+            Map<String,Object> hour;
             if (hours.containsKey(key)){
                 hour = hours.get(key);
             }
