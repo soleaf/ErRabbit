@@ -45,7 +45,7 @@ public class Graph {
      */
     public Map<Integer, Integer> getTimeLine(String level){
         if (!data.containsKey(level)){
-            Map<Integer, Integer> timeLine = new HashMap<Integer, Integer>();
+            Map<Integer, Integer> timeLine = new HashMap<>();
             for (int h=0 ; h <24; h++){
                 timeLine.put(h, 0); // set zero counts
             }

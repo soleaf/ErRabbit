@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class StackTraceGraph {
 
-    private List<ErStackTraceElement> stackTraceElements = new ArrayList<ErStackTraceElement>();
+    private List<ErStackTraceElement> stackTraceElements = new ArrayList<>();
     private String basePackage;
     private String className;
     private String packageName;
