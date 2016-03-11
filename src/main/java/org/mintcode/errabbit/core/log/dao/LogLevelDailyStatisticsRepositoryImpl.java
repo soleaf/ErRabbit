@@ -66,9 +66,9 @@ public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStati
             q.put("day", day);
 
             DBObject u = new BasicDBObject();
-            for (String key : staticSet.keySet()){
-                if (key.startsWith("level_")){
-                    u.put("$inc", new BasicDBObject(key, staticSet.get(key)));
+            for (Map.Entry<String, Object> entry : staticSet.entrySet()){
+                if (entry.getKey().startsWith("level_")){
+                    u.put("$inc", new BasicDBObject(entry.getKey(), entry.getValue()));
                 }
             }
             coll.update(q, u, true, false);
