@@ -26,9 +26,9 @@ public class EventChecker implements Comparable{
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // Count for matched
-    private Long metricMatched = 0l;
+    private Long metricMatched = 0L;
     // Count for matched but ignored by sleeping status
-    private Long metricIgnoreFromSleepSec = 0l;
+    private Long metricIgnoreFromSleepSec = 0L;
 
     private EventStream eventStream;
 
@@ -84,10 +84,6 @@ public class EventChecker implements Comparable{
         int l1v = convertLevelValue(l1);
         int l2v = convertLevelValue(l2);
         return (l1v <= l2v);
-
-//        Level level1 = Level.getLevel(l1);
-//        Level level2 = Level.getLevel(l2);
-//        return level1.isLessSpecificThan(level2);
     }
 
     protected int convertLevelValue(String l){

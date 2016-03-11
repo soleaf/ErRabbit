@@ -107,8 +107,8 @@ public class EventController {
     ) {
 
         try{
-            EventMapping mapping = null;
-            EventCondition condition = null;
+            EventMapping mapping;
+            EventCondition condition;
             if (id == null){
                 mapping = new EventMapping();
                 condition = new EventCondition();
