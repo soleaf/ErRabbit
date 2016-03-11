@@ -74,8 +74,7 @@ public abstract class AbstractEventStream implements EventStream {
 
     public String makeDescription(){
         Gson gson = new Gson();
-        String json = gson.toJson(eventCheckers);
-        return json;
+        return gson.toJson(eventCheckers);
     }
 
     public Set<EventChecker> getEventCheckers() {

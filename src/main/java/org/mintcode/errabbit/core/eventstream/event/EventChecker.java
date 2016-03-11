@@ -83,7 +83,7 @@ public class EventChecker implements Comparable{
 
         int l1v = convertLevelValue(l1);
         int l2v = convertLevelValue(l2);
-        return (l1v <= l2v);
+        return l1v <= l2v;
     }
 
     protected int convertLevelValue(String l){

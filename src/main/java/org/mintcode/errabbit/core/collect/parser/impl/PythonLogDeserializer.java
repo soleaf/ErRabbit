@@ -84,7 +84,7 @@ public class PythonLogDeserializer implements JsonDeserializer<ErrLoggingEvent> 
      * @return
      */
     protected String getFilename(String filePath){
-        String simbol = null;
+        String simbol;
         if (filePath.contains("/")) // Unix
             simbol = "/";
         else {
