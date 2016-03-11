@@ -176,10 +176,10 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
             rabbitGroupSetMap = getRabbitsByGroup();
         }
         List<RabbitGroup> list = new ArrayList<>();
-        for (RabbitGroup r : rabbitGroupSetMap.keySet()){
-            r.setRabbits(new ArrayList<>(rabbitGroupSetMap.get(r)));
-            list.add(r);
-            Collections.sort(r.getRabbits(), rabbitNameComparator);
+        for (Map.Entry<RabbitGroup, Set<Rabbit>> entry : rabbitGroupSetMap.entrySet()){
+            entry.getKey().setRabbits(new ArrayList<>(entry.getValue()));
+            list.add(entry.getKey());
+            Collections.sort(entry.getKey().getRabbits(), rabbitNameComparator);
         }
         Collections.sort(list, rabbitGroupNameComparator);
         return list;

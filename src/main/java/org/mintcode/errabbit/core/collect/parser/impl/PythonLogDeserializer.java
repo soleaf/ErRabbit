@@ -19,7 +19,7 @@ import java.util.Date;
 public class PythonLogDeserializer implements JsonDeserializer<ErrLoggingEvent> {
 
     @Override
-    public ErrLoggingEvent deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+    public ErrLoggingEvent deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) {
 
         JsonObject log = (JsonObject) jsonElement;
         ErrLoggingEvent ee = new ErrLoggingEvent();

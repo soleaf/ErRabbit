@@ -129,13 +129,13 @@ public class LogBuffer {
         for (Map<String,Object> hour : hours.values()){
             logLevelDailyStatisticsRepository.insertStatistic(hour);
             logLevelHourlyStatisticsRepository.insertStatistic(hour);
-            for (String key : hour.keySet()){
-                if (key.startsWith("level_")){
-                    String level = key.replaceAll("level_","");
+            for (Map.Entry<String, Object> entry : hour.entrySet()){
+                if (entry.getKey().startsWith("level_")){
+                    String level = entry.getKey().replaceAll("level_","");
                     rabbitCache.updateDailyStatistics((String) hour.get("rabbitId"),
                             level,
                             (Integer) hour.get("dateInt"),
-                            (Integer) hour.get(key));
+                            (Integer) entry.getValue());
                 }
             }
         }

@@ -29,6 +29,14 @@ public class EventMapping {
 
     private String name;
 
+    public EventMapping(){
+
+    }
+
+    public EventMapping(EventCondition condition) {
+        this.condition = condition;
+    }
+
     public String getId() {
         return id;
     }
@@ -37,20 +45,12 @@ public class EventMapping {
         this.id = id;
     }
 
-    public EventMapping(){
-
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public EventMapping(EventCondition condition) {
-        this.condition = condition;
     }
 
     public void addEventAction(EventAction action){
