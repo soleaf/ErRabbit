@@ -1,10 +1,12 @@
 package org.mintcode.errabbit.core.collect;
 
-import org.mintcode.errabbit.core.collect.parser.Log4jParser;
+import org.mintcode.errabbit.core.collect.parser.impl.Log4jParser;
 import org.mintcode.errabbit.core.collect.parser.LogParser;
+import org.mintcode.errabbit.core.collect.parser.impl.PythonLogParser;
 import org.mintcode.errabbit.core.rabbit.name.RabbitCache;
 import org.mintcode.errabbit.model.ErrLoggingEvent;
 import org.mintcode.errabbit.model.Log;
+import org.mintcode.errabbit.model.LoggerType;
 import org.mintcode.errabbit.model.Rabbit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +17,6 @@ import javax.annotation.PostConstruct;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import javax.jms.ObjectMessage;
 import java.util.Date;
 
 /**
@@ -52,9 +53,8 @@ public class LogMessageListener implements MessageListener {
             }
 
             // Parsing
-            ObjectMessage objectMessage = (ObjectMessage) message;
-            LogParser parser = selectParser(objectMessage);
-            ErrLoggingEvent errLoggingEvent = parser.parseToLoggingEvent(objectMessage);
+            LogParser parser = selectParser(rabbit);
+            ErrLoggingEvent errLoggingEvent = parser.parseToLoggingEvent(message);
 
             // Check option : accept only
             if (rabbit.getCollectionOnlyException() != null &&
@@ -74,7 +74,6 @@ public class LogMessageListener implements MessageListener {
             logBuffer.addLog(log);
 
         } catch (Exception e) {
-            e.printStackTrace();
             logger.error(e.getMessage(), e);
         }
 
@@ -92,11 +91,19 @@ public class LogMessageListener implements MessageListener {
 
     /**
      * Select LogParser by message
-     * No just parsing by log4j message
-     * @param message
+     * No just parsing by Log4j message
+     * @param rabbit
      * @return
      */
-    protected LogParser selectParser(ObjectMessage message){
-        return new Log4jParser();
+    protected LogParser selectParser(Rabbit rabbit){
+        if (rabbit.getLoggerType().equals(LoggerType.Log4j)){
+            return new Log4jParser();
+        }
+        else if (rabbit.getLoggerType().equals(LoggerType.PythonLogger)){
+            return new PythonLogParser();
+        }
+        else{
+            return new Log4jParser();
+        }
     }
 }

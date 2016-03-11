@@ -35,7 +35,7 @@
                 <c:if test="${not empty modifying}">
                     <c:set var="rabbitIdSet" value="${rabbit.id}"/>
                     <c:set var="basePackage" value="${rabbit.basePackage}"/>
-                    <c:set var="groupId" value="${rabbit.group.id}"/>
+                    <c:set var="loggerType" value="${rabbit.loggerType}"/>
                     <c:if test="${rabbit.collectionOnlyException}">
                         <c:set var="collectionOnlyException" value="checked"/>
                     </c:if>
@@ -49,6 +49,17 @@
                         <label for="id" class="control-label">ID</label>
                         <input type="text" class="form-control" id="id" name="id" placeholder="Rabbit ID" value="${rabbitIdSet}" ${idReadOnly}>
                         <span class="help-block">It's used to identify a rabbitIdSet on Log4j appender property.</span>
+                    </div>
+                    <div class="sub-form">
+                        <label for="loggerType" class="control-label">LoggerType</label>
+                        <select class="form-control" id="loggerType" name="loggerType">
+                            <c:if test="${not empty loggerTypes}">
+                                <c:forEach var="item" items="${loggerTypes}">
+                                    <option value="${item.value}" <c:if test="${loggerTpe == item.value}">selected</c:if>>${item}</option>
+                                </c:forEach>
+                            </c:if>
+                        </select>
+                        <span class="help-block">What is used to your application as logging component?</span>
                     </div>
                     <div class="sub-form">
                         <label for="basePackage" class="control-label">Base package</label>
@@ -89,11 +100,11 @@
                     </div>
                 </div>
 
-                <c:if test="${not empty e}">
+                <c:if test="${not empty param.error}">
                     <div class="alert alert-warning alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                        <strong>ERROR</strong> ${e.message}
+                        <strong>ERROR</strong> ${param.error}
                     </div>
                 </c:if>
                 <div class="form_submit">

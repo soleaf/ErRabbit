@@ -36,6 +36,9 @@ public class Rabbit implements Serializable {
     // Hide on console
     private Boolean hideOnConsole;
 
+    // Logger type
+    private LoggerType loggerType;
+
     // Group
     @DBRef
     private RabbitGroup group;
@@ -114,6 +117,14 @@ public class Rabbit implements Serializable {
         this.collectionOnlyException = collectionOnlyException;
     }
 
+    public LoggerType getLoggerType() {
+        return loggerType == null ? LoggerType.Log4j : loggerType;
+    }
+
+    public void setLoggerType(LoggerType loggerType) {
+        this.loggerType = loggerType;
+    }
+
     /**
      * This rabbit's group
      * @return
@@ -141,7 +152,6 @@ public class Rabbit implements Serializable {
         this.hideOnConsole = hideOnConsole;
     }
 
-
     @Override
     public String toString() {
         return "Rabbit{" +
@@ -152,6 +162,7 @@ public class Rabbit implements Serializable {
                 ", basePackage='" + basePackage + '\'' +
                 ", collectionOnlyException=" + collectionOnlyException +
                 ", hideOnConsole=" + hideOnConsole +
+                ", loggerType=" + loggerType +
                 ", group=" + group +
                 '}';
     }

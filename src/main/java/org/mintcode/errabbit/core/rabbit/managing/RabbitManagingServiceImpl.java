@@ -8,6 +8,7 @@ import org.mintcode.errabbit.core.log.dao.LogRepository;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitGroupRepository;
 import org.mintcode.errabbit.core.rabbit.name.RabbitGroupNameComparator;
 import org.mintcode.errabbit.core.rabbit.name.RabbitNameComparator;
+import org.mintcode.errabbit.model.LoggerType;
 import org.mintcode.errabbit.model.RabbitGroup;
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 import org.mintcode.errabbit.core.rabbit.dao.RabbitRepository;
@@ -57,6 +58,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
      * @param collectOnlyException option for collection only exception log
      * @param group rabbit group
      * @param hideOnConsole hide on console page
+     * @param loggerType logger type (Log4j, PythonLogger ...)
      * @return
      * @throws AlreadyExistRabbitIDException
      * @throws InvalidRabbitNameException
@@ -67,7 +69,8 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
                                 String basePackage,
                                 Boolean collectOnlyException,
                                 RabbitGroup group,
-                                Boolean hideOnConsole)
+                                Boolean hideOnConsole,
+                                LoggerType loggerType)
             throws AlreadyExistRabbitIDException, InvalidRabbitNameException, InvalidBasePackageException {
 
         // Rabbit Name Validation
@@ -101,6 +104,7 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
         rabbit.setCollectionOnlyException(collectOnlyException);
         rabbit.setGroup(group);
         rabbit.setHideOnConsole(hideOnConsole);
+        rabbit.setLoggerType(loggerType);
 
         rabbitRepository.save(rabbit);
 

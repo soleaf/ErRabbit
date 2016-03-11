@@ -123,6 +123,7 @@ public class EventController {
 
             String[] arr = rabbitSet.split(",");
             for (String rabbitId : arr) {
+                condition.getRabbitIdSet().clear();
                 condition.addRabbitId(rabbitId);
             }
             condition.setMatchLevel(level);

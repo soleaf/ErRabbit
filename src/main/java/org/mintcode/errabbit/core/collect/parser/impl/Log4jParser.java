@@ -1,33 +1,21 @@
-package org.mintcode.errabbit.core.collect.parser;
+package org.mintcode.errabbit.core.collect.parser.impl;
 
 import org.apache.logging.log4j.core.impl.Log4jLogEvent;
+import org.mintcode.errabbit.core.collect.parser.LogParser;
+import org.mintcode.errabbit.core.collect.parser.NotLoggingEventException;
 import org.mintcode.errabbit.model.ErrLoggingEvent;
 
 import javax.jms.JMSException;
+import javax.jms.Message;
 import javax.jms.ObjectMessage;
 
 /**
  * Log4jParser
  * Implement LogParser
- * Just parse log4j object messsage to ErLoggingEvent Object
+ * Just parse Log4j object messsage to ErLoggingEvent Object
  * Created by soleaf on 2015. 12. 31..
  */
 public class Log4jParser implements LogParser {
-
-    @Override
-    public boolean isAbleToParse(ObjectMessage msg) {
-        try{
-            Object obj = msg.getObject();
-            if (obj instanceof Log4jLogEvent) {
-                return true;
-            }
-            else{
-                return false;
-            }
-        } catch (JMSException e) {
-            return false;
-        }
-    }
 
     /**
      * Parse ObjectMessage to ErLoggingEvent
@@ -37,10 +25,12 @@ public class Log4jParser implements LogParser {
      * @throws JMSException
      * @throws NotLoggingEventException
      */
-    public ErrLoggingEvent parseToLoggingEvent(ObjectMessage msg) throws JMSException, NotLoggingEventException {
+    public ErrLoggingEvent parseToLoggingEvent(Message msg) throws JMSException, NotLoggingEventException {
+
+        ObjectMessage messageObject = (ObjectMessage) msg;
 
         // Parse
-        Object obj = msg.getObject();
+        Object obj = messageObject.getObject();
         ErrLoggingEvent errLoggingEvent;
 
         // From log4j2 JMS appender

@@ -44,6 +44,10 @@ public class Log implements Serializable {
     @Indexed(unique = false)
     protected Date collectedDate;
 
+    protected LoggerSpecificData specificData;
+
+    protected LoggerType type;
+
     public Log(){
 
     }
@@ -78,6 +82,30 @@ public class Log implements Serializable {
     }
     public void setRabbitId(String rabbitId) {
         this.rabbitId = rabbitId;
+    }
+
+    /**
+     * Logger specific data
+     * @return
+     */
+    public LoggerSpecificData getSpecificData() {
+        return specificData;
+    }
+    public void setSpecificData(LoggerSpecificData specificData) {
+        this.specificData = specificData;
+    }
+
+    /**
+     * Log's Logger type
+     * Default value is Log4j. Because bellow 1.1.0 only support Log4j, This value is null
+     * @return
+     */
+    public LoggerType getType() {
+        return null == type ? LoggerType.Log4j : type;
+    }
+
+    public void setType(LoggerType type) {
+        this.type = type;
     }
 
     /**
@@ -122,6 +150,7 @@ public class Log implements Serializable {
     /**
      * To Html
      * Used on console (web socket)
+     * todo : remove from here!, And make new decorator class
      * @param showRabbitID
      * @return
      */

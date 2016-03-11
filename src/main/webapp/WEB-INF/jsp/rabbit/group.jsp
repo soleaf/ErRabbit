@@ -60,10 +60,15 @@
                 </c:forEach>
             </c:if>
             </tbody>
+            <c:if test="${empty list}">
+                <tbody>
+                <tr>
+                    <td colspan="2"><i>No gorup</i></td>
+                </tr>
+                </tbody>
+            </c:if>
         </table>
-        <c:if test="${empty list}">
-            empty.
-        </c:if>
+
     </div>
 </section>
 

@@ -5,6 +5,7 @@ import org.mintcode.errabbit.core.log.dao.LogLevelDailyStatisticsRepository;
 import org.mintcode.errabbit.core.log.dao.LogLevelHourlyStatisticsRepository;
 import org.mintcode.errabbit.core.rabbit.managing.RabbitManagingService;
 import org.mintcode.errabbit.core.rabbit.name.RabbitCache;
+import org.mintcode.errabbit.model.LoggerTypeUtil;
 import org.mintcode.errabbit.model.Rabbit;
 import org.mintcode.errabbit.model.RabbitGroup;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -66,6 +68,7 @@ public class RabbitController {
     @RequestMapping(value = "insert")
     public ModelAndView insertForm(Model model) {
         model.addAttribute("groups", rabbitManagingService.getGroups());
+        model.addAttribute("loggerTypes", LoggerTypeUtil.allLoggerTypes());
         return new ModelAndView("/rabbit/form");
     }
 
@@ -76,6 +79,8 @@ public class RabbitController {
                                @RequestParam(value = "group", required = false) String groupId,
                                @RequestParam(value = "onlyException", required = false, defaultValue = "false") Boolean onlyException,
                                @RequestParam(value = "hideOnConsole", required = false, defaultValue = "false") Boolean hideOnConsole,
+                               @RequestParam(value = "loggerType") Integer loggerType,
+                               RedirectAttributes redirectAttributes,
                                Model model) {
         try {
 
@@ -88,15 +93,16 @@ public class RabbitController {
                 }
             }
 
-            Rabbit newRabbit = rabbitManagingService.makeNewRabbit(id, basePackage, onlyException, group, hideOnConsole);
+            Rabbit newRabbit = rabbitManagingService.makeNewRabbit(id, basePackage, onlyException,
+                    group, hideOnConsole, LoggerTypeUtil.loggerTypeFromValue(loggerType));
             logger.info("Made new Rabbit > " + newRabbit);
 
             model.addAttribute("info", String.format("Success to make Rabbit '%s'", id));
             return "redirect:list.err";
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            model.addAttribute("e", e);
-            return "/rabbit/form";
+            redirectAttributes.addAttribute("error", e.getMessage());
+            return "redirect:insert.err";
         }
     }
 
@@ -109,6 +115,7 @@ public class RabbitController {
         try {
             Rabbit rabbit = rabbitManagingService.getRabbitById(id);
             model.addAttribute("groups", rabbitManagingService.getGroups());
+            model.addAttribute("loggerTypes", LoggerTypeUtil.allLoggerTypes());
             if (rabbit == null) {
                 throw new RabbitNotExistException(id);
             }

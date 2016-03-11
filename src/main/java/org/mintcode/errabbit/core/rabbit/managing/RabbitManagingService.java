@@ -1,6 +1,7 @@
 package org.mintcode.errabbit.core.rabbit.managing;
 
 import org.bson.types.ObjectId;
+import org.mintcode.errabbit.model.LoggerType;
 import org.mintcode.errabbit.model.Rabbit;
 import org.mintcode.errabbit.model.RabbitGroup;
 
@@ -24,7 +25,8 @@ public interface RabbitManagingService {
                                 String basePackage,
                                 Boolean collectOnlyException,
                                 RabbitGroup group,
-                                Boolean hideOnConsole) throws AlreadyExistRabbitIDException,
+                                Boolean hideOnConsole,
+                                LoggerType loggerType) throws AlreadyExistRabbitIDException,
             InvalidRabbitNameException, InvalidBasePackageException;
 
     /**

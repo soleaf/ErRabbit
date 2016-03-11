@@ -3,6 +3,7 @@ package org.mintcode.errabbit.core.collect.parser;
 import org.mintcode.errabbit.model.ErrLoggingEvent;
 
 import javax.jms.JMSException;
+import javax.jms.Message;
 import javax.jms.ObjectMessage;
 
 /**
@@ -13,7 +14,5 @@ import javax.jms.ObjectMessage;
  */
 public interface LogParser {
 
-    public boolean isAbleToParse(ObjectMessage msg);
-
-    public ErrLoggingEvent parseToLoggingEvent(ObjectMessage msg) throws JMSException, NotLoggingEventException;
+    public ErrLoggingEvent parseToLoggingEvent(Message message) throws JMSException, NotLoggingEventException;
 }
