@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
 
-//    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @RequestMapping(value = "/login")
     public String login(Model model,
                              @RequestParam(value = "error", required = false) String error,
