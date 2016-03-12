@@ -29,14 +29,14 @@ public class RabbitGroup implements Serializable {
 
     }
 
-    // Get NoneGroup
-    public static RabbitGroup noneGroup(){
-        return new NoneRabbitGroup();
-    }
-
     // RabbitGroup with name
     public RabbitGroup(String name) {
         this.name = name;
+    }
+
+    // Get NoneGroup
+    public static RabbitGroup noneGroup(){
+        return new NoneRabbitGroup();
     }
 
     /**

@@ -12,6 +12,23 @@ public class ErLocationInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Caller's line number.
+     */
+    String lineNumber;
+    /**
+     * Caller's file name.
+     */
+    String fileName;
+    /**
+     * Caller's fully qualified class name.
+     */
+    String className;
+    /**
+     * Caller's method name.
+     */
+    String methodName;
+
     public ErLocationInfo() {
 
     }
@@ -32,23 +49,6 @@ public class ErLocationInfo implements Serializable {
 
         return erLocationInfo;
     }
-
-    /**
-     * Caller's line number.
-     */
-    String lineNumber;
-    /**
-     * Caller's file name.
-     */
-    String fileName;
-    /**
-     * Caller's fully qualified class name.
-     */
-    String className;
-    /**
-     * Caller's method name.
-     */
-    String methodName;
 
     /**
      * Get lineNumber

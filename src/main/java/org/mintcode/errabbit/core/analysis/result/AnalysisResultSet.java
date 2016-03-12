@@ -29,14 +29,6 @@ public class AnalysisResultSet implements Serializable {
     }
 
     /**
-     * Set result
-     * @param results
-     */
-    public void setResults(Map<String, AnalysisResult> results) {
-        this.results = results;
-    }
-
-    /**
      * initation with result
      * @param req
      * @param result
@@ -45,6 +37,14 @@ public class AnalysisResultSet implements Serializable {
         logger.trace("result > " + result);
         results.put(TABLE, new TableLogAnalysisResult(req, result));
         results.put(GRAPHIC, new GraphicLogAnalysisResult(req, result));
+    }
+
+    /**
+     * Set result
+     * @param results
+     */
+    public void setResults(Map<String, AnalysisResult> results) {
+        this.results = results;
     }
 
     /**

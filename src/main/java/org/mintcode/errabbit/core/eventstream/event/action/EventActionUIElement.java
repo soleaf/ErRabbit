@@ -13,6 +13,10 @@ public class EventActionUIElement {
     public Boolean isRequired = false;
     public Object value;
 
+    public EventActionUIElement(){
+
+    }
+
     public EventActionUIElement(String name, String label, String valueType, String defaultValue, String help, Boolean isRequired, Object value) {
         this.name = name;
         this.label = label;
@@ -69,10 +73,6 @@ public class EventActionUIElement {
 
     public void setRequired(Boolean required) {
         isRequired = required;
-    }
-
-    public EventActionUIElement(){
-
     }
 
     public Object getValue() {
