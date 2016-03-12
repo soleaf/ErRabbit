@@ -16,6 +16,22 @@ public class ErrLoggingEvent implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
+    public String categoryName;
+
+    public String level;
+
+    private String renderedMessage;
+
+    private String threadName;
+
+    private ErLocationInfo locationInfo;
+
+    private ErThrowableInformation throwableInfo;
+
+    public long timeStamp;
+
+    public Date timeStampDate;
+
     public ErrLoggingEvent(){
 
     }
@@ -65,22 +81,6 @@ public class ErrLoggingEvent implements Serializable{
 
         return erLoggingEvent;
     }
-
-    public String categoryName;
-
-    public String level;
-
-    private String renderedMessage;
-
-    private String threadName;
-
-    private ErLocationInfo locationInfo;
-
-    private ErThrowableInformation throwableInfo;
-
-    public long timeStamp;
-
-    public Date timeStampDate;
 
     public String getCategoryName() {
         return categoryName;
