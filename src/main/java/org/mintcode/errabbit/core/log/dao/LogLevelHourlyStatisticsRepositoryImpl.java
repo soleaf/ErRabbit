@@ -73,7 +73,6 @@ public class LogLevelHourlyStatisticsRepositoryImpl implements LogLevelHourlySta
             }
             coll.update(q, u, true, false);
         } catch (Exception e) {
-            e.printStackTrace();
             logger.error(e.getMessage());
         }
     }
@@ -123,7 +122,6 @@ public class LogLevelHourlyStatisticsRepositoryImpl implements LogLevelHourlySta
             u.put("$inc", new BasicDBObject("level_" + log.getLoggingEvent().getLevel(), 1));
             coll.update(q, u, true, false);
         } catch (Exception e) {
-            e.printStackTrace();
             logger.error(e.getMessage());
         }
     }

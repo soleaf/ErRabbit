@@ -3,6 +3,8 @@ package org.mintcode.errabbit.model;
 import org.apache.log4j.Category;
 import org.apache.log4j.spi.ThrowableInformation;
 import org.apache.logging.log4j.core.impl.ThrowableProxy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -15,6 +17,8 @@ import java.util.Arrays;
  * Created by soleaf on 2/21/15.
  */
 public class ErThrowableInformation implements Serializable{
+
+    private static final Logger logger = LoggerFactory.getLogger(ErThrowableInformation.class);
 
     private static final long serialVersionUID = 1L;
 
@@ -40,9 +44,9 @@ public class ErThrowableInformation implements Serializable{
             field.setAccessible(true);
             ert.setCategory(ErCategory.fromCategory((Category) field.get(tw)));
         } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
 
         return ert;
