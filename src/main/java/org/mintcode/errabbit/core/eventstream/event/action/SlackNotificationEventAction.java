@@ -124,11 +124,11 @@ public class SlackNotificationEventAction extends AbstractEventAction {
     protected String generateMessage(Log log){
         ErrLoggingEvent ev = log.getLoggingEvent();
         if (host != null) {
-            return String.format("[ %s ] %s\n%s\n:mag: %s/log/list.err?id=%s",
+            return String.format("[ %s ] %s%n%s%n:mag: %s/log/list.err?id=%s",
                     ev.getLevel(), log.getRabbitId(), ev.getRenderedMessage(), host, log.getRabbitId());
         }
         else{
-            return String.format("[ %s ] %s\n%s",
+            return String.format("[ %s ] %s%n%s",
                     ev.getLevel(), log.getRabbitId(), ev.getRenderedMessage());
         }
     }

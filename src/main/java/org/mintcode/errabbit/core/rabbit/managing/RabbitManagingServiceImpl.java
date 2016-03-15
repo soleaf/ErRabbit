@@ -75,16 +75,16 @@ public class RabbitManagingServiceImpl implements RabbitManagingService {
 
         // Rabbit Name Validation
         if (id == null){
-            throw new InvalidRabbitNameException(String.format("'Null' is invalid"));
+            throw new InvalidRabbitNameException("'Null' is invalid");
         }
         if (id.length() < 2){
-            throw new InvalidRabbitNameException(String.format("Rabbit id's length must be greater than 2 characters."));
+            throw new InvalidRabbitNameException("Rabbit id's length must be greater than 2 characters.");
         }
         if (id.contains(" ")){
-            throw new InvalidRabbitNameException(String.format("Rabbit id's should not include blank"));
+            throw new InvalidRabbitNameException("Rabbit id's should not include blank");
         }
         if (id.contains(",")){
-            throw new InvalidRabbitNameException(String.format("Rabbit id's should comma"));
+            throw new InvalidRabbitNameException("Rabbit id's should comma");
         }
 
         // Check already exist id
