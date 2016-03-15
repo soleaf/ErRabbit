@@ -87,7 +87,6 @@ public class LogRepositoryImpl implements LogRepositoryCustom {
             mongoOperations.upsert(query, update, LogLevelHourStatistics.class);
 
         } catch (Exception e) {
-            e.printStackTrace();
             logger.error(e.getMessage());
         }
     }

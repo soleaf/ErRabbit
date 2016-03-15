@@ -41,7 +41,6 @@ public class ConsoleController {
             return "/console/main";
         }
         catch (Exception e){
-            e.printStackTrace();
             logger.error(e.getMessage(),e);
             // todo: make ErrorPage
             model.addAttribute("e",e);

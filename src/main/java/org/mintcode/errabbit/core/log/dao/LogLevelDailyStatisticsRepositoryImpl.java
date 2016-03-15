@@ -73,7 +73,6 @@ public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStati
             }
             coll.update(q, u, true, false);
         } catch (Exception e) {
-            e.printStackTrace();
             logger.error(e.getMessage());
         }
     }
@@ -121,7 +120,6 @@ public class LogLevelDailyStatisticsRepositoryImpl implements LogLevelDailyStati
             u.put("$inc", new BasicDBObject("level_" + log.getLoggingEvent().getLevel(), 1));
             coll.update(q, u, true, false);
         } catch (Exception e) {
-            e.printStackTrace();
             logger.error(e.getMessage());
         }
     }
