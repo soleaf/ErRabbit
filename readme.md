@@ -5,7 +5,7 @@
 # Introduction
 
 ErRabbit(Error Rabbit) is useful error remote tracking service with Visual View.
-Collecting by Log4j and ActiveMQ will make it easy compatible with other programs.
+Collecting by Log4j, slf4j(by Plinio Freire)  and ActiveMQ will make it easy compatible with other programs.
 
 > Introduction Slide http://www.slideshare.net/ilhoahn50/errabbit
 
@@ -119,6 +119,8 @@ Choose method by your application log4j version.
 
 * Log4j 1.2
 * Log4j 2.x
+
+If you want to use slf4j refer [this section](#slf4j-logging-component-support)
 
 ### Setup for Log4j 1.2
 
