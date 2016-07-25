@@ -73,7 +73,7 @@ Collecting by Log4j, slf4j(by Plinio Freire)  and ActiveMQ will make it easy com
 * Java 1.7 upper
 * MongoDB 2
 * ActiveMQ
-* Configure Log4j
+* Configure Log4j or slf4j
 
 # Install and Using
 
