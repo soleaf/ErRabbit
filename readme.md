@@ -303,9 +303,14 @@ Example Project : https://github.com/soleaf/ErRabbit-Example-log4j2
 #### Read System output
 If you have legacy logs which use JVM System.class (printstackstrace, System.out, System.err and etc), you can configure your application to wrap them to Log4j. Check more info on this [wiki article](https://github.com/soleaf/ErRabbit/wiki/Read%20System.*%20output%20with%20ErRabbit%20and%20Log4j).
 
-#### Using with logback
-https://github.com/plinioasf/ErRabbit-logback-appender
-https://github.com/plinioasf/ErRabbit-Example-logback
+#### Slf4j logging component support
+
+There is other implementations by Plinio Freire(https://github.com/plinioasf)
+
+- Implementation
+    - slf4j only : https://github.com/plinioasf/ErRabbit-logback-appender
+    - slf4j + log4j combiation : https://github.com/plinioasf/ErRabbit-logback-log4j-appender
+- Example : https://github.com/plinioasf/ErRabbit-Example-logback
 
 # Contribute
 
