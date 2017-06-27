@@ -134,8 +134,11 @@ public class LogMessageListener implements MessageListener {
         // Add to dao
         logRepository.save(caching);
 
+        // Add logs to iterating for aggregating works
+        List<Log> workingLogs = new ArrayList<>(caching);
+
         Map<String,Map<String,Object>> hours = new HashMap<>();
-        for (Log log : caching) {
+        for (Log log : workingLogs) {
 
             Calendar cal = Calendar.getInstance();
             cal.setTime(new Date(log.getLoggingEvent().getTimeStamp()));
@@ -182,7 +185,7 @@ public class LogMessageListener implements MessageListener {
             }
         }
 
-        caching.clear();
+        caching.removeAll(workingLogs);
     }
 
     /**
